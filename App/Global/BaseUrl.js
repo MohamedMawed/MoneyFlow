@@ -1,0 +1,1 @@
+export const BaseUrl="http://kit.ab3dlabs.com/api/app/"
