@@ -2,11 +2,11 @@ export const Colors = {
     WhiteColor: '#ffffff',
     MoveColor: '#9459A7',
     DarkGrayColor: '#5E5E5E',
-    GrayColor: '#EFF0FE',
+    GrayColor: '#F6F6F6',
     MediumGrayColor: '#EAEEF1',
     BigMediumColor: '#D9D9D9',
     WhiteBlueColor: '#65AFEE',
-    GreenColor: '#31A54F',
+    GreenColor: '#026431',
     BlueColor: '#4985E1',
     DarkBlueColor: '#5125F4',
     DarkWhiteColor: '#F8F8F8',
@@ -25,7 +25,10 @@ export const Colors = {
     background: '#F8F8F8',
     BlackColor: '#000000',
     borderColor: "#999999",
-    ofWhiteColr: '#F8F8F8'
+    ofWhiteColr: '#F6F6F6',
+    greenlite: '#5EBB46',
+    GreenColors0: '#498E69'
+
 
 
 }

@@ -10,7 +10,11 @@
     "@babel/runtime": "^7.1.2",
     "react": "16.5.0",
     "react-native": "0.57.1",
-    "react-native-linear-gradient": "^2.4.2"
+    "react-native-linear-gradient": "^2.4.2",
+    "react-native-modal-dropdown": "^0.6.2",
+    "react-native-snap-carousel": "^3.7.4",
+    "react-native-swiper": "^1.5.13",
+    "react-navigation": "^2.17.0"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
@@ -20,5 +24,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./App/Assets/Fonts"
+    ]
   }
 }

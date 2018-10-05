@@ -38,6 +38,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		8147F732954B41F884BF04F8 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE36752274F66919E2314 /* libBVLinearGradient.a */; };
+		2442A680639A4992B88F0898 /* GE SS Two Etisalat_0.otf in Resources */ = {isa = PBXBuildFile; fileRef = 71CDC19FC52747F29DCB8D40 /* GE SS Two Etisalat_0.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +346,7 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		FF1CFF8155B14E04B856BF9F /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; name = "BVLinearGradient.xcodeproj"; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		B36FE36752274F66919E2314 /* libBVLinearGradient.a */ = {isa = PBXFileReference; name = "libBVLinearGradient.a"; path = "libBVLinearGradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		71CDC19FC52747F29DCB8D40 /* GE SS Two Etisalat_0.otf */ = {isa = PBXFileReference; name = "GE SS Two Etisalat_0.otf"; path = "../App/Assets/Fonts/GE SS Two Etisalat_0.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -581,6 +583,7 @@
 				00E356EF1AD99517003FC87E /* FlosyTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				9AF2D902E6854965BE28B830 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -606,6 +609,15 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		9AF2D902E6854965BE28B830 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				71CDC19FC52747F29DCB8D40 /* GE SS Two Etisalat_0.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1053,6 +1065,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				2442A680639A4992B88F0898 /* GE SS Two Etisalat_0.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
