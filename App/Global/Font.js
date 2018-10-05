@@ -5,13 +5,10 @@ export const FontSize = {
     MediumFontSize : Width * .035,
     smallFontSize2: Width * .025,
     LargFontSize: Width * .05,
+    VeryLargFontSize: Width * .07,
 }
 export const FontFamilies = {
-    FontCairoSemiBold: 'Cairo-SemiBold',
-    FontCairoBold: 'Cairo-Bold',
-    FontCairoExtraLight: 'Cairo-ExtraLight',
-    FontCairoLight: 'Cairo-Light',
-    FontCairoRegular: 'Cairo-Regular'
+    Etisalat_0: 'GE SS Two Etisalat_0',
 }
 
 
