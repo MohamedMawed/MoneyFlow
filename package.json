@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
+    "@ptomasroos/react-native-multi-slider": "^1.0.0",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-linear-gradient": "^2.4.2",

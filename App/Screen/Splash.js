@@ -4,6 +4,7 @@ import { Width, Height } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
 import LinearGradient from 'react-native-linear-gradient'
 import { Requires } from '../Assets/Requires';
+import { NavigationActions, StackActions } from 'react-navigation'
 class Splash extends Component {
     constructor(props) {
         super(props)
@@ -21,10 +22,13 @@ class Splash extends Component {
         )
     }
     componentDidMount() {
-        // const inter = setInterval(async () => {
-        //     const resetAction = NavigationActions.reset({ index: 0, actions: [NavigationActions.navigate({ routeName: 'HomeStudent' })] })
-        //     this.props.navigation.dispatch(resetAction);
-        // }, 10)
+        setTimeout(() => {
+            const resetAction = StackActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: 'Intro' })],
+            });
+            this.props.navigation.dispatch(resetAction);
+        }, 2500)
     }
 }
 const Styles = StyleSheet.create({

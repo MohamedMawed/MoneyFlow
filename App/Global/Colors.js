@@ -34,6 +34,7 @@ export const Colors = {
     error:'#F1626D',
     BtnLoginBack : '#5D5FD5',
     BtnFaceBookBack : '#3B5998',
-    BtnGoogleBack :'#DD4B39'
+    BtnGoogleBack :'#DD4B39',
+    red:'#FA4B5B'
 
 }
