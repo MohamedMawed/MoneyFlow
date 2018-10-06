@@ -27,7 +27,7 @@
   },
   "rnpm": {
     "assets": [
-      "./App/Assets/Fonts"
+      "./App/Assets/Font"
     ]
   }
 }
