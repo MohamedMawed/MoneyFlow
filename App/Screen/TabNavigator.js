@@ -12,12 +12,13 @@ import { Login } from './Login';
 import { Register } from './Register';
 import {Home} from './Home'
 import { ExportTab } from './Export';
+import { EditProfile } from './EditProfile';
 export default createBottomTabNavigator(
     {
-        Report: ExportTab,
-        Home: Home,
+        Home: EditProfile,
         Plan: Register,
         Plus: Register,
+        Report: ExportTab,
         Setting: Register,
     },
     {

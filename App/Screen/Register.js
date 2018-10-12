@@ -22,7 +22,7 @@ class Register extends Component {
                         fontFamily: FontFamilies.Etisalat_0,
                         fontSize: Width * .07,
                         color: '#000',
-                    }}>Login</Text>
+                    }}>Register</Text>
                 </View>
                 <View style={{
                     width: Width,
