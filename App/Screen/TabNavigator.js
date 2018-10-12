@@ -11,12 +11,13 @@ import { Requires } from '../Assets/Requires';
 import { Login } from './Login';
 import { Register } from './Register';
 import {Home} from './Home'
+import { ExportTab } from './Export';
 export default createBottomTabNavigator(
     {
+        Report: ExportTab,
         Home: Home,
         Plan: Register,
         Plus: Register,
-        Report: Register,
         Setting: Register,
     },
     {
