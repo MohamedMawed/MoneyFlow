@@ -9,5 +9,6 @@ import { Register } from './App/Screen/Register';
 import { Intro } from './App/Screen/Intro';
 import { NavigationsScreen } from './App/Global/NavigationsScreen';
 import { AddBudget } from './App/Screen/AddBudget';
+import Navigator from './App/Screen/TabNavigator'
 
-AppRegistry.registerComponent(appName, () => AddBudget);
+AppRegistry.registerComponent(appName, () => Navigator);

@@ -16,7 +16,7 @@ class Login extends Component {
     render() {
         return (
             <View style={{ width: Width, height: Height }}>
-                <View style={{ width: Width, height: Height * .43, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ width: Width, height: Height * .35, justifyContent: 'center', alignItems: 'center' }}>
                     <Image source={Requires.Logo} style={{ width: Width * .42, resizeMode: 'contain' }} />
                     <Text style={{
                         fontFamily: FontFamilies.Etisalat_0,

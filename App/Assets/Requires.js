@@ -1,10 +1,10 @@
 
-let icons = ()=>{
-let ddd=[]
+let icons = () => {
+    let ddd = []
 
     for (i = 0; i < 25; i++) {
-        ddd.push(require('./img/Icon/money-bag.png') )
-    } 
+        ddd.push(require('./img/Icon/money-bag.png'))
+    }
     return ddd
 }
 
@@ -17,13 +17,22 @@ export const Requires = {
     FB: require('./img/facebook.png'),
     Google: require('./img/google.png'),
     User: require('./img/user.png'),
-    ICons:icons(),
+    ICons: icons(),
     User: require('./img/user.png'),
     claender: require('./img/claender.png'),
     edit: require('./img/edit.png'),
     remove: require('./img/remove.png'),
     back: require('./img/arrow-back.png'),
-    
+    arrow_left: require('./img/arrow-left.png'),
+    arrow_up: require('./img/arrowup.png'),
+    arrow_down: require('./img/arrowdown.png'),
+    arrow_right: require('./img/arrow-right.png'),
+    Home: require('./img/home.png'),
+    Plan: require('./img/plane.png'),
+    Plus: require('./img/plus.png'),
+    Report: require('./img/mezaneya.png'),
+    Setting: require('./img/settings.png'),
+
 }
 
 
