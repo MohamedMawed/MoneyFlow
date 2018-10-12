@@ -23,7 +23,6 @@ export const Requires = {
     edit: require('./img/edit.png'),
     remove: require('./img/remove.png'),
     back: require('./img/arrow-back.png'),
-<<<<<<< HEAD
     arrow_left: require('./img/arrow-left.png'),
     arrow_up: require('./img/arrowup.png'),
     arrow_down: require('./img/arrowdown.png'),
@@ -33,9 +32,7 @@ export const Requires = {
     Plus: require('./img/plus.png'),
     Report: require('./img/mezaneya.png'),
     Setting: require('./img/settings.png'),
-=======
     car2: require('./img/car2.png'),
->>>>>>> df23d610a03671f822bd713b390391b077c41fe2
 
 }
 
