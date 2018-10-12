@@ -9,5 +9,7 @@ import { Register } from './App/Screen/Register';
 import { Intro } from './App/Screen/Intro';
 import { NavigationsScreen } from './App/Global/NavigationsScreen';
 import { AddBudget } from './App/Screen/AddBudget';
+import { add_plan } from './App/Screen/add_plan';
+import { plan } from './App/Screen/plan';
 
-AppRegistry.registerComponent(appName, () => AddBudget);
+AppRegistry.registerComponent(appName, () => plan);

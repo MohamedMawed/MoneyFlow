@@ -23,7 +23,8 @@ export const Requires = {
     edit: require('./img/edit.png'),
     remove: require('./img/remove.png'),
     back: require('./img/arrow-back.png'),
-    
+    car2: require('./img/car2.png'),
+
 }
 
 
