@@ -68,7 +68,7 @@ class ExportTab extends Component {
                             }}
 
                         />
-                        <Image source={Requires.arrow_down} style={{
+                        <Image source={Requires.arrow_dropdown} style={{
                             resizeMode: 'contain',
                             width: Width * .037
                         }} />

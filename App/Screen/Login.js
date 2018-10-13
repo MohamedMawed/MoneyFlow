@@ -3,6 +3,7 @@ import {
     View,
     Image,
     Text,
+    ActivityIndicator,
     TouchableOpacity,
 } from 'react-native'
 import { CustomTextInput } from '../Components/TextInput';
@@ -10,9 +11,68 @@ import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
+import firebase from 'react-native-firebase'
+import { NavigationActions, StackActions } from 'react-navigation'
+
 
 
 class Login extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            Email: '',
+            Password: '',
+            CloseAlert: false,
+            User: null
+        }
+    }
+    Massage = ""
+    CloseAlert() {
+        this.setState({ CloseAlert: false });
+    }
+    Login = () => {
+        const { Email, Password } = this.state
+        if (Email === '') {
+            this.Massage = 'Email Required'
+            this.setState({ CloseAlert: true })
+            return
+        }
+
+        if (Password === '') {
+            this.Massage = 'Password Required'
+            this.setState({ CloseAlert: true })
+            return
+        }
+        this.setState({ Loading: true })
+
+        firebase.auth().signInWithEmailAndPassword(Email, Password).then((User) => {
+            console.log('yesssssss',User)
+            this.setState({ User: User, Loading: false })
+            const resetAction = StackActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: 'Main' })],
+            });
+            this.props.navigation.dispatch(resetAction);
+        }).catch((error) => {
+            switch (error.code) {
+                case 'auth/invalid-email':
+                    this.Massage = 'invalid email'
+                    break;
+                case 'auth/user-disabled':
+                    this.Massage = 'this account has been deactivited'
+                    break;
+                case 'auth/user-not-found':
+                    this.Massage = 'email not found please register'
+                    break;
+                default:
+                    this.Massage = 'Wrong Passwor'
+
+                // handle other codes ...
+            }
+            this.setState({ CloseAlert: true, Loading: false })
+        })
+    }
     render() {
         return (
             <View style={{ width: Width, height: Height }}>
@@ -33,7 +93,7 @@ class Login extends Component {
                     <CustomTextInput
                         Title={'Email Address'}
                         onChangeText={(text) => {
-                            console.log(text)
+                            this.setState({ Email: text })
                         }}
                         icon={Requires.Email}
                     />
@@ -41,7 +101,7 @@ class Login extends Component {
                         Title={'Password'}
                         secure
                         onChangeText={(text) => {
-                            console.log(text)
+                            this.setState({ Password: text })
                         }}
                         icon={Requires.Password}
                     />
@@ -71,19 +131,28 @@ class Login extends Component {
                         height: Height * .06,
                         flexDirection: 'row'
                     }}>
-                        <TouchableOpacity style={{
-                            backgroundColor: Colors.BtnLoginBack,
-                            borderRadius: Width * .1,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: '100%',
-                            paddingHorizontal: Width * .06
-                        }}>
-                            <Text style={{
-                                fontFamily: FontFamilies.Etisalat_0,
-                                fontSize: Width * .05,
-                                color: Colors.WhiteColor,
-                            }}>Login</Text>
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            onPress={this.Login}
+
+                            style={{
+                                backgroundColor: Colors.BtnLoginBack,
+                                borderRadius: Width * .1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: '100%',
+                                paddingHorizontal: Width * .06
+                            }}>
+
+                            {this.state.Loading == true ?
+                                <ActivityIndicator size={'small'} color={'#fff'} />
+                                :
+                                <Text style={{
+                                    fontFamily: FontFamilies.Etisalat_0,
+                                    fontSize: Width * .05,
+                                    color: Colors.WhiteColor,
+                                }}>Login</Text>
+                            }
                         </TouchableOpacity>
                         <TouchableOpacity style={{
                             borderColor: Colors.BtnLoginBack,
@@ -120,7 +189,7 @@ class Login extends Component {
                         }}>
                             <Image source={Requires.FB} style={{
                                 width: Width * .025,
-                                margin:Width*.02,
+                                margin: Width * .02,
                                 height: '100%',
                                 resizeMode: 'contain'
                             }} />
@@ -148,12 +217,18 @@ class Login extends Component {
                             }} />
                             <Text style={{
                                 fontFamily: FontFamilies.Etisalat_0,
-                                margin:Width*.02,
+                                margin: Width * .02,
                                 fontSize: Width * .05,
                                 color: Colors.WhiteColor,
                             }}>login with google</Text>
                         </TouchableOpacity>
                     </View>
+                    {this.state.CloseAlert === true && <CustomToast
+                        Massage={this.Massage}
+                        CloseAlert={this
+                            .CloseAlert
+                            .bind(this)}
+                        PositionAlert="Left" />}
                 </View>
 
             </View>

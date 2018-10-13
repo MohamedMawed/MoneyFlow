@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { createBottomTabNavigator, createTabNavigator, createMaterialTopTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 import {
     Image,
     Text,
@@ -9,17 +9,22 @@ import {
 import { Width, Height } from './../Global/Dimension'
 import { Requires } from '../Assets/Requires';
 import { Login } from './Login';
+import { Splash } from './Splash';
+
 import { Register } from './Register';
-import {Home} from './Home'
+import { Home } from './Home'
 import { ExportTab } from './Export';
 import { EditProfile } from './EditProfile';
-export default createBottomTabNavigator(
+import { Intro } from './Intro';
+import { AddBudget } from './AddBudget';
+
+const Tabs = createBottomTabNavigator(
     {
-        Home: EditProfile,
+        Home: Home,
         Plan: Register,
-        Plus: Register,
+        Plus: EditProfile,
         Report: ExportTab,
-        Setting: Register,
+        Setting: AddBudget,
     },
     {
         navigationOptions: ({ navigation }) => ({
@@ -49,3 +54,16 @@ export default createBottomTabNavigator(
         },
     }
 );
+
+
+export default App = createStackNavigator(
+    {
+        Splash: { screen: Splash },
+        Intro : {screen : Intro},
+        Login: { screen: Login },
+        Register: { screen: Register },
+        Main: { screen: Tabs }
+    }, {
+        headerMode: 'none'
+    }
+)

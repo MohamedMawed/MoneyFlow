@@ -2,8 +2,8 @@ import React, { Component } from 'React'
 import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, TouchableOpacity } from 'react-native'
 import { Width, Height } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
+import { NavigationActions, StackActions } from 'react-navigation'
 import LinearGradient from 'react-native-linear-gradient'
-import Swiper from 'react-native-swiper';
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies } from '../Global/Font';
@@ -14,7 +14,7 @@ class Intro extends Component {
         super(props)
         this.state = {
             GradientBackground: [[Colors.greenlite, Colors.GreenColor], ['#514DCB', '#6266DA'], ['#FA4B5B', '#E8787E']],
-            StepColor:[Colors.greenlite,'#514DCB','#FA4B5B'],
+            StepColor: [Colors.greenlite, '#514DCB', '#FA4B5B'],
             index: 0
         }
     }
@@ -35,7 +35,7 @@ class Intro extends Component {
         );
     }
     render() {
-        let {navigate}=this.props.navigation
+        let { navigate } = this.props.navigation
         let { GradientBackground } = this.state
 
         return (<View style={Styles.Container}>
@@ -58,21 +58,34 @@ class Intro extends Component {
             </View>
             {this.state.index == 2 ?
                 <View style={{ width: '90%', flexDirection: FixViewsOrder(), justifyContent: 'space-between', height: '100%' }}>
-                    <TouchableOpacity onPress={() =>navigate('Register')}
-                        
-                     style={[Styles.Button, { overflow: 'hidden', width: '48%' }]} >
-                        <LinearGradient colors={GradientBackground[this.state.index]} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Register')}</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() =>navigate('Login')}
-                    
-                     style={[Styles.Button, { overflow: 'hidden', width: '48%' }]} >
+
+                    <TouchableOpacity onPress={() => {
+                        const resetAction = StackActions.reset({
+                            index: 0,
+                            actions: [NavigationActions.navigate({ routeName: 'Login' })],
+                        });
+                        this.props.navigation.dispatch(resetAction);
+                    }}
+
+                        style={[Styles.Button, { overflow: 'hidden', width: '48%' }]} >
 
                         <LinearGradient colors={GradientBackground[this.state.index]} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Login')}</Text>
                         </LinearGradient>
 
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        const resetAction = StackActions.reset({
+                            index: 0,
+                            actions: [NavigationActions.navigate({ routeName: 'Register' })],
+                        });
+                        this.props.navigation.dispatch(resetAction);
+                    }}
+
+                        style={[Styles.Button, { overflow: 'hidden', width: '48%' }]} >
+                        <LinearGradient colors={GradientBackground[this.state.index]} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Register')}</Text>
+                        </LinearGradient>
                     </TouchableOpacity>
                 </View>
 
@@ -91,10 +104,10 @@ class Intro extends Component {
 
 
 
-            <View style={{ width: '40%', height: '20%', flexDirection: FixViewsOrder(), justifyContent: 'space-between', marginTop: Height * .7,position:'absolute' }}>
-                <View style={{ width: Width * .12, height: Height * .015, backgroundColor:this.state.index>=0?this.state.StepColor[this.state.index]:Colors.MediumGrayColor, borderRadius: Width * .03 }} />
-                <View style={{ width: Width * .12, height: Height * .015, backgroundColor:this.state.index>=1?this.state.StepColor[this.state.index]:Colors.MediumGrayColor, borderRadius: Width * .03 }} />
-                <View style={{ width: Width * .12, height: Height * .015, backgroundColor: this.state.index>=2?this.state.StepColor[this.state.index]:Colors.MediumGrayColor, borderRadius: Width * .03 }} />
+            <View style={{ width: '40%', height: '20%', flexDirection: FixViewsOrder(), justifyContent: 'space-between', marginTop: Height * .7, position: 'absolute' }}>
+                <View style={{ width: Width * .12, height: Height * .015, backgroundColor: this.state.index >= 0 ? this.state.StepColor[this.state.index] : Colors.MediumGrayColor, borderRadius: Width * .03 }} />
+                <View style={{ width: Width * .12, height: Height * .015, backgroundColor: this.state.index >= 1 ? this.state.StepColor[this.state.index] : Colors.MediumGrayColor, borderRadius: Width * .03 }} />
+                <View style={{ width: Width * .12, height: Height * .015, backgroundColor: this.state.index >= 2 ? this.state.StepColor[this.state.index] : Colors.MediumGrayColor, borderRadius: Width * .03 }} />
             </View>
 
 

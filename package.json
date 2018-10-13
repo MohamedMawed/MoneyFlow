@@ -11,6 +11,7 @@
     "@ptomasroos/react-native-multi-slider": "^1.0.0",
     "react": "16.5.0",
     "react-native": "0.57.1",
+    "react-native-firebase": "^5.0.0",
     "react-native-linear-gradient": "^2.4.2",
     "react-native-modal-dropdown": "^0.6.2",
     "react-native-snap-carousel": "^3.7.4",

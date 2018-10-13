@@ -27,7 +27,7 @@ export const Requires = {
     arrow_up: require('./img/arrowup.png'),
     arrow_down: require('./img/arrowdown.png'),
     arrow_right: require('./img/arrow-right.png'),
-    arrow_down: require('./img/chavron-down.png'),
+    arrow_dropdown: require('./img/chavron-down.png'),
     Home: require('./img/home.png'),
     Plan: require('./img/plane.png'),
     Plus: require('./img/plus.png'),

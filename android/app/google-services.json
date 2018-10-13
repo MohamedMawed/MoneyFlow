@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "168676012959",
+    "firebase_url": "https://flosy-534c8.firebaseio.com",
+    "project_id": "flosy-534c8",
+    "storage_bucket": "flosy-534c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168676012959:android:125b11df56bbc732",
+        "android_client_info": {
+          "package_name": "com.flosy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168676012959-rh0m629s8grco9e7hsnae2ftmfbkpvir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ5sZQo5Pc4djvSXA9CtPKNgk8TzgXPYM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

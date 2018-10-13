@@ -28,7 +28,7 @@ class Splash extends Component {
                 actions: [NavigationActions.navigate({ routeName: 'Intro' })],
             });
             this.props.navigation.dispatch(resetAction);
-        }, 2500)
+        }, 2000)
     }
 }
 const Styles = StyleSheet.create({
