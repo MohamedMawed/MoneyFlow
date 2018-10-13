@@ -39,7 +39,30 @@ class add_plan extends Component {
                     width: '50%',
                     height: '100%',
                     alignItems: 'center',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'space-evenly',
+                    flexDirection: 'row'
+                }}>
+                    <TouchableOpacity >
+                        <Image
+                            source={Requires.back}
+                            resizeMode='contain'
+                            style={{
+                                width: Width * .05,
+                                height: Width * .05
+                            }} />
+                    </TouchableOpacity>
+
+                    <Text style={[Styles.TextStyle, {
+                        marginHorizontal: Width * .04
+                    }]}> Add plan or goal </Text>
+
+                </View>
+
+                <View style={{
+                    width: '25%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
                     flexDirection: 'row'
                 }}>
 
@@ -53,20 +76,6 @@ class add_plan extends Component {
                     }}>
                         <Image source={Requires.edit} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                     </TouchableOpacity>
-                    <Text style={[Styles.TextStyle, {
-                        marginHorizontal: Width * .04
-                    }]}> Add plan or goal </Text>
-
-                </View>
-
-                <View style={{
-                    width: '20%',
-                    height: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    flexDirection: 'row'
-                }}>
-
                     <TouchableOpacity >
                         <Image
                             source={Requires.remove}
@@ -76,15 +85,7 @@ class add_plan extends Component {
                                 height: Width * .05
                             }} />
                     </TouchableOpacity>
-                    <TouchableOpacity >
-                        <Image
-                            source={Requires.back}
-                            resizeMode='contain'
-                            style={{
-                                width: Width * .05,
-                                height: Width * .05
-                            }} />
-                    </TouchableOpacity>
+
 
                 </View>
 
@@ -157,6 +158,13 @@ class add_plan extends Component {
                         justifyContent: 'space-between',
                         alignItems: 'center'
                     }}>
+
+                    <TouchableOpacity activeOpacity={.5} style={{ width: '48%', height: '60%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
+                        <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
+                        <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
+                        <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7' }]}>start date</Text>
+
+                    </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={.5}
                         style={{
@@ -171,22 +179,16 @@ class add_plan extends Component {
                             backgroundColor: '#F9F9F9',
                             paddingHorizontal: Width * .03
                         }}>
-                        <Text 
-                        style={[Styles.TextStyle, {
-                             width: '60%',
-                              color: '#D7D7D7'
-                             }]}></Text>
-
-                        <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                         <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
+                        <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
+                        <Text
+                            style={[Styles.TextStyle, {
+                                width: '60%',
+                                color: '#D7D7D7'
+                            }]}>end date</Text>
+
                     </TouchableOpacity>
 
-                    <TouchableOpacity activeOpacity={.5} style={{ width: '48%', height: '60%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
-                        <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7' }]}>تاريخ البدء</Text>
-
-                        <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
-                        <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
-                    </TouchableOpacity>
 
 
                 </View>
@@ -196,24 +198,27 @@ class add_plan extends Component {
 
             {/* // TITLE CHOOSE ICON */}
             <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                <Text style={Styles.TextStyle}>{'اختر ايقونة معبرة'}</Text>
+                <Text style={Styles.TextStyle}>{'Choose Descriptive Icon'}</Text>
             </View>
 
 
-            <View style={[Styles.Header, { width: '90%', height: Height * .35, marginVertical: 5 }]}>
-                <FlatList numColumns={4} contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }} data={Requires.ICons} renderItem={({ item, index }) => {
-                    return (
-                        <View style={{ width: '25%', alignItems: 'center', justifyContent: 'center' }}>
-                            <TouchableOpacity onPress={() => this.setState({ CurantSelected: index })} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015 }}>
-                                <View style={{ width: Width * .1, height: Width * .1, backgroundColor: CurantSelected == index ? Colors.red : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center', elevation: 5 }}>
-                                    <Image source={item} resizeMode='contain' style={{ width: '70%', height: '70%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
-                                </View>
-                                {/* <Text style={[Styles.TextStyle, { fontSize: Width * .025, marginTop: Height * .01, color: CurantSelected == index ? Colors.red : Colors.DarkGrayColor }]}>{text[index]}</Text> */}
-                            </TouchableOpacity>
+            <View style={[Styles.Header, { width: '90%', height: Height * .48, marginVertical: 5 }]}>
+                <FlatList
+                    numColumns={4}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }} data={Requires.ICons} renderItem={({ item, index }) => {
+                        return (
+                            <View style={{ width: '25%', alignItems: 'center', justifyContent: 'center' }}>
+                                <TouchableOpacity onPress={() => this.setState({ CurantSelected: index })} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015 }}>
+                                    <View style={{ width: Width * .14, height: Width * .14, backgroundColor: CurantSelected == index ? Colors.red : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center', elevation: 5 }}>
+                                        <Image source={item} resizeMode='contain' style={{ width: '60%', height: '60%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
+                                    </View>
+                                    {/* <Text style={[Styles.TextStyle, { fontSize: Width * .025, marginTop: Height * .01, color: CurantSelected == index ? Colors.red : Colors.DarkGrayColor }]}>{text[index]}</Text> */}
+                                </TouchableOpacity>
 
-                        </View>
-                    )
-                }} />
+                            </View>
+                        )
+                    }} />
             </View>
 
         </View>
@@ -235,7 +240,10 @@ const Styles = StyleSheet.create({
 
     },
     TextStyle: {
-        fontFamily: FontFamilies.Etisalat_0, color: Colors.BlackColor
+        fontFamily: FontFamilies.Etisalat_0,
+        color: Colors.BlackColor,
+        // width:'100%',
+        textAlign: 'left'
     }
 })
 export { add_plan } 

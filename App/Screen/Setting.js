@@ -32,11 +32,11 @@ class Setting extends Component {
 
 
 
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity activeOpacity={0.7} onPress={()=>this.props.navigation.navigate('EditProfile')} style={styles.Button}>
                         <Text style={styles.textButton}>Account settings</Text>
                         <EvilIcons name='chevron-right' size={Width * .1} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity activeOpacity={0.7} onPress={()=>this.props.navigation.navigate('ExportTab')} style={styles.Button}>
                         <Text style={styles.textButton}>Export and Import Data</Text>
                         <EvilIcons name='chevron-right' size={Width * .1} />
                     </TouchableOpacity>

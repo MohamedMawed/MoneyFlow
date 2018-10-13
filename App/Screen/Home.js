@@ -86,6 +86,7 @@ class Home extends Component {
                                 console.log(index)
                                 return (
                                     <HomeProgressBarItem
+                                        onClick={() => this.props.navigation.navigate('plan')}
                                         key={index}
                                         cost={item.cost}
                                         Percent={this.CalcPercent(item.startDate, item.endDate)}
@@ -101,6 +102,7 @@ class Home extends Component {
                                 console.log(index)
                                 return (
                                     <HomeProgressBarItem
+                                        onClick={() => this.props.navigation.navigate('plan')}
                                         key={index}
                                         cost={item.cost}
                                         Percent={this.CalcPercent(item.startDate, item.endDate)}

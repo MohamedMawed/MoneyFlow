@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { Requires } from '../Assets/Requires';
 import { NavigationActions, StackActions } from 'react-navigation'
 import { FontFamilies, FontSize } from '../Global';
+import firebase from 'react-native-firebase';
 class Splash extends Component {
     constructor(props) {
         super(props)
@@ -27,11 +28,22 @@ class Splash extends Component {
         </LinearGradient>
         )
     }
-    componentDidMount() {
+    componentDidMount = async()=> {
+        let firstTime = await AsyncStorage.getItem('FirstTime');
+        let User = await AsyncStorage.getItem('User');
+        let Screen = 'Intro'
+        if(firstTime!= null){
+            screen = 'Login'
+        }
+        if(User != null){
+            screen = 'Main'
+        }
+        
+
         setTimeout(() => {
             const resetAction = StackActions.reset({
                 index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'Intro' })],
+                actions: [NavigationActions.navigate({ routeName: Screen })],
             });
             this.props.navigation.dispatch(resetAction);
         }, 2000)

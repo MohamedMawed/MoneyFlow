@@ -29,7 +29,7 @@ class plan extends Component {
             <View style={[Styles.Header, { width: '90%', height: Height * .1, backgroundColor: Colors.WhiteColor, flexDirection: FixViewsOrder(), justifyContent: 'space-between' }]}>
 
                 <View style={{ width: '30%', height: '100%', alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder() }}>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={()=>this.props.navigation.goBack()} >
                         <Image source={Requires.back} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                     </TouchableOpacity>
 

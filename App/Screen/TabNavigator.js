@@ -63,6 +63,9 @@ export default App = createStackNavigator(
         Intro: { screen: Intro },
         Login: { screen: Login },
         Register: { screen: Register },
+        EditProfile:{screen:EditProfile},
+        ExportTab:{screen:ExportTab},
+        plan:{screen : plan},
         Main: { screen: Tabs },
 
     }, {

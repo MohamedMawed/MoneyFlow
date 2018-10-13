@@ -4,6 +4,7 @@ import {
     Image,
     Text,
     StyleSheet,
+    TouchableOpacity
 } from 'react-native'
 import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
@@ -19,7 +20,7 @@ class HomeProgressBarItem extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.ItemRow}>
+                <TouchableOpacity activeOpacity={0.75} onPress={this.props.onClick} style={styles.ItemRow}>
 
                     {/* for item Icon */}
                     <View style={[styles.ItemIconContainer,{backgroundColor: this.props.BackColor,}]}>
@@ -38,7 +39,7 @@ class HomeProgressBarItem extends Component {
                         <Text style={[styles.ItemCostText,{color: this.props.BackColor}]}
                         >{this.props.cost}</Text>
                     </View>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.ProgressBarContainer}>
                     <View style={{ width: Width * .9 * (this.props.Percent / 100),height:'100%', backgroundColor: this.props.BackColor }} />
                 </View>

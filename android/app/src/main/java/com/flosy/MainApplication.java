@@ -3,6 +3,8 @@ package com.flosy;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+import com.magus.fblogin.FacebookLoginPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import io.invertase.firebase.RNFirebasePackage;
@@ -28,9 +30,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNGoogleSigninPackage(),
+            new RNFirebasePackage(),
+            new FacebookLoginPackage(),
             new VectorIconsPackage(),
             new SvgPackage(),
-            new RNFirebasePackage(),
             new LinearGradientPackage(),
             new RNFirebaseAuthPackage()
       );

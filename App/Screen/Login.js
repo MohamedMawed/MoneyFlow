@@ -5,6 +5,7 @@ import {
     Text,
     ActivityIndicator,
     TouchableOpacity,
+    Platform
 } from 'react-native'
 import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
@@ -14,7 +15,17 @@ import { Colors } from '../Global/Colors';
 import firebase from 'react-native-firebase'
 import { NavigationActions, StackActions } from 'react-navigation'
 import CustomToast from '../Components/CustomToast';
+import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 
+import  { FBLoginManager } from 'react-native-facebook-login'
+if (Platform.OS === "android") {
+    FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Native); // defaults to Native
+
+} else {
+    FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Web); // defaults to Native
+
+}
+FBLoginManager.logout(() => { });
 
 
 class Login extends Component {
@@ -48,7 +59,7 @@ class Login extends Component {
         this.setState({ Loading: true })
 
         firebase.auth().signInWithEmailAndPassword(Email, Password).then((User) => {
-            console.log('yesssssss',User)
+            console.log('yesssssss', User)
             this.setState({ User: User, Loading: false })
             const resetAction = StackActions.reset({
                 index: 0,
@@ -74,9 +85,32 @@ class Login extends Component {
             this.setState({ CloseAlert: true, Loading: false })
         })
     }
+    GoogleLogin = async () => {
+        try {
+            await GoogleSignin.hasPlayServices();
+            const userInfo = await GoogleSignin.signIn();
+            this.setState({ userInfo, provider: 'google' });
+            this.setState({ Loading1: true })
+            SetSocialProvider('google')
+
+            OnLineCheckSocialUser(userInfo.user.id, 'google', this.OnSuccess, this.OnFail)
+            this.signOut()
+        } catch (error) {
+            alert(error)
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // user cancelled the login flow
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                // operation (f.e. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                // play services not available or outdated
+            } else {
+                // some other error happened
+            }
+        }
+    }
     render() {
         return (
-            <View style={{ width: Width, height: Height,backgroundColor: '#fff', }}>
+            <View style={{ width: Width, height: Height, backgroundColor: '#fff', }}>
                 <View style={{ width: Width, height: Height * .35, justifyContent: 'center', alignItems: 'center' }}>
                     <Image source={Requires.Logo} style={{ width: Width * .42, resizeMode: 'contain' }} />
                     <Text style={{
@@ -178,16 +212,40 @@ class Login extends Component {
                         height: Height * .15,
                         marginTop: Height * .04
                     }}>
-                        <TouchableOpacity style={{
-                            backgroundColor: Colors.BtnFaceBookBack,
-                            borderRadius: Width * .1,
-                            justifyContent: 'center',
-                            width: Width * .9,
-                            alignItems: 'center',
-                            height: '46%',
-                            paddingHorizontal: Width * .06,
-                            flexDirection: 'row',
-                        }}>
+                        <TouchableOpacity
+
+                            activeOpacity={0.7}
+                            onPress={()=>{
+                                try{
+                                FBLoginManager.loginWithPermissions(["email","public_profile"], (error, data) => {
+
+                                    if (!error) {
+
+                                        alert(JSON.stringify(data))
+                                        // OnlineGetFacebookData(data.credentials.userId, data.credentials.token, this.OnSuccessGetSocialFBdata, (errr) => { alert(errr) })
+                                        // SetSocialProvider('facebook')
+                                        // this.setState({ userInfo: UserData, provider: 'facebook' })
+                                        // // alert(JSON.stringify(UserData))
+                                        // this.setState({ Loading: true })
+                                        // OnLineCheckSocialUser(UserData.id, 'facebook', this.OnSuccess, this.OnFail)
+                                    } else {
+                                        alert(JSON.stringify(error))
+                                    }
+                                })
+                            }catch(error){
+                                console.log('MAWWWEEEDD',error)
+                            }
+                            }}
+                            style={{
+                                backgroundColor: Colors.BtnFaceBookBack,
+                                borderRadius: Width * .1,
+                                justifyContent: 'center',
+                                width: Width * .9,
+                                alignItems: 'center',
+                                height: '46%',
+                                paddingHorizontal: Width * .06,
+                                flexDirection: 'row',
+                            }}>
                             <Image source={Requires.FB} style={{
                                 width: Width * .025,
                                 margin: Width * .02,
@@ -201,7 +259,12 @@ class Login extends Component {
                                 color: Colors.WhiteColor,
                             }}>Login with facebook</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{
+                        <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={()=>{
+                            this.GoogleLogin()
+                        }}
+                        style={{
                             backgroundColor: Colors.BtnGoogleBack,
                             borderRadius: Width * .1,
                             justifyContent: 'center',
