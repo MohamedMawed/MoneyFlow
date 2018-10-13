@@ -35,6 +35,12 @@ export const Requires = {
     Setting: require('./img/settings.png'),
     car2: require('./img/car2.png'),
     exportLogo:require('./img/export-large.png'),
+    settings_large:require('./img/settings-large.png'),
+    America:require('./img/united-states.png'),
+    Egypt:require('./img/egypt.png'),
+    money2:require('./img/money2.png'),
+    money1:require('./img/money1.png'),
+    arrow_down2:require('./img/play-button.png'),
 
 }
 

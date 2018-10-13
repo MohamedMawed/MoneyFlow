@@ -15,7 +15,7 @@ import { Colors } from '../Global/Colors';
 class EditProfile extends Component {
     render() {
         return (
-            <View style={{ width: Width, height: Height }}>
+            <View style={{ width: Width, height: Height,backgroundColor:'#fff' }}>
                 <View style={{ width: Width, height: Height * .35, justifyContent: 'center', alignItems: 'center' }}>
                     <Image source={Requires.Logo} style={{ width: Width * .42, resizeMode: 'contain' }} />
                     <Text style={{

@@ -63,10 +63,11 @@ const Styles = StyleSheet.create({
     Container: {
         width: Width * .9,
         borderRadius: Width * .1,
-        height: Height * .08,
+        height: Height * .069,
         justifyContent: 'space-evenly',
         alignItems: 'center',
         flexDirection: 'row',
+        
         borderWidth: 1,
     },
     line: {

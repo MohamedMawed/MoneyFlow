@@ -17,14 +17,17 @@ import { ExportTab } from './Export';
 import { EditProfile } from './EditProfile';
 import { Intro } from './Intro';
 import { AddBudget } from './AddBudget';
+import { add_plan } from './add_plan'
+import { Setting } from './Setting';
+import { plan } from './plan';
 
 const Tabs = createBottomTabNavigator(
     {
         Home: Home,
-        Plan: Register,
-        Plus: EditProfile,
-        Report: ExportTab,
-        Setting: AddBudget,
+        Plan: add_plan,
+        Plus: add_plan,
+        Report: AddBudget,
+        Setting: Setting,
     },
     {
         navigationOptions: ({ navigation }) => ({
@@ -33,8 +36,6 @@ const Tabs = createBottomTabNavigator(
                 let myTintColor = tintColor
                 if (routeName == 'Plus') myTintColor = null
                 let IconWidth = routeName == 'Plus' ? Width * .11 : Width * .06
-                // You can return any component that you like here! We usually use an
-                // icon component from react-native-vector-icons
 
                 return <Image source={Requires[routeName]}
                     style={{
@@ -59,10 +60,11 @@ const Tabs = createBottomTabNavigator(
 export default App = createStackNavigator(
     {
         Splash: { screen: Splash },
-        Intro : {screen : Intro},
+        Intro: { screen: Intro },
         Login: { screen: Login },
         Register: { screen: Register },
-        Main: { screen: Tabs }
+        Main: { screen: Tabs },
+
     }, {
         headerMode: 'none'
     }

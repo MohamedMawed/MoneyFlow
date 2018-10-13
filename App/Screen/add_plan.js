@@ -12,60 +12,171 @@ class add_plan extends Component {
         this.state = {
             CurantSelected: 0,
             valueSlider: 0,
-            NamePlan:'',
-            AmountValue:''
+            NamePlan: '',
+            AmountValue: ''
 
         }
     }
     render() {
-
-        //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
-        // </LinearGradient>
         let { CurantSelected } = this.state
         let text = ['طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام',]
-        return (<View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
+        return (<View style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#fff',
+            alignItems: 'center'
+        }}>
             {/* //header */}
-            <View style={[Styles.Header, { width: '90%', height: Height * .1, backgroundColor: Colors.WhiteColor, flexDirection: FixViewsOrder(), justifyContent: 'space-between' }]}>
+            <View style={[Styles.Header, {
+                width: '90%',
+                height: Height * .1,
+                backgroundColor: Colors.WhiteColor,
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+            }]}>
 
-                <View style={{ width: '20%', height: '100%', alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder() }}>
-                    <TouchableOpacity >
-                        <Image source={Requires.back} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
-                    </TouchableOpacity>
+                <View style={{
+                    width: '50%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    flexDirection: 'row'
+                }}>
 
-                    <TouchableOpacity >
-                        <Image source={Requires.remove} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{ width: '50%', height: '100%', alignItems: 'center', justifyContent: 'flex-end', flexDirection: FixViewsOrder() }}>
-
-                    <Text style={[Styles.TextStyle, { marginHorizontal: Width * .04 }]}>اضافة خطة او هدف</Text>
-
-                    <TouchableOpacity style={{ width: Width * .09, height: Width * .09, borderRadius: Width * .05, backgroundColor: Colors.GrayColor, alignItems: 'center', justifyContent: 'center' }}>
+                    <TouchableOpacity style={{
+                        width: Width * .09,
+                        height: Width * .09,
+                        borderRadius: Width * .05,
+                        backgroundColor: Colors.GrayColor,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
                         <Image source={Requires.edit} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                     </TouchableOpacity>
+                    <Text style={[Styles.TextStyle, {
+                        marginHorizontal: Width * .04
+                    }]}> Add plan or goal </Text>
+
+                </View>
+
+                <View style={{
+                    width: '20%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    flexDirection: 'row'
+                }}>
+
+                    <TouchableOpacity >
+                        <Image
+                            source={Requires.remove}
+                            resizeMode='contain'
+                            style={{
+                                width: Width * .05,
+                                height: Width * .05
+                            }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity >
+                        <Image
+                            source={Requires.back}
+                            resizeMode='contain'
+                            style={{
+                                width: Width * .05,
+                                height: Width * .05
+                            }} />
+                    </TouchableOpacity>
+
                 </View>
 
             </View>
 
             {/* // form enter data */}
-            <View style={[Styles.Header, { width: '90%', height: Height * .3, backgroundColor: Colors.WhiteColor, elevation: 7, borderRadius: Width * .03, alignItems: 'center' }]}>
-
+            <View style={[Styles.Header, {
+                width: '90%',
+                height: Height * .3,
+                backgroundColor: Colors.WhiteColor,
+                elevation: 7,
+                borderRadius: Width * .03,
+                alignItems: 'center'
+            }]}>
 
                 {/* //inputs */}
-                <View style={{ width: '100%', height: '60%', alignItems: 'center' }}>
-                    <TextInput autoCorrect={false} value={this.state.NamePlan} onChangeText={(text)=>{
-                        this.setState({NamePlan:text})
-                    }}  placeholder='اسم الخطة او الهدف' style={{fontSize:Width*.03,fontFamily:FontFamilies.Etisalat_0, width: '90%', height: Height * .065, borderRadius: Width * .03, borderWidth: 1, borderColor: '#D9D9D9', backgroundColor: '#F9F9F9',paddingHorizontal:Width*.03,marginTop:Height*.022 }} />
+                <View style={{
+                    width: '100%',
+                    height: '60%',
+                    alignItems: 'center'
+                }}>
+                    <TextInput
+                        autoCorrect={false}
+                        onChangeText={(text) => {
+                            this.setState({ NamePlan: text })
+                        }}
+                        placeholder='Goal Name'
+                        style={{
+                            fontSize: Width * .03,
+                            fontFamily: FontFamilies.Etisalat_0,
+                            width: '90%',
+                            textAlign: 'left',
+                            height: Height * .065,
+                            borderRadius: Width * .03,
+                            borderWidth: 1,
+                            borderColor: '#D9D9D9',
+                            backgroundColor: '#F9F9F9',
+                            paddingHorizontal: Width * .03,
+                            marginTop: Height * .022
+                        }} />
 
 
-                    <TextInput autoCorrect={false} value={this.state.AmountValue} onChangeText={(text)=>{
-                        this.setState({AmountValue:text})
-                    }} keyboardType='numeric' placeholder='ٌقيمة المبلغ' style={{fontSize:Width*.03,fontFamily:FontFamilies.Etisalat_0, width: '90%', height: Height * .065, borderRadius: Width * .03, borderWidth: 1, borderColor: '#D9D9D9', backgroundColor: '#F9F9F9',paddingHorizontal:Width*.03,marginTop:Height*.022 }} />
+
+
+                    <TextInput
+                        autoCorrect={false}
+                        onChangeText={(text) => {
+                            this.setState({ AmountValue: text })
+                        }} keyboardType='numeric'
+                        placeholder='Cost'
+                        style={{
+                            fontSize: Width * .03,
+                            fontFamily: FontFamilies.Etisalat_0,
+                            width: '90%',
+                            height: Height * .065,
+                            borderRadius: Width * .03,
+                            borderWidth: 1,
+                            borderColor: '#D9D9D9',
+                            backgroundColor: '#F9F9F9',
+                            paddingHorizontal: Width * .03,
+                            marginTop: Height * .022
+                        }} />
+
                 </View>
-                <View style={{ width: '90%', height: '30%', flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center' }}>
-                    <TouchableOpacity activeOpacity={.5} style={{ width: '48%', height: '60%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
-                        <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7' }]}>تاريخ الانتهاء</Text>
+                <View
+                    style={{
+                        width: '90%',
+                        height: '30%',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+                    <TouchableOpacity
+                        activeOpacity={.5}
+                        style={{
+                            width: '48%',
+                            height: '60%',
+                            borderRadius: Width * .02,
+                            borderColor: '#D7D7D7',
+                            borderWidth: 1,
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            backgroundColor: '#F9F9F9',
+                            paddingHorizontal: Width * .03
+                        }}>
+                        <Text 
+                        style={[Styles.TextStyle, {
+                             width: '60%',
+                              color: '#D7D7D7'
+                             }]}></Text>
+
                         <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                         <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                     </TouchableOpacity>
@@ -114,7 +225,11 @@ class add_plan extends Component {
 }
 const Styles = StyleSheet.create({
     Container: {
-        width: Width, height: Height, backgroundColor: Colors.WhiteColor, alignItems: 'center', justifyContent: 'center',
+        width: Width,
+        height: Height,
+        backgroundColor: Colors.WhiteColor,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     Header: {
 

@@ -43,7 +43,7 @@ class HomeMoneyItem extends Component {
                     >{this.props.Title}</Text>
                 <View style={{
                     flexDirection: 'row',
-                    width: Width * .4,
+                    // width: Width * .4]4,
                     height: Height * .06,
                     alignItems:'center',
                     justifyContent:'space-around'
@@ -56,15 +56,16 @@ class HomeMoneyItem extends Component {
                         fontSize:FontSize.VeryLargFontSize,
                         color:this.props.color,
                         textAlign:'center',
-                        width:Width*.2
+                        // fontWeight:'f'
+                        // width:Width*.2
                     }}
                     >7500</Text>
                     <Text style={{
                         fontFamily:FontFamilies.Etisalat_0,
                         fontSize:FontSize.MediumFontSize,
-                        color:this.props.color,
+                        color:Colors.TextGrayColor,
                         textAlign:'center',
-                        width:Width*.2
+                        // width:Width*.2
                     }}
                     >pounds</Text>
                 </View>

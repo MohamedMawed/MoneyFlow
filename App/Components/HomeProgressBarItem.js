@@ -55,11 +55,12 @@ class HomeProgressBarItem extends Component {
 const styles = StyleSheet.create(
     {
         container: {
+            paddingTop: Height*.01,
             width: Width * .94,
-            height: Height * .13,
-            borderRadius: Width * .03,
+            height: Height * .1,
+            borderRadius: Width * .02,
             marginTop: Height*.02,
-            elevation: 2,
+            elevation: 1.5,
             // backgroundColor: 'red',
             justifyContent: 'center',
             alignItems: 'center',
@@ -67,7 +68,7 @@ const styles = StyleSheet.create(
         },
         ItemCostText: {
             fontFamily: FontFamilies.Etisalat_0,
-            fontSize: FontSize.VeryLargFontSize,
+            fontSize: FontSize.LargFontSize,
             textAlign: 'center',
             width: Width * .2
         },
@@ -75,8 +76,8 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             borderWidth: 0.7,
             borderRadius: Width * .1,
-            width: Width * .25,
-            height: Height * .05,
+            width: Width * .23,
+            height: Height * .04,
             alignItems: 'center',
             justifyContent: 'space-around'
 
@@ -103,7 +104,7 @@ const styles = StyleSheet.create(
         },
         ProgressBarContainer: {
             width: Width*.94,
-            height: Height * .015,
+            height: Height * .01,
             alignItems: 'flex-start',
             // backgroundColor: 'red',
             position: 'absolute',
@@ -113,13 +114,15 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             justifyContent: 'space-evenly',
             width: '100%',
+            paddingTop: Height*.005,
             overflow:'hidden',
+            // alignItems: 'center',
             height: Height * .085,
 
         },
         ItemIconContainer: {
-            width: Width * .14,
-            height: Width * .14,
+            width: Width * .11,
+            height: Width * .11,
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: Width * .1,
@@ -127,8 +130,8 @@ const styles = StyleSheet.create(
         },
         ItemIcon: {
             resizeMode: 'contain',
-            width: Width * .1,
-            height: Width * .1,
+            width: Width * .06,
+            height: Width * .06,
             tintColor: '#fff'
         }
     }

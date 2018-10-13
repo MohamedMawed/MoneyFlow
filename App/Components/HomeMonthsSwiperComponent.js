@@ -19,7 +19,7 @@ class HomeMonthsSwiperComponent extends Component {
                 width: Width * .9,
                 height: Height * .22,
                 borderRadius: Width * .03,
-                paddingVertical:Height*.03,
+                paddingVertical:Height*.02,
                 marginTop:Height*.04,
                 elevation: 4,
                 // shadowColor:'red',
@@ -69,11 +69,11 @@ class HomeMonthsSwiperComponent extends Component {
                     flexDirection: 'row',
                     borderWidth: 1,
                     borderRadius: Width * .1,
-                    backgroundColor: Colors.GreenColor,
+                    backgroundColor: Colors.AppGreenColor,
                     width: Width * .4,
                     height: Height * .06,
                     alignItems:'center',
-                    justifyContent:'space-around'
+                    justifyContent:'center'
 
 
                 }}>
@@ -83,7 +83,8 @@ class HomeMonthsSwiperComponent extends Component {
                         fontSize:FontSize.VeryLargFontSize,
                         color:'white',
                         textAlign:'center',
-                        width:Width*.2
+                        // width:Width*.2,
+                        fontWeight:'bold'
                     }}
                     >7500</Text>
                     <Text style={{
@@ -91,7 +92,7 @@ class HomeMonthsSwiperComponent extends Component {
                         fontSize:FontSize.MediumFontSize,
                         color:'white',
                         textAlign:'center',
-                        width:Width*.2
+                        // width:Width*.2
                     }}
                     >pounds</Text>
                 </View>

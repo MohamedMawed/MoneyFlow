@@ -1,11 +1,12 @@
 import React, { Component } from 'React'
-import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, FlatList, TouchableOpacity, TextInput } from 'react-native'
+import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, FlatList, TouchableOpacity, TextInput,Easing } from 'react-native'
 import { Height, Width } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
 import { Requires } from '../Assets/Requires';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { Lang, FixViewsOrder } from '../Global/Localization';
-import { FontFamilies, FontSize } from '../Global/Font';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { FontFamilies } from '../Global/Font';
 class plan extends Component {
     constructor(props) {
         super(props)
@@ -13,7 +14,8 @@ class plan extends Component {
             CurantSelected: 0,
             valueSlider: 0,
             NamePlan: '',
-            AmountValue: ''
+            AmountValue: '',
+            VALUE:0
 
         }
     }
@@ -22,7 +24,6 @@ class plan extends Component {
         //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
         // </LinearGradient>
         let { CurantSelected } = this.state
-        let text = ['طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام',]
         return (<View style={{ width: '100%', height: '100%', alignItems: 'center', backgroundColor: Colors.WhiteColor }}>
             {/* //header */}
             <View style={[Styles.Header, { width: '90%', height: Height * .1, backgroundColor: Colors.WhiteColor, flexDirection: FixViewsOrder(), justifyContent: 'space-between' }]}>
@@ -72,10 +73,40 @@ class plan extends Component {
                 <Text style={Styles.TextStyle}>{'39 يوم'}</Text>
                 <Text style={Styles.TextStyle}>{'متبقى من الوقت'}</Text>
             </View>
+
+
+            <View style={{ width: '100%', height: Height * .3, alignItems: 'center', justifyContent: 'center', marginTop: Height * .02 }}>
+
+                <AnimatedCircularProgress
+                ref={(ref) => this.circularProgress = ref}
+                    
+                    size={Width * .37}
+                    width={Width * .05}
+                    fill={0}
+                    rotation={0}
+                    duration={1000}
+           
+                    tintColor={Colors.red}
+                    onAnimationComplete={(VAL) => console.log(VAL,'onAnimationComplete')}
+                    backgroundColor={'#DADADA'} >
+                    {
+                        (fill) => (
+                            <Text style={Styles.TextStyle}>
+                                { Math.floor(fill) +'%'}
+                            </Text>
+                        )
+                    }
+                </AnimatedCircularProgress>
+
+
+            </View>
         </View>
         )
     }
+    
     componentDidMount() {
+        this.circularProgress.animate(35, 2000, Easing.elastic(1)); // Will fill the progress bar linearly in 8 seconds
+
     }
 }
 const Styles = StyleSheet.create({
@@ -86,7 +117,7 @@ const Styles = StyleSheet.create({
 
     },
     TextStyle: {
-        fontFamily: FontFamilies.Etisalat_0, color: '#5D5D5D'
+        fontFamily:FontFamilies.Etisalat_2, color: '#5D5D5D'
     },
     perantTextItem: {
         width: '90%', height: Height * .09, backgroundColor: Colors.WhiteColor, alignItems: 'center', borderBottomWidth: 1, borderColor: '#EBEBEB', flexDirection: FixViewsOrder(), justifyContent: 'space-between'

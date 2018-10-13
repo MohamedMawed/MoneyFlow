@@ -6,7 +6,6 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native'
-import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
@@ -36,7 +35,7 @@ class ExportTab extends Component {
                     }}>
 
                         <ModalDropdown
-                        showsVerticalScrollIndicator={false}
+                            showsVerticalScrollIndicator={false}
                             textStyle={{
                                 textAlign: 'left',
                                 width: Width * .75,
@@ -127,6 +126,7 @@ const styles = StyleSheet.create(
             justifyContent: 'space-evenly',
             alignItems: 'center',
             overflow: 'hidden',
+            backgroundColor: '#fff'
         },
         ItemCostText: {
             fontFamily: FontFamilies.Etisalat_0,

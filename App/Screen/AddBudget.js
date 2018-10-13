@@ -21,9 +21,20 @@ class AddBudget extends Component {
         // </LinearGradient>
         let { CurantSelected } = this.state
         let text = ['طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام',]
-        return (<View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
+        return (<View style={{
+            width: '100%',
+            height: '100%',
+            alignItems: 'center',
+            backgroundColor: '#fff',
+        }}>
             {/* //header */}
-            <View style={[Styles.Header, { width: '90%', height: Height * .1, backgroundColor: Colors.WhiteColor, flexDirection: FixViewsOrder(), justifyContent: 'space-between' }]}>
+            <View style={[Styles.Header, {
+                width: '90%',
+                height: Height * .1,
+                backgroundColor: Colors.WhiteColor,
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+            }]}>
 
                 <View style={{ width: '20%', height: '100%', alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder() }}>
                     <TouchableOpacity >
@@ -65,10 +76,10 @@ class AddBudget extends Component {
                         max={10000}
                         snapped
                         selectedStyle={{
-                            backgroundColor:'#7274CD',height:Width*.02,borderRadius:4
+                            backgroundColor: '#7274CD', height: Width * .02, borderRadius: 4
                         }}
                         trackStyle={{
-                            backgroundColor:Colors.GrayColor,height:Width*.02,borderRadius:4
+                            backgroundColor: Colors.GrayColor, height: Width * .02, borderRadius: 4
                         }}
                         customMarker={() => {
                             return (
@@ -77,8 +88,8 @@ class AddBudget extends Component {
                                         backgroundColor: Colors.WhiteColor,
                                         width: Width * .07,
                                         height: Width * .07,
-                                        borderColor:'#DDDDDD',
-                                        borderWidth:1,
+                                        borderColor: '#DDDDDD',
+                                        borderWidth: 1,
                                         borderRadius: Width * .01,
                                         justifyContent: "center",
                                         alignItems: "center"
@@ -87,7 +98,7 @@ class AddBudget extends Component {
                             );
                         }}
                         onValuesChange={(values) => {
-                            console.log(values,"ssssssssssssssddd")
+                            console.log(values, "ssssssssssssssddd")
                             this.setState({ valueSlider: values[0] })
                         }}
                     //    onValuesChangeFinish={this.sliderOneValuesChangeFinish}
@@ -97,13 +108,13 @@ class AddBudget extends Component {
                 </View>
                 <View style={{ width: '90%', height: '30%', flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center' }}>
                     <TouchableOpacity activeOpacity={.5} style={{ width: '48%', height: '60%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
-                        <Text style={[Styles.TextStyle, { width: '60%',color:'#D7D7D7' }]}>تاريخ الانتهاء</Text>
+                        <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7' }]}>تاريخ الانتهاء</Text>
                         <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                         <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                     </TouchableOpacity>
 
                     <TouchableOpacity activeOpacity={.5} style={{ width: '48%', height: '60%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
-                        <Text style={[Styles.TextStyle, { width: '60%',color:'#D7D7D7' }]}>تاريخ البدء</Text>
+                        <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7' }]}>تاريخ البدء</Text>
 
                         <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                         <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
@@ -126,7 +137,7 @@ class AddBudget extends Component {
                     return (
                         <View style={{ width: '25%', alignItems: 'center', justifyContent: 'center' }}>
                             <TouchableOpacity onPress={() => this.setState({ CurantSelected: index })} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015 }}>
-                                <View style={{ width: Width * .1, height: Width * .1, backgroundColor: CurantSelected == index ? Colors.red : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center',elevation:5}}>
+                                <View style={{ width: Width * .1, height: Width * .1, backgroundColor: CurantSelected == index ? Colors.red : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center', elevation: 5 }}>
                                     <Image source={item} resizeMode='contain' style={{ width: '70%', height: '70%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
                                 </View>
                                 <Text style={[Styles.TextStyle, { fontSize: Width * .025, marginTop: Height * .01, color: CurantSelected == index ? Colors.red : Colors.DarkGrayColor }]}>{text[index]}</Text>

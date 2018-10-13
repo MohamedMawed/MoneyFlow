@@ -5,6 +5,7 @@ import { Colors } from '../Global/Colors';
 import LinearGradient from 'react-native-linear-gradient'
 import { Requires } from '../Assets/Requires';
 import { NavigationActions, StackActions } from 'react-navigation'
+import { FontFamilies, FontSize } from '../Global';
 class Splash extends Component {
     constructor(props) {
         super(props)
@@ -17,7 +18,12 @@ class Splash extends Component {
         // </LinearGradient>
 
         return (<LinearGradient colors={[Colors.greenlite, Colors.GreenColor]} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-            <Image resizeMode="contain" source={Requires.Logo_main} style={{ width: '40%', height: '40%' }} />
+            <Image resizeMode="contain" source={Requires.Logo} style={{ width: '40%' }} />
+            <Text style={{
+                fontFamily:FontFamilies.Etisalat_0,
+                fontSize:FontSize.VeryLargFontSize,
+                color:'#fff'
+            }}>Flosy</Text>
         </LinearGradient>
         )
     }

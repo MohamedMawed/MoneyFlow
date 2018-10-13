@@ -53,9 +53,9 @@ class Home extends Component {
 
         let percent = this.CalcPercent(start, end)
         console.log(percent)
-        if (percent <= 33) return Colors.GreenColor
-        if (percent <= 66) return Colors.DarkBlueColor
-        if (percent <= 100) return Colors.red
+        if (percent <= 33) return Colors.AppGreenColor
+        if (percent <= 66) return Colors.AppBlueColor
+        if (percent <= 100) return Colors.AppRedColor
 
     }
     render() {
@@ -67,8 +67,8 @@ class Home extends Component {
                     }}
                 />
                 <View style={styles.categoriesContainer}>
-                    <HomeMoneyItem Source={Requires.arrow_down} color={'#6267DA'} Title={'Income'} />
-                    <HomeMoneyItem Source={Requires.arrow_up} color={'red'} Title={'Expenses'} />
+                    <HomeMoneyItem Source={Requires.arrow_down} color={Colors.AppBlueColor} Title={'Income'} />
+                    <HomeMoneyItem Source={Requires.arrow_up} color={Colors.AppRedColor} Title={'Expenses'} />
                 </View>
                 <View style={{ marginTop: Height * .02 }}>
                     <ScrollView
@@ -91,13 +91,9 @@ class Home extends Component {
                                         Percent={this.CalcPercent(item.startDate, item.endDate)}
                                         BackColor={this.CalcPercentColor(item.startDate, item.endDate)}
                                         Source={item.Icon} />
-
-                                    // <Text style={styles.FirstCategoryHeader}>Plans & Goals</Text>
                                 )
                             })
-
                             }
-                            {/* <HomeProgressBarItem cost={3700} Percent={50} BackColor={'blue'} Source={Requires.Home} /> */}
                         </View>
                         <Text style={styles.SecondCategoryHeader}>budget</Text>
                         <View style={{ marginBottom: Height * .45, }}>
@@ -111,12 +107,10 @@ class Home extends Component {
                                         BackColor={this.CalcPercentColor(item.startDate, item.endDate)}
                                         Source={item.Icon} />
 
-                                    // <Text style={styles.FirstCategoryHeader}>Plans & Goals</Text>
                                 )
                             })
 
                             }
-                            {/* <HomeProgressBarItem cost={3700} Percent={50} BackColor={'blue'} Source={Requires.Home} /> */}
                         </View>
 
                     </ScrollView>
@@ -140,6 +134,7 @@ const styles = StyleSheet.create({
         width: Width,
         height: Height,
         alignItems: 'center',
+        backgroundColor: 'white',
         // justifyContent: 'space-around'
     },
     FirstCategoryHeader: {

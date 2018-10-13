@@ -13,6 +13,7 @@ import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
 import firebase from 'react-native-firebase'
 import { NavigationActions, StackActions } from 'react-navigation'
+import CustomToast from '../Components/CustomToast';
 
 
 
@@ -66,7 +67,7 @@ class Login extends Component {
                     this.Massage = 'email not found please register'
                     break;
                 default:
-                    this.Massage = 'Wrong Passwor'
+                    this.Massage = 'Wrong Password'
 
                 // handle other codes ...
             }
@@ -75,7 +76,7 @@ class Login extends Component {
     }
     render() {
         return (
-            <View style={{ width: Width, height: Height }}>
+            <View style={{ width: Width, height: Height,backgroundColor: '#fff', }}>
                 <View style={{ width: Width, height: Height * .35, justifyContent: 'center', alignItems: 'center' }}>
                     <Image source={Requires.Logo} style={{ width: Width * .42, resizeMode: 'contain' }} />
                     <Text style={{
