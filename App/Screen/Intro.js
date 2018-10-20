@@ -37,7 +37,7 @@ class Intro extends Component {
                         }}>
                         <Image resizeMode="contain" source={Requires.toturil[index]} style={{ width: '30%', height: '30%', position: 'absolute', bottom: Height * .1 }} />
                     </LinearGradient>
-                    <View style={{ width: '70%', alignItems: 'center', marginTop: Height * .45 }}>
+                    <View style={{ width: '85%', alignItems: 'center', marginTop: Height * .45 }}>
                         <Text style={[Styles.TextStyle, { fontSize: 20 }]}>{Lang('TitleIntroScreen')[index]}</Text>
                         <Text style={[Styles.TextStyle, { textAlign: 'center', fontSize: 18, color: Colors.DarkGrayColor, marginTop: Height * .02, lineHeight: Height * .032 }]}>{Lang('ContentIntroScreen')[index]}</Text>
                     </View>
