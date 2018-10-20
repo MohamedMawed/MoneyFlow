@@ -20,14 +20,18 @@ const Ar_Lang = {
 
 }
 const En_Lang = {
-    TitleIntroScreen: ['follow your incomes and expences','Define Your Menoy Budget','determine your finacial goals'],
-    ContentIntroScreen:['follow your incomes and expences','Define Your Menoy Budget','determine your finacial goals'],
+    TitleIntroScreen: [
+        'Track your expenses and incomes',
+        'Set your budgets',
+        'Add your financial goals'],
+    ContentIntroScreen:[
+        'This app helps you to know where your money goes to save it.',
+        'Save more by setting budgets.',
+        'Need to buy something. Add a goal for it.'],
     Register:'Register',
     Login:'Login',
     Next:'Next',
     ChooseIcon:'Choose Descriptive Icon'
-
-
 }
 export const Lang = (txt) => {
     if (Language == 'ar')

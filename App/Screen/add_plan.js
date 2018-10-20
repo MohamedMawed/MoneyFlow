@@ -54,7 +54,8 @@ class add_plan extends Component {
 
                     <Text style={[Styles.TextStyle, {
                         width: '95%',
-                        textAlign: 'left'
+                        textAlign: 'left',
+                        fontSize:20,
                         // marginHorizontal: Width * .04
                     }]}> Add plan or goal </Text>
 
@@ -126,6 +127,7 @@ class add_plan extends Component {
                             borderRadius: Width * .02,
                             borderWidth: 1,
                             borderColor: '#D9D9D9',
+                            fontSize:17,
                             backgroundColor: '#F9F9F9',
                             paddingHorizontal: Width * .03,
                             // marginTop: Height * .022
@@ -150,6 +152,7 @@ class add_plan extends Component {
                             borderColor: '#D9D9D9',
                             backgroundColor: '#F9F9F9',
                             paddingHorizontal: Width * .03,
+                            fontSize:17
                             // marginTop: Height * .022
                         }} />
                     <View
@@ -246,6 +249,7 @@ const Styles = StyleSheet.create({
     TextStyle: {
         fontFamily: FontFamilies.Etisalat_0,
         color: Colors.BlackColor,
+        fontSize:17,
         // width:'100%',
         textAlign: 'left'
     }

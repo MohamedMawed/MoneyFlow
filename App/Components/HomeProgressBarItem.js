@@ -41,7 +41,7 @@ class HomeProgressBarItem extends Component {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.ProgressBarContainer}>
-                    <View style={{ width: Width * .9 * (this.props.Percent / 100),height:'100%', backgroundColor: this.props.BackColor }} />
+                    <View style={{elevation:2, width: Width * .9 * (this.props.Percent / 100),height:'100%', backgroundColor: this.props.BackColor }} />
                 </View>
             </View>
         )
@@ -107,6 +107,7 @@ const styles = StyleSheet.create(
             width: Width*.94,
             height: Height * .01,
             alignItems: 'flex-start',
+            elevation:1.5,
             // backgroundColor: 'red',
             position: 'absolute',
             bottom:0

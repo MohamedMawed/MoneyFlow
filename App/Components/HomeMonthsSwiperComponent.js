@@ -64,7 +64,7 @@ class HomeMonthsSwiperComponent extends Component {
                         textAlign:'center',
                         width:Width*.45
                     }}
-                    > You Now Have</Text>
+                    > In your wallet</Text>
                 <View style={{
                     flexDirection: 'row',
                     borderWidth: 1,
@@ -92,6 +92,7 @@ class HomeMonthsSwiperComponent extends Component {
                         fontSize:FontSize.MediumFontSize,
                         color:'white',
                         textAlign:'center',
+                        marginLeft:Width*.01
                         // width:Width*.2
                     }}
                     >pounds</Text>

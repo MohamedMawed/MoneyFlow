@@ -167,7 +167,8 @@ const Styles = StyleSheet.create({
     },
     TextStyle: {
         fontFamily: FontFamilies.Etisalat_0,
-        color: Colors.BlackColor
+        color: Colors.BlackColor,
+        fontSize:17
     }
 })
 export { AddBudget } 

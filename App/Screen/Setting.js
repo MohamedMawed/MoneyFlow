@@ -46,7 +46,7 @@ class Setting extends Component {
                         {/* <EvilIcons name='chevron-right' size={Width * .1} /> */}
 
                         <View style={{ width: Width * .1, height: Width * .1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.red, borderRadius: Width * .1, position: 'absolute', top: -Width * .03, right: Width * .03 }}>
-                            <Text style={{ fontSize: Width * .02, color: Colors.WhiteColor }}>Special</Text>
+                            <Text style={{ fontSize: Width * .02, color: Colors.WhiteColor }}>Pro</Text>
                         </View>
                     </TouchableOpacity>
 

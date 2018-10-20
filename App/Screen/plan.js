@@ -43,7 +43,7 @@ class plan extends Component {
                         resizeMode='contain'
                         style={{
                             width: Width * .05,
-                            height: Width * .05
+                            height:'100%'
                         }} />
                 </TouchableOpacity>
                 <View style={{
@@ -56,7 +56,7 @@ class plan extends Component {
                 }}>
                     <Image source={Requires.car2} resizeMode='contain' style={{ width: '100%', height: '100%' }} />
                 </View>
-                <Text style={[Styles.TextStyle, { width: Width * .4, textAlign: 'left' }]}>Add Plan Or Goal</Text>
+                <Text style={[Styles.TextStyle, { width: Width * .4, textAlign: 'left' }]}>Buy Car</Text>
                 <TouchableOpacity >
                     <Image source={Requires.remove} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                 </TouchableOpacity>
@@ -133,7 +133,7 @@ const Styles = StyleSheet.create({
 
     },
     TextStyle: {
-        fontFamily: FontFamilies.Etisalat_2, color: '#5D5D5D'
+        fontFamily: FontFamilies.Etisalat_2, color: '#5D5D5D',fontSize:20
     },
     perantTextItem: {
         width: '90%', height: Height * .09, backgroundColor: Colors.WhiteColor, alignItems: 'center', borderBottomWidth: 1, borderColor: '#EBEBEB', flexDirection: FixViewsOrder(), justifyContent: 'space-between'

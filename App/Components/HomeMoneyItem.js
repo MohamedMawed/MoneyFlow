@@ -65,6 +65,7 @@ class HomeMoneyItem extends Component {
                         fontSize:15,
                         color:Colors.TextGrayColor,
                         textAlign:'center',
+                        paddingLeft:Width*.01
                         // width:Width*.2
                     }}
                     >pounds</Text>

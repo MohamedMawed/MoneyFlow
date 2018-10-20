@@ -96,7 +96,7 @@ class Home extends Component {
                             })
                             }
                         </View>
-                        <Text style={styles.SecondCategoryHeader}>budget</Text>
+                        <Text style={styles.SecondCategoryHeader}>Budget</Text>
                         <View style={{ marginBottom: Height * .03, }}>
                             {this.state.PlansGoalsList.map((item, index) => {
                                 console.log(index)
