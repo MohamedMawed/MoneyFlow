@@ -70,12 +70,12 @@ class Home extends Component {
                     <HomeMoneyItem Source={Requires.arrow_down} color={Colors.AppBlueColor} Title={'Income'} />
                     <HomeMoneyItem Source={Requires.arrow_up} color={Colors.AppRedColor} Title={'Expenses'} />
                 </View>
-                <View style={{ marginTop: Height * .02 }}>
+                <View style={{ marginTop: Height * .02,height:'50%', }}>
                     <ScrollView
                         contentContainerStyle={{
                             width: Width,
                             // height:Height*.5,
-                            marginBottom: Height * .1,
+                            // marginBottom: Height * .1,
                             justifyContent: 'center', alignItems: 'center'
                         }}
 
@@ -97,7 +97,7 @@ class Home extends Component {
                             }
                         </View>
                         <Text style={styles.SecondCategoryHeader}>budget</Text>
-                        <View style={{ marginBottom: Height * .45, }}>
+                        <View style={{ marginBottom: Height * .03, }}>
                             {this.state.PlansGoalsList.map((item, index) => {
                                 console.log(index)
                                 return (
@@ -125,7 +125,7 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
     categoriesContainer: {
-        width: Width * .9,
+        width: Width * .94,
         height: Height * .11,
         flexDirection: 'row',
         justifyContent: 'space-between',

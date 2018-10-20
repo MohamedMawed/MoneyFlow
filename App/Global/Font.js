@@ -9,7 +9,7 @@ export const FontSize = {
 }
 export const FontFamilies = {
     // Etisalat_0: 'GE SS Two Etisalat_0',
-    Etisalat_0: 'Roboto-Regular',
+    Etisalat_0: 'OpenSans-Regular',
 }
 
 

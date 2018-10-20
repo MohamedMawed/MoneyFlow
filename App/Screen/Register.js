@@ -147,7 +147,10 @@ class Register extends Component {
                                 }}>Register</Text>
                             }
                         </TouchableOpacity>
-                        <TouchableOpacity style={{
+                        <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={()=>this.props.navigation.navigate('Login')}
+                         style={{
                             borderColor: Colors.BtnLoginBack,
                             borderWidth: 1,
                             borderRadius: Width * .1,

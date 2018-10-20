@@ -1,4 +1,4 @@
-export const Language = 'ar'
+export const Language = 'en'
 export const LanguageAlignment = () => {
     if (Language == 'ar')
         return 'right'
@@ -20,12 +20,12 @@ const Ar_Lang = {
 
 }
 const En_Lang = {
-    TitleIntroScreen1: 'dfdf',
-    ContentIntroScreen1:'dff',
-    Register:'تسجيل حساب',
-    Login:'دخول',
+    TitleIntroScreen: ['follow your incomes and expences','Define Your Menoy Budget','determine your finacial goals'],
+    ContentIntroScreen:['follow your incomes and expences','Define Your Menoy Budget','determine your finacial goals'],
+    Register:'Register',
+    Login:'Login',
     Next:'Next',
-    ChooseIcon:'اختر أيقونة معبرة'
+    ChooseIcon:'Choose Descriptive Icon'
 
 
 }

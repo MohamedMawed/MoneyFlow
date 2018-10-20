@@ -22,9 +22,9 @@ class Splash extends Component {
             <Image resizeMode="contain" source={Requires.Logo} style={{ width: '40%' }} />
             <Text style={{
                 fontFamily:FontFamilies.Etisalat_0,
-                fontSize:FontSize.VeryLargFontSize,
-                color:'#fff'
-            }}>Flosy</Text>
+                fontSize:22,
+                color:'#fff',
+            }}>Floosy App</Text>
         </LinearGradient>
         )
     }

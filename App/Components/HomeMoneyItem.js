@@ -16,7 +16,7 @@ class HomeMoneyItem extends Component {
     render() {
         return (
             <View style={{
-                width: Width * .44,
+                width: Width * .46,
                 height: Height * .11,
                 borderRadius: Width * .02,
                 paddingVertical:Height*.02,
@@ -35,7 +35,7 @@ class HomeMoneyItem extends Component {
                 }}/>
                 <Text style={{
                         fontFamily:FontFamilies.Etisalat_0,
-                        fontSize:FontSize.LargFontSize,
+                        fontSize:16,
                         color:'gray',
                         textAlign:'center',
                         width:Width*.45
@@ -53,7 +53,7 @@ class HomeMoneyItem extends Component {
                 
                     <Text style={{
                         fontFamily:FontFamilies.Etisalat_0,
-                        fontSize:FontSize.VeryLargFontSize,
+                        fontSize:20,
                         color:this.props.color,
                         textAlign:'center',
                         // fontWeight:'f'
@@ -62,7 +62,7 @@ class HomeMoneyItem extends Component {
                     >7500</Text>
                     <Text style={{
                         fontFamily:FontFamilies.Etisalat_0,
-                        fontSize:FontSize.MediumFontSize,
+                        fontSize:15,
                         color:Colors.TextGrayColor,
                         textAlign:'center',
                         // width:Width*.2

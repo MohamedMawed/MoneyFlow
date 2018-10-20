@@ -16,7 +16,7 @@ class DropDown extends Component {
             options: this.props.Data,
             dropdownHeight: 0,
             borderColor: Colors.BorderColor,
-            arrowSource: Requires.arrow_down2
+            arrowSource: this.props.Data[1].Icon
         }
     }
     render() {
@@ -24,19 +24,19 @@ class DropDown extends Component {
         return (
             <TouchableOpacity activeOpacity={.9} style={[Styles.perantDropDown, { width: this.props.Width, borderColor: this.state.borderColor, alignItems: 'center' }]} onPress={() => { }}>
                 <ModalDropdown
-                    renderButtonText={(item,index) => {
-                        console.log(item,"itemitemitemitem")
-                        this.setState({arrowSource:item.Icon})
+                    renderButtonText={(item, index) => {
+                        console.log(item, "itemitemitemitem")
+                        this.setState({ arrowSource: item.Icon })
                         return (<Text>
                             {item.text}
                         </Text>)
                     }}
                     renderRow={(item, index, IsSelected) => {
-                        console.log(item,"itemitemitemitem")
+                        console.log(item, "itemitemitemitem")
 
-                        return (<View style={{ width: '100%', height: Height * .06, backgroundColor: IsSelected ? '#DADADA' : '#FAFAFA', paddingHorizontal: Width * .04, justifyContent: 'space-between', flexDirection: FixViewsOrder(), alignItems: 'center' }}>
+                        return (<View style={{ width: '100%', height: Height * .06, backgroundColor: IsSelected ? '#DADADA' : '#FAFAFA', paddingHorizontal: Width * .04, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
                             <Text>{item.text}</Text>
-                            <Image resizeMode='contain' style={{ width: Width * .05, height: Height * .05, tintColor:this.props.TintColor? IsSelected ? '#FAFAFA' : Colors.DarkGrayColor:null }} source={item.Icon}  >
+                            <Image resizeMode='contain' style={{ width: Width * .05, height: Height * .05, tintColor: this.props.TintColor ? IsSelected ? '#FAFAFA' : Colors.DarkGrayColor : null }} source={item.Icon}  >
                             </Image>
                         </View>)
                     }}
@@ -62,7 +62,7 @@ class DropDown extends Component {
                     defaultValue={this.props.defaultValue} options={this.state.options}
                     defaultIndex={this.props.defaultIndex} />
                 <View style={{ width: Width * .12, height: Height * .05, backgroundColor: '#fff', right: Width * .05, position: 'absolute', borderRadius: Width * .05, alignItems: 'center', justifyContent: 'center' }}>
-                    <Image resizeMode='contain' style={{ width: Width * .05, height: Height * .05, tintColor: this.props.TintColor?Colors.DarkGrayColor:null }} source={this.state.arrowSource} />
+                    <Image resizeMode='contain' style={{ width: Width * .05, height: Height * .05, tintColor: this.props.TintColor ? Colors.DarkGrayColor : null }} source={this.state.arrowSource} />
                 </View>
             </TouchableOpacity>
         )

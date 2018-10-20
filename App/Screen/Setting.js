@@ -97,7 +97,7 @@ const styles = StyleSheet.create(
             height: Width * .2, marginTop: Height * .05
         },
         Button: {
-            width: Width * .9, height: Height * .07, borderRadius: Width * .1, backgroundColor: '#FAFAFA', paddingHorizontal: Width * .04, alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder()
+            width: Width * .9, height: Height * .07, borderRadius: Width * .1, backgroundColor: '#FAFAFA', paddingHorizontal: Width * .04, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row'
         },
         textButton: {
             fontFamily: FontFamilies.Etisalat_0, fontSize: Width * .04, textAlign: 'center'

@@ -148,11 +148,11 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-firebase')
     compile project(':react-native-google-signin')
     compile project(':react-native-facebook-login')
     compile project(':react-native-vector-icons')
     compile project(':react-native-svg')
-    implementation project(':react-native-firebase')
   implementation "com.google.android.gms:play-services-base:16.0.1"
   implementation "com.google.firebase:firebase-core:16.0.3"
   implementation "com.google.firebase:firebase-auth:16.0.3"

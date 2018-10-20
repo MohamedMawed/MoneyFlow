@@ -65,6 +65,7 @@
 		A5B5D4B4FF944228A270EE2A /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6966D85A5BED437883C3A573 /* SafariServices.framework */; };
 		ABBB505AF073495B88E37184 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EC4C581FD7423B866ED1BF /* SystemConfiguration.framework */; };
 		4CE19B3175B54129941A9D01 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FF3186950740C69C5FFB39 /* AddressBook.framework */; };
+		5CB86032ECAF4DF09E4E1D75 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6B1820050CE4A70964A07BD /* OpenSans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -404,6 +405,7 @@
 		6966D85A5BED437883C3A573 /* SafariServices.framework */ = {isa = PBXFileReference; name = "SafariServices.framework"; path = "System/Library/Frameworks/SafariServices.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		39EC4C581FD7423B866ED1BF /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		B2FF3186950740C69C5FFB39 /* AddressBook.framework */ = {isa = PBXFileReference; name = "AddressBook.framework"; path = "System/Library/Frameworks/AddressBook.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		C6B1820050CE4A70964A07BD /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; name = "OpenSans-Regular.ttf"; path = "../App/Assets/Font/OpenSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -706,6 +708,7 @@
 				62E52BEE043342CDBC8C5C80 /* Octicons.ttf */,
 				0462ADBB2C984D41B0B32493 /* SimpleLineIcons.ttf */,
 				10380B20195B45358E2F4876 /* Zocial.ttf */,
+				C6B1820050CE4A70964A07BD /* OpenSans-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1173,6 +1176,7 @@
 				1F2410687CEA4DCAB956BE1E /* Octicons.ttf in Resources */,
 				D0638CA65A284D1FA15E7803 /* SimpleLineIcons.ttf in Resources */,
 				9DF60E88A06A416EA58C2955 /* Zocial.ttf in Resources */,
+				5CB86032ECAF4DF09E4E1D75 /* OpenSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

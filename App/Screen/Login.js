@@ -153,11 +153,6 @@ class Login extends Component {
                             color: '#000',
                             textDecorationLine: 'underline'
                         }}>Forget Password</Text>
-                        <Text style={{
-                            fontFamily: FontFamilies.Etisalat_0,
-                            fontSize: Width * .05,
-                            color: '#000',
-                        }}>Remember Me</Text>
                     </View>
                     <View style={{
                         width: Width * .9,
@@ -189,7 +184,10 @@ class Login extends Component {
                                 }}>Login</Text>
                             }
                         </TouchableOpacity>
-                        <TouchableOpacity style={{
+                        <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={()=>this.props.navigation.navigate('Register')}
+                        style={{
                             borderColor: Colors.BtnLoginBack,
                             borderWidth: 1,
                             borderRadius: Width * .1,
@@ -255,7 +253,7 @@ class Login extends Component {
 
                             <Text style={{
                                 fontFamily: FontFamilies.Etisalat_0,
-                                fontSize: Width * .05,
+                                fontSize: 18,
                                 color: Colors.WhiteColor,
                             }}>Login with facebook</Text>
                         </TouchableOpacity>
@@ -282,9 +280,9 @@ class Login extends Component {
                             <Text style={{
                                 fontFamily: FontFamilies.Etisalat_0,
                                 margin: Width * .02,
-                                fontSize: Width * .05,
+                                fontSize: 18,
                                 color: Colors.WhiteColor,
-                            }}>login with google</Text>
+                            }}>Login with google</Text>
                         </TouchableOpacity>
                     </View>
                     {this.state.CloseAlert === true && <CustomToast

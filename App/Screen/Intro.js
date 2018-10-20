@@ -14,7 +14,7 @@ class Intro extends Component {
         super(props)
         this.state = {
             GradientBackground: [[Colors.greenlite, Colors.GreenColor], ['#514DCB', '#6266DA'], ['#FA4B5B', '#E8787E']],
-            StepColor: [Colors.greenlite, '#514DCB', '#FA4B5B'],
+            StepColor: [Colors.GreenColor, '#6266DA', '#E8787E'],
             index: 0
         }
     }
@@ -23,12 +23,23 @@ class Intro extends Component {
         return (
             <View style={Styles.ParentItem}>
                 <View style={[Styles.contentItem, { overflow: 'hidden' }]}>
-                    <LinearGradient colors={GradientBackground[index]} style={{ width: Width * 1.3, height: Width * 1.3, backgroundColor: Colors.BlueColor, borderRadius: Width * .7, position: 'absolute', top: -Width * .6, alignItems: 'center', justifyContent: 'center' }}>
+                    <LinearGradient
+                        colors={GradientBackground[index]}
+                        style={{
+                            width: Width * 1.3,
+                            height: Width * 1.3,
+                            backgroundColor: Colors.BlueColor,
+                            borderRadius: Width * .7,
+                            position: 'absolute',
+                            top: -Width * .6,
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}>
                         <Image resizeMode="contain" source={Requires.toturil[index]} style={{ width: '30%', height: '30%', position: 'absolute', bottom: Height * .1 }} />
                     </LinearGradient>
                     <View style={{ width: '70%', alignItems: 'center', marginTop: Height * .45 }}>
-                        <Text style={[Styles.TextStyle, { fontSize: Width * .05 }]}>{Lang('TitleIntroScreen')[index]}</Text>
-                        <Text style={[Styles.TextStyle, { textAlign: 'center', fontSize: Width * .03, color: Colors.DarkGrayColor, marginTop: Height * .02, lineHeight: Height * .032 }]}>{Lang('ContentIntroScreen')[index]}</Text>
+                        <Text style={[Styles.TextStyle, { fontSize: 20 }]}>{Lang('TitleIntroScreen')[index]}</Text>
+                        <Text style={[Styles.TextStyle, { textAlign: 'center', fontSize: 18, color: Colors.DarkGrayColor, marginTop: Height * .02, lineHeight: Height * .032 }]}>{Lang('ContentIntroScreen')[index]}</Text>
                     </View>
                 </View>
             </View>
@@ -36,7 +47,7 @@ class Intro extends Component {
     }
     render() {
         let { navigate } = this.props.navigation
-        let { GradientBackground } = this.state
+        let { GradientBackground, StepColor } = this.state
 
         return (<View style={Styles.Container}>
 
@@ -57,7 +68,7 @@ class Intro extends Component {
                 />
             </View>
             {this.state.index == 2 ?
-                <View style={{ width: '90%', flexDirection: FixViewsOrder(), justifyContent: 'space-between', height: '100%' }}>
+                <View style={{ width: '90%', flexDirection: 'row', justifyContent: 'space-between', height: '100%' }}>
 
                     <TouchableOpacity onPress={() => {
                         const resetAction = StackActions.reset({
@@ -67,11 +78,9 @@ class Intro extends Component {
                         this.props.navigation.dispatch(resetAction);
                     }}
 
-                        style={[Styles.Button, { overflow: 'hidden', width: '48%' }]} >
+                        style={[Styles.Button, { overflow: 'hidden', width: '48%', backgroundColor: StepColor[this.state.index] }]} >
 
-                        <LinearGradient colors={GradientBackground[this.state.index]} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Login')}</Text>
-                        </LinearGradient>
+                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Login')}</Text>
 
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
@@ -82,10 +91,8 @@ class Intro extends Component {
                         this.props.navigation.dispatch(resetAction);
                     }}
 
-                        style={[Styles.Button, { overflow: 'hidden', width: '48%' }]} >
-                        <LinearGradient colors={GradientBackground[this.state.index]} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Register')}</Text>
-                        </LinearGradient>
+                        style={[Styles.Button, { overflow: 'hidden', width: '48%', backgroundColor: StepColor[this.state.index] }]} >
+                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Register')}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -93,18 +100,14 @@ class Intro extends Component {
                 <TouchableOpacity onPress={() => {
                     this.setState({ index: this.state.index + 1 })
                     this._carousel.snapToNext();
-                }} style={[Styles.Button, { overflow: 'hidden' }]} >
-
-                    <LinearGradient colors={GradientBackground[this.state.index]} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Next')}</Text>
-                    </LinearGradient>
-
+                }} style={[Styles.Button, { overflow: 'hidden', backgroundColor: StepColor[this.state.index] }]} >
+                    <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Next')}</Text>
                 </TouchableOpacity>}
 
 
 
 
-            <View style={{ width: '40%', height: '20%', flexDirection: FixViewsOrder(), justifyContent: 'space-between', marginTop: Height * .7, position: 'absolute' }}>
+            <View style={{ width: '40%', height: '20%', flexDirection: 'row', justifyContent: 'space-between', marginTop: Height * .7, position: 'absolute' }}>
                 <View style={{ width: Width * .12, height: Height * .015, backgroundColor: this.state.index >= 0 ? this.state.StepColor[this.state.index] : Colors.MediumGrayColor, borderRadius: Width * .03 }} />
                 <View style={{ width: Width * .12, height: Height * .015, backgroundColor: this.state.index >= 1 ? this.state.StepColor[this.state.index] : Colors.MediumGrayColor, borderRadius: Width * .03 }} />
                 <View style={{ width: Width * .12, height: Height * .015, backgroundColor: this.state.index >= 2 ? this.state.StepColor[this.state.index] : Colors.MediumGrayColor, borderRadius: Width * .03 }} />
@@ -134,7 +137,10 @@ const Styles = StyleSheet.create({
         width: '90%', height: '95%', alignItems: 'center', backgroundColor: Colors.WhiteColor, borderRadius: Width * .03, elevation: 5
     },
     TextStyle: {
-        fontFamily: FontFamilies.Etisalat_0, color: Colors.BlackColor
+        fontFamily: FontFamilies.Etisalat_0,
+        color: Colors.BlackColor,
+        textAlign: 'center',
+        fontSize: 18
     }
 
 

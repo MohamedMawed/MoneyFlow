@@ -16,12 +16,12 @@ class HomeMonthsSwiperComponent extends Component {
     render() {
         return (
             <View style={{
-                width: Width * .9,
+                width: Width * .94,
                 height: Height * .22,
                 borderRadius: Width * .03,
                 paddingVertical:Height*.02,
                 marginTop:Height*.04,
-                elevation: 4,
+                elevation: 2,
                 // shadowColor:'red',
                 justifyContent:'space-around',
                 alignItems:'center'
