@@ -15,7 +15,21 @@ import { Colors } from '../Global/Colors';
 class EditProfile extends Component {
     render() {
         return (
-            <View style={{ width: Width, height: Height,backgroundColor:'#fff' }}>
+            <View style={{ width: Width, height: Height,backgroundColor:'#fff',alignItems:'center' }}>
+              
+              <View style={{width:'90%',height:Height*.1,justifyContent:'center'}}>
+              <TouchableOpacity
+                    onPress={() => this.props.navigation.goBack()}
+                >
+                    <Image
+                        source={Requires.back}
+                        resizeMode='contain'
+                        style={{
+                            width: Width * .05,
+                            height:'100%'
+                        }} />
+                </TouchableOpacity>
+              </View>
                 <View style={{ width: Width, height: Height * .35, justifyContent: 'center', alignItems: 'center' }}>
                     <Image source={Requires.Logo} style={{ width: Width * .42, resizeMode: 'contain' }} />
                     <Text style={{

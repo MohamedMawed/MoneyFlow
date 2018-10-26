@@ -23,7 +23,7 @@ class HomeProgressBarItem extends Component {
                 <TouchableOpacity activeOpacity={0.75} onPress={this.props.onClick} style={styles.ItemRow}>
 
                     {/* for item Icon */}
-                    <View style={[styles.ItemIconContainer,{backgroundColor: this.props.BackColor,}]}>
+                    <View style={[styles.ItemIconContainer, { backgroundColor: this.props.BackColor, }]}>
                         <Image source={this.props.Source} style={styles.ItemIcon} />
                     </View>
 
@@ -34,15 +34,18 @@ class HomeProgressBarItem extends Component {
                     </View>
 
                     {/* for item Cost */}
-                    <View style={[styles.ItemCostContainer, { borderColor: this.props.BackColor, }]}>
+                    <View style={[styles.ItemCostContainer, { borderColor: this.props.BackColor, marginTop: Height * .012 }]}>
 
-                        <Text style={[styles.ItemCostText,{color: this.props.BackColor}]}
+                        <Text style={[styles.ItemCostText, { color: this.props.BackColor }]}
                         >{this.props.cost}</Text>
                     </View>
+
                 </TouchableOpacity>
+          
                 <View style={styles.ProgressBarContainer}>
-                    <View style={{elevation:2, width: Width * .9 * (this.props.Percent / 100),height:'100%', backgroundColor: this.props.BackColor }} />
+                    <View style={{ elevation: 2, width: Width * .9 * (this.props.Percent / 100), height: '100%', backgroundColor: this.props.BackColor }} />
                 </View>
+           
             </View>
         )
     }
@@ -56,14 +59,14 @@ class HomeProgressBarItem extends Component {
 const styles = StyleSheet.create(
     {
         container: {
-            paddingTop: Height*.01,
+            paddingTop: Height * .01,
             width: Width * .94,
-            height: Height * .1,
+            height: Height * .15,
             borderRadius: Width * .02,
-            marginTop: Height*.02,
+            marginTop: Height * .02,
             elevation: 1.5,
             // backgroundColor: 'red',
-            justifyContent: 'center',
+            // justifyContent: 'center',
             alignItems: 'center',
             overflow: 'hidden',
         },
@@ -88,13 +91,13 @@ const styles = StyleSheet.create(
             fontSize: FontSize.MediumFontSize,
             color: 'gray',
             textAlign: 'left',
-            width:'100%'
+            width: '100%'
         },
         HeaderTitle: {
             fontFamily: FontFamilies.Etisalat_0,
             fontSize: FontSize.LargFontSize,
             color: '#000',
-            width:'100%',
+            width: '100%',
             textAlign: 'left',
         },
         HeaderContainer: {
@@ -104,22 +107,21 @@ const styles = StyleSheet.create(
             alignItems: 'center'
         },
         ProgressBarContainer: {
-            width: Width*.94,
+            width:'92%',
             height: Height * .01,
             alignItems: 'flex-start',
-            elevation:1.5,
-            // backgroundColor: 'red',
-            position: 'absolute',
-            bottom:0
+       borderRadius:Height*.03,overflow:'hidden',
+            backgroundColor: '#EBEBEB',marginTop:Height*.005
+
         },
         ItemRow: {
             flexDirection: 'row',
             justifyContent: 'space-evenly',
             width: '100%',
-            paddingTop: Height*.005,
-            overflow:'hidden',
+            paddingTop: Height * .005,
+            overflow: 'hidden',
             // alignItems: 'center',
-            height: Height * .085,
+            height: Height * .085,marginTop:Height*.01
 
         },
         ItemIconContainer: {

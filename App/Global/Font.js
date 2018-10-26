@@ -4,7 +4,7 @@ export const FontSize = {
     smallFontSize1: Width * .03,
     MediumFontSize : Width * .035,
     smallFontSize2: Width * .025,
-    LargFontSize: Width * .05,
+    LargFontSize: Width * .04,
     VeryLargFontSize: Width * .07,
 }
 export const FontFamilies = {

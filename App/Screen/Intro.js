@@ -13,7 +13,7 @@ class Intro extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            GradientBackground: [[Colors.greenlite, Colors.GreenColor], ['#514DCB', '#6266DA'], ['#FA4B5B', '#E8787E']],
+            GradientBackground: [[Colors.greenlite, Colors.GreenColor], ['#8D8DE0', '#6266DA'], ['#FA4B5B', '#EF858D']],
             StepColor: [Colors.GreenColor, '#6266DA', '#E8787E'],
             index: 0
         }
@@ -37,9 +37,9 @@ class Intro extends Component {
                         }}>
                         <Image resizeMode="contain" source={Requires.toturil[index]} style={{ width: '30%', height: '30%', position: 'absolute', bottom: Height * .1 }} />
                     </LinearGradient>
-                    <View style={{ width: '85%', alignItems: 'center', marginTop: Height * .45 }}>
-                        <Text style={[Styles.TextStyle, { fontSize: 20 }]}>{Lang('TitleIntroScreen')[index]}</Text>
-                        <Text style={[Styles.TextStyle, { textAlign: 'center', fontSize: 18, color: Colors.DarkGrayColor, marginTop: Height * .02, lineHeight: Height * .032 }]}>{Lang('ContentIntroScreen')[index]}</Text>
+                    <View style={{ width: '85%', alignItems: 'center', marginTop: Height * .47 }}>
+                        <Text style={[Styles.TextStyle, { fontSize: Width*.045 }]}>{Lang('TitleIntroScreen')[index]}</Text>
+                        <Text style={[Styles.TextStyle, { textAlign: 'center', fontSize: Width*.035, color: Colors.DarkGrayColor, marginTop: Height * .02, lineHeight: Height * .032 }]}>{Lang('ContentIntroScreen')[index]}</Text>
                     </View>
                 </View>
             </View>

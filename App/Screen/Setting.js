@@ -53,13 +53,13 @@ class Setting extends Component {
                     <DropDown
                         onSelect={() => { }}
                         TintColor
-                        defaultValue={'Change currency'}
+                        defaultValue={'Change Currency'}
                         Data={[{ text: 'EGY', Icon: Requires.money1 }, { text: 'USD', Icon: Requires.money2 }]}
                         Width={Width * .9}
                         DropdownWidth={Width * .9} />
                     <DropDown
                         onSelect={() => { }}
-                        defaultValue={'Change Langage'}
+                        defaultValue={'Change Language'}
                         Data={[{ text: 'Arabic', Icon: Requires.Egypt }, { text: 'English', Icon: Requires.America }]}
                         Width={Width * .9}
                         DropdownWidth={Width * .9} />

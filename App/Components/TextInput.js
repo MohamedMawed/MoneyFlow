@@ -85,7 +85,7 @@ const Styles = StyleSheet.create({
     },
     Input: {
         fontFamily: FontFamilies.Etisalat_0,
-        fontSize: FontSize.smallFontSize,
+        fontSize: Width*.03,
         color: '#000',
         width: Width * .7,
     }

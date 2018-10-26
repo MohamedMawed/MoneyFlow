@@ -5,7 +5,7 @@ import {
     Text,
     ActivityIndicator,
     TouchableOpacity,
-    Platform
+    Platform, ScrollView
 } from 'react-native'
 import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
@@ -17,7 +17,7 @@ import { NavigationActions, StackActions } from 'react-navigation'
 import CustomToast from '../Components/CustomToast';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 
-import  { FBLoginManager } from 'react-native-facebook-login'
+import { FBLoginManager } from 'react-native-facebook-login'
 if (Platform.OS === "android") {
     FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Native); // defaults to Native
 
@@ -110,189 +110,191 @@ class Login extends Component {
     }
     render() {
         return (
-            <View style={{ width: Width, height: Height, backgroundColor: '#fff', }}>
-                <View style={{ width: Width, height: Height * .35, justifyContent: 'center', alignItems: 'center' }}>
-                    <Image source={Requires.Logo} style={{ width: Width * .42, resizeMode: 'contain' }} />
-                    <Text style={{
-                        fontFamily: FontFamilies.Etisalat_0,
-                        fontSize: Width * .07,
-                        color: '#000',
-                    }}>Login</Text>
-                </View>
-                <View style={{
-                    width: Width,
-                    height: Height * .6,
-                    alignItems: 'center',
-                    justifyContent: 'space-evenly',
-                }}>
-                    <CustomTextInput
-                        Title={'Email Address'}
-                        onChangeText={(text) => {
-                            this.setState({ Email: text })
-                        }}
-                        icon={Requires.Email}
-                    />
-                    <CustomTextInput
-                        Title={'Password'}
-                        secure
-                        onChangeText={(text) => {
-                            this.setState({ Password: text })
-                        }}
-                        icon={Requires.Password}
-                    />
-                    <View style={{
-                        width: Width * .85,
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        height: Height * .06,
-                        flexDirection: 'row'
-                    }}>
+            <View style={{ width: '100%', height: '100%', backgroundColor: '#fff', }}>
+                <ScrollView  >
+                    <View style={{ width: Width, height: Height * .35, justifyContent: 'center', alignItems: 'center' }}>
+                        <Image source={Requires.Logo} style={{ width: Width * .3, resizeMode: 'contain' }} />
                         <Text style={{
                             fontFamily: FontFamilies.Etisalat_0,
-                            fontSize: Width * .05,
+                            fontSize: Width * .07,
                             color: '#000',
-                            textDecorationLine: 'underline'
-                        }}>Forget Password</Text>
+                        }}>Login</Text>
                     </View>
                     <View style={{
-                        width: Width * .9,
-                        justifyContent: 'space-between',
+                        width: Width,
+                        height: Height * .6,
                         alignItems: 'center',
-                        height: Height * .06,
-                        flexDirection: 'row'
+                        justifyContent: 'space-evenly',
                     }}>
-                        <TouchableOpacity
-                            activeOpacity={0.7}
-                            onPress={this.Login}
 
-                            style={{
-                                backgroundColor: Colors.BtnLoginBack,
-                                borderRadius: Width * .1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                height: '100%',
-                                paddingHorizontal: Width * .06
-                            }}>
+                        <CustomTextInput
+                            Title={'Email Address'}
+                            onChangeText={(text) => {
+                                this.setState({ Email: text })
+                            }}
+                            icon={Requires.Email}
+                        />
+                        <CustomTextInput
+                            Title={'Password'}
+                            secure
+                            onChangeText={(text) => {
+                                this.setState({ Password: text })
+                            }}
+                            icon={Requires.Password}
+                        />
+                        <View style={{
+                            width: Width * .85,
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            height: Height * .06,
+                            flexDirection: 'row'
+                        }}>
+                            <Text style={{
+                                fontFamily: FontFamilies.Etisalat_0,
+                                fontSize: Width * .035,
+                                color: '#000',
+                                textDecorationLine: 'underline'
+                            }}>Forget Password</Text>
+                        </View>
+                        <View style={{
+                            width: Width * .9,
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            height: Height * .06,
+                            flexDirection: 'row'
+                        }}>
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                onPress={this.Login}
 
-                            {this.state.Loading == true ?
-                                <ActivityIndicator size={'small'} color={'#fff'} />
-                                :
+                                style={{
+                                    backgroundColor: Colors.BtnLoginBack,
+                                    borderRadius: Width * .1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    height: '100%',width:Width*.6,
+                                    paddingHorizontal: Width * .06
+                                }}>
+
+                                {this.state.Loading == true ?
+                                    <ActivityIndicator size={'small'} color={'#fff'} />
+                                    :
+                                    <Text style={{
+                                        fontFamily: FontFamilies.Etisalat_0,
+                                        fontSize: Width * .035,
+                                        color: Colors.WhiteColor,
+                                    }}>Login</Text>
+                                }
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                onPress={() => this.props.navigation.navigate('Register')}
+                                style={{
+                                    borderColor: Colors.BtnLoginBack,
+                                    borderWidth: 1,
+                                    borderRadius: Width * .1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    height: '100%',
+                                    paddingHorizontal: Width * .06
+                                }}>
                                 <Text style={{
                                     fontFamily: FontFamilies.Etisalat_0,
-                                    fontSize: Width * .05,
-                                    color: Colors.WhiteColor,
-                                }}>Login</Text>
-                            }
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={()=>this.props.navigation.navigate('Register')}
-                        style={{
-                            borderColor: Colors.BtnLoginBack,
-                            borderWidth: 1,
-                            borderRadius: Width * .1,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: '100%',
-                            paddingHorizontal: Width * .06
-                        }}>
-                            <Text style={{
-                                fontFamily: FontFamilies.Etisalat_0,
-                                fontSize: Width * .05,
-                                color: Colors.BtnLoginBack,
-                            }}>Register</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{
-                        width: Width * .9,
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        height: Height * .15,
-                        marginTop: Height * .04
-                    }}>
-                        <TouchableOpacity
-
-                            activeOpacity={0.7}
-                            onPress={()=>{
-                                try{
-                                FBLoginManager.loginWithPermissions(["email","public_profile"], (error, data) => {
-
-                                    if (!error) {
-
-                                        alert(JSON.stringify(data))
-                                        // OnlineGetFacebookData(data.credentials.userId, data.credentials.token, this.OnSuccessGetSocialFBdata, (errr) => { alert(errr) })
-                                        // SetSocialProvider('facebook')
-                                        // this.setState({ userInfo: UserData, provider: 'facebook' })
-                                        // // alert(JSON.stringify(UserData))
-                                        // this.setState({ Loading: true })
-                                        // OnLineCheckSocialUser(UserData.id, 'facebook', this.OnSuccess, this.OnFail)
-                                    } else {
-                                        alert(JSON.stringify(error))
-                                    }
-                                })
-                            }catch(error){
-                                console.log('MAWWWEEEDD',error)
-                            }
-                            }}
-                            style={{
-                                backgroundColor: Colors.BtnFaceBookBack,
-                                borderRadius: Width * .1,
-                                justifyContent: 'center',
-                                width: Width * .9,
-                                alignItems: 'center',
-                                height: '46%',
-                                paddingHorizontal: Width * .06,
-                                flexDirection: 'row',
-                            }}>
-                            <Image source={Requires.FB} style={{
-                                width: Width * .025,
-                                margin: Width * .02,
-                                height: '100%',
-                                resizeMode: 'contain'
-                            }} />
-
-                            <Text style={{
-                                fontFamily: FontFamilies.Etisalat_0,
-                                fontSize: 18,
-                                color: Colors.WhiteColor,
-                            }}>Login with facebook</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={()=>{
-                            this.GoogleLogin()
-                        }}
-                        style={{
-                            backgroundColor: Colors.BtnGoogleBack,
-                            borderRadius: Width * .1,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: '46%',
-                            flexDirection: 'row',
+                                    fontSize: Width * .035,
+                                    color: Colors.BtnLoginBack,
+                                }}>Register</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{
                             width: Width * .9,
-                            paddingHorizontal: Width * .06
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            height: Height * .15,
+                            marginTop: Height * .04
                         }}>
-                            <Image source={Requires.Google} style={{
-                                width: Width * .06,
-                                height: '100%',
-                                resizeMode: 'contain'
-                            }} />
-                            <Text style={{
-                                fontFamily: FontFamilies.Etisalat_0,
-                                margin: Width * .02,
-                                fontSize: 18,
-                                color: Colors.WhiteColor,
-                            }}>Login with google</Text>
-                        </TouchableOpacity>
-                    </View>
-                    {this.state.CloseAlert === true && <CustomToast
-                        Massage={this.Massage}
-                        CloseAlert={this
-                            .CloseAlert
-                            .bind(this)}
-                        PositionAlert="Left" />}
-                </View>
+                            <TouchableOpacity
 
+                                activeOpacity={0.7}
+                                onPress={() => {
+                                    try {
+                                        FBLoginManager.loginWithPermissions(["email", "public_profile"], (error, data) => {
+
+                                            if (!error) {
+
+                                                alert(JSON.stringify(data))
+                                                // OnlineGetFacebookData(data.credentials.userId, data.credentials.token, this.OnSuccessGetSocialFBdata, (errr) => { alert(errr) })
+                                                // SetSocialProvider('facebook')
+                                                // this.setState({ userInfo: UserData, provider: 'facebook' })
+                                                // // alert(JSON.stringify(UserData))
+                                                // this.setState({ Loading: true })
+                                                // OnLineCheckSocialUser(UserData.id, 'facebook', this.OnSuccess, this.OnFail)
+                                            } else {
+                                                alert(JSON.stringify(error))
+                                            }
+                                        })
+                                    } catch (error) {
+                                        console.log('MAWWWEEEDD', error)
+                                    }
+                                }}
+                                style={{
+                                    backgroundColor: Colors.BtnFaceBookBack,
+                                    borderRadius: Width * .1,
+                                    justifyContent: 'center',
+                                    width: Width * .9,
+                                    alignItems: 'center',
+                                    height: '46%',
+                                    paddingHorizontal: Width * .06,
+                                    flexDirection: 'row',
+                                }}>
+                                <Image source={Requires.FB} style={{
+                                    width: Width * .025,
+                                    margin: Width * .02,
+                                    height: '100%',
+                                    resizeMode: 'contain'
+                                }} />
+
+                                <Text style={{
+                                    fontFamily: FontFamilies.Etisalat_0,
+                                    fontSize: Width*.035,
+                                    color: Colors.WhiteColor,
+                                }}>Login with facebook</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                onPress={() => {
+                                    this.GoogleLogin()
+                                }}
+                                style={{
+                                    backgroundColor: Colors.BtnGoogleBack,
+                                    borderRadius: Width * .1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    height: '46%',
+                                    flexDirection: 'row',
+                                    width: Width * .9,
+                                    paddingHorizontal: Width * .06,paddingRight:Width*.01
+                                }}>
+                                <Image source={Requires.Google} style={{
+                                    width: Width * .06,
+                                    height: '100%',
+                                    resizeMode: 'contain'
+                                }} />
+                                <Text style={{
+                                    fontFamily: FontFamilies.Etisalat_0,
+                                    margin: Width * .02,
+                                    fontSize: Width*.035,
+                                    color: Colors.WhiteColor,
+                                }}>Login with google</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {this.state.CloseAlert === true && <CustomToast
+                            Massage={this.Massage}
+                            CloseAlert={this
+                                .CloseAlert
+                                .bind(this)}
+                            PositionAlert="Left" />}
+                    </View>
+                </ScrollView>
             </View>
         )
     }

@@ -22,7 +22,9 @@ class DropDown extends Component {
     render() {
 
         return (
-            <TouchableOpacity activeOpacity={.9} style={[Styles.perantDropDown, { width: this.props.Width, borderColor: this.state.borderColor, alignItems: 'center' }]} onPress={() => { }}>
+            <TouchableOpacity activeOpacity={.9} style={[Styles.perantDropDown, { width: this.props.Width, borderColor: this.state.borderColor, alignItems: 'center' }]} onPress={() => {
+                this.refs.dropdown1.show()
+             }}>
                 <ModalDropdown
                     renderButtonText={(item, index) => {
                         console.log(item, "itemitemitemitem")
@@ -61,9 +63,11 @@ class DropDown extends Component {
                     style={Styles.DropDown}
                     defaultValue={this.props.defaultValue} options={this.state.options}
                     defaultIndex={this.props.defaultIndex} />
-                <View style={{ width: Width * .12, height: Height * .05, backgroundColor: '#fff', right: Width * .05, position: 'absolute', borderRadius: Width * .05, alignItems: 'center', justifyContent: 'center' }}>
+                <TouchableOpacity activeOpacity={.9} onPress={() => {
+                this.refs.dropdown1.show()
+             }} style={{ width: Width * .12, height: Height * .05, backgroundColor: '#fff', right: Width * .05, position: 'absolute', borderRadius: Width * .05, alignItems: 'center', justifyContent: 'center' }}>
                     <Image resizeMode='contain' style={{ width: Width * .05, height: Height * .05, tintColor: this.props.TintColor ? Colors.DarkGrayColor : null }} source={this.state.arrowSource} />
-                </View>
+                </TouchableOpacity>
             </TouchableOpacity>
         )
     }

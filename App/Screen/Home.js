@@ -71,7 +71,7 @@ class Home extends Component {
                     <HomeMoneyItem Source={Requires.arrow_up} color={Colors.AppRedColor} Title={'Expenses'} />
                 </View>
                 <View style={{ marginTop: Height * .02,height:'50%', }}>
-                    <ScrollView
+                    {/* <ScrollView
                         contentContainerStyle={{
                             width: Width,
                             // height:Height*.5,
@@ -115,7 +115,7 @@ class Home extends Component {
                             }
                         </View>
 
-                    </ScrollView>
+                    </ScrollView> */}
                 </View>
             </View>
         )

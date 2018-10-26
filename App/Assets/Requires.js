@@ -1,10 +1,42 @@
 
 let icons = () => {
-    let ddd = []
+    let ddd = [
+      { icon: require('./img/Icon/cake0.png'),text:'Foot'},
+      { icon: require('./img/Icon/cake1.png'),text:'Drink'},
+      { icon: require('./img/Icon/cake2.png'),text:'Party'},
+      { icon: require('./img/Icon/cake3.png'),text:'Sound'},
+      { icon: require('./img/Icon/cake4.png'),text:'Mony'},
+      { icon: require('./img/Icon/cake5.png'),text:'School'},
+      { icon: require('./img/Icon/cake0.png'),text:'Foot'},
+      { icon: require('./img/Icon/cake1.png'),text:'Drink'},
+      { icon: require('./img/Icon/cake2.png'),text:'Party'},
+      { icon: require('./img/Icon/cake3.png'),text:'Sound'},
+      { icon: require('./img/Icon/cake4.png'),text:'Mony'},
+      { icon: require('./img/Icon/cake5.png'),text:'School'},
+      { icon: require('./img/Icon/cake0.png'),text:'Foot'},
+      { icon: require('./img/Icon/cake1.png'),text:'Drink'},
+      { icon: require('./img/Icon/cake2.png'),text:'Party'},
+      { icon: require('./img/Icon/cake3.png'),text:'Sound'},
+      { icon: require('./img/Icon/cake4.png'),text:'Mony'},
+      { icon: require('./img/Icon/cake5.png'),text:'School'},
+      { icon: require('./img/Icon/cake0.png'),text:'Foot'},
+      { icon: require('./img/Icon/cake1.png'),text:'Drink'},
+      { icon: require('./img/Icon/cake2.png'),text:'Party'},
+      { icon: require('./img/Icon/cake3.png'),text:'Sound'},
+      { icon: require('./img/Icon/cake4.png'),text:'Mony'},
+      { icon: require('./img/Icon/cake5.png'),text:'School'},
+      { icon: require('./img/Icon/cake0.png'),text:'Foot'},
+      { icon: require('./img/Icon/cake1.png'),text:'Drink'},
+      { icon: require('./img/Icon/cake2.png'),text:'Party'},
+      { icon: require('./img/Icon/cake3.png'),text:'Sound'},
+      { icon: require('./img/Icon/cake4.png'),text:'Mony'},
+      { icon: require('./img/Icon/cake5.png'),text:'School'},
 
-    for (i = 0; i < 25; i++) {
-        ddd.push(require('./img/Icon/money-bag.png'))
-    }
+    ]
+     
+    
+ 
+
     return ddd
 }
 

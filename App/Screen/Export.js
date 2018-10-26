@@ -17,12 +17,25 @@ class ExportTab extends Component {
     render() {
         return (
             <View style={styles.container}>
+                    <View style={{width:'90%',height:Height*.1,justifyContent:'center'}}>
+              <TouchableOpacity
+                    onPress={() => this.props.navigation.goBack()}
+                >
+                    <Image
+                        source={Requires.back}
+                        resizeMode='contain'
+                        style={{
+                            width: Width * .05,
+                            height:'100%'
+                        }} />
+                </TouchableOpacity>
+              </View>
                 <Image source={Requires.exportLogo} style={styles.ExportLogo} />
                 <View style={{
                     width: Width,
                     height: Height * .3,
                     justifyContent: 'space-evenly',
-                    alignItems: 'center'
+                    alignItems: 'center',marginTop:Height*.1
                 }}>
                     <View style={{
                         width: Width * .85,
@@ -123,7 +136,7 @@ const styles = StyleSheet.create(
             width: '100%',
             height: '100%',
             // backgroundColor: 'red',
-            justifyContent: 'space-evenly',
+           
             alignItems: 'center',
             overflow: 'hidden',
             backgroundColor: '#fff'
