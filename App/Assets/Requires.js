@@ -73,7 +73,7 @@ export const Requires = {
     money2:require('./img/money2.png'),
     money1:require('./img/money1.png'),
     arrow_down2:require('./img/play-button.png'),
-
+    addIncomeLogo:require('./img/addIncomeLogo.png'),
 }
 
 

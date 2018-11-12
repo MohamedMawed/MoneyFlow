@@ -20,12 +20,13 @@ import { AddBudget } from './AddBudget';
 import { add_plan } from './add_plan'
 import { Setting } from './Setting';
 import { plan } from './plan';
+import {AddIncome} from './addIncome';
 
 const Tabs = createBottomTabNavigator(
     {
         Home: Home,
         Plan: add_plan,
-        Plus: add_plan,
+        Plus: AddIncome,
         Report: AddBudget,
         Setting: Setting,
     },
@@ -59,8 +60,8 @@ const Tabs = createBottomTabNavigator(
 
 export default App = createStackNavigator(
     {
-        Splash: { screen: Splash },
         Main: { screen: Tabs },
+        Splash: { screen: Splash },
         Login: { screen: Login },
         Intro: { screen: Intro },
         Register: { screen: Register },

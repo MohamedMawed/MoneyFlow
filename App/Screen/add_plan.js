@@ -21,8 +21,8 @@ class add_plan extends Component {
             addPlan: false,
             PlansGoalsList: PlansGoalsList,
             isDateTimePickerVisible: false,
-            startDate: 'start date',
-            endDate: 'end date',
+            startDate: 'Start date',
+            endDate: 'End date',
             ButtonType: -1
 
         }
@@ -87,7 +87,7 @@ class add_plan extends Component {
                             textAlign: 'left',
                             fontSize: FontSize.LargFontSize,marginHorizontal:Width*.02
                             // marginHorizontal: Width * .04
-                        }]}> Add plan or goal </Text>
+                        }]}> New Plan </Text>
 
                     </View>
 
@@ -147,7 +147,7 @@ class add_plan extends Component {
                             onChangeText={(text) => {
                                 this.setState({ NamePlan: text })
                             }}
-                            placeholder='Goal Name'
+                            placeholder='Name'
                             style={{
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
@@ -171,7 +171,7 @@ class add_plan extends Component {
                             onChangeText={(text) => {
                                 this.setState({ AmountValue: text })
                             }} keyboardType='numeric'
-                            placeholder='targit'
+                            placeholder='Target'
                             style={{
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
@@ -238,7 +238,7 @@ class add_plan extends Component {
 
                 {/* // TITLE CHOOSE ICON */}
                 <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                    <Text style={Styles.TextStyle}>{'Choose  Icon'}</Text>
+                    <Text style={Styles.TextStyle}>{'Choose Icon'}</Text>
                 </View>
 
 
@@ -251,7 +251,7 @@ class add_plan extends Component {
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
                                     <TouchableOpacity onPress={() => this.setState({ CurantSelected: index })} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015 }}>
                                         <View style={{ width: Width * .14, height: Width * .14, backgroundColor: CurantSelected == index ? Colors.AppBlueColor : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center' }}>
-                                            <Image source={item} resizeMode='contain' style={{ width: '60%', height: '60%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
+                                            <Image source={item.icon} resizeMode='contain' style={{ width: '60%', height: '60%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
                                         </View>
                                         {/* <Text style={[Styles.TextStyle, { fontSize: Width * .025, marginTop: Height * .01, color: CurantSelected == index ? Colors.red : Colors.DarkGrayColor }]}>{text[index]}</Text> */}
                                     </TouchableOpacity>
@@ -268,7 +268,7 @@ class add_plan extends Component {
                 <View style={{  height: '100%', alignItems: 'center' }}>
 
                     <View style={{ width: '90%',height:Height*.08,justifyContent:'center' }}>
-                        <Text style={Styles.FirstCategoryHeader}>Goals</Text>
+                        <Text style={Styles.FirstCategoryHeader}>Plans</Text>
                     </View>
                      {/* // swiper */}
                      <View style={{width:'100%',height:Height*.1,alignItems:'center',justifyContent:'center'}}>

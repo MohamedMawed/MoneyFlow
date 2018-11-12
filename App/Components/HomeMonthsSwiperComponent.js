@@ -95,7 +95,7 @@ class HomeMonthsSwiperComponent extends Component {
                         marginLeft:Width*.01
                         // width:Width*.2
                     }}
-                    >pounds</Text>
+                    >LE</Text>
                 </View>
 
             </View>

@@ -56,6 +56,7 @@ class HomeMoneyItem extends Component {
                         fontSize: 20,
                         color: this.props.color,
                         textAlign: 'center',
+                        fontWeight:'500'
                         // fontWeight:'f'
                         // width:Width*.2
                     }}

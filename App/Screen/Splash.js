@@ -24,7 +24,8 @@ class Splash extends Component {
                 fontFamily:FontFamilies.Etisalat_0,
                 fontSize:22,
                 color:'#fff',
-            }}>Floosy App</Text>
+                fontWeight: '500',
+            }}>FLOOSY</Text>
         </LinearGradient>
         )
     }

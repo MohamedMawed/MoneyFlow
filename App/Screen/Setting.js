@@ -42,7 +42,7 @@ class Setting extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.Button}>
-                        <Text style={styles.textButton}>Sync with Google</Text>
+                        <Text style={styles.textButton}>Sync with drive</Text>
                         {/* <EvilIcons name='chevron-right' size={Width * .1} /> */}
 
                         <View style={{ width: Width * .1, height: Width * .1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.red, borderRadius: Width * .1, position: 'absolute', top: -Width * .03, right: Width * .03 }}>
@@ -65,7 +65,7 @@ class Setting extends Component {
                         DropdownWidth={Width * .9} />
 
                     <TouchableOpacity style={{
-                        width: Width * .9, height: Height * .07, borderRadius: Width * .1, backgroundColor: '#5D5FD5', marginTop: Height * .04, alignItems: 'center', justifyContent: 'center'
+                        width: Width * .9, height: Height * .064, borderRadius: Width * .1, backgroundColor: '#5D5FD5', marginTop: Height * .04, alignItems: 'center', justifyContent: 'center'
                     }}>
                         <Text style={[styles.textButton, { color: Colors.WhiteColor }]}>Save</Text>
                     </TouchableOpacity>
@@ -94,6 +94,7 @@ const styles = StyleSheet.create(
         settingsLogo: {
             resizeMode: 'contain',
             width: Width * .4,
+            marginVertical:Height*.05,
             height: Width * .2, marginTop: Height * .05
         },
         Button: {

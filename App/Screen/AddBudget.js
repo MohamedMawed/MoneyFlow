@@ -21,8 +21,8 @@ class AddBudget extends Component {
             AddBudget: false,
             PlansGoalsList: PlansGoalsList2,
             isDateTimePickerVisible: false,
-            startDate: 'start date',
-            endDate: 'end date',
+            startDate: 'Start date',
+            endDate: 'End date',
             ButtonType: -1
         }
     }
@@ -191,7 +191,7 @@ class AddBudget extends Component {
                 <View style={{ height: '95%', alignItems: 'center' }}>
 
                     <View style={{ width: '90%', height: Height * .08, justifyContent: 'center' }}>
-                        <Text style={Styles.FirstCategoryHeader}>Budget</Text>
+                        <Text style={Styles.FirstCategoryHeader}>Budgets</Text>
                     </View>
 
 

@@ -5,6 +5,9 @@ import {
     Text,
     StyleSheet,
 } from 'react-native'
+import { BarChart, LineChart, XAxis, YAxis, Grid } from 'react-native-svg-charts'
+
+
 import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
@@ -59,6 +62,10 @@ class Home extends Component {
 
     }
     render() {
+        const fill = 'rgb(134, 65, 244)'
+        const contentInset = { top: 20, bottom: 20 }
+        const data = [50, 10, 40, 95, 4, 24, 85, 14, 35, 53, 53, 24, 50, 20, 80]
+
         return (
             <View style={styles.container}>
                 <HomeMonthsSwiperComponent
@@ -70,7 +77,7 @@ class Home extends Component {
                     <HomeMoneyItem Source={Requires.arrow_down} color={Colors.AppBlueColor} Title={'Income'} />
                     <HomeMoneyItem Source={Requires.arrow_up} color={Colors.AppRedColor} Title={'Expenses'} />
                 </View>
-                <View style={{ marginTop: Height * .02,height:'50%', }}>
+                <View style={{ marginTop: Height * .04, marginHorizontal: Width * .02, height: '50%', width: Width }}>
                     {/* <ScrollView
                         contentContainerStyle={{
                             width: Width,
@@ -116,6 +123,41 @@ class Home extends Component {
                         </View>
 
                     </ScrollView> */}
+                    <Text style={{
+                        color: Colors.BlackColor,
+                        fontSize: 22,
+                        fontWeight: '500',
+                    }}>
+                        Monthly Report
+                    </Text>
+                    <View style={{ height: Height * .4, flexDirection: 'row' }}>
+                        <YAxis
+                            data={data}
+                            contentInset={contentInset}
+                            svg={{
+                                fill: 'grey',
+                                fontSize: 10,
+                            }}
+                            numberOfTicks={10}
+                            formatLabel={value => value}
+                        />
+                        <BarChart
+                            style={{ flex: 1, marginLeft: 16 }}
+                            data={data}
+                            svg={{ fill: Colors.AppBlueColor }}
+                            contentInset={contentInset}
+                        >
+                            <Grid />
+                        </BarChart>
+                    </View>
+                    <XAxis
+                        style={{ marginHorizontal: -10 }}
+                        data={data}
+                        formatLabel={(value, index) => index}
+                        contentInset={{ left: 10, right: 10 }}
+                        svg={{ fontSize: 10, fill: 'black' }}
+                    />
+
                 </View>
             </View>
         )
