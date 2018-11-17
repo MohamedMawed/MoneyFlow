@@ -3,6 +3,31 @@ import { BaseUrl } from './BaseUrl';
 var UserProfile1 = null;
 var UserData1 = null;
 
+var monthlyIncome = 10;
+
+export const getSavedMonthlyIncome = ()=>{
+    return monthlyIncome;
+}
+export const setSavedMonthlyIncome = async(val)=>{
+    monthlyIncome = val
+    await AsyncStorage.setItem('Income',val.toString());
+}
+
+var monthlyExpenses = 0;
+
+export const getSavedMonthlyExpenses = ()=>{
+    return monthlyExpenses;
+}
+export const setSavedMonthlyExpenses = async(val)=>{
+    monthlyExpenses = val
+    await AsyncStorage.setItem('Expenses',val.toString());
+}
+
+var HomeScreen = null;
+export const getHomeScreen =()=>HomeScreen;
+export const setHomeScreen =(pt)=>HomeScreen=pt;
+
+
 export const GetUserProfile = async () => {
     AsyncStorage.getItem("UserProfile").then(
         async (value) => {

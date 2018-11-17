@@ -60,7 +60,7 @@ class HomeMoneyItem extends Component {
                         // fontWeight:'f'
                         // width:Width*.2
                     }}
-                    >7500</Text>
+                    >{this.props.value}</Text>
                     <Text style={{
                         fontFamily: FontFamilies.Etisalat_0,
                         fontSize: 15,

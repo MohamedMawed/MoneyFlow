@@ -10,8 +10,7 @@ import {
 import { Requires } from '../Assets/Requires';
 import {CustomTextInput} from './../Components/TextInput'
 import { Colors, FontFamilies, Width, Height } from '../Global';
-
-
+import monthlyIncome, { setSavedMonthlyIncome, getSavedMonthlyIncome, getHomeScreen } from './../Global/API';
 export class AddIncome extends Component {
     constructor(props) {
         super(props)
@@ -59,6 +58,7 @@ export class AddIncome extends Component {
 
                 <CustomTextInput
                     Title={'income'}
+                
                     onChangeText={(text) => {
                         this.setState({ Name: text })
                     }}
@@ -66,7 +66,19 @@ export class AddIncome extends Component {
                 />
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={this.Register}
+                    onPress={()=>{
+                        try{
+                            let intVal = parseFloat(this.state.Name);
+                            if(!Number.isInteger(intVal))intVal=ldfjs
+                            setSavedMonthlyIncome(intVal);
+                            let HomeScreenRef = getHomeScreen();
+                            HomeScreenRef.setState((prev)=>({stateChanger:prev.stateChanger}))
+                            alert('Income Added successfully')
+                        }catch(error){
+
+                        alert('Please enter valid number');
+                        }
+                    }}
                     style={{
                         marginTop:Height*.1,
                         backgroundColor: Colors.BtnLoginBack,
@@ -77,15 +89,11 @@ export class AddIncome extends Component {
                         width: Width * .9,
                         paddingHorizontal: Width * .06
                     }}>
-                    {this.state.Loading == true ?
-                        <ActivityIndicator size={'small'} color={'#fff'} />
-                        :
                         <Text style={{
                             fontFamily: FontFamilies.Etisalat_0,
                             fontSize: 18,
                             color: Colors.WhiteColor,
                         }}>Save</Text>
-                    }
                 </TouchableOpacity>
 
             </View>

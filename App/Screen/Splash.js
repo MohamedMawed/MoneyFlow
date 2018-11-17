@@ -7,6 +7,7 @@ import { Requires } from '../Assets/Requires';
 import { NavigationActions, StackActions } from 'react-navigation'
 import { FontFamilies, FontSize } from '../Global';
 import firebase from 'react-native-firebase';
+import { setSavedMonthlyIncome, setSavedMonthlyExpenses } from '../Global/API';
 class Splash extends Component {
     constructor(props) {
         super(props)
@@ -30,15 +31,24 @@ class Splash extends Component {
         )
     }
     componentDidMount = async()=> {
+        // firebase.auth().signOut();
+        // await AsyncStorage.clear();
         let firstTime = await AsyncStorage.getItem('FirstTime');
-        let User = await AsyncStorage.getItem('User');
+        let income = await AsyncStorage.getItem('Income');
+        let expenses = await AsyncStorage.getItem('Expenses');
         let Screen = 'Intro'
         if(firstTime!= null){
-            screen = 'Login'
-        }
-        if(User != null){
-            screen = 'Main'
-        }
+            Screen = 'Login'
+        }else
+            firebase.auth().onAuthStateChanged((user) => {
+                this.setState({ user });
+                if(user != null)
+                {
+                    Screen = 'Main';
+                    setSavedMonthlyIncome(parseFloat(income));
+                    setSavedMonthlyExpenses(parseFloat(expenses));
+                }
+              });
         
 
         setTimeout(() => {

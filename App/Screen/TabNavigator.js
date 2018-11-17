@@ -60,8 +60,8 @@ const Tabs = createBottomTabNavigator(
 
 export default App = createStackNavigator(
     {
-        Main: { screen: Tabs },
         Splash: { screen: Splash },
+        Main: { screen: Tabs },
         Login: { screen: Login },
         Intro: { screen: Intro },
         Register: { screen: Register },

@@ -10,6 +10,7 @@ import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
+import { getSavedMonthlyIncome, getSavedMonthlyExpenses } from '../Global/API';
 
 
 class HomeMonthsSwiperComponent extends Component {
@@ -86,7 +87,7 @@ class HomeMonthsSwiperComponent extends Component {
                         // width:Width*.2,
                         fontWeight:'bold'
                     }}
-                    >7500</Text>
+                    >{getSavedMonthlyIncome()-getSavedMonthlyExpenses()}</Text>
                     <Text style={{
                         fontFamily:FontFamilies.Etisalat_0,
                         fontSize:FontSize.MediumFontSize,
