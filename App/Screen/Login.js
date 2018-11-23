@@ -11,11 +11,15 @@ import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
+import {setGlobalUser} from './../Global/API';
 import { Colors } from '../Global/Colors';
-import firebase from 'react-native-firebase'
+import firebase from 'react-native-firebase';
+firebase.initializeApp();
 import { NavigationActions, StackActions } from 'react-navigation'
 import CustomToast from '../Components/CustomToast';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
+import Auth from './auth';
+const fbLoginPermissions = ['email'];
 
 import { FBLoginManager } from 'react-native-facebook-login'
 if (Platform.OS === "android") {
@@ -215,23 +219,25 @@ class Login extends Component {
                             <TouchableOpacity
 
                                 activeOpacity={0.7}
-                                onPress={() => {
+                                onPress={async() => {
                                     try {
-                                        FBLoginManager.loginWithPermissions(["email", "public_profile"], (error, data) => {
+                                        // FBLoginManager.loginWithPermissions(["email", "public_profile"], (error, data) => {
 
-                                            if (!error) {
-
-                                                alert(JSON.stringify(data))
-                                                // OnlineGetFacebookData(data.credentials.userId, data.credentials.token, this.OnSuccessGetSocialFBdata, (errr) => { alert(errr) })
-                                                // SetSocialProvider('facebook')
-                                                // this.setState({ userInfo: UserData, provider: 'facebook' })
-                                                // // alert(JSON.stringify(UserData))
-                                                // this.setState({ Loading: true })
-                                                // OnLineCheckSocialUser(UserData.id, 'facebook', this.OnSuccess, this.OnFail)
-                                            } else {
-                                                alert(JSON.stringify(error))
-                                            }
+                                        //     if (!error) {
+                                        //             console.log(data)
+                                        //        } else {
+                                        //         console.log(error)
+                                        //     }
+                                        // })
+                                       await Auth.Facebook.logout();
+                                        Auth.Facebook.login(["email", "public_profile"])
+                                        .then(async(token) => {
+                                            console.log(token)
+                                            const credential = firebase.auth.FacebookAuthProvider.credential(token);
+                                            const currentUser = await firebase.auth().signInWithCredential({ providerId:credential.providerId,token: credential.token,secret: credential.secret})
+                                            setGlobalUser(currentUser._user);
                                         })
+                                        .catch((err) => console.log(err))
                                     } catch (error) {
                                         console.log('MAWWWEEEDD', error)
                                     }

@@ -7,6 +7,7 @@ import { Requires } from '../Assets/Requires';
 import { NavigationActions, StackActions } from 'react-navigation'
 import { FontFamilies, FontSize } from '../Global';
 import firebase from 'react-native-firebase';
+import { setGlobalUser } from '../Global/API';
 class Splash extends Component {
     constructor(props) {
         super(props)
@@ -36,9 +37,14 @@ class Splash extends Component {
         if(firstTime!= null){
             screen = 'Login'
         }
-        if(User != null){
-            screen = 'Main'
-        }
+        
+        firebase.auth().onAuthStateChanged((user)=>{
+            if(user!=null){
+                console.log(user._user)
+                setGlobalUser(user._user)
+                Screen = 'Main'
+            }
+        })  
         
 
         setTimeout(() => {

@@ -2,6 +2,11 @@ import { AsyncStorage } from 'react-native'
 import { BaseUrl } from './BaseUrl';
 var UserProfile1 = null;
 var UserData1 = null;
+var GlobalUser={}
+export const setGlobalUser=(User)=>{
+    GlobalUser=User;
+}
+export const getGlobalUser = ()=>GlobalUser;
 
 export const GetUserProfile = async () => {
     AsyncStorage.getItem("UserProfile").then(
