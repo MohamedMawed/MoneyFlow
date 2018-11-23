@@ -16,6 +16,7 @@ import { Colors } from '../Global/Colors';
 import { HomeMonthsSwiperComponent } from '../Components/HomeMonthsSwiperComponent';
 import { HomeMoneyItem } from '../Components/HomeMoneyItem';
 import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
+import { getSavedMonthlyIncome, setHomeScreen, getSavedMonthlyExpenses } from '../Global/API';
 
 
 class Home extends Component {
@@ -35,8 +36,12 @@ class Home extends Component {
                     endDate: '2020/02/01',
                     cost: 3700
                 },
-            ]
+            ],
+            stateChanger : 0
         }
+    }
+    componentDidMount(){
+        setHomeScreen(this);
     }
     CalcPercent = (start, end) => {
         // console.log((new Date()).days-10)
@@ -74,55 +79,19 @@ class Home extends Component {
                     }}
                 />
                 <View style={styles.categoriesContainer}>
-                    <HomeMoneyItem Source={Requires.arrow_down} color={Colors.AppBlueColor} Title={'Income'} />
-                    <HomeMoneyItem Source={Requires.arrow_up} color={Colors.AppRedColor} Title={'Expenses'} />
+                    <HomeMoneyItem 
+                    Source={Requires.arrow_down} 
+                    color={Colors.AppBlueColor} 
+                    value={getSavedMonthlyIncome()}
+                    Title={'Income'} />
+                    <HomeMoneyItem
+                     Source={Requires.arrow_up}
+                      color={Colors.AppRedColor} 
+                      value={getSavedMonthlyExpenses()}
+                      Title={'Expenses'} />
                 </View>
-                <View style={{ marginTop: Height * .04, marginHorizontal: Width * .02, height: '50%', width: Width }}>
-                    {/* <ScrollView
-                        contentContainerStyle={{
-                            width: Width,
-                            // height:Height*.5,
-                            // marginBottom: Height * .1,
-                            justifyContent: 'center', alignItems: 'center'
-                        }}
-
-                    >
-                        <Text style={styles.FirstCategoryHeader}>Plans & Goals</Text>
-                        <View style={{}}>
-                            {this.state.PlansGoalsList.map((item, index) => {
-                                console.log(index)
-                                return (
-                                    <HomeProgressBarItem
-                                        onClick={() => this.props.navigation.navigate('plan')}
-                                        key={index}
-                                        cost={item.cost}
-                                        Percent={this.CalcPercent(item.startDate, item.endDate)}
-                                        BackColor={this.CalcPercentColor(item.startDate, item.endDate)}
-                                        Source={item.Icon} />
-                                )
-                            })
-                            }
-                        </View>
-                        <Text style={styles.SecondCategoryHeader}>Budget</Text>
-                        <View style={{ marginBottom: Height * .03, }}>
-                            {this.state.PlansGoalsList.map((item, index) => {
-                                console.log(index)
-                                return (
-                                    <HomeProgressBarItem
-                                        onClick={() => this.props.navigation.navigate('plan')}
-                                        key={index}
-                                        cost={item.cost}
-                                        Percent={this.CalcPercent(item.startDate, item.endDate)}
-                                        BackColor={this.CalcPercentColor(item.startDate, item.endDate)}
-                                        Source={item.Icon} />
-
-                                )
-                            })
-
-                            }
-                        </View>
-
-                    </ScrollView> */}
+                <View style={{ marginTop: Height * .04, marginHorizontal: Width * .02, height: '50%', width: Width*.94 }}>
+                    
                     <Text style={{
                         color: Colors.BlackColor,
                         fontSize: 22,

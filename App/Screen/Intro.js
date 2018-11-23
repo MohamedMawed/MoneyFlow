@@ -117,7 +117,10 @@ class Intro extends Component {
         </View>
         )
     }
-    componentDidMount() {
+    async componentDidMount() {
+        await AsyncStorage.setItem('FirstTime','true');
+        await AsyncStorage.setItem('Income','0');
+        await AsyncStorage.setItem('Expenses','0');
     }
 }
 const Styles = StyleSheet.create({

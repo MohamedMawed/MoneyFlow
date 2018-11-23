@@ -15,7 +15,9 @@ class plan extends Component {
             valueSlider: 0,
             NamePlan: '',
             AmountValue: '',
-            VALUE: 0
+            VALUE: 0,
+            budgetData:{},
+            dayes:0
 
         }
     }
@@ -23,7 +25,7 @@ class plan extends Component {
 
         //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
         // </LinearGradient>
-        let { CurantSelected } = this.state
+        let { CurantSelected,budgetData } = this.state
         return (<View style={{ width: '100%', height: '100%', alignItems: 'center', backgroundColor: Colors.WhiteColor }}>
             {/* //header */}
             <View style={[Styles.Header, {
@@ -54,9 +56,9 @@ class plan extends Component {
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}>
-                    <Image source={Requires.car2} resizeMode='contain' style={{ width: '100%', height: '100%' }} />
+                    <Image source={budgetData.icon} resizeMode='contain' style={{ width: '100%', height: '100%' }} />
                 </View>
-                <Text style={[Styles.TextStyle, { width: Width * .4, textAlign: 'left' }]}>Buy Car</Text>
+                <Text style={[Styles.TextStyle, { width: Width * .4, textAlign: 'left' }]}>{budgetData.nameCategory}</Text>
                 <TouchableOpacity >
                     <Image source={Requires.remove} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                 </TouchableOpacity>
@@ -71,22 +73,22 @@ class plan extends Component {
 
             {/* // form enter data */}
             <View style={Styles.perantTextItem} >
-                <Text style={Styles.TextStyle}>{'2333'}</Text>
+                <Text style={Styles.TextStyle}>{budgetData.Budget}</Text>
                 <Text style={Styles.TextStyle}>{'Cost'}</Text>
             </View>
 
 
             <View style={Styles.perantTextItem} >
-                <Text style={Styles.TextStyle}>{'12-02-2018'}</Text>
+                <Text style={Styles.TextStyle}>{budgetData.startDate}</Text>
                 <Text style={Styles.TextStyle}>{'Start Date'}</Text>
             </View>
             <View style={Styles.perantTextItem} >
-                <Text style={Styles.TextStyle}>{'12-06-2018'}</Text>
+                <Text style={Styles.TextStyle}>{budgetData.endDate}</Text>
                 <Text style={Styles.TextStyle}>{'End Date'}</Text>
             </View>
 
             <View style={Styles.perantTextItem} >
-                <Text style={Styles.TextStyle}>{'39 Days'}</Text>
+                <Text style={Styles.TextStyle}>{this.state.dayes+ ' Days'}</Text>
                 <Text style={Styles.TextStyle}>{'Remaining Date'}</Text>
             </View>
 
@@ -122,7 +124,10 @@ class plan extends Component {
 
     componentDidMount() {
         this.circularProgress.animate(35, 2000, Easing.elastic(1)); // Will fill the progress bar linearly in 8 seconds
-
+if (this.props.navigation.state.params.item){
+    let {item,dayes}=this.props.navigation.state.params
+    this.setState({budgetData:item,dayes:dayes})
+}
     }
 }
 const Styles = StyleSheet.create({

@@ -39,7 +39,14 @@ let icons = () => {
 
     return ddd
 }
+export const incomeCategory=
+ [{ id:1,icon: require('./img/Icon/cake1.png'),text:'Drink'},
+{id:2, icon: require('./img/Icon/cake2.png'),text:'Party'},
+{ id:3,icon: require('./img/Icon/cake3.png'),text:'Sound'},
+{id:4, icon: require('./img/Icon/cake4.png'),text:'Mony'},
+{id:5, icon: require('./img/Icon/cake5.png'),text:'School'},
 
+]
 export const Requires = {
     Logo_main: require('./img/logo-main.png'),
     toturil: [require('./img/toturil1.png'), require('./img/toturil2.png'), require('./img/toturil3.png')],

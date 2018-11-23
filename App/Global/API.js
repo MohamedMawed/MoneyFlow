@@ -8,6 +8,31 @@ export const setGlobalUser=(User)=>{
 }
 export const getGlobalUser = ()=>GlobalUser;
 
+var monthlyIncome = 10;
+
+export const getSavedMonthlyIncome = ()=>{
+    return monthlyIncome;
+}
+export const setSavedMonthlyIncome = async(val)=>{
+    monthlyIncome = val
+    await AsyncStorage.setItem('Income',val.toString());
+}
+
+var monthlyExpenses = 0;
+
+export const getSavedMonthlyExpenses = ()=>{
+    return monthlyExpenses;
+}
+export const setSavedMonthlyExpenses = async(val)=>{
+    monthlyExpenses = val
+    await AsyncStorage.setItem('Expenses',val.toString());
+}
+
+var HomeScreen = null;
+export const getHomeScreen =()=>HomeScreen;
+export const setHomeScreen =(pt)=>HomeScreen=pt;
+
+
 export const GetUserProfile = async () => {
     AsyncStorage.getItem("UserProfile").then(
         async (value) => {
@@ -54,3 +79,5 @@ export let LocalGetUserProfile = () => {
     return [UserProfile1, UserData1]
 
 }
+
+export let _key = (new Date().getMonth().toString() + new Date().getFullYear().toString()).toString()

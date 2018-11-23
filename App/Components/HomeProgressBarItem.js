@@ -18,6 +18,7 @@ class HomeProgressBarItem extends Component {
 
     }
     render() {
+        let {nameCategory,Percent}=this.props
         return (
             <View style={styles.container}>
                 <TouchableOpacity activeOpacity={0.75} onPress={this.props.onClick} style={styles.ItemRow}>
@@ -29,8 +30,8 @@ class HomeProgressBarItem extends Component {
 
                     {/* for item Header and remaingin time */}
                     <View style={styles.HeaderContainer}>
-                        <Text style={styles.HeaderTitle}>Buying New Car</Text>
-                        <Text style={styles.HeaderRemainingDays}>35 Remaingin Days</Text>
+                        <Text style={styles.HeaderTitle}>{nameCategory}</Text>
+                        <Text style={styles.HeaderRemainingDays}>{Percent} Remaingin Days</Text>
                     </View>
 
                     {/* for item Cost */}
