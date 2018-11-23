@@ -3,7 +3,7 @@ import {
     View,
     StyleSheet,
     TextInput,
-    Image,
+    Image,AsyncStorage,
     Text
 } from 'react-native'
 import { Width, Height } from '../Global/Dimension';
@@ -32,6 +32,7 @@ class CustomTextInput extends Component {
         this.setState({ TextColor: Colors.TextgreenColor, Color: Colors.TextgreenColor, background: '#0000' })
     }
     render() {
+        let {keyboardType,value}=this.props
         return (
             <View style={[Styles.Container,
             {
@@ -42,9 +43,12 @@ class CustomTextInput extends Component {
                 {/* <Text style={[Styles.Header, { color: this.state.TextColor }]}>{this.props.Title}</Text> */}
                 {/* <View style={[Styles.line, { backgroundColor: this.state.Color }]} /> */}
                 <TextInput
+                value={value}
+                keyboardType={keyboardType?keyboardType:'default'}
                     onChangeText={(text) => {
                         this.setState({ currentValue: text })
                         this.props.onChangeText(text)
+                  
                     }}
                     secureTextEntry={this.props.secure}
                     placeholder={this.props.Title}

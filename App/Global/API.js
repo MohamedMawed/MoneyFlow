@@ -74,3 +74,5 @@ export let LocalGetUserProfile = () => {
     return [UserProfile1, UserData1]
 
 }
+
+export let _key = (new Date().getMonth().toString() + new Date().getFullYear().toString()).toString()

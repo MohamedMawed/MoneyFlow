@@ -5,7 +5,7 @@ import {
     Text,
     ActivityIndicator,
     TouchableOpacity,
-    Platform, ScrollView
+    Platform, ScrollView,AsyncStorage
 } from 'react-native'
 import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
@@ -61,10 +61,12 @@ class Login extends Component {
         firebase.auth().signInWithEmailAndPassword(Email, Password).then((User) => {
             console.log('yesssssss', User)
             this.setState({ User: User, Loading: false })
+
             const resetAction = StackActions.reset({
                 index: 0,
                 actions: [NavigationActions.navigate({ routeName: 'Main' })],
             });
+            AsyncStorage.setItem('User',JSON.stringify(User))
             this.props.navigation.dispatch(resetAction);
         }).catch((error) => {
             switch (error.code) {
