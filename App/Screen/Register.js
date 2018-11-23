@@ -3,17 +3,45 @@ import {
     View,
     Image,
     Text,
+    ActivityIndicator,
     TouchableOpacity,
-    ActivityIndicator, ScrollView
+    Platform, ScrollView,AsyncStorage
 } from 'react-native'
 import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
+import {setGlobalUser} from './../Global/API';
 import { Colors } from '../Global/Colors';
-import firebase from 'react-native-firebase'
-import CustomToast from './../Components/CustomToast'
+import firebase from 'react-native-firebase';
+firebase.initializeApp();
 import { NavigationActions, StackActions } from 'react-navigation'
+import CustomToast from '../Components/CustomToast';
+import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
+import Auth from './auth';
+const fbLoginPermissions = ['email'];
+
+import { FBLoginManager } from 'react-native-facebook-login'
+if (Platform.OS === "android") {
+    FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Native); // defaults to Native
+
+} else {
+    FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Web); // defaults to Native
+
+}
+FBLoginManager.logout(() => { });
+
+GoogleSignin.configure({
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+    webClientId: '168676012959-rh0m629s8grco9e7hsnae2ftmfbkpvir.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+    hostedDomain: '', // specifies a hosted domain restriction
+    loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
+    forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login.
+    accountName: '', // [Android] specifies an account name on the device that should be used
+    iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+  });
+
 
 class Register extends Component {
 
@@ -175,7 +203,24 @@ class Register extends Component {
                             height: Height * .15,
                             marginTop: Height * .08
                         }}>
-                            <TouchableOpacity style={{
+                            <TouchableOpacity
+                            activeOpacity={0.7}
+                            onPress={async() => {
+                                try {
+                                   await Auth.Facebook.logout();
+                                    Auth.Facebook.login(["email", "public_profile"])
+                                    .then(async(token) => {
+                                        console.log(token)
+                                        const credential = firebase.auth.FacebookAuthProvider.credential(token);
+                                        const currentUser = await firebase.auth().signInWithCredential({ providerId:credential.providerId,token: credential.token,secret: credential.secret})
+                                        setGlobalUser(currentUser._user);
+                                    })
+                                    .catch((err) => console.log(err))
+                                } catch (error) {
+                                    console.log('MAWWWEEEDD', error)
+                                }
+                            }}
+                            style={{
                                 backgroundColor: Colors.BtnFaceBookBack,
                                 borderRadius: Width * .1,
                                 justifyContent: 'center',
@@ -198,7 +243,10 @@ class Register extends Component {
                                     color: Colors.WhiteColor,
                                 }}>Register with facebook</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{
+                            <TouchableOpacity
+                            onPress={this.GoogleLogin}
+                            activeOpacity={0.7}
+                            style={{
                                 backgroundColor: Colors.BtnGoogleBack,
                                 borderRadius: Width * .1,
                                 justifyContent: 'center',
@@ -232,6 +280,25 @@ class Register extends Component {
                 </ScrollView>
             </View>
         )
+    }
+    GoogleLogin = async () => {
+        try {
+            await GoogleSignin.hasPlayServices();
+            const data = await GoogleSignin.signIn();
+            const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken)
+            const currentUser = await firebase.auth().signInAndRetrieveDataWithCredential(credential);
+            console.info(JSON.stringify(currentUser.user.toJSON()));
+        } catch (error) {
+            // alert(error)
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // user cancelled the login flow
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                // operation (f.e. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                // play services not available or outdated
+            } else {
+            }
+        }
     }
 }
 export { Register }
