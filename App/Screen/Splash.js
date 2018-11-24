@@ -35,9 +35,9 @@ class Splash extends Component {
         // await AsyncStorage.clear();
         let firstTime = await AsyncStorage.getItem('FirstTime');
         let income = await AsyncStorage.getItem('Income');
-        let expenses = await AsyncStorage.getItem('Expenses');
+        // let expenses = await AsyncStorage.getItem('Expenses');
         let user = await AsyncStorage.getItem('User');
-        this.copyLastIncometoNewMonth()
+        this.copyLastIncomeToNewMonth()
         let Screen = 'Intro'
         if (firstTime != null && user == null) {
             Screen = 'Login'
@@ -50,7 +50,7 @@ class Splash extends Component {
                 this.setState({ user });
                 if (user != null) {
                     Screen = 'Main';
-                    setSavedMonthlyIncome(parseFloat(income));
+                    // setSavedMonthlyIncome(parseFloat(income));
                     setSavedMonthlyExpenses(parseFloat(expenses));
                 }
             });
@@ -66,26 +66,45 @@ class Splash extends Component {
     }
 
 
-   async copyLastIncometoNewMonth() {
+    async copyLastIncomeToNewMonth() {
         let _key = (new Date().getMonth().toString() + new Date().getFullYear().toString()).toString()
         let new_key = ((new Date().getMonth() - 1).toString() + new Date().getFullYear().toString()).toString()
         let storeIncome = await AsyncStorage.getItem('Incomedata' + _key)
+        let TotalCost = 0
+        let Budget = await AsyncStorage.getItem('Budget' + _key)
+        let Plan = await AsyncStorage.getItem('Plan' + _key)
+
+        // GET TOTAL COST FROM BUDGETS--------------
+        if (Budget) {
+            let _Budget = JSON.parse(Budget)
+            _Budget.forEach((element) => {
+                TotalCost = TotalCost + element.Budget
+            })
+        }
+        // GET TOTAL COST FROM PLANS----------------
+        if (Plan) {
+            let _Plan = JSON.parse(Plan)
+            _Plan.forEach((element) => {
+                TotalCost = TotalCost + element.target
+            })
+        }
+
         if (storeIncome == null) {
             let lastIncome = await AsyncStorage.getItem('Incomedata' + new_key)
             if (lastIncome) {
-              AsyncStorage.setItem('Incomedata' + _key,lastIncome)
+                AsyncStorage.setItem('Incomedata' + _key, lastIncome)
             }
-        }else
-        {
-            let _data=JSON.parse(storeIncome)
+        } else {
+            let _data = JSON.parse(storeIncome)
             let totalValue = 0
             _data.forEach(element => {
                 totalValue = totalValue + element.IncomeValue
             });
             setSavedMonthlyIncome(totalValue);
+            setSavedMonthlyExpenses(TotalCost)
         }
 
-       
+
     }
 }
 const Styles = StyleSheet.create({

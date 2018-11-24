@@ -3,14 +3,14 @@ import { BaseUrl } from './BaseUrl';
 var UserProfile1 = null;
 var UserData1 = null;
 
-var monthlyIncome = 10;
+var monthlyIncome = 0;
 
 export const getSavedMonthlyIncome = ()=>{
     return monthlyIncome;
 }
-export const setSavedMonthlyIncome = async(val)=>{
+export const setSavedMonthlyIncome = (val)=>{
     monthlyIncome = val
-    await AsyncStorage.setItem('Income',val.toString());
+    // await AsyncStorage.setItem('Income',val.toString());
 }
 
 var monthlyExpenses = 0;
@@ -19,8 +19,8 @@ export const getSavedMonthlyExpenses = ()=>{
     return monthlyExpenses;
 }
 export const setSavedMonthlyExpenses = async(val)=>{
-    monthlyExpenses = val
-    await AsyncStorage.setItem('Expenses',val.toString());
+    monthlyExpenses = JSON.parse(JSON.stringify(parseInt( val)))
+    // await AsyncStorage.setItem('Expenses',val.toString());
 }
 
 var HomeScreen = null;

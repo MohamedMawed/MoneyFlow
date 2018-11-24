@@ -1,5 +1,5 @@
 import React, { Component } from 'React'
-import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, FlatList, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, FlatList, TouchableOpacity, TextInput, ScrollView,ActivityIndicator,Alert } from 'react-native'
 import { Height, Width } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
 import { Requires } from '../Assets/Requires';
@@ -10,6 +10,7 @@ import { FontFamilies, FontSize } from '../Global/Font';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { PlansGoalsList } from '../Global/ComponentTest';
+import { _key } from '../Global/API';
 class add_plan extends Component {
     constructor(props) {
         super(props)
@@ -23,7 +24,11 @@ class add_plan extends Component {
             isDateTimePickerVisible: false,
             startDate: 'Start date',
             endDate: 'End date',
-            ButtonType: -1
+            ButtonType: -1,
+            target:500,
+            icon:'',
+            PlanList:[],
+            IsLoding:true
 
         }
     }
@@ -43,7 +48,7 @@ class add_plan extends Component {
         this._hideDateTimePicker();
     };
     render() {
-        let { CurantSelected } = this.state
+        let { CurantSelected, PlanList, IsLoding,addPlan } = this.state
         let text = ['طعام', 'شراب', 'تعليم', 'مسرح', 'رياضة', 'فن', 'اطفال', 'صحة', 'اموال', 'زراعه', 'مساكن', 'مرح', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام', 'طعام',]
         return (<View style={{
             width: '100%',
@@ -249,7 +254,7 @@ class add_plan extends Component {
                         contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }} data={Requires.ICons} renderItem={({ item, index }) => {
                             return (
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
-                                    <TouchableOpacity onPress={() => this.setState({ CurantSelected: index })} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015 }}>
+                                    <TouchableOpacity onPress={() => this.setState({ CurantSelected: index,icon:item.icon })} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015 }}>
                                         <View style={{ width: Width * .14, height: Width * .14, backgroundColor: CurantSelected == index ? Colors.AppBlueColor : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center' }}>
                                             <Image source={item.icon} resizeMode='contain' style={{ width: '60%', height: '60%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
                                         </View>
@@ -305,37 +310,51 @@ class add_plan extends Component {
                     </View>
                     </View>
                     {/* // _________________________________________________________ */}
+                    <View style={{width:Width,alignItems:'center',height:Height*.75}}>
+
                     <ScrollView
                         contentContainerStyle={{
                             width: Width,
                             // height:Height*.5,
                             // marginBottom: Height * .1,
-                            justifyContent: 'center', alignItems: 'center',paddingBottom:Height*.02
+                            alignItems: 'center',paddingBottom:Height*.06,
                         }}
 
                     >
-                        <View style={{}}>
-                            {this.state.PlansGoalsList.map((item, index) => {
+                        {IsLoding && PlanList.length >= 1 &&this.state.PlanList.map((item, index) => {
                                 console.log(index)
+                                // let newPlan = { icon: icon, startDate: startDate, endDate: endDate, NamePlan: NamePlan,target:target }
+
                                 return (
                                     <HomeProgressBarItem
-                                        onClick={() => this.props.navigation.navigate('plan')}
-                                        key={index}
-                                        cost={item.cost}
+                                    onClick={() => this.props.navigation.navigate('plan', { item: item, dayes: this.CalcPercent(item.startDate, item.endDate) })}
+                                    key={index}
+                                        cost={item.target}
                                         Percent={this.CalcPercent(item.startDate, item.endDate)}
                                         BackColor={this.CalcPercentColor(item.startDate, item.endDate)}
-                                        Source={item.Icon} />
+                                        Source={item.icon}
+                                        nameCategory={item.NamePlan}
+                                        />
                                 )
                             })
                             }
-                        </View>
+                             {IsLoding == false && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                                <ActivityIndicator size='large' />
+                            </View>}
+                            {IsLoding && PlanList.length < 1 && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                                <Text>No Plans </Text>
+                            </View>}
                     </ScrollView>
+                </View>
                 </View>
 
 
             </View>}
             <TouchableOpacity onPress={() => {
-                this.setState({ addPlan: !this.state.addPlan })
+                    if (addPlan) 
+                    this.onsubmitPlan()
+                    else
+                    this.setState({ addPlan:true})
 
                 // ios-save
             }} style={{ position: 'absolute', elevation: 7, top: Height * .01, right: Width * .07 }}>
@@ -350,18 +369,17 @@ class add_plan extends Component {
         )
     }
     CalcPercent = (start, end) => {
-        // console.log((new Date()).days-10)
-        let totdays = Math.abs(new Date(end) - new Date(start));
+        let _staer = start.split('-')[2] + '-' + start.split('-')[1] + '-' + start.split('-')[0]
+        let _end = end.split('-')[2] + '-' + end.split('-')[1] + '-' + end.split('-')[0]
+        let totdays = Math.abs(new Date(_end) - new Date(_staer));
+
         // console.log(melli)
         totdays = totdays / 1000 / 60 / 60 / 24
-        let tillNow = Math.abs(new Date() - new Date(start));
-        tillNow = tillNow / 1000 / 60 / 60 / 24
-        console.log('totdays', totdays)
-        console.log('tillNow', tillNow)
-        console.log('Percent', (tillNow / totdays) * 100)
-        // console.log(days)
+        console.log(totdays, "dddddddddddddddddsssss")
 
-        return (tillNow / totdays) * 100
+        let tillNow = Math.abs(new Date() - new Date(_staer));
+        tillNow = tillNow / 1000 / 60 / 60 / 24
+        return parseInt((tillNow / totdays) * 100)
     }
     CalcPercentColor = (start, end) => {
 
@@ -372,8 +390,65 @@ class add_plan extends Component {
         if (percent <= 100) return Colors.AppRedColor
 
     }
-    componentDidMount() {
+    async componentDidMount() {
+        this.setState({ IsLoding: false })
+        let Plan = await AsyncStorage.getItem('Plan' + _key)
+        if (Plan) {
+            this.setState({ PlanList: JSON.parse(Plan), IsLoding: true })
+        } else {
+            this.setState({ IsLoding: true })
+        }
+    }
+   async onsubmitPlan(){
 
+        // CurantSelected: -1,
+        // valueSlider: 0,
+        // NamePlan: '',
+        // AmountValue: '',
+        // addPlan: false,
+        // PlansGoalsList: PlansGoalsList,
+        // isDateTimePickerVisible: false,
+        // startDate: 'Start date',
+        // endDate: 'End date',
+        // ButtonType: -1
+
+        let { startDate, endDate, valueSlider, addPlan, icon, category,target,NamePlan } = this.state
+        if (addPlan) {
+            
+            if (NamePlan == '')
+            return alert('Please specify the name')
+            if (target == 0)
+                return alert('Please specify the value')
+            if (startDate == 'Start date')
+                return alert('Please specify the Start date')
+            if (endDate == 'End date')
+                return alert('Please specify the End date')
+            if (icon == '')
+                return alert('Please selected icon')
+            // add store
+            let newPlan = { icon: icon, startDate: startDate, endDate: endDate, NamePlan: NamePlan,target:target }
+            let Plan = await AsyncStorage.getItem('Plan' + _key)
+            if (Plan) {
+                let currantPlan = JSON.parse(Plan)
+                currantPlan.push(newPlan)
+                AsyncStorage.setItem('Plan' + _key, JSON.stringify(currantPlan))
+                this.setState({ PlanList: currantPlan })
+                console.log('currantPlan', currantPlan)
+            }
+            else {
+                AsyncStorage.setItem('Plan' + _key, JSON.stringify([newPlan]))
+                this.setState({ PlanList: [newPlan] })
+            }
+            Alert.alert('successfully', 'Plan Added successfully', [{
+                text: 'ok', onPress: () => {
+                    this.setState({ AddPlan: false })
+                }
+            }])
+
+        }
+        else {
+            this.setState({ AddPlan: true })
+        }
     }
 }
 const Styles = StyleSheet.create({

@@ -11,7 +11,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { PlansGoalsList, PlansGoalsList2 } from '../Global/ComponentTest';
 import { HomeMonthsSwiperComponent } from '../Components/HomeMonthsSwiperComponent';
-import { getSavedMonthlyIncome, _key } from '../Global/API';
+import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyExpenses } from '../Global/API';
 class AddBudget extends Component {
     constructor(props) {
         super(props)
@@ -38,7 +38,7 @@ class AddBudget extends Component {
 
     _handleDatePicked = (date) => {
 
-        let _date = new Date(date).getDate() + '-' + (new Date(date).getMonth()+1) + '-' + new Date(date).getFullYear()
+        let _date = new Date(date).getDate() + '-' + (new Date(date).getMonth() + 1) + '-' + new Date(date).getFullYear()
         if (this.state.ButtonType == 'start')
             this.setState({ startDate: _date })
         if (this.state.ButtonType == 'end')
@@ -107,7 +107,7 @@ class AddBudget extends Component {
                             sliderLength={Width * .8}
                             min={0}
                             step={1}
-                            max={getSavedMonthlyIncome()}
+                            max={getSavedMonthlyIncome()-getSavedMonthlyExpenses()}
                             snapped
                             selectedStyle={{
                                 backgroundColor: '#7274CD', height: Width * .02, borderRadius: 4
@@ -229,7 +229,7 @@ class AddBudget extends Component {
                                 width: Width * .45
                             }}
 
-                            >Oct 2018</Text>
+                            >Nov 2018</Text>
                             <Image source={Requires.arrow_right} style={{
                                 width: Width * .03,
                                 tintColor: 'red',
@@ -238,22 +238,22 @@ class AddBudget extends Component {
                         </View>
                     </View>
                     {/* // _________________________________________________________ */}
+                    <View style={{width:Width,alignItems:'center',height:Height*.75}}>
                     <ScrollView
                         contentContainerStyle={{
                             width: Width,
                             // height:Height*.5,
                             // marginBottom: Height * .1,
-                            justifyContent: 'center', alignItems: 'center', paddingBottom: Height * .02
+                          alignItems: 'center',paddingBottom:Height*.06
                         }}
 
                     >
-                        <View style={{ width: Width, height: Height * .75, alignItems: 'center' }}>
 
                             {IsLoding && BudgetList.length >= 1 && this.state.BudgetList.map((item, index) => {
                                 console.log(index)
                                 return (
                                     <HomeProgressBarItem
-                                        onClick={() => this.props.navigation.navigate('plan',{item:item,dayes:this.CalcPercent(item.startDate, item.endDate)})}
+                                        onClick={() => this.props.navigation.navigate('plan', { item: item, dayes: this.CalcPercent(item.startDate, item.endDate) })}
                                         key={index}
                                         nameCategory={item.nameCategory}
                                         cost={item.Budget}
@@ -270,9 +270,9 @@ class AddBudget extends Component {
                                 <Text>No Budget </Text>
                             </View>}
 
-                        </View>
 
                     </ScrollView>
+                    </View>
                 </View>
             </View>}
             <TouchableOpacity onPress={async () => {
@@ -286,21 +286,20 @@ class AddBudget extends Component {
                         return alert('Please specify the End date')
                     if (icon == '')
                         return alert('Please selected icon')
-
-
                     // add store
+                    setSavedMonthlyExpenses(getSavedMonthlyExpenses()+valueSlider)
                     let newBudget = { icon: icon, startDate: startDate, endDate: endDate, nameCategory: category, Budget: valueSlider }
                     let Budget = await AsyncStorage.getItem('Budget' + _key)
                     if (Budget) {
                         let currantBudget = JSON.parse(Budget)
                         currantBudget.push(newBudget)
                         AsyncStorage.setItem('Budget' + _key, JSON.stringify(currantBudget))
-                        this.setState({BudgetList:currantBudget})
+                        this.setState({ BudgetList: currantBudget })
                         console.log('currantBudget', currantBudget)
                     }
                     else {
                         AsyncStorage.setItem('Budget' + _key, JSON.stringify([newBudget]))
-this.setState({BudgetList:[newBudget]})
+                        this.setState({ BudgetList: [newBudget] })
                     }
 
                     Alert.alert('successfully', 'Budget Added successfully', [{
@@ -329,16 +328,16 @@ this.setState({BudgetList:[newBudget]})
     }
     CalcPercent = (start, end) => {
 
-        let _staer=start.split('-')[2]+'-'+start.split('-')[1]+'-'+start.split('-')[0]
-        let _end=end.split('-')[2]+'-'+end.split('-')[1]+'-'+end.split('-')[0]
+        let _staer = start.split('-')[2] + '-' + start.split('-')[1] + '-' + start.split('-')[0]
+        let _end = end.split('-')[2] + '-' + end.split('-')[1] + '-' + end.split('-')[0]
         let totdays = Math.abs(new Date(_end) - new Date(_staer));
-        console.log(totdays,_staer,_end,"dddddddddddddddddsssss")
+        console.log(totdays, _staer, _end, "dddddddddddddddddsssss")
 
         // console.log(melli)
         totdays = totdays / 1000 / 60 / 60 / 24
         let tillNow = Math.abs(new Date() - new Date(_staer));
         tillNow = tillNow / 1000 / 60 / 60 / 24
-        return  parseInt( (tillNow / totdays) * 100)
+        return parseInt((tillNow / totdays) * 100)
     }
 
     CalcPercentColor = (start, end) => {
@@ -349,13 +348,12 @@ this.setState({BudgetList:[newBudget]})
 
     }
     async componentDidMount() {
-this.setState({IsLoding: false})
+        this.setState({ IsLoding: false })
         let Budget = await AsyncStorage.getItem('Budget' + _key)
         if (Budget) {
             this.setState({ BudgetList: JSON.parse(Budget), IsLoding: true })
-        }else
-        {
-            this.setState({ IsLoding: true })  
+        } else {
+            this.setState({ IsLoding: true })
         }
     }
 }

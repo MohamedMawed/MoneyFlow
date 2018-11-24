@@ -17,7 +17,8 @@ class plan extends Component {
             AmountValue: '',
             VALUE: 0,
             budgetData:{},
-            dayes:0
+            dayes:0,
+            
 
         }
     }

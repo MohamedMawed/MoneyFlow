@@ -38,11 +38,13 @@ class HomeMonthsSwiperComponent extends Component {
                     justifyContent:'space-evenly'
 
                 }}>
+                   <TouchableOpacity>
                     <Image source={Requires.arrow_left} style={{
                         width: Width * .03,
                         tintColor: 'red',
                         resizeMode: 'contain'
                     }} />
+                    </TouchableOpacity>
                     <Text style={{
                         fontFamily:FontFamilies.Etisalat_0,
                         fontSize:FontSize.LargFontSize,
@@ -51,12 +53,14 @@ class HomeMonthsSwiperComponent extends Component {
                         width:Width*.45
                     }}
                     
-                    >Oct 2018</Text>
+                    >Nov 2018</Text>
+                    <TouchableOpacity>
                     <Image source={Requires.arrow_right} style={{
                         width: Width * .03,
                         tintColor: 'red',
                         resizeMode: 'contain'
                     }} />
+                    </TouchableOpacity>
                 </View>
                 <Text style={{
                         fontFamily:FontFamilies.Etisalat_0,
@@ -101,6 +105,10 @@ class HomeMonthsSwiperComponent extends Component {
 
             </View>
         )
+    }
+    componentDidMount(){
+
+        console.log("getSavedMonthlyExpensesgetSavedMonthlyExpensesgetSavedMonthlyExpenses")
     }
 }
 export { HomeMonthsSwiperComponent }

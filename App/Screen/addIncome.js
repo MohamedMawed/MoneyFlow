@@ -54,10 +54,7 @@ export class AddIncome extends Component {
                             fontSize: 18,
                             fontWeight: '400',
                             textAlign: 'center'
-                        }}>
-                            add your income from this month to monitor
-
-                    </Text>
+                        }}>add your income from this month to monitor</Text>         
                     </View>
                     <View style={{ width: '90%', height: Height * .2, alignItems: 'center', justifyContent: 'center' }}>
                         <FlatList contentContainerStyle={{ height: '100%', justifyContent: 'center', alignItems: 'center' }} horizontal data={incomeCategory} renderItem={({ item, index }) => {
@@ -99,22 +96,23 @@ export class AddIncome extends Component {
 
                                     let storeIncome = await AsyncStorage.getItem('Incomedata' + _key)
                                     console.log('Incomedata' + _key, "successfully")
-
                                     if (storeIncome) {
                                         currantIncome = JSON.parse(storeIncome)
-
                                         currantIncome.forEach((element) => {
                                             if (element.CategoryId != selectedCatogry)
                                                 _data.push(element)
                                         })
-
                                         _data.push(data)
                                         AsyncStorage.setItem('Incomedata' + _key, JSON.stringify(_data))
                                     }
                                     else {
                                         AsyncStorage.setItem('Incomedata' + _key, JSON.stringify([data]))
+                                        console.log(intVal,"intValintValintVal")
+
+                                        setSavedMonthlyIncome(intVal);
+
                                     }
-                                    let totalValue = 0
+                                    let totalValue = intVal
                                     _data.forEach(element => {
                                         totalValue = totalValue + element.IncomeValue
                                     });
@@ -124,16 +122,12 @@ export class AddIncome extends Component {
                                     console.log(_data, "successfully")
                                    Alert.alert("successfully",'Income Added successfully',[{text:'ok',onPress:()=>{
                                     this.props.navigation.navigate('Home')
+
                                     this.setState({ income: '', selectedCatogry: -1, selectedData: null })
                                    }}])
-                               
-
-
                                 }
                                 else
                                     alert('Please Choose Category Type');
-
-
                             } catch (error) {
                                 console.log(error, "selectedData11")
 
