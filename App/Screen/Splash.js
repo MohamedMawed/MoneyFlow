@@ -7,6 +7,7 @@ import { Requires } from '../Assets/Requires';
 import { NavigationActions, StackActions } from 'react-navigation'
 import { FontFamilies, FontSize } from '../Global';
 import firebase from 'react-native-firebase';
+import { setGlobalUser } from '../Global/API';
 import { setSavedMonthlyIncome, setSavedMonthlyExpenses } from '../Global/API';
 class Splash extends Component {
     constructor(props) {
@@ -51,6 +52,9 @@ class Splash extends Component {
                 if (user != null) {
                     Screen = 'Main';
                     // setSavedMonthlyIncome(parseFloat(income));
+                    console.log(user._user)
+                    setGlobalUser(user._user)
+                    setSavedMonthlyIncome(parseFloat(income));
                     setSavedMonthlyExpenses(parseFloat(expenses));
                 }
             });
