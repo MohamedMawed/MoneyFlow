@@ -1,13 +1,14 @@
 import React, { Component } from 'React'
-import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar } from 'react-native'
+import { Text, Image, I18nManager, AsyncStorage, StyleSheet, StatusBar } from 'react-native'
 import { Width, Height } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
 import LinearGradient from 'react-native-linear-gradient'
 import { Requires } from '../Assets/Requires';
 import { NavigationActions, StackActions } from 'react-navigation'
-import { FontFamilies, FontSize } from '../Global';
+import { FontFamilies, FontSize, setFont } from '../Global';
 import firebase from 'react-native-firebase';
 import { setGlobalUser } from '../Global/API';
+import I18n, { strings, setAppLanguage } from './../locals';
 import { setSavedMonthlyIncome, setSavedMonthlyExpenses } from '../Global/API';
 class Splash extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class Splash extends Component {
         this.state = {
         }
     }
-    render() {
+    render() {  
 
         //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
         // </LinearGradient>
@@ -26,34 +27,46 @@ class Splash extends Component {
                 fontFamily: FontFamilies.Etisalat_0,
                 fontSize: 22,
                 color: '#fff',
-                fontWeight: '500',
-            }}>FLOOSY</Text>
+            }}>{strings('appName')}</Text>
         </LinearGradient>
         )
     }
     componentDidMount = async () => {
         // firebase.auth().signOut();
         // await AsyncStorage.clear();
+        const lang = await AsyncStorage.getItem('language')
+        console.log("TAG", lang)
+        if (lang != null) {
+            setAppLanguage(lang, false)
+        } else {
+            if (I18nManager.isRTL) {
+                setAppLanguage("ar", false);
+            }
+        }
+        setFont(lang == 'ar'?'GE SS Two Etisalat_0':'OpenSans-Regular')
         let firstTime = await AsyncStorage.getItem('FirstTime');
         let income = await AsyncStorage.getItem('Income');
         // let expenses = await AsyncStorage.getItem('Expenses');
         let user = await AsyncStorage.getItem('User');
         this.copyLastIncomeToNewMonth()
         let Screen = 'Intro'
-        if (firstTime != null && user == null) {
-            Screen = 'Login'
-        }
-        else if (user != null) {
-            Screen = 'Main'
-        }
-        else
+        // if (firstTime != null && user == null) {
+        //     Screen = 'Login'
+        // }
+        //  if (user != null) {
+        //     Screen = 'Main'
+        // }
+        // else
             firebase.auth().onAuthStateChanged((user) => {
                 this.setState({ user });
                 if (user != null) {
                     Screen = 'Main';
                     setGlobalUser(user._user)
+                }else {
+                    Screen = 'Login'
                 }
             });
+        //  Screen = 'Intro'
 
 
         setTimeout(() => {

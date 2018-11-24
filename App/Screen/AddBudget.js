@@ -12,6 +12,7 @@ import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { PlansGoalsList, PlansGoalsList2 } from '../Global/ComponentTest';
 import { HomeMonthsSwiperComponent } from '../Components/HomeMonthsSwiperComponent';
 import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyExpenses } from '../Global/API';
+import { strings } from '../locals';
 class AddBudget extends Component {
     constructor(props) {
         super(props)
@@ -22,8 +23,8 @@ class AddBudget extends Component {
             AddBudget: false,
             PlansGoalsList: PlansGoalsList2,
             isDateTimePickerVisible: false,
-            startDate: 'Start date',
-            endDate: 'End date',
+            startDate: strings('startDate'),
+            endDate: strings('endDate'),
             ButtonType: -1,
             icon: '',
             category: '',
@@ -72,7 +73,7 @@ class AddBudget extends Component {
                         {/* <TouchableOpacity >
                         <Image source={Requires.back} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                     </TouchableOpacity> */}
-                        <Text style={[Styles.FirstCategoryHeader, { width: '85%', textAlign: 'left' }]}>New Budget</Text>
+                        <Text style={[Styles.FirstCategoryHeader, { width: '85%', textAlign: 'left' }]}>{strings('newBudget')}</Text>
 
 
                     </View>
@@ -95,7 +96,7 @@ class AddBudget extends Component {
                 <View style={[Styles.Header, { width: '90%', height: Height * .27, backgroundColor: Colors.WhiteColor, elevation: 7, borderRadius: Width * .03, alignItems: 'center' }]}>
 
                     <View style={{ width: '90%', height: '33%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text style={[Styles.TextStyle, { fontSize: 18 }]}>Budget</Text>
+                        <Text style={[Styles.TextStyle, { fontSize: 18 }]}>{strings('budget')}</Text>
                         <Text style={[Styles.TextStyle, { color: '#7274CD', fontSize: Width * .08 }]}>{this.state.valueSlider}</Text>
                     </View>
 
@@ -169,7 +170,7 @@ class AddBudget extends Component {
 
                 {/* // TITLE CHOOSE ICON */}
                 <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                    <Text style={[Styles.TextStyle, { fontSize: Width * .03 }]}>{'Choose Category'}</Text>
+                    <Text style={[Styles.TextStyle, { fontSize: Width * .03 }]}>{strings('chooseCat')}</Text>
                 </View>
 
 
@@ -198,7 +199,7 @@ class AddBudget extends Component {
                 <View style={{ height: '95%', alignItems: 'center' }}>
 
                     <View style={{ width: '90%', height: Height * .08, justifyContent: 'center' }}>
-                        <Text style={Styles.FirstCategoryHeader}>Budgets</Text>
+                        <Text style={Styles.FirstCategoryHeader}>{strings('budgets')}</Text>
                     </View>
 
 
@@ -267,7 +268,7 @@ class AddBudget extends Component {
                                 <ActivityIndicator size='large' />
                             </View>}
                             {IsLoding && BudgetList.length < 1 && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                                <Text>No Budget </Text>
+                                <Text>{strings('noBudgets')}</Text>
                             </View>}
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'React'
 import { StyleSheet, Text, View, Animated, Easing, TouchableOpacity, TouchableWithoutFeedback, Linking } from 'react-native'
-import { Width, Height, Colors } from './../Global'
+import { Width, Height, Colors, FontFamilies } from './../Global'
 
 class CustomToast extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class CustomToast extends Component {
     render() {
         return (
             <Animated.View style={[Styles.Container, { paddingHorizontal: Width*.03,height: Height * .055, bottom: this.state.animaitionAlert }]} >
-                <Text style={{fontSize: Width * .03, fontWeight: 'bold', color: Colors.ofWhiteColr, textAlign: 'center' }}>{this.props.Massage}</Text>
+                <Text style={{fontSize: Width * .03,fontFamily:FontFamilies.Etisalat_0, color: Colors.ofWhiteColr, textAlign: 'center' }}>{this.props.Massage}</Text>
             </Animated.View>
         )
     }

@@ -11,6 +11,7 @@ import { Requires, incomeCategory } from '../Assets/Requires';
 import { CustomTextInput } from './../Components/TextInput'
 import { Colors, FontFamilies, Width, Height } from '../Global';
 import monthlyIncome, { setSavedMonthlyIncome, getSavedMonthlyIncome, getHomeScreen } from './../Global/API';
+import { strings } from '../locals';
 export class AddIncome extends Component {
     constructor(props) {
         super(props)
@@ -45,16 +46,16 @@ export class AddIncome extends Component {
                         <Text style={{
                             color: Colors.BlackColor,
                             fontSize: 22,
-                            fontWeight: '600',
+                            fontFamily:FontFamilies.Etisalat_0,
                             textAlign: 'center'
                         }}>
-                            Heading Title
+                            {strings('headingIcomeScreen')}
                     </Text>
                         <Text style={{
                             fontSize: 18,
-                            fontWeight: '400',
+                            fontFamily:FontFamilies.Etisalat_0,
                             textAlign: 'center'
-                        }}>add your income from this month to monitor</Text>         
+                        }}>{strings('description')}</Text>         
                     </View>
                     <View style={{ width: '90%', height: Height * .2, alignItems: 'center', justifyContent: 'center' }}>
                         <FlatList contentContainerStyle={{ height: '100%', justifyContent: 'center', alignItems: 'center' }} horizontal data={incomeCategory} renderItem={({ item, index }) => {
@@ -69,7 +70,7 @@ export class AddIncome extends Component {
                     <CustomTextInput
                         value={this.state.income}
                         keyboardType='numeric'
-                        Title={'income'}
+                        Title={strings('Income')}
 
                         onChangeText={(text) => {
 
@@ -120,18 +121,18 @@ export class AddIncome extends Component {
                                     let HomeScreenRef = getHomeScreen();
                                     HomeScreenRef.setState((prev) => ({ stateChanger: prev.stateChanger }))
                                     console.log(_data, "successfully")
-                                   Alert.alert("successfully",'Income Added successfully',[{text:'ok',onPress:()=>{
+                                   Alert.alert(strings('success'),strings('incomeAdded'),[{text:'ok',onPress:()=>{
                                     this.props.navigation.navigate('Home')
 
                                     this.setState({ income: '', selectedCatogry: -1, selectedData: null })
                                    }}])
                                 }
                                 else
-                                    alert('Please Choose Category Type');
+                                    alert(strings('alertChooseType'));
                             } catch (error) {
                                 console.log(error, "selectedData11")
 
-                                alert('Please enter valid number');
+                                alert(strings('validNumber'));
                             }
                         }}
                         style={{
@@ -148,7 +149,7 @@ export class AddIncome extends Component {
                             fontFamily: FontFamilies.Etisalat_0,
                             fontSize: 18,
                             color: Colors.WhiteColor,
-                        }}>Save</Text>
+                        }}>{strings('save')}</Text>
                     </TouchableOpacity>
 
                 </ScrollView>

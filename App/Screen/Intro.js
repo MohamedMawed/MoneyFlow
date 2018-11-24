@@ -8,6 +8,7 @@ import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies } from '../Global/Font';
 import { Lang, FixViewsOrder } from '../Global/Localization';
+import { strings, getAppLanguage } from '../locals';
 
 class Intro extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class Intro extends Component {
             index: 0
         }
     }
+    
     _renderItem({ item, index }, parallaxProps) {
         let { GradientBackground } = this.state
         return (
@@ -38,8 +40,8 @@ class Intro extends Component {
                         <Image resizeMode="contain" source={Requires.toturil[index]} style={{ width: '30%', height: '30%', position: 'absolute', bottom: Height * .1 }} />
                     </LinearGradient>
                     <View style={{ width: '85%', alignItems: 'center', marginTop: Height * .47 }}>
-                        <Text style={[Styles.TextStyle, { fontSize: Width*.045 }]}>{Lang('TitleIntroScreen')[index]}</Text>
-                        <Text style={[Styles.TextStyle, { textAlign: 'center', fontSize: Width*.035, color: Colors.DarkGrayColor, marginTop: Height * .02, lineHeight: Height * .032 }]}>{Lang('ContentIntroScreen')[index]}</Text>
+                        <Text style={[Styles.TextStyle, { fontSize: Width*.045 }]}>{strings('TitleIntroScreen')[index]}</Text>
+                        <Text style={[Styles.TextStyle, { textAlign: 'center', fontSize: Width*.035, color: Colors.DarkGrayColor, marginTop: Height * .02, lineHeight: Height * .032 }]}>{strings('ContentIntroScreen')[index]}</Text>
                     </View>
                 </View>
             </View>
@@ -80,7 +82,7 @@ class Intro extends Component {
 
                         style={[Styles.Button, { overflow: 'hidden', width: '48%', backgroundColor: StepColor[this.state.index] }]} >
 
-                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Login')}</Text>
+                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{strings('Login')}</Text>
 
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
@@ -92,7 +94,7 @@ class Intro extends Component {
                     }}
 
                         style={[Styles.Button, { overflow: 'hidden', width: '48%', backgroundColor: StepColor[this.state.index] }]} >
-                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Register')}</Text>
+                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{strings('Register')}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -101,7 +103,7 @@ class Intro extends Component {
                     this.setState({ index: this.state.index + 1 })
                     this._carousel.snapToNext();
                 }} style={[Styles.Button, { overflow: 'hidden', backgroundColor: StepColor[this.state.index] }]} >
-                    <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{Lang('Next')}</Text>
+                    <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{strings('Next')}</Text>
                 </TouchableOpacity>}
 
 
@@ -121,6 +123,11 @@ class Intro extends Component {
         await AsyncStorage.setItem('FirstTime','true');
         await AsyncStorage.setItem('Income','0');
         await AsyncStorage.setItem('Expenses','0');
+        if(getAppLanguage() == 'ar'){
+            let temp = this.state.GradientBackground;
+            temp.reverse();
+            this.setState({GradientBackground:temp})
+        }
     }
 }
 const Styles = StyleSheet.create({

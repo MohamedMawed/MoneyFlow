@@ -22,6 +22,7 @@ import Auth from './auth';
 const fbLoginPermissions = ['email'];
 
 import { FBLoginManager } from 'react-native-facebook-login'
+import { strings } from '../locals';
 if (Platform.OS === "android") {
     FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Native); // defaults to Native
 
@@ -108,6 +109,13 @@ class Login extends Component {
             const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken)
             const currentUser = await firebase.auth().signInAndRetrieveDataWithCredential(credential);
             console.info(JSON.stringify(currentUser.user.toJSON()));
+            const resetAction = StackActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: 'Main' })],
+            });
+            AsyncStorage.setItem('User',JSON.stringify(currentUser.user.toJSON()))
+            this.props.navigation.dispatch(resetAction);
+
         } catch (error) {
             // alert(error)
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -130,7 +138,7 @@ class Login extends Component {
                             fontFamily: FontFamilies.Etisalat_0,
                             fontSize: Width * .07,
                             color: '#000',
-                        }}>Login</Text>
+                        }}>{strings('Login')}</Text>
                     </View>
                     <View style={{
                         width: Width,
@@ -140,14 +148,14 @@ class Login extends Component {
                     }}>
 
                         <CustomTextInput
-                            Title={'Email Address'}
+                            Title={strings('email')}
                             onChangeText={(text) => {
                                 this.setState({ Email: text })
                             }}
                             icon={Requires.Email}
                         />
                         <CustomTextInput
-                            Title={'Password'}
+                            Title={strings('password')}
                             secure
                             onChangeText={(text) => {
                                 this.setState({ Password: text })
@@ -166,7 +174,7 @@ class Login extends Component {
                                 fontSize: Width * .035,
                                 color: '#000',
                                 textDecorationLine: 'underline'
-                            }}>Forget Password</Text>
+                            }}>{strings('forgetPassword')}</Text>
                         </View>
                         <View style={{
                             width: Width * .9,
@@ -184,7 +192,8 @@ class Login extends Component {
                                     borderRadius: Width * .1,
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    height: '100%',width:Width*.6,
+                                    height: '100%',
+                                    width:Width*.53,
                                     paddingHorizontal: Width * .06
                                 }}>
 
@@ -195,7 +204,7 @@ class Login extends Component {
                                         fontFamily: FontFamilies.Etisalat_0,
                                         fontSize: Width * .035,
                                         color: Colors.WhiteColor,
-                                    }}>Login</Text>
+                                    }}>{strings('Login')}</Text>
                                 }
                             </TouchableOpacity>
                             <TouchableOpacity
@@ -214,7 +223,7 @@ class Login extends Component {
                                     fontFamily: FontFamilies.Etisalat_0,
                                     fontSize: Width * .035,
                                     color: Colors.BtnLoginBack,
-                                }}>Register</Text>
+                                }}>{strings('Register')}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{
@@ -236,6 +245,13 @@ class Login extends Component {
                                             const credential = firebase.auth.FacebookAuthProvider.credential(token);
                                             const currentUser = await firebase.auth().signInWithCredential({ providerId:credential.providerId,token: credential.token,secret: credential.secret})
                                             setGlobalUser(currentUser._user);
+                                            const resetAction = StackActions.reset({
+                                                index: 0,
+                                                actions: [NavigationActions.navigate({ routeName: 'Main' })],
+                                            });
+                                            AsyncStorage.setItem('User',JSON.stringify(currentUser._user))
+                                            this.props.navigation.dispatch(resetAction);
+
                                         })
                                         .catch((err) => console.log(err))
                                     } catch (error) {
@@ -263,7 +279,7 @@ class Login extends Component {
                                     fontFamily: FontFamilies.Etisalat_0,
                                     fontSize: Width*.035,
                                     color: Colors.WhiteColor,
-                                }}>Login with facebook</Text>
+                                }}>{strings('fbLogin')}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={0.7}
@@ -290,7 +306,7 @@ class Login extends Component {
                                     margin: Width * .02,
                                     fontSize: Width*.035,
                                     color: Colors.WhiteColor,
-                                }}>Login with google</Text>
+                                }}>{strings('googleLogin')}</Text>
                             </TouchableOpacity>
                         </View>
                         {this.state.CloseAlert === true && <CustomToast

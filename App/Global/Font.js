@@ -7,9 +7,18 @@ export const FontSize = {
     LargFontSize: Width * .04,
     VeryLargFontSize: Width * .07,
 }
-export const FontFamilies = {
+export var FontFamilies = {
     // Etisalat_0: 'GE SS Two Etisalat_0',
     Etisalat_0: 'OpenSans-Regular',
+}
+
+// export var FontFamilies 
+
+export const setFont = (x)=>{
+FontFamilies = {
+    Etisalat_0: x,
+
+}
 }
 
 

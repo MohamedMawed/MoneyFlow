@@ -11,6 +11,7 @@ import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
 import { getSavedMonthlyIncome, getSavedMonthlyExpenses } from '../Global/API';
+import { strings } from '../locals';
 
 
 class HomeMonthsSwiperComponent extends Component {
@@ -69,7 +70,7 @@ class HomeMonthsSwiperComponent extends Component {
                         textAlign:'center',
                         width:Width*.45
                     }}
-                    > In your wallet</Text>
+                    > {strings('inWallet')}</Text>
                 <View style={{
                     flexDirection: 'row',
                     borderWidth: 1,
@@ -89,7 +90,6 @@ class HomeMonthsSwiperComponent extends Component {
                         color:'white',
                         textAlign:'center',
                         // width:Width*.2,
-                        fontWeight:'bold'
                     }}
                     >{getSavedMonthlyIncome()-getSavedMonthlyExpenses()}</Text>
                     <Text style={{
@@ -100,7 +100,7 @@ class HomeMonthsSwiperComponent extends Component {
                         marginLeft:Width*.01
                         // width:Width*.2
                     }}
-                    >LE</Text>
+                    >{strings('currencyLE')}</Text>
                 </View>
 
             </View>

@@ -17,6 +17,7 @@ import { HomeMonthsSwiperComponent } from '../Components/HomeMonthsSwiperCompone
 import { HomeMoneyItem } from '../Components/HomeMoneyItem';
 import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { getSavedMonthlyIncome, setHomeScreen, getSavedMonthlyExpenses } from '../Global/API';
+import { strings } from '../locals';
 
 
 class Home extends Component {
@@ -83,23 +84,24 @@ class Home extends Component {
                     Source={Requires.arrow_down} 
                     color={Colors.AppBlueColor} 
                     value={getSavedMonthlyIncome()}
-                    Title={'Income'} />
+                    Title={strings('Income')} />
                     <HomeMoneyItem
                      Source={Requires.arrow_up}
                       color={Colors.AppRedColor} 
                       value={getSavedMonthlyExpenses()}
-                      Title={'Expenses'} />
+                      Title={strings('Expenses')} />
                 </View>
                 <View style={{ marginTop: Height * .04, marginHorizontal: Width * .02, height: '50%', width: Width*.94 }}>
                     
                     <Text style={{
                         color: Colors.BlackColor,
                         fontSize: 22,
-                        fontWeight: '500',
+                        fontFamily:FontFamilies.Etisalat_0
                     }}>
-                        Monthly Report
+                    {strings('monthlyReport')}
+                    
                     </Text>
-                    <View style={{ height: Height * .4, flexDirection: 'row' }}>
+                    <View style={{ height: Height * .35, flexDirection: 'row' }}>
                         <YAxis
                             data={data}
                             contentInset={contentInset}
@@ -111,6 +113,8 @@ class Home extends Component {
                             formatLabel={value => value}
                         />
                         <BarChart
+                        animate={true}
+                        animationDuration={1000}
                             style={{ flex: 1, marginLeft: 16 }}
                             data={data}
                             svg={{ fill: Colors.AppBlueColor }}

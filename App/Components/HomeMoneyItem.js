@@ -10,6 +10,7 @@ import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
+import { strings } from '../locals';
 
 
 class HomeMoneyItem extends Component {
@@ -38,7 +39,7 @@ class HomeMoneyItem extends Component {
                     fontSize: 16,
                     color: 'gray',
                     textAlign: 'center',
-                    width: Width * .45, fontWeight: 'bold',marginTop:Height*.01
+                    width: Width * .45,marginTop:Height*.01
                 }}
                 >{this.props.Title}</Text>
                 <View style={{
@@ -56,8 +57,6 @@ class HomeMoneyItem extends Component {
                         fontSize: 20,
                         color: this.props.color,
                         textAlign: 'center',
-                        fontWeight:'500'
-                        // fontWeight:'f'
                         // width:Width*.2
                     }}
                     >{this.props.value}</Text>
@@ -69,7 +68,7 @@ class HomeMoneyItem extends Component {
                         paddingLeft: Width * .01
                         // width:Width*.2
                     }}
-                    >LE</Text>
+                    >{strings('currencyLE')}</Text>
                 </View>
 
             </View>

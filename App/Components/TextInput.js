@@ -10,6 +10,7 @@ import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
+import { getAppLanguage } from '../locals';
 
 class CustomTextInput extends Component {
     constructor(props) {
@@ -56,7 +57,9 @@ class CustomTextInput extends Component {
                     onEndEditing={this.onUnFocus}
                     onSubmitEditing={this.onUnFocus}
                     onFocus={this.OnFocus}
-                    style={Styles.Input}
+                    style={[Styles.Input,{
+                        textAlign : this.props.secure && getAppLanguage() == 'ar'?'right':null
+                    }]}
                 />
                 <Image source={this.props.icon} style={[Styles.CustomIcon, { tintColor: this.state.TextColor }]} />
             </View>

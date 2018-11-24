@@ -11,6 +11,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { PlansGoalsList } from '../Global/ComponentTest';
 import { _key } from '../Global/API';
+import { strings } from '../locals';
 class add_plan extends Component {
     constructor(props) {
         super(props)
@@ -22,8 +23,8 @@ class add_plan extends Component {
             addPlan: false,
             PlansGoalsList: PlansGoalsList,
             isDateTimePickerVisible: false,
-            startDate: 'Start date',
-            endDate: 'End date',
+            startDate: strings('startDate'),
+            endDate: strings('endDate'),
             ButtonType: -1,
             target:500,
             icon:'',
@@ -92,7 +93,7 @@ class add_plan extends Component {
                             textAlign: 'left',
                             fontSize: FontSize.LargFontSize,marginHorizontal:Width*.02
                             // marginHorizontal: Width * .04
-                        }]}> New Plan </Text>
+                        }]}> {strings('newPlan')}</Text>
 
                     </View>
 
@@ -243,7 +244,7 @@ class add_plan extends Component {
 
                 {/* // TITLE CHOOSE ICON */}
                 <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                    <Text style={Styles.TextStyle}>{'Choose Icon'}</Text>
+                    <Text style={Styles.TextStyle}>{strings('chooseIcon')}</Text>
                 </View>
 
 
@@ -273,7 +274,7 @@ class add_plan extends Component {
                 <View style={{  height: '100%', alignItems: 'center' }}>
 
                     <View style={{ width: '90%',height:Height*.08,justifyContent:'center' }}>
-                        <Text style={Styles.FirstCategoryHeader}>Plans</Text>
+                        <Text style={Styles.FirstCategoryHeader}>{strings('plans')}</Text>
                     </View>
                      {/* // swiper */}
                      <View style={{width:'100%',height:Height*.1,alignItems:'center',justifyContent:'center'}}>
@@ -342,7 +343,7 @@ class add_plan extends Component {
                                 <ActivityIndicator size='large' />
                             </View>}
                             {IsLoding && PlanList.length < 1 && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                                <Text>No Plans </Text>
+                                <Text>{strings('noPlans')}</Text>
                             </View>}
                     </ScrollView>
                 </View>
