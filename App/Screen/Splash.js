@@ -51,11 +51,7 @@ class Splash extends Component {
                 this.setState({ user });
                 if (user != null) {
                     Screen = 'Main';
-                    // setSavedMonthlyIncome(parseFloat(income));
-                    console.log(user._user)
                     setGlobalUser(user._user)
-                    setSavedMonthlyIncome(parseFloat(income));
-                    setSavedMonthlyExpenses(parseFloat(expenses));
                 }
             });
 
