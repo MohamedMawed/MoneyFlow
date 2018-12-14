@@ -25,33 +25,29 @@ class Setting extends Component {
                 <Image source={Requires.settings_large} style={styles.settingsLogo} />
                 <View style={{
                     width: Width,
-                    height: Height * .65,
-                    justifyContent: 'space-evenly',
+                    height: '50%',
+                    justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-
-
-
 
                     <TouchableOpacity activeOpacity={0.7} onPress={()=>this.props.navigation.navigate('EditProfile')} style={styles.Button}>
                         <Text style={styles.textButton}>{strings('accountset')}</Text>
                         <EvilIcons name='chevron-right' size={Width * .1} />
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={0.7} onPress={()=>this.props.navigation.navigate('ExportTab')} style={styles.Button}>
+                    {/* <TouchableOpacity activeOpacity={0.7} onPress={()=>this.props.navigation.navigate('ExportTab')} style={styles.Button}>
                         <Text style={styles.textButton}>{strings('exportImport')}</Text>
                         <EvilIcons name='chevron-right' size={Width * .1} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.Button}>
                         <Text style={styles.textButton}>{strings('accountset')}Sync with drive</Text>
-                        {/* <EvilIcons name='chevron-right' size={Width * .1} /> */}
 
                         <View style={{ width: Width * .1, height: Width * .1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.red, borderRadius: Width * .1, position: 'absolute', top: -Width * .03, right: Width * .03 }}>
                             <Text style={{ fontSize: Width * .02, color: Colors.WhiteColor }}>{strings('accountset')}Pro</Text>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
-                    <DropDown
+                    {/* <DropDown
                         onSelect={(index) => {
 
                          }}
@@ -59,33 +55,21 @@ class Setting extends Component {
                         defaultValue={strings('changeCur')}
                         Data={[{ text: 'EGY', Icon: Requires.money1 }, { text: 'USD', Icon: Requires.money2 }]}
                         Width={Width * .9}
-                        DropdownWidth={Width * .9} />
+                        DropdownWidth={Width * .9} /> */}
                     <DropDown
                     
                         onSelect={(index) => {
-                            console.log(index,
-                                'xxxxxxxxxxxxxxx')
-                            if(index.text == 'Arabic'){
-                                setAppLanguage('ar',getAppLanguage() != 'ar');
-                            }else {
-                                    setAppLanguage('en',getAppLanguage() != 'en');
-                                
+                            if (index.text == 'Arabic') {
+                                setAppLanguage('ar');
+                            } else {
+                                setAppLanguage('en');
+
                             }
-                         }}
+                        }}
                         defaultValue={strings('changeLang')}
                         Data={[{ text: 'Arabic', Icon: Requires.Egypt }, { text: 'English', Icon: Requires.America }]}
                         Width={Width * .9}
                         DropdownWidth={Width * .9} />
-
-                    <TouchableOpacity 
-                    onPress={()=>{
-
-                    }}
-                    style={{
-                        width: Width * .9, height: Height * .064, borderRadius: Width * .1, backgroundColor: '#5D5FD5', marginTop: Height * .04, alignItems: 'center', justifyContent: 'center'
-                    }}>
-                        <Text style={[styles.textButton, { color: Colors.WhiteColor }]}>{strings('save')}</Text>
-                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -110,14 +94,16 @@ const styles = StyleSheet.create(
         },
         settingsLogo: {
             resizeMode: 'contain',
-            width: Width * .4,
+            width: Width * .5,
             marginVertical:Height*.05,
-            height: Width * .2, marginTop: Height * .05
+            height: Height*.25, marginTop: Height * .1
         },
         Button: {
+            marginBottom:Height*.04,
             width: Width * .9, height: Height * .07, borderRadius: Width * .1, backgroundColor: '#FAFAFA', paddingHorizontal: Width * .04, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row'
         },
         textButton: {
+            
             fontFamily: FontFamilies.Etisalat_0, fontSize: Width * .04, textAlign: 'center'
         }
     }

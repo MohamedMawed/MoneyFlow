@@ -12,7 +12,7 @@ import { Login } from './Login';
 import { Splash } from './Splash';
 
 import { Register } from './Register';
-import { Home } from './Home'
+import Home  from './Home'
 import { ExportTab } from './Export';
 import { EditProfile } from './EditProfile';
 import { Intro } from './Intro';

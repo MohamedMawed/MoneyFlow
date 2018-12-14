@@ -32,6 +32,7 @@ class Splash extends Component {
         )
     }
     componentDidMount = async () => {
+        x = require('./floosy');
         // firebase.auth().signOut();
         // await AsyncStorage.clear();
         const lang = await AsyncStorage.getItem('language')

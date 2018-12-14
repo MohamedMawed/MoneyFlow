@@ -18,6 +18,7 @@ import { HomeMoneyItem } from '../Components/HomeMoneyItem';
 import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { getSavedMonthlyIncome, setHomeScreen, getSavedMonthlyExpenses } from '../Global/API';
 import { strings } from '../locals';
+import { connect } from 'react-redux'
 
 
 class Home extends Component {
@@ -83,7 +84,7 @@ class Home extends Component {
                     <HomeMoneyItem 
                     Source={Requires.arrow_down} 
                     color={Colors.AppBlueColor} 
-                    value={getSavedMonthlyIncome()}
+                    value={this.props.income}
                     Title={strings('Income')} />
                     <HomeMoneyItem
                      Source={Requires.arrow_up}
@@ -176,6 +177,20 @@ const styles = StyleSheet.create({
     // },
 
 })
-export { Home }
+
+
+function mapStateToProps(state) {
+    console.log("TAG", "previous profile", state)
+   
+    return {
+      income: state.appReducer.income,
+    //   onBoardingDataLoaded: state.userReducer.onBoardingDataLoaded,
+    }
+  }
+  
+  
+  export default connect(
+    mapStateToProps
+  )(Home)
 
 
