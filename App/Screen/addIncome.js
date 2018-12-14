@@ -12,7 +12,10 @@ import { CustomTextInput } from './../Components/TextInput'
 import { Colors, FontFamilies, Width, Height } from '../Global';
 import monthlyIncome, { setSavedMonthlyIncome, getSavedMonthlyIncome, getHomeScreen } from './../Global/API';
 import { strings } from '../locals';
-export class AddIncome extends Component {
+import { connect } from 'react-redux';
+import { AppReducer } from './../state/reducer';
+const editIncome = AppReducer.updateIncome;
+class AddIncome extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -85,7 +88,7 @@ export class AddIncome extends Component {
 
                         onPress={async () => {
                             try {
-
+                                this.props.editIncome(this.state.income)
                                 let { selectedData, selectedCatogry } = this.state
                                 if (selectedData) {
                                     let intVal = parseFloat(this.state.income);
@@ -157,3 +160,27 @@ export class AddIncome extends Component {
         )
     }
 }
+
+
+
+function mapStateToProps(state) {
+    // console.log("TAG", "previous profile", state)
+   
+    return {
+      income: state.appReducer.income,
+    //   onBoardingDataLoaded: state.userReducer.onBoardingDataLoaded,
+    }
+  }
+
+  function mapDispatchToProps(dispatch) {
+    return {
+      editIncome : (value) => dispatch(editIncome(value)),
+    }
+  }
+  
+  
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddIncome)

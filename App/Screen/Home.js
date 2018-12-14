@@ -18,7 +18,7 @@ import { HomeMoneyItem } from '../Components/HomeMoneyItem';
 import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { getSavedMonthlyIncome, setHomeScreen, getSavedMonthlyExpenses } from '../Global/API';
 import { strings } from '../locals';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 
 class Home extends Component {
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(state) {
-    console.log("TAG", "previous profile", state)
+    // console.log("TAG", "previous profile", state)
    
     return {
       income: state.appReducer.income,

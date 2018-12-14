@@ -20,7 +20,7 @@ import { AddBudget } from './AddBudget';
 import { add_plan } from './add_plan'
 import { Setting } from './Setting';
 import { plan } from './plan';
-import {AddIncome} from './addIncome';
+import AddIncome from './addIncome';
 
 const Tabs = createBottomTabNavigator(
     {
