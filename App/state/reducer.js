@@ -6,8 +6,8 @@ export class AppReducer {
 
 
     static initialOrderState = {
-        income : 100,
-        expense : 50
+        income : 0,
+        expense : 0
     };
 
     

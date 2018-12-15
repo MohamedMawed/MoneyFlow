@@ -88,10 +88,10 @@ class AddIncome extends Component {
 
                         onPress={async () => {
                             try {
-                                this.props.editIncome(this.state.income)
                                 let { selectedData, selectedCatogry } = this.state
                                 if (selectedData) {
                                     let intVal = parseFloat(this.state.income);
+                                this.props.editIncome(intVal);
                                     let data = { date: new Date(), IncomeValue: intVal, CategoryId: selectedData.id, CategoryName: selectedData.text }
                                     let _data = []
                                     let currantIncome = []

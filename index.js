@@ -21,18 +21,23 @@ import { combineReducers } from 'redux';
 let userPersistConfig = {
     key: 'user',
     storage: storage,
-    blacklist: []
+    whitelist: ['appReducer']
   };
+  const authPersistConfig = {
+    key: 'auth',
+    storage: storage,
+    blacklist: ['somethingTemporary']
+  }
 let appReducer = new AppReducer();
 const mainReducer = combineReducers({
-    appReducer: appReducer.reduce,
+    appReducer: persistReducer(authPersistConfig, appReducer.reduce),
   });
 appReducer=persistReducer(userPersistConfig, mainReducer); 
 
 const {store,persistor} = configureStore(appReducer)
 
 store.subscribe(()=>{
-  console.log("TAG","current store",store.getState())
+  console.log("TAG","storeState",store.getState())
 })
 class MainApp extends Component {
     render() {
