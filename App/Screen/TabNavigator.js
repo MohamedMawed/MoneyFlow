@@ -17,16 +17,17 @@ import { ExportTab } from './Export';
 import { EditProfile } from './EditProfile';
 import { Intro } from './Intro';
 import { AddBudget } from './AddBudget';
-import { add_plan } from './add_plan'
 import { Setting } from './Setting';
 import { plan } from './plan';
 import AddIncome from './addIncome';
+import add_plan from './add_plan';
+import { strings } from '../locals';
+import { FontFamilies } from '../Global';
 
 const Tabs = createBottomTabNavigator(
     {
         Home: Home,
         Plan: add_plan,
-        Plus: AddIncome,
         Report: AddBudget,
         Setting: Setting,
     },
@@ -38,14 +39,20 @@ const Tabs = createBottomTabNavigator(
                 if (routeName == 'Plus') myTintColor = null
                 let IconWidth = routeName == 'Plus' ? Width * .11 : Width * .06
 
-                return <Image source={Requires[routeName]}
+                return <View style={{flexDirection:'row',alignItems:'center',width:Width*.25,justifyContent:'center'}}>
+               
+             <Image source={Requires[routeName]}
                     style={{
                         width: IconWidth,
                         height: IconWidth,
                         resizeMode: 'contain',
                         tintColor: myTintColor
                     }} />
-                // return <Text>fsdfds</Text>
+         
+                     <Text style={{fontFamily:FontFamilies.Etisalat_0,padding:10,fontSize:12}}>{strings('tap.'+routeName+'')}</Text>
+                     
+                    </View>
+               
             },
             tabBarLabel: () => null
         }),
@@ -68,6 +75,7 @@ export default App = createStackNavigator(
         EditProfile:{screen:EditProfile},
         ExportTab:{screen:ExportTab},
         plan:{screen : plan},
+        AddIncome:{screen : AddIncome}
 
     }, {
         headerMode: 'none'

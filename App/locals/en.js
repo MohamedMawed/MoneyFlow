@@ -1,4 +1,11 @@
 export default {
+
+    tap:{
+Plan:'Goals',
+Home:'Home',
+Report:'Budgets',
+Setting:'Setting'
+    },
     appName : 'FlOOSY',
 
         TitleIntroScreen: [
@@ -29,11 +36,11 @@ export default {
         inWallet : 'In your wallet',
         currencyLE : 'LE',
 
-        headingIcomeScreen : 'Heading Title',
-        description : 'add your income from this month to monitor',
+        headingIcomeScreen : 'Heading title',
+        description : 'add an income from this month to monitor',
         save:'save',
-        noPlans : 'No Plans',
-        newPlan : 'New Plan',
+        noPlans : 'No Goals',
+        newPlan : 'New Goal',
         newBudget : 'New Budget',
         chooseIcon : 'Choose Icon',
         success : 'success',
@@ -43,7 +50,7 @@ export default {
         startDate : 'Start Date',
         endDate : 'End Date',
         noBudgets : 'No Budgets',
-        plans : 'Plans',
+        plans : 'Goals',
         incomeAdded : 'Income Added successfully',
         validNumber : 'Please enter valid number',
         alertChooseType : 'Please Choose Category Type',

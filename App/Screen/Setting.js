@@ -94,9 +94,9 @@ const styles = StyleSheet.create(
         },
         settingsLogo: {
             resizeMode: 'contain',
-            width: Width * .5,
+            width: Width * .4,
             marginVertical:Height*.05,
-            height: Height*.25, marginTop: Height * .1
+            height: Height*.2, marginTop: Height * .1
         },
         Button: {
             marginBottom:Height*.04,

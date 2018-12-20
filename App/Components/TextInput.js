@@ -61,7 +61,7 @@ class CustomTextInput extends Component {
                         textAlign : this.props.secure && getAppLanguage() == 'ar'?'right':null
                     }]}
                 />
-                <Image source={this.props.icon} style={[Styles.CustomIcon, { tintColor: this.state.TextColor }]} />
+               {!this.props.NotIcon&& <Image source={this.props.icon} style={[Styles.CustomIcon, { tintColor: this.state.TextColor }]} />}
             </View>
         )
     }

@@ -63,12 +63,9 @@ class plan extends Component {
                 <TouchableOpacity >
                     <Image source={Requires.remove} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                 </TouchableOpacity>
-
                 <TouchableOpacity style={{ width: Width * .09, height: Width * .09, borderRadius: Width * .05, backgroundColor: Colors.GrayColor, alignItems: 'center', justifyContent: 'center' }}>
                     <Image source={Requires.edit} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                 </TouchableOpacity>
-
-
 
             </View>
 
@@ -92,13 +89,9 @@ class plan extends Component {
                 <Text style={Styles.TextStyle}>{this.state.dayes+ ' Days'}</Text>
                 <Text style={Styles.TextStyle}>{'Remaining Date'}</Text>
             </View>
-
-
             <View style={{ width: '100%', height: Height * .3, alignItems: 'center', justifyContent: 'center', marginTop: Height * .02 }}>
-
                 <AnimatedCircularProgress
                     ref={(ref) => this.circularProgress = ref}
-
                     size={Width * .37}
                     width={Width * .05}
                     fill={0}

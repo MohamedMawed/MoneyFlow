@@ -11,6 +11,8 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { PlansGoalsList } from '../Global/ComponentTest';
 import { _key } from '../Global/API';
+import { connect } from 'react-redux';
+
 import { strings } from '../locals';
 class add_plan extends Component {
     constructor(props) {
@@ -73,7 +75,7 @@ class add_plan extends Component {
                         width: '50%',
                         height: '100%',
                         alignItems: 'center',
-                        justifyContent: 'space-evenly',
+                        justifyContent: 'flex-start',
                         flexDirection: 'row'
                     }}>
                         <TouchableOpacity style={{marginHorizontal:Width*.01}} onPress={()=>{
@@ -91,7 +93,7 @@ class add_plan extends Component {
                         <Text style={[Styles.TextStyle, {
                             width: '90%',
                             textAlign: 'left',
-                            fontSize: FontSize.LargFontSize,marginHorizontal:Width*.02
+                            fontSize: FontSize.LargFontSize,marginHorizontal:Width*.03
                             // marginHorizontal: Width * .04
                         }]}> {strings('newPlan')}</Text>
 
@@ -351,21 +353,33 @@ class add_plan extends Component {
 
 
             </View>}
-            <TouchableOpacity onPress={() => {
-                    if (addPlan) 
-                    this.onsubmitPlan()
-                    else
-                    this.setState({ addPlan:true})
 
-                // ios-save
-            }} style={{ position: 'absolute', elevation: 7, top: Height * .01, right: Width * .07 }}>
-                <Ionicons name={this.state.addPlan ? 'md-checkmark-circle' : 'md-add-circle'} size={Width * .1} color={Colors.GreenColor} />
-            </TouchableOpacity>
+           
             <DateTimePicker
                 isVisible={this.state.isDateTimePickerVisible}
                 onConfirm={this._handleDatePicked}
                 onCancel={this._hideDateTimePicker}
             />
+            
+            <TouchableOpacity onPress={() => {
+                
+                if (addPlan) {
+                    this.onsubmitPlan()
+                     }
+                     else{
+                         if (this.props.income<=0){
+                             alert('Please add the first income')
+                             return 
+                         }
+                     this.setState({ addPlan:true})
+                     }
+
+                // ios-save
+            }} style={{ position: 'absolute', elevation: 7, bottom: Height * .05, right: Width * .075 }}>
+            <Image resizeMode='contain' style={{width:Width*.13,height:Width*.13}}  source={Requires.Plus}/>
+                {/* <Ionicons name={this.state.addPlan ? 'md-checkmark-circle' : 'md-add-circle'} size={Width * .14} color={'#F9616F'} /> */}
+            </TouchableOpacity>
+
         </View>
         )
     }
@@ -440,11 +454,7 @@ class add_plan extends Component {
                 AsyncStorage.setItem('Plan' + _key, JSON.stringify([newPlan]))
                 this.setState({ PlanList: [newPlan] })
             }
-            Alert.alert('successfully', 'Plan Added successfully', [{
-                text: 'ok', onPress: () => {
                     this.setState({ AddPlan: false })
-                }
-            }])
 
         }
         else {
@@ -452,6 +462,15 @@ class add_plan extends Component {
         }
     }
 }
+function mapStateToProps(state) {
+    // console.log("TAG", "previous profile", state)
+   
+    return {
+      income: state.appReducer.income,
+    //   onBoardingDataLoaded: state.userReducer.onBoardingDataLoaded,
+    }
+  }
+
 const Styles = StyleSheet.create({
     Container: {
         width: Width,
@@ -478,4 +497,7 @@ const Styles = StyleSheet.create({
         width: Width * .9,
     },
 })
-export { add_plan } 
+
+export default connect(
+    mapStateToProps
+  )(add_plan)

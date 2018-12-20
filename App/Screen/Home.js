@@ -3,7 +3,7 @@ import {
     View,
     ScrollView,
     Text,
-    StyleSheet,
+    StyleSheet,TouchableOpacity,Image
 } from 'react-native'
 import { BarChart, LineChart, XAxis, YAxis, Grid } from 'react-native-svg-charts'
 
@@ -20,6 +20,7 @@ import { getSavedMonthlyIncome, setHomeScreen, getSavedMonthlyExpenses } from '.
 import { strings } from '../locals';
 import { connect } from 'react-redux';
 
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class Home extends Component {
     constructor(props) {
@@ -133,6 +134,15 @@ class Home extends Component {
                     />
 
                 </View>
+                <TouchableOpacity onPress={() => {
+                
+                this.props.navigation.navigate('AddIncome')
+
+                // ios-save
+            }} style={{ position: 'absolute', elevation: 7, bottom: Height * .15, right: Width * .075 }}>
+            <Image resizeMode='contain' style={{width:Width*.13,height:Width*.13}}  source={Requires.Plus}/>
+                {/* <Ionicons name={this.state.addPlan ? 'md-checkmark-circle' : 'md-add-circle'} size={Width * .14} color={'#F9616F'} /> */}
+            </TouchableOpacity>
             </View>
         )
     }

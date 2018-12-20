@@ -92,15 +92,7 @@ class HomeMonthsSwiperComponent extends Component {
                         // width:Width*.2,
                     }}
                     >{getSavedMonthlyIncome()-getSavedMonthlyExpenses()}</Text>
-                    <Text style={{
-                        fontFamily:FontFamilies.Etisalat_0,
-                        fontSize:FontSize.MediumFontSize,
-                        color:'white',
-                        textAlign:'center',
-                        marginLeft:Width*.01
-                        // width:Width*.2
-                    }}
-                    >{strings('currencyLE')}</Text>
+        
                 </View>
 
             </View>

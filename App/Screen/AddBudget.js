@@ -13,6 +13,7 @@ import { PlansGoalsList, PlansGoalsList2 } from '../Global/ComponentTest';
 import { HomeMonthsSwiperComponent } from '../Components/HomeMonthsSwiperComponent';
 import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyExpenses } from '../Global/API';
 import { strings } from '../locals';
+import DropDown from '../Components/DropDown';
 class AddBudget extends Component {
     constructor(props) {
         super(props)
@@ -69,12 +70,31 @@ class AddBudget extends Component {
                     justifyContent: 'space-around'
                 }]}>
 
-                    <View style={{ width: '75%', height: '100%', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row' }}>
-                        {/* <TouchableOpacity >
-                        <Image source={Requires.back} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
-                    </TouchableOpacity> */}
-                        <Text style={[Styles.FirstCategoryHeader, { width: '85%', textAlign: 'left' }]}>{strings('newBudget')}</Text>
+                   <View style={{
+                        width: '50%',
+                        height: '100%',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        flexDirection: 'row'
+                    }}>
+                        <TouchableOpacity style={{marginHorizontal:Width*.01}} onPress={()=>{
+                            this.setState({AddBudget:false})
+                        }}>
+                        <Image
+                            source={Requires.back}
+                            resizeMode='contain'
+                            style={{
+                                width: Width * .05,
+                                height: Width * .05
+                            }} />
+                    </TouchableOpacity >
 
+                        <Text style={[Styles.TextStyle, {
+                            width: '90%',
+                            textAlign: 'left',
+                            fontSize: FontSize.LargFontSize,marginHorizontal:Width*.03
+                            // marginHorizontal: Width * .04
+                        }]}> {strings('newBudget')}</Text>
 
                     </View>
 
@@ -141,8 +161,18 @@ class AddBudget extends Component {
 
 
                     </View>
-                    <View style={{ width: '90%', height: '30%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <TouchableOpacity onPress={() => {
+                    <View style={{ width: '90%', height: '30%', justifyContent: 'center', alignItems: 'center' }}>
+                    <DropDown
+                    defaultIndex={0}
+                    onSelect={(index) => {
+              
+                    }}
+                    defaultValue={'weekly'}
+                    Data={[{ text: 'weekly', Icon:'' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }]}
+                    Width={Width * .85}
+                    DropdownWidth={Width * .85} />
+                    
+                        {/* <TouchableOpacity onPress={() => {
                             this.setState({ ButtonType: 'start' })
                             this._showDateTimePicker()
                         }} activeOpacity={.5} style={{ width: '48%', height: Height * .06, borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
@@ -160,7 +190,7 @@ class AddBudget extends Component {
                             <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                             <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
 
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
 
                     </View>
@@ -276,7 +306,17 @@ class AddBudget extends Component {
                     </View>
                 </View>
             </View>}
-            <TouchableOpacity onPress={async () => {
+
+       
+
+
+        
+            <DateTimePicker
+                isVisible={this.state.isDateTimePickerVisible}
+                onConfirm={this._handleDatePicked}
+                onCancel={this._hideDateTimePicker}
+            />
+                 <TouchableOpacity onPress={async () => {
                 let { startDate, endDate, valueSlider, AddBudget, icon, category } = this.state
                 if (AddBudget) {
                     if (valueSlider == 0)
@@ -316,14 +356,10 @@ class AddBudget extends Component {
 
 
                 // ios-save
-            }} style={{ position: 'absolute', elevation: 7, top: Height * .01, right: Width * .07 }}>
-                <Ionicons name={this.state.AddBudget ? 'md-checkmark-circle' : 'md-add-circle'} size={Width * .1} color={Colors.GreenColor} />
+            }} style={{ position: 'absolute', elevation: 7, bottom: Height * .05, right: Width * .075 }}>
+            <Image resizeMode='contain' style={{width:Width*.13,height:Width*.13}}  source={Requires.Plus}/>
+                {/* <Ionicons name={this.state.addPlan ? 'md-checkmark-circle' : 'md-add-circle'} size={Width * .14} color={'#F9616F'} /> */}
             </TouchableOpacity>
-            <DateTimePicker
-                isVisible={this.state.isDateTimePickerVisible}
-                onConfirm={this._handleDatePicked}
-                onCancel={this._hideDateTimePicker}
-            />
         </View>
         )
     }

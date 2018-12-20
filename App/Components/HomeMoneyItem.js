@@ -60,15 +60,7 @@ class HomeMoneyItem extends Component {
                         // width:Width*.2
                     }}
                     >{this.props.value}</Text>
-                    <Text style={{
-                        fontFamily: FontFamilies.Etisalat_0,
-                        fontSize: 15,
-                        color: Colors.TextGrayColor,
-                        textAlign: 'center',
-                        paddingLeft: Width * .01
-                        // width:Width*.2
-                    }}
-                    >{strings('currencyLE')}</Text>
+            
                 </View>
 
             </View>

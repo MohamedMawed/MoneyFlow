@@ -56,6 +56,7 @@ class DropDown extends Component {
                             this.props.onSelect(this.state.options[value])
                         }
                     }}
+                    
                     renderSeparator={() => null}
                     dropdownTextStyle={Styles.dropdownTextStyle}
                     dropdownStyle={[Styles.dropdownStyle, { width: this.props.DropdownWidth, height: this.state.dropdownHeight }]}

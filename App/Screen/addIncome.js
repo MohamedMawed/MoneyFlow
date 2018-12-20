@@ -64,13 +64,14 @@ class AddIncome extends Component {
                         <FlatList contentContainerStyle={{ height: '100%', justifyContent: 'center', alignItems: 'center' }} horizontal data={incomeCategory} renderItem={({ item, index }) => {
                             return (<TouchableOpacity onPress={() => {
                                 this.setState({ selectedCatogry: item.id, selectedData: item })
-                            }} style={{ width: Width * .2, height: Width * .2, marginHorizontal: Width * .05, alignItems: 'center', justifyContent: 'center' }}>
+                            }} style={{ width: Width * .15, height: Width * .2, marginHorizontal: Width * .05, alignItems: 'center', justifyContent: 'center' }}>
                                 <Image resizeMode='contain' style={{ width: '60%', height: '50%', tintColor: selectedCatogry == item.id ? Colors.greenlite : null }} source={item.icon} />
                                 <Text style={{ color: selectedCatogry == item.id ? Colors.greenlite : null }}>{item.text}</Text>
                             </TouchableOpacity>)
                         }} />
                     </View>
                     <CustomTextInput
+                    NotIcon
                         value={this.state.income}
                         keyboardType='numeric'
                         Title={strings('Income')}
@@ -124,11 +125,11 @@ class AddIncome extends Component {
                                     let HomeScreenRef = getHomeScreen();
                                     HomeScreenRef.setState((prev) => ({ stateChanger: prev.stateChanger }))
                                     console.log(_data, "successfully")
-                                   Alert.alert(strings('success'),strings('incomeAdded'),[{text:'ok',onPress:()=>{
+                             
                                     this.props.navigation.navigate('Home')
 
                                     this.setState({ income: '', selectedCatogry: -1, selectedData: null })
-                                   }}])
+                                
                                 }
                                 else
                                     alert(strings('alertChooseType'));
@@ -156,6 +157,18 @@ class AddIncome extends Component {
                     </TouchableOpacity>
 
                 </ScrollView>
+
+                <TouchableOpacity style={{left:Width*.05,position:'absolute',top:Height*.04}} onPress={()=>{
+                      this.props.navigation.navigate('Home')
+                        }}>
+                        <Image
+                            source={Requires.back}
+                            resizeMode='contain'
+                            style={{
+                                width: Width * .07,
+                                height: Width * .07
+                            }} />
+                    </TouchableOpacity >
             </View>
         )
     }
