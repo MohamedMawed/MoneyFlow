@@ -1,21 +1,14 @@
 
 export class AppReducer {
     constructor() {
+
     }
-
-
-
     static initialOrderState = {
         income : 0,
         expense : 0
     };
-
-    
     reduce(state = AppReducer.initialOrderState, action) {
-
         switch (action.type) {
-
-
             case AppReducer.CREATE_BUDGET:
                 return {
                     ...state,
@@ -32,17 +25,13 @@ export class AppReducer {
             case AppReducer.DELETE_BUDGET:
                 return initialOrderState;
             default:
-                return state;
-        }
-    }
-
-
+             return state;
+      }
+     }
     static CREATE_BUDGET = 'BUDGET/NEW_BUDGET';
     static EDIT_INCOME = 'FLOOSY/EDIT_INCOME';
     static EDIT_BUDGET = 'BUDGET/EDIT_BUDGET';
     static DELETE_BUDGET = 'BUDGET/DELETE_BUDGET';
-
-
 
     static updateIncome = (value) => {
         return {

@@ -67,6 +67,7 @@ const Tabs = createBottomTabNavigator(
 
 export default App = createStackNavigator(
     {
+        AddIncome:{screen : AddIncome},
         Splash: { screen: Splash },
         Main: { screen: Tabs },
         Login: { screen: Login },
@@ -75,7 +76,7 @@ export default App = createStackNavigator(
         EditProfile:{screen:EditProfile},
         ExportTab:{screen:ExportTab},
         plan:{screen : plan},
-        AddIncome:{screen : AddIncome}
+      
 
     }, {
         headerMode: 'none'
