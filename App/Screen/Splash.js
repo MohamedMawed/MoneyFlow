@@ -33,6 +33,7 @@ class Splash extends Component {
     }
     componentDidMount = async () => {
         x = require('./floosy');
+
         // firebase.auth().signOut();
         // await AsyncStorage.clear();
         const lang = await AsyncStorage.getItem('language')
@@ -62,12 +63,13 @@ class Splash extends Component {
                 this.setState({ user });
                 if (user != null) {
                     Screen = 'Main';
+                    console.log(user._user);
                     setGlobalUser(user._user)
                 }else {
                     Screen = 'Login'
                 }
             });
-        //  Screen = 'Intro'
+         Screen = 'Intro'
 
 
         setTimeout(() => {

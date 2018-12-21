@@ -52,7 +52,6 @@ class MainApp extends Component {
                 <Provider store={store}>
                     <PersistGate loading={null} persistor={persistor}>
                         <Navigator />
-
                     </PersistGate>
 
                 </Provider>

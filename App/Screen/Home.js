@@ -13,7 +13,7 @@ import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
-import { HomeMonthsSwiperComponent } from '../Components/HomeMonthsSwiperComponent';
+import  HomeMonthsSwiperComponent  from '../Components/HomeMonthsSwiperComponent';
 import { HomeMoneyItem } from '../Components/HomeMoneyItem';
 import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { getSavedMonthlyIncome, setHomeScreen, getSavedMonthlyExpenses } from '../Global/API';
