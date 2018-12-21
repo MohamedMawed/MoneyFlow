@@ -1,10 +1,8 @@
 
 export class AppReducer {
     constructor() {
+
     }
-
-
-
     static initialOrderState = {
 
         // "income": 1000,
@@ -59,7 +57,6 @@ export class AppReducer {
 
 
     reduce(state = AppReducer.initialOrderState, action) {
-
         switch (action.type) {
 
             case AppReducer.USER_DATA:
@@ -67,13 +64,20 @@ export class AppReducer {
             case AppReducer.CREATE_BUDGET:
                 return {
                     ...state,
-                    budgets: state.budgets.push(state.budget)
+                    budgets: state.budget.push(state.budget)
                 };
             case AppReducer.EDIT_INCOME:
                 return {
                     ...state,
                     income: state.income + action.value
                 };
+
+                case AppReducer.EDIT_EXPENSE:
+                return {
+                    ...state,
+                    expense: state.expense + action.value
+                };
+
             case AppReducer.EDIT_BUDGET:
                 return {
                     ...action.newBudget,
@@ -87,6 +91,7 @@ export class AppReducer {
 
     static USER_DATA = 'FLOOSY/USER_DATA';
     static EDIT_INCOME = 'FLOOSY/EDIT_INCOME';
+    static EDIT_EXPENSE = 'FLOOSY/EDIT_EXPENSE';
     static CREATE_BUDGET = 'BUDGET/NEW_BUDGET';
     static EDIT_BUDGET = 'BUDGET/EDIT_BUDGET';
     static DELETE_BUDGET = 'BUDGET/DELETE_BUDGET';
@@ -99,6 +104,13 @@ export class AppReducer {
             value
         }
     }
+    static updateExpense = (value) => {
+        return {
+            type: AppReducer.EDIT_EXPENSE,
+            value,
+        }
+    }
+
     static updateIncome = (value) => {
         return {
             type: AppReducer.EDIT_INCOME,

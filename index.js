@@ -13,6 +13,8 @@ import Navigator from './App/Screen/TabNavigator'
 import { Colors } from './App/Global';
 import configureStore from './App/state/store';
 import { combineReducers } from 'redux';
+import { AddBudget } from './App/Screen/AddBudget';
+import { BudgetList } from './App/Screen/BudgetList';
 
 let userPersistConfig = {
     key: 'user',

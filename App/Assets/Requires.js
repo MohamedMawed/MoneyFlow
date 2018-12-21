@@ -31,12 +31,7 @@ let icons = () => {
       { icon: require('./img/Icon/cake3.png'),text:'Sound'},
       { icon: require('./img/Icon/cake4.png'),text:'Mony'},
       { icon: require('./img/Icon/cake5.png'),text:'School'},
-
     ]
-     
-    
- 
-
     return ddd
 }
 export const incomeCategory=
@@ -45,7 +40,6 @@ export const incomeCategory=
 { id:3,icon: require('./img/Icon/cake3.png'),text:'Sound'},
 {id:4, icon: require('./img/Icon/cake4.png'),text:'Mony'},
 {id:5, icon: require('./img/Icon/cake5.png'),text:'School'},
-
 ]
 export const Requires = {
     Logo_main: require('./img/logo-main.png'),
@@ -82,5 +76,3 @@ export const Requires = {
     arrow_down2:require('./img/play-button.png'),
     addIncomeLogo:require('./img/addIncomeLogo.png'),
 }
-
-
