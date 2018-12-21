@@ -15,12 +15,9 @@ import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
 import  HomeMonthsSwiperComponent  from '../Components/HomeMonthsSwiperComponent';
 import { HomeMoneyItem } from '../Components/HomeMoneyItem';
-import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
-import { getSavedMonthlyIncome, setHomeScreen, getSavedMonthlyExpenses } from '../Global/API';
+import { setHomeScreen } from '../Global/API';
 import { strings } from '../locals';
 import { connect } from 'react-redux';
-
-import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class Home extends Component {
     constructor(props) {
@@ -69,10 +66,25 @@ class Home extends Component {
         if (percent <= 100) return Colors.AppRedColor
 
     }
+    getChartData=()=>{
+        let { goal , budget } = this.props;
+        let date1 = new Date();
+        date1 = date1.toString();
+        date1 = date1.split(' ')[3];
+        for(let i = 1 ; i <= 12 ; i++){
+                goal.forEach(element => {
+                    console.log('goalElement',element);
+                });
+                budget.forEach(element =>{
+                    console.log('budgetElement',element)
+                });
+        }
+        return [30, 40, 10, 50];
+    }
     render() {
         const fill = 'rgb(134, 65, 244)'
         const contentInset = { top: 20, bottom: 20 }
-        const data = [50, 10, 40, 95, 4, 24, 85, 14, 35, 53, 53, 24, 50, 20, 80]
+        const data = this.getChartData()
 
         return (
             <View style={styles.container}>
@@ -90,7 +102,7 @@ class Home extends Component {
                     <HomeMoneyItem
                      Source={Requires.arrow_up}
                       color={Colors.AppRedColor} 
-                      value={getSavedMonthlyExpenses()}
+                      value={this.props.expense}
                       Title={strings('Expenses')} />
                 </View>
                 <View style={{ marginTop: Height * .04, marginHorizontal: Width * .02, height: '50%', width: Width*.94 }}>
@@ -180,11 +192,6 @@ const styles = StyleSheet.create({
         width: Width * .9,
         marginTop: Height * .03,
     },
-    // FirstCategoryList: {
-    //     width: Width,
-    //     height: Height * .5,
-    //     // backgroundColor: 'red',
-    // },
 
 })
 
@@ -194,7 +201,9 @@ function mapStateToProps(state) {
    
     return {
       income: state.appReducer.income,
-    //   onBoardingDataLoaded: state.userReducer.onBoardingDataLoaded,
+      expense : state.appReducer.expense,
+      goal : state.appReducer.goal,
+      budget : state.appReducer.budget,
     }
   }
   
