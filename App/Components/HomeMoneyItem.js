@@ -5,12 +5,8 @@ import {
     Text,
     TouchableOpacity,
 } from 'react-native'
-import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
-import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
-import { Colors } from '../Global/Colors';
-import { strings } from '../locals';
 
 
 class HomeMoneyItem extends Component {
@@ -18,11 +14,10 @@ class HomeMoneyItem extends Component {
         return (
             <View style={{
                 width: Width * .46,
-                height: Height * .11,
+                height: Height * .12,
                 borderRadius: Width * .02,
                 paddingVertical: Height * .02,
                 elevation: 2,
-                // backgroundColor: 'red',
                 justifyContent: 'space-around',
                 alignItems: 'center'
             }}>
@@ -48,10 +43,7 @@ class HomeMoneyItem extends Component {
                     height: Height * .06,
                     alignItems: 'center',
                     justifyContent: 'space-around', marginTop: Height * .01
-
-
                 }}>
-
                     <Text style={{
                         fontFamily: FontFamilies.Etisalat_0,
                         fontSize: 20,

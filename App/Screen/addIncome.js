@@ -15,6 +15,7 @@ import { strings } from '../locals';
 import { connect } from 'react-redux';
 import { AppReducer } from './../state/reducer';
 const editIncome = AppReducer.updateIncome;
+const editExpense = AppReducer.updateExpense;
 class AddIncome extends Component {
     constructor(props) {
         super(props)
@@ -108,43 +109,43 @@ class AddIncome extends Component {
                             try {
                                 let { selectedData, selectedCatogry } = this.state
                                 if (selectedData) {
-                                    let intVal = parseFloat(this.state.income);
-                                this.props.editIncome(intVal);
-                                    let data = { date: new Date(), IncomeValue: intVal, CategoryId: selectedData.id, CategoryName: selectedData.text }
-                                    let _data = []
-                                    let currantIncome = []
-                                    if (!Number.isInteger(intVal)) intVal = ldfjs
-                                    let _key = (new Date().getMonth().toString() + new Date().getFullYear().toString()).toString()
-
-                                    let storeIncome = await AsyncStorage.getItem('Incomedata' + _key)
-                                    console.log('Incomedata' + _key, "successfully")
-                                    if (storeIncome) {
-                                        currantIncome = JSON.parse(storeIncome)
-                                        currantIncome.forEach((element) => {
-                                            if (element.CategoryId != selectedCatogry)
-                                                _data.push(element)
-                                        })
-                                        _data.push(data)
-                                        AsyncStorage.setItem('Incomedata' + _key, JSON.stringify(_data))
-                                    }
-                                    else {
-                                        AsyncStorage.setItem('Incomedata' + _key, JSON.stringify([data]))
-                                        console.log(intVal,"intValintValintVal")
-                                        setSavedMonthlyIncome(intVal);
-                                    }
-                                    let totalValue = intVal
-                                    _data.forEach(element => {
-                                        totalValue = totalValue + element.IncomeValue
-                                    });
-                                    setSavedMonthlyIncome(totalValue);
-                                    let HomeScreenRef = getHomeScreen();
-                                    HomeScreenRef.setState((prev) => ({ stateChanger: prev.stateChanger }))
-                                    console.log(_data, "successfully")
-                             
-                                    this.props.navigation.navigate('Home')
-
-                                    this.setState({ income: '', selectedCatogry: -1, selectedData: null })
-                                
+                                   let intVal = parseFloat(this.state.income);
+                                   if (IncomeOrExpence==1)
+                                    this.props.editIncome(intVal);
+                                   else  {this.props.editExpanse(intVal)
+                                    this.props.editIncome(-intVal);
+                                }
+                                    // let data = { date: new Date(), IncomeValue: intVal, CategoryId: selectedData.id, CategoryName: selectedData.text }
+                                    // let _data = []
+                                    // let currantIncome = []
+                                    // if (!Number.isInteger(intVal)) intVal = ldfjs
+                                    // let _key = (new Date().getMonth().toString() + new Date().getFullYear().toString()).toString()
+                                    // let storeIncome = await AsyncStorage.getItem('Incomedata' + _key)
+                                    // console.log('Incomedata' + _key, "successfully")
+                                    // if (storeIncome) {
+                                    //     currantIncome = JSON.parse(storeIncome)
+                                    //     currantIncome.forEach((element) => {
+                                    //         if (element.CategoryId != selectedCatogry)
+                                    //             _data.push(element)
+                                    //     })
+                                    //     _data.push(data)
+                                    //     AsyncStorage.setItem('Incomedata' + _key, JSON.stringify(_data))
+                                    // }
+                                    // else {
+                                    //     AsyncStorage.setItem('Incomedata' + _key, JSON.stringify([data]))
+                                    //     console.log(intVal,"intValintValintVal")
+                                    //     setSavedMonthlyIncome(intVal);
+                                    // }
+                                    // let totalValue = intVal
+                                    // _data.forEach(element => {
+                                    //     totalValue = totalValue + element.IncomeValue
+                                    // });
+                                    // setSavedMonthlyIncome(totalValue);
+                                    // let HomeScreenRef = getHomeScreen();
+                                    // HomeScreenRef.setState((prev) => ({ stateChanger: prev.stateChanger }))
+                                    // console.log(_data, "successfully")
+                                     this.props.navigation.navigate('Home')
+                                    // this.setState({ income: '', selectedCatogry: -1, selectedData: null })
                                 }
                                 else
                                     alert(strings('alertChooseType'));
@@ -193,13 +194,14 @@ function mapStateToProps(state) {
    
     return {
       income: state.appReducer.income,
-    //   onBoardingDataLoaded: state.userReducer.onBoardingDataLoaded,
+    // onBoardingDataLoaded: state.userReducer.onBoardingDataLoaded,
     }
   }
 
   function mapDispatchToProps(dispatch) {
     return {
       editIncome : (value) => dispatch(editIncome(value)),
+      editExpanse: (value)=> dispatch(editExpense(value))
     }
   }
   
