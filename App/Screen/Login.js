@@ -20,9 +20,12 @@ import CustomToast from '../Components/CustomToast';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import Auth from './auth';
 const fbLoginPermissions = ['email'];
+import { connect } from 'react-redux';
 
 import { FBLoginManager } from 'react-native-facebook-login'
 import { strings } from '../locals';
+import { AppReducer } from './../state/reducer';
+const setAppData = AppReducer.setAppData;
 if (Platform.OS === "android") {
     FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Native); // defaults to Native
 
@@ -81,7 +84,13 @@ class Login extends Component {
                 index: 0,
                 actions: [NavigationActions.navigate({ routeName: 'Main' })],
             });
-            AsyncStorage.setItem('User',JSON.stringify(User))
+            // AsyncStorage.setItem('User',JSON.stringify(User))
+            console.log('myUserrrrrrrr'+User.user.uid);
+            let snapshot = firebase.database().ref('/'+User.user.uid);
+            snapshot.once('value',(snapshot)=>{
+                // console.log('snapSHOTTTTTTT',snapshot);
+                this.props.LoadUserData(snapshot._value);
+            })
             this.props.navigation.dispatch(resetAction);
         }).catch((error) => {
             switch (error.code) {
@@ -244,12 +253,15 @@ class Login extends Component {
                                             console.log(token)
                                             const credential = firebase.auth.FacebookAuthProvider.credential(token);
                                             const currentUser = await firebase.auth().signInWithCredential({ providerId:credential.providerId,token: credential.token,secret: credential.secret})
-                                            setGlobalUser(currentUser._user);
+                                            // setGlobalUser(currentUser._user);
                                             const resetAction = StackActions.reset({
                                                 index: 0,
                                                 actions: [NavigationActions.navigate({ routeName: 'Main' })],
                                             });
-                                            AsyncStorage.setItem('User',JSON.stringify(currentUser._user))
+                                            
+                                            firebase.database().ref('/'+currentUser.uid).once('val',(snapshot)=>{
+                                                this.props.LoadUserData(snapshot);
+                                            })
                                             this.props.navigation.dispatch(resetAction);
 
                                         })
@@ -321,4 +333,25 @@ class Login extends Component {
         )
     }
 }
-export { Login }
+
+function mapStateToProps(state) {
+    // console.log("TAG", "previous profile", state)
+   
+    return {
+      income: state.appReducer.income,
+    //   onBoardingDataLoaded: state.userReducer.onBoardingDataLoaded,
+    }
+  }
+
+  function mapDispatchToProps(dispatch) {
+    return {
+      LoadUserData : (value) => dispatch(setAppData(value)),
+    }
+  }
+  
+  
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Login)
