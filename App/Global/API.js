@@ -36,7 +36,7 @@ export const setHomeScreen =(pt)=>HomeScreen=pt;
 export const GetUserProfile = async () => {
     AsyncStorage.getItem("UserProfile").then(
         async (value) => {
-            console.log(JSON.parse(value), "ssssssssssssssssssss")
+            //console.log(JSON.parse(value), "ssssssssssssssssssss")
 
             if (value == null) {
 

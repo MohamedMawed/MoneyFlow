@@ -31,7 +31,7 @@ Setting:'Setting'
         name : 'Name',
 
 
-        monthlyReport : 'Monthly Report',
+        monthlyReport : 'ٌReport',
         Income : 'Income',
         Expenses : 'Expenses',
         inWallet : 'In your wallet',

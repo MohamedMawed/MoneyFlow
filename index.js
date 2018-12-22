@@ -35,7 +35,7 @@ appReducer=persistReducer(userPersistConfig, mainReducer);
 const {store,persistor} = configureStore(appReducer)
 
 store.subscribe(()=>{
-  console.log("TAG","storeState",store.getState())
+  //console.log("TAG","storeState",store.getState())
 })
 class MainApp extends Component {
     render() {

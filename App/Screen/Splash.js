@@ -36,7 +36,7 @@ class Splash extends Component {
         // firebase.auth().signOut();
         // await AsyncStorage.clear();
         const lang = await AsyncStorage.getItem('language')
-        console.log("TAG", lang)
+        //console.log("TAG", lang)
         if (lang != null) {
             setAppLanguage(lang, false)
         } else {
@@ -62,7 +62,7 @@ class Splash extends Component {
                 this.setState({ user });
                 if (user != null) {
                     Screen = 'Main';
-                    console.log(user._user);
+                    //console.log(user._user);
                     setGlobalUser(user._user)
                 }else {
                     Screen = 'Login'

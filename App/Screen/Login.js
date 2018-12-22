@@ -77,7 +77,7 @@ class Login extends Component {
         this.setState({ Loading: true })
 
         firebase.auth().signInWithEmailAndPassword(Email, Password).then((User) => {
-            console.log('yesssssss', User)
+            //console.log('yesssssss', User)
             this.setState({ User: User, Loading: false })
 
             const resetAction = StackActions.reset({
@@ -85,13 +85,13 @@ class Login extends Component {
                 actions: [NavigationActions.navigate({ routeName: 'Main' })],
             });
             // AsyncStorage.setItem('User',JSON.stringify(User))
-            console.log('myUserrrrrrrr'+User.user.uid);
+            //console.log('myUserrrrrrrr'+User.user.uid);
             let snapshot = firebase.database().ref('/'+User.user.uid);
             snapshot.once('value',(snapshot)=>{
-                // console.log('snapSHOTTTTTTT',snapshot);
+                // //console.log('snapSHOTTTTTTT',snapshot);
                 this.props.LoadUserData(snapshot._value);
-            })
             this.props.navigation.dispatch(resetAction);
+            })
         }).catch((error) => {
             switch (error.code) {
                 case 'auth/invalid-email':
@@ -250,7 +250,7 @@ class Login extends Component {
                                        await Auth.Facebook.logout();
                                         Auth.Facebook.login(["email", "public_profile"])
                                         .then(async(token) => {
-                                            console.log(token)
+                                            //console.log(token)
                                             const credential = firebase.auth.FacebookAuthProvider.credential(token);
                                             const currentUser = await firebase.auth().signInWithCredential({ providerId:credential.providerId,token: credential.token,secret: credential.secret})
                                             // setGlobalUser(currentUser._user);
@@ -267,7 +267,7 @@ class Login extends Component {
                                         })
                                         .catch((err) => console.log(err))
                                     } catch (error) {
-                                        console.log('MAWWWEEEDD', error)
+                                        //console.log('MAWWWEEEDD', error)
                                     }
                                 }}
                                 style={{
@@ -335,7 +335,7 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-    // console.log("TAG", "previous profile", state)
+    // //console.log("TAG", "previous profile", state)
    
     return {
       income: state.appReducer.income,

@@ -68,8 +68,7 @@ export const getAppLanguage = () => {
     return AppLanguage
 }
 export const setAppLanguage = async (lang,restart=true) => {
-    console.log("TAG","setapplang",lang)
-    let ch = AppLanguage == lang;
+    //console.log("TAG","setapplang",lang)
     AppLanguage = lang
     if (lang == "ar") {
         ReactNative.I18nManager.forceRTL(true);
@@ -77,7 +76,7 @@ export const setAppLanguage = async (lang,restart=true) => {
         ReactNative.I18nManager.forceRTL(false);
     }
     await ReactNative.AsyncStorage.setItem('language', lang)
-    if(ch && restart){
+    if(restart){
         RNRestart.Restart();
     }
    

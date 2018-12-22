@@ -118,7 +118,7 @@ export class AppReducer {
 
 
     static setAppData = (value) => {
-        console.log('this.setAppData',value);
+        //console.log('this.setAppData',value);
         return {
             type : AppReducer.USER_DATA,
             value

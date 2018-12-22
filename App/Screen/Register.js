@@ -211,7 +211,7 @@ class Register extends Component {
                                    await Auth.Facebook.logout();
                                     Auth.Facebook.login(["email", "public_profile"])
                                     .then(async(token) => {
-                                        console.log(token)
+                                        //console.log(token)
                                         const credential = firebase.auth.FacebookAuthProvider.credential(token);
                                         const currentUser = await firebase.auth().signInWithCredential({ providerId:credential.providerId,token: credential.token,secret: credential.secret})
                                         setGlobalUser(currentUser._user);
@@ -226,7 +226,7 @@ class Register extends Component {
                                     })
                                     .catch((err) => console.log(err))
                                 } catch (error) {
-                                    console.log('MAWWWEEEDD', error)
+                                    //console.log('MAWWWEEEDD', error)
                                 }
                             }}
                             style={{

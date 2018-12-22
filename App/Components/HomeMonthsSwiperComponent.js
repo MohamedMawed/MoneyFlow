@@ -70,7 +70,7 @@ class HomeMonthsSwiperComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("TAG", "previous profile", state)
+    //console.log("TAG", "previous profile", state)
    
     return {
       income: state.appReducer.income,

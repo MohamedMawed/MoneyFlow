@@ -164,7 +164,7 @@ class AddBudget extends Component {
                                 );
                             }}
                             onValuesChange={(values) => {
-                                console.log(values, "ssssssssssssssddd")
+                                //console.log(values, "ssssssssssssssddd")
                                 this.setState({ valueSlider: values[0] })
                             }}
                         //    onValuesChangeFinish={this.sliderOneValuesChangeFinish}
@@ -271,14 +271,14 @@ class AddBudget extends Component {
             return alert('Please selected icon')
 
         let newBudget = { icon_index: icon, start_date: startDate, category: category, money: valueSlider, payment_period: payment_period }
-        console.log("newBudgetnewBudget", newBudget)
+        //console.log("newBudgetnewBudget", newBudget)
         this.props.createBudget(newBudget)
         // if (Budget) {
         //     let currantBudget = JSON.parse(Budget)
         //     currantBudget.push(newBudget)
         //     AsyncStorage.setItem('Budget' + _key, JSON.stringify(currantBudget))
         //     this.setState({ BudgetList: currantBudget })
-        //     console.log('currantBudget', currantBudget)
+        //     //console.log('currantBudget', currantBudget)
         // }
         // else {
         //     AsyncStorage.setItem('Budget' + _key, JSON.stringify([newBudget]))
@@ -298,8 +298,8 @@ class AddBudget extends Component {
         let _staer = start.split('-')[2] + '-' + start.split('-')[1] + '-' + start.split('-')[0]
         let _end = end.split('-')[2] + '-' + end.split('-')[1] + '-' + end.split('-')[0]
         let totdays = Math.abs(new Date(_end) - new Date(_staer));
-        console.log(totdays, _staer, _end, "dddddddddddddddddsssss")
-        // console.log(melli)
+        //console.log(totdays, _staer, _end, "dddddddddddddddddsssss")
+        // //console.log(melli)
         totdays = totdays / 1000 / 60 / 60 / 24
         let tillNow = Math.abs(new Date() - new Date(_staer));
         tillNow = tillNow / 1000 / 60 / 60 / 24

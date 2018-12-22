@@ -23,7 +23,7 @@ export default {
         password : 'كلمة المرور',
         name : 'الإسم',
 
-        monthlyReport : 'تقرير شهري',
+        monthlyReport : 'إحصائية',
         Income : 'الدخل',
         Expenses : 'المصروفات',
         inWallet : 'في محفظتك',

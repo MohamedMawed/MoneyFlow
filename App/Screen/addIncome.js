@@ -121,7 +121,7 @@ class AddIncome extends Component {
                                     // if (!Number.isInteger(intVal)) intVal = ldfjs
                                     // let _key = (new Date().getMonth().toString() + new Date().getFullYear().toString()).toString()
                                     // let storeIncome = await AsyncStorage.getItem('Incomedata' + _key)
-                                    // console.log('Incomedata' + _key, "successfully")
+                                    // //console.log('Incomedata' + _key, "successfully")
                                     // if (storeIncome) {
                                     //     currantIncome = JSON.parse(storeIncome)
                                     //     currantIncome.forEach((element) => {
@@ -133,7 +133,7 @@ class AddIncome extends Component {
                                     // }
                                     // else {
                                     //     AsyncStorage.setItem('Incomedata' + _key, JSON.stringify([data]))
-                                    //     console.log(intVal,"intValintValintVal")
+                                    //     //console.log(intVal,"intValintValintVal")
                                     //     setSavedMonthlyIncome(intVal);
                                     // }
                                     // let totalValue = intVal
@@ -143,14 +143,14 @@ class AddIncome extends Component {
                                     // setSavedMonthlyIncome(totalValue);
                                     // let HomeScreenRef = getHomeScreen();
                                     // HomeScreenRef.setState((prev) => ({ stateChanger: prev.stateChanger }))
-                                    // console.log(_data, "successfully")
+                                    // //console.log(_data, "successfully")
                                      this.props.navigation.navigate('Home')
                                     // this.setState({ income: '', selectedCatogry: -1, selectedData: null })
                                 }
                                 else
                                     alert(strings('alertChooseType'));
                             } catch (error) {
-                                console.log(error, "selectedData11")
+                                //console.log(error, "selectedData11")
                                 alert(strings('validNumber'));
                             }
                         }}
@@ -190,7 +190,7 @@ class AddIncome extends Component {
 
 
 function mapStateToProps(state) {
-    // console.log("TAG", "previous profile", state)
+    // //console.log("TAG", "previous profile", state)
    
     return {
       income: state.appReducer.income,

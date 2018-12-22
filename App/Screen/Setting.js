@@ -59,9 +59,9 @@ class Setting extends Component {
                     <DropDown
                     
                         onSelect={(index) => {
-                            if (index.text == 'Arabic') {
+                            if (index.text == 'Arabic' && getAppLanguage()!= 'ar') {
                                 setAppLanguage('ar');
-                            } else {
+                            } else if(getAppLanguage()!= 'en'){
                                 setAppLanguage('en');
 
                             }

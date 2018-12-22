@@ -47,14 +47,14 @@ class EditProfile extends Component {
                     <CustomTextInput
                         Title={'Name'}
                         onChangeText={(text) => {
-                            console.log(text)
+                            //console.log(text)
                         }}
                         icon={Requires.User}
                     />
                     <CustomTextInput
                         Title={'Email Address'}
                         onChangeText={(text) => {
-                            console.log(text)
+                            //console.log(text)
                         }}
                         icon={Requires.Email}
                     />
@@ -62,7 +62,7 @@ class EditProfile extends Component {
                         Title={'Password'}
                         secure
                         onChangeText={(text) => {
-                            console.log(text)
+                            //console.log(text)
                         }}
                         icon={Requires.Password}
                     />

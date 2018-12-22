@@ -27,14 +27,14 @@ class DropDown extends Component {
              }}>
                 <ModalDropdown
                     renderButtonText={(item, index) => {
-                        console.log(item, "itemitemitemitem")
+                        //console.log(item, "itemitemitemitem")
                         this.setState({ arrowSource: item.Icon })
                         return (<Text>
                             {item.text}
                         </Text>)
                     }}
                     renderRow={(item, index, IsSelected) => {
-                        console.log(item, "itemitemitemitem")
+                        //console.log(item, "itemitemitemitem")
 
                         return (<View style={{ width: '100%', height: Height * .06, backgroundColor: IsSelected ? '#DADADA' : '#FAFAFA', paddingHorizontal: Width * .04, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
                             <Text>{item.text}</Text>

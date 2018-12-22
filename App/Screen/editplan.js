@@ -42,11 +42,11 @@ class Editplan extends Component {
             this.setState({ startDate: _date })
         if (this.state.ButtonType == 'end')
             this.setState({ endDate: _date })
-        console.log(date, "datedatedatedatedatedate")
+        //console.log(date, "datedatedatedatedatedate")
         this._hideDateTimePicker();
     };
     render() {
-        console.log('navigationstateparamsitem',this.props.navigation.state.params.item)
+        //console.log('navigationstateparamsitem',this.props.navigation.state.params.item)
         let { CurantSelected, PlanList, IsLoding } = this.state
         return (<View style={{
             width: '100%',
@@ -287,9 +287,9 @@ class Editplan extends Component {
         let _end = end.split('-')[2] + '-' + end.split('-')[1] + '-' + end.split('-')[0]
         let totdays = Math.abs(new Date(_end) - new Date(_staer));
 
-        // console.log(melli)
+        // //console.log(melli)
         totdays = totdays / 1000 / 60 / 60 / 24
-        console.log(totdays, "dddddddddddddddddsssss")
+        //console.log(totdays, "dddddddddddddddddsssss")
 
         let tillNow = Math.abs(new Date() - new Date(_staer));
         tillNow = tillNow / 1000 / 60 / 60 / 24
@@ -298,7 +298,7 @@ class Editplan extends Component {
     CalcPercentColor = (start, end) => {
 
         let percent = this.CalcPercent(start, end)
-        console.log(percent)
+        //console.log(percent)
         if (percent <= 33) return Colors.AppGreenColor
         if (percent <= 66) return Colors.AppBlueColor
         if (percent <= 100) return Colors.AppRedColor
@@ -336,7 +336,7 @@ class Editplan extends Component {
             //     "start_date": "MM/DD/YYYY",
             //     "end_date": "MM/DD/YYYY"
             // }
-            console.log("newPlannewPlan",newPlan)
+            //console.log("newPlannewPlan",newPlan)
             this.props.createGole(newPlan)
             this.props.navigation.goBack()
 

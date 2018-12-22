@@ -47,11 +47,11 @@ class PlanList extends Component {
             this.setState({ startDate: _date })
         if (this.state.ButtonType == 'end')
             this.setState({ endDate: _date })
-        console.log(date, "datedatedatedatedatedate")
+        //console.log(date, "datedatedatedatedatedate")
         this._hideDateTimePicker();
     };
     render() {
-        console.log(this.props.goals,"this.props.goals")
+        //console.log(this.props.goals,"this.props.goals")
         let { CurantSelected, PlanList, IsLoding,addPlan } = this.state
         return (<View style={{
             width: '100%',
@@ -88,7 +88,7 @@ class PlanList extends Component {
         money: '43434',
         category: 'Drink' } */}
                         {IsLoding && this.props.goals.length >= 1 &&this.props.goals.map((item, index) => {
-                                console.log(index)
+                                //console.log(index)
                                 // let newPlan = { icon: icon, startDate: startDate, endDate: endDate, NamePlan: NamePlan,target:target }
 
                                 return (
@@ -141,9 +141,9 @@ class PlanList extends Component {
         let _end = end.split('-')[2] + '-' + end.split('-')[1] + '-' + end.split('-')[0]
         let totdays = Math.abs(new Date(_end) - new Date(_staer));
 
-        // console.log(melli)
+        // //console.log(melli)
         totdays = totdays / 1000 / 60 / 60 / 24
-        console.log(totdays, "dddddddddddddddddsssss")
+        //console.log(totdays, "dddddddddddddddddsssss")
 
         let tillNow = Math.abs(new Date() - new Date(_staer));
         tillNow = tillNow / 1000 / 60 / 60 / 24
@@ -152,7 +152,7 @@ class PlanList extends Component {
     CalcPercentColor = (start, end) => {
 
         let percent = this.CalcPercent(start, end)
-        console.log(percent)
+        //console.log(percent)
         if (percent <= 33) return Colors.AppGreenColor
         if (percent <= 66) return Colors.AppBlueColor
         if (percent <= 100) return Colors.AppRedColor
@@ -201,7 +201,7 @@ class PlanList extends Component {
                 currantPlan.push(newPlan)
                 AsyncStorage.setItem('Plan' + _key, JSON.stringify(currantPlan))
                 this.setState({ PlanList: currantPlan })
-                console.log('currantPlan', currantPlan)
+                //console.log('currantPlan', currantPlan)
             }
             else {
                 AsyncStorage.setItem('Plan' + _key, JSON.stringify([newPlan]))
@@ -216,7 +216,7 @@ class PlanList extends Component {
     }
 }
 function mapStateToProps(state) {
-    // console.log("TAG", "previous profile", state)
+    // //console.log("TAG", "previous profile", state)
    
     return {
       goals: state.appReducer.goal,
