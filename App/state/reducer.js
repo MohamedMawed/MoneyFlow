@@ -4,19 +4,11 @@ export class AppReducer {
 
     }
     static initialOrderState = {
-        "income": 1000,
-        "expense": 300,
+        "income": 0,
+        "expense": 0,
         "budget": [
         ],
         "goal": [
-            {
-                "category": "Foot",
-                "name": "Foot",
-                "icon_index": 2,
-                "money": 254,
-                "start_date": "MM/DD/YYYY",
-                "end_date": "MM/DD/YYYY"
-            }
         ]
 
         // "income": 1000,
