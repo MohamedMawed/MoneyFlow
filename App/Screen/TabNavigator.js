@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Width, Height } from './../Global/Dimension'
 import { Requires } from '../Assets/Requires';
-import { Login } from './Login';
+import Login from './Login';
 import { Splash } from './Splash';
 
 import { Register } from './Register';

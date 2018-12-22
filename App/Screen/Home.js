@@ -18,6 +18,7 @@ import { HomeMoneyItem } from '../Components/HomeMoneyItem';
 import { setHomeScreen } from '../Global/API';
 import { strings } from '../locals';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 
 class Home extends Component {
     constructor(props) {
@@ -41,7 +42,10 @@ class Home extends Component {
         }
     }
     componentDidMount(){
-        setHomeScreen(this);
+        // setHomeScreen(this);
+        firebase.database().ref('/'+firebase.auth().currentUser.uid).set(this.props.appData,(res)=>{
+            console.log('app backup result',res);
+        })
     }
     CalcPercent = (start, end) => {
         // console.log((new Date()).days-10)
@@ -53,8 +57,6 @@ class Home extends Component {
         console.log('totdays', totdays)
         console.log('tillNow', tillNow)
         console.log('Percent', (tillNow / totdays) * 100)
-        // console.log(days)
-
         return (tillNow / totdays) * 100
     }
     CalcPercentColor = (start, end) => {
@@ -68,17 +70,18 @@ class Home extends Component {
     }
     getChartData=()=>{
         let { goal , budget } = this.props;
+        console.log('goalllsss',goal);
         let date1 = new Date();
         date1 = date1.toString();
         date1 = date1.split(' ')[3];
-        for(let i = 1 ; i <= 12 ; i++){
-                goal.forEach(element => {
-                    console.log('goalElement',element);
-                });
-                budget.forEach(element =>{
-                    console.log('budgetElement',element)
-                });
-        }
+        // for(let i = 1 ; i <= 12 ; i++){
+        //         goal.forEach(element => {
+        //             console.log('goalElement',element);
+        //         });
+        //         budget.forEach(element =>{
+        //             console.log('budgetElement',element)
+        //         });
+        // }
         return [30, 40, 10, 50];
     }
     render() {
@@ -200,6 +203,7 @@ function mapStateToProps(state) {
     // console.log("TAG", "previous profile", state)
    
     return {
+      appData:state.appReducer,
       income: state.appReducer.income,
       expense : state.appReducer.expense,
       goal : state.appReducer.goal,
