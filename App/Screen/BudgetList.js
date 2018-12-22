@@ -8,12 +8,13 @@ import { Lang, FixViewsOrder } from '../Global/Localization';
 import { FontFamilies, FontSize } from '../Global/Font';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
+import { HomeProgressBarItem, BudgetItem } from '../Components/HomeProgressBarItem';
 import { PlansGoalsList, PlansGoalsList2 } from '../Global/ComponentTest';
 import { HomeMonthsSwiperComponent } from '../Components/HomeMonthsSwiperComponent';
 import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyExpenses } from '../Global/API';
 import { strings } from '../locals';
 import DropDown from '../Components/DropDown';
+import { connect } from 'react-redux'
 
 class BudgetList extends Component {
     constructor(props) {
@@ -31,7 +32,9 @@ class BudgetList extends Component {
             icon: '',
             category: '',
             BudgetList: [],
-            IsLoding: true
+            IsLoding: true,
+            Defaultpayment_period: [{ text: 'weekly', Icon: '' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }]
+
         }
     }
 
@@ -50,7 +53,7 @@ class BudgetList extends Component {
         this._hideDateTimePicker();
     };
     render() {
-
+        console.log("thisBudgets", this.props.Budgets)
         //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
         // </LinearGradient>
         let { CurantSelected, BudgetList, IsLoding } = this.state
@@ -62,14 +65,14 @@ class BudgetList extends Component {
             backgroundColor: '#fff',
         }}>
             {/* //header */}
-               <View style={{ width: '100%', height: '100%' }}>
+            <View style={{ width: '100%', height: '100%' }}>
                 <View style={{ height: '95%', alignItems: 'center' }}>
 
                     <View style={{ width: '90%', height: Height * .08, justifyContent: 'center' }}>
                         <Text style={Styles.FirstCategoryHeader}>{strings('budgets')}</Text>
                     </View>
                     {/* // swiper */}
-                    <View style={{ width: '100%', height: Height * .1, alignItems: 'center', justifyContent: 'center' }}>
+                    {/* <View style={{ width: '100%', height: Height * .1, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{
                             flexDirection: 'row',
                             borderWidth: 1,
@@ -101,57 +104,65 @@ class BudgetList extends Component {
                                 resizeMode: 'contain'
                             }} />
                         </View>
-                    </View>
+                    </View> */}
                     {/* // _________________________________________________________ */}
-                    <View style={{width:Width,alignItems:'center',height:Height*.75}}>
-                    <ScrollView
-                        contentContainerStyle={{
-                            width: Width,
-                            // height:Height*.5,
-                            // marginBottom: Height * .1,
-                          alignItems: 'center',paddingBottom:Height*.06
-                        }}
-
-                    >
-
-                            {IsLoding && BudgetList.length >= 1 && this.state.BudgetList.map((item, index) => {
-                                console.log(index)
-                                return (
-                                    <HomeProgressBarItem
-                                        onClick={() => this.props.navigation.navigate('plan', { item: item, dayes: this.CalcPercent(item.startDate, item.endDate) })}
-                                        key={index}
-                                        nameCategory={item.nameCategory}
-                                        cost={item.Budget}
-                                        Percent={this.CalcPercent(item.startDate, item.endDate)}
-                                        BackColor={this.CalcPercentColor(item.startDate, item.endDate)}
-                                        Source={item.icon} />
-                                )
-                            })
-                            }
+                    <View style={{ width: Width, alignItems: 'center', height: Height * .8 }}>
+                        <ScrollView
+                            contentContainerStyle={{
+                                width: Width,
+                                alignItems: 'center', paddingBottom: Height * .01
+                            }} >
+                            {IsLoding && this.tabSections('Weekly')}
+                            {IsLoding && this.props.Budgets.length >=1 && this.props.Budgets.map((item, index) => {return (this.sections(item,0) ) })}
+                            {IsLoding && this.tabSections('Monthly')}
+                            {IsLoding && this.props.Budgets.length >=1 && this.props.Budgets.map((item, index) => {return (this.sections(item,1) ) })}     
+                            {IsLoding && this.tabSections('Annual')}
+                            {IsLoding && this.props.Budgets.length >= 1 && this.props.Budgets.map((item, index) => {return (this.sections(item,2) ) })}
                             {IsLoding == false && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                                <ActivityIndicator size='large' />
+                             <ActivityIndicator size='large' />
                             </View>}
                             {IsLoding && BudgetList.length < 1 && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                                 <Text>{strings('noBudgets')}</Text>
                             </View>}
 
 
-                    </ScrollView>
+                        </ScrollView>
                     </View>
                 </View>
-            </View>      
+            </View>
             <DateTimePicker
                 isVisible={this.state.isDateTimePickerVisible}
                 onConfirm={this._handleDatePicked}
                 onCancel={this._hideDateTimePicker}
             />
-                 <TouchableOpacity onPress={async () => {
-                 this.props.navigation.navigate('AddBudget')
+            <TouchableOpacity onPress={async () => {
+                this.props.navigation.navigate('AddBudget')
             }} style={{ position: 'absolute', elevation: 7, bottom: Height * .05, right: Width * .075 }}>
-            <Image resizeMode='contain' style={{width:Width*.13,height:Width*.13}}  source={Requires.Plus}/>
+                <Image resizeMode='contain' style={{ width: Width * .13, height: Width * .13 }} source={Requires.Plus} />
                 {/* <Ionicons name={this.state.addPlan ? 'md-checkmark-circle' : 'md-add-circle'} size={Width * .14} color={'#F9616F'} /> */}
             </TouchableOpacity>
         </View>
+        )
+    }
+
+    tabSections=(text)=>{
+       return( <View style={{ width: '94%', height: Height * .06, backgroundColor: Colors.BlueColor, alignItems: 'flex-start', justifyContent: 'center', borderRadius: 5,marginTop:Height*.02 }}>
+        <Text style={{ color: Colors.WhiteColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{text}</Text>
+    </View>)
+    }
+    sections = (item, index) => {
+        return (
+            <View>
+                {item.payment_period == index ? <BudgetItem
+                    onClick={() => this.props.navigation.navigate('EditBudget', { item: item, index: index })}
+                    Source={Requires.ICons[item.icon_index].icon}
+                    cost={item.money}
+                    Category={item.category}
+                    date={item.start_date}
+                    payment_period={this.state.Defaultpayment_period[item.payment_period].text}
+                /> : null}
+            </View>
+
         )
     }
     CalcPercent = (start, end) => {
@@ -206,5 +217,18 @@ const Styles = StyleSheet.create({
     },
 })
 
+function mapStateToProps(state) {
+    console.log("stateappReducerbudget", state.appReducer.budget)
+    return {
+        Budgets: state.appReducer.budget,
+    }
+}
 
-export { BudgetList } 
+function mapDispatchToProps(dispatch) {
+    return {
+        createBudget: (value) => dispatch(createBudget(value)),
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(BudgetList)

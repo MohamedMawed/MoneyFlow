@@ -1,4 +1,5 @@
 export default {
+    editBudget:'edit Budget',
 
     tap:{
 Plan:'Goals',

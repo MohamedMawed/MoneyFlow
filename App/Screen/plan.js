@@ -63,7 +63,11 @@ class plan extends Component {
                 <TouchableOpacity >
                     <Image source={Requires.remove} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ width: Width * .09, height: Width * .09, borderRadius: Width * .05, backgroundColor: Colors.GrayColor, alignItems: 'center', justifyContent: 'center' }}>
+                <TouchableOpacity 
+                onPress={()=>{
+                    this.props.navigation.navigate('Editplan',{item:this.props.navigation.state.params.item,index:this.props.navigation.state.params.index})
+                }}
+                style={{ width: Width * .09, height: Width * .09, borderRadius: Width * .05, backgroundColor: Colors.GrayColor, alignItems: 'center', justifyContent: 'center' }}>
                     <Image source={Requires.edit} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
                 </TouchableOpacity>
 

@@ -8,13 +8,6 @@ export class AppReducer {
         "income": 1000,
         "expense": 300,
         "budget": [
-            {
-                "category": "Foot",
-                "icon_index": 0,
-                "money": 254,
-                "start_date": "MM/DD/YYYY",
-                "end_date": "MM/DD/YYYY"
-            }
         ],
         "goal": [
             {
@@ -34,7 +27,12 @@ export class AppReducer {
             case AppReducer.CREATE_BUDGET:
                 return {
                     ...state,
-                    budgets: state.budget.push(state.budget)
+                    budget : state.budget.concat([action.budget]),
+                };
+                case AppReducer.CREATE_GOAL:
+                return {
+                    ...state,
+                    goal : state.goal.concat([action.goal]),
                 };
             case AppReducer.EDIT_INCOME:
                 return {
@@ -65,7 +63,7 @@ export class AppReducer {
     static CREATE_BUDGET = 'BUDGET/NEW_BUDGET';
     static EDIT_BUDGET = 'BUDGET/EDIT_BUDGET';
     static DELETE_BUDGET = 'BUDGET/DELETE_BUDGET';
-
+     static CREATE_GOAL="PLAN/CREATE_GOAL"
     static updateExpense = (value) => {
         return {
             type: AppReducer.EDIT_EXPENSE,
@@ -86,13 +84,14 @@ export class AppReducer {
             budget,
         }
     }
-
-    static editBudget = (index, newBudget) => {
-        console.log('Atribute', newBudget)
-        return {
-            type: AppReducer.EDIT_BUDGET,
-            index,
-            newBudget,
+static createGoal=(goal)=>{
+    return {
+        type: AppReducer.CREATE_GOAL,
+        goal,
+    } 
+}
+    static editBudget = (newBudget,index) => {
+        return {type:AppReducer.EDIT_BUDGET,index,newBudget,
         }
     }
 

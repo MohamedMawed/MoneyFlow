@@ -3,13 +3,9 @@ import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, FlatList, Touch
 import { Height, Width } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
 import { Requires } from '../Assets/Requires';
-import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { Lang, FixViewsOrder } from '../Global/Localization';
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import { FontFamilies, FontSize } from '../Global/Font';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
-import { PlansGoalsList } from '../Global/ComponentTest';
 import { _key } from '../Global/API';
 import { connect } from 'react-redux';
 
@@ -17,22 +13,18 @@ import { strings } from '../locals';
 import { AppReducer } from '../state/reducer';
 const createGole = AppReducer.createGoal;
 
-class Add_plan extends Component {
+class Editplan extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            CurantSelected: -1,
-            valueSlider: 0,
-            NamePlan: '',
-            AmountValue: '',
-            addPlan: false,
-            PlansGoalsList: PlansGoalsList,
+            CurantSelected: props.navigation.state.params.item.icon_index,
+            NamePlan: props.navigation.state.params.item.name,
             isDateTimePickerVisible: false,
-            startDate: strings('startDate'),
-            endDate: strings('endDate'),
+            startDate: props.navigation.state.params.item.start_date,
+            endDate: props.navigation.state.params.item.end_date,
             ButtonType: -1,
-            target:500,
-            icon:'',
+            target:props.navigation.state.params.item.money,
+            icon:props.navigation.state.params.item.icon_index,
             PlanList:[],
             IsLoding:true
 
@@ -54,7 +46,8 @@ class Add_plan extends Component {
         this._hideDateTimePicker();
     };
     render() {
-        let { CurantSelected, PlanList, IsLoding,addPlan } = this.state
+        console.log('navigationstateparamsitem',this.props.navigation.state.params.item)
+        let { CurantSelected, PlanList, IsLoding } = this.state
         return (<View style={{
             width: '100%',
             height: '100%',
@@ -96,7 +89,7 @@ class Add_plan extends Component {
                             textAlign: 'left',
                             fontSize: FontSize.LargFontSize,marginHorizontal:Width*.03
                             // marginHorizontal: Width * .04
-                        }]}> {strings('newPlan')}</Text>
+                        }]}> {"Edit Goal"}</Text>
 
                     </View>
 
@@ -152,6 +145,7 @@ class Add_plan extends Component {
                         justifyContent: 'space-evenly'
                     }}>
                         <TextInput
+                        value={this.state.NamePlan}
                             autoCorrect={false}
                             onChangeText={(text) => {
                                 this.setState({ NamePlan: text })
@@ -176,6 +170,7 @@ class Add_plan extends Component {
 
 
                         <TextInput
+                        value={this.state.target}
                             autoCorrect={false}
                             onChangeText={(text) => {
                                 this.setState({ target: text })
@@ -320,7 +315,7 @@ class Add_plan extends Component {
     }
    async onsubmitPlan(){
 
-        let { startDate, endDate, addPlan, icon, category,target,NamePlan } = this.state
+        let { startDate, endDate, icon, category,target,NamePlan } = this.state
             if (NamePlan == '')
             return alert('Please specify the name')
             if (target == 0)
@@ -389,4 +384,4 @@ const Styles = StyleSheet.create({
 
 export default connect(
     mapStateToProps,mapDispatchToProps
-  )(Add_plan)
+  )(Editplan)

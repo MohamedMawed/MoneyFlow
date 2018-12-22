@@ -1,5 +1,6 @@
 export default {
     appName : 'فلوسي',
+    editBudget:'تعديل الميزانية',
      tap:{
         Plan:'الخطة',
         Home:'الرئيسية',

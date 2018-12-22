@@ -22,12 +22,16 @@ import AddIncome from './addIncome';
 import add_plan from './add_plan';
 import { strings } from '../locals';
 import { FontFamilies } from '../Global';
-import { BudgetList } from './BudgetList';
+import  BudgetList  from './BudgetList';
 import AddBudget from './AddBudget';
+import EditBudget from './editBudget';
+import PlanList from './planList';
+import Add_plan from './add_plan';
+import Editplan from './editplan';
 const Tabs = createBottomTabNavigator(
     {
         Home: Home,
-        Plan: add_plan,
+        Plan: PlanList,
         Report: BudgetList,
         Setting: Setting,
     },
@@ -65,11 +69,14 @@ export default App = createStackNavigator(
         Splash: { screen: Splash },
         Main: { screen: Tabs },
         Login: { screen: Login },
+        Add_plan:{screen:Add_plan},
         Intro: { screen: Intro },
         Register: { screen: Register },
         EditProfile:{screen:EditProfile},
         ExportTab:{screen:ExportTab},
+        EditBudget:{screen:EditBudget},
         plan:{screen : plan},
+        Editplan:{screen:Editplan},
         AddBudget:{screen : AddBudget},
         AddIncome:{screen : AddIncome}
 

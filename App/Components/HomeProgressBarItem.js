@@ -11,6 +11,75 @@ import { Width, Height } from '../Global/Dimension';
 import { Requires } from '../Assets/Requires';
 import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
+import { FixViewsOrder } from '../Global';
+
+export const BudgetItem = ({ onClick, Source, cost,Category,date,payment_period }) => {
+    return (
+        <View style={[styles.container, { paddingTop: 0 ,height:Height*.13}]}>
+
+            <TouchableOpacity activeOpacity={0.75}  style={[{ height: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: FixViewsOrder() }]}>
+                
+                <View style={{width:Width*.27,height:'100%',alignItems:'center'}} >
+                <View style={{width:'70%',height:'50%',flexDirection:FixViewsOrder(),justifyContent:'flex-end',alignItems:'center'}}>
+        
+                       
+                <TouchableOpacity >
+                <View style={{width:Width*.08,height:Width*.08,borderRadius:Width*.05,marginHorizontal:5,alignItems:'center',justifyContent:'center',borderColor:Colors.DarkGrayColor,backgroundColor:Colors.GrayColor}}>
+                <Image source={Requires.remove} resizeMode='contain' style={{width:'50%',height:'50%',tintColor:Colors.DarkGrayColor}} />
+                </View>
+
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onClick}>
+                <View style={{width:Width*.08,height:Width*.08,borderRadius:Width*.05,marginHorizontal:5,alignItems:'center',justifyContent:'center',backgroundColor:Colors.GrayColor}}>
+                <Image source={Requires.edit} resizeMode='contain' style={{width:'50%',height:'50%',tintColor:Colors.DarkGrayColor}} />
+                </View>
+                </TouchableOpacity>
+     
+                
+          
+
+                </View>
+
+                <View style={[styles.ItemCostContainer, { borderColor: Colors.GreenColor, marginTop: Height * .012 }]}>
+                    <Text style={[styles.ItemCostText, { color: Colors.GreenColor }]}
+                    >{cost}</Text>
+                </View>
+
+                </View>
+          
+
+                <View style={{width:Width*.5,height:'70%'}}>
+                    <Text style={[{ color: Colors.BlackColor,fontSize:17 }]}>{Category}</Text>
+                    <View style={{flexDirection:FixViewsOrder(),justifyContent:'flex-end'}}>
+                    <Text style={[styles.ItemCostText, { color: Colors.DarkGrayColor,fontSize:14 }]}>{date}</Text>
+                    <Text style={[{ color: Colors.DarkGrayColor,fontSize:12 }]}>Next Date : </Text>
+                    </View>
+                    <View style={{flexDirection:FixViewsOrder(),justifyContent:'flex-end'}}>
+                    <Text style={[styles.ItemCostText, { color: Colors.DarkGrayColor,fontSize:14 }]}>{payment_period}</Text>
+                    <Text style={[{ color: Colors.DarkGrayColor,fontSize:12 }]}>Payment Period :</Text>
+                    </View>
+                </View>
+
+
+
+                <View style={{ width: Width * .17, alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                    <View style={[{ backgroundColor: Colors.GreenColor,width:Width*.13,height:Width*.13,alignItems:'center',justifyContent:'center',borderRadius:Width*.1 }]}>
+                        <Image source={Source} style={styles.ItemIcon} />
+                    </View>
+                </View>
+
+
+
+
+            </TouchableOpacity>
+
+
+        </View>
+    )
+}
+
+
+
 
 
 class HomeProgressBarItem extends Component {
@@ -18,7 +87,7 @@ class HomeProgressBarItem extends Component {
 
     }
     render() {
-        let {nameCategory,Percent}=this.props
+        let { nameCategory, Percent } = this.props
         return (
             <View style={styles.container}>
                 <TouchableOpacity activeOpacity={0.75} onPress={this.props.onClick} style={styles.ItemRow}>
@@ -27,6 +96,7 @@ class HomeProgressBarItem extends Component {
                     <View style={[styles.ItemIconContainer, { backgroundColor: this.props.BackColor, }]}>
                         <Image source={this.props.Source} style={styles.ItemIcon} />
                     </View>
+
 
                     {/* for item Header and remaingin time */}
                     <View style={styles.HeaderContainer}>
@@ -42,11 +112,11 @@ class HomeProgressBarItem extends Component {
                     </View>
 
                 </TouchableOpacity>
-          
+                {/*           
                 <View style={styles.ProgressBarContainer}>
                     <View style={{ elevation: 2, width: Width * .9 * (this.props.Percent / 100), height: '100%', backgroundColor: this.props.BackColor }} />
-                </View>
-           
+                </View> */}
+
             </View>
         )
     }
@@ -108,11 +178,11 @@ const styles = StyleSheet.create(
             alignItems: 'center'
         },
         ProgressBarContainer: {
-            width:'92%',
+            width: '92%',
             height: Height * .01,
             alignItems: 'flex-start',
-       borderRadius:Height*.03,overflow:'hidden',
-            backgroundColor: '#EBEBEB',marginTop:Height*.005
+            borderRadius: Height * .03, overflow: 'hidden',
+            backgroundColor: '#EBEBEB', marginTop: Height * .005
 
         },
         ItemRow: {
@@ -122,7 +192,7 @@ const styles = StyleSheet.create(
             paddingTop: Height * .005,
             overflow: 'hidden',
             // alignItems: 'center',
-            height: Height * .085,marginTop:Height*.01
+            height: Height * .085, marginTop: Height * .01
 
         },
         ItemIconContainer: {
