@@ -33,7 +33,8 @@ class BudgetList extends Component {
             category: '',
             BudgetList: [],
             IsLoding: true,
-            Defaultpayment_period: [{ text: 'weekly', Icon: '' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }]
+            Defaultpayment_period: [{ text: 'weekly', Icon: '' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }],
+            CurantTab:1
 
         }
     }
@@ -56,7 +57,7 @@ class BudgetList extends Component {
         //console.log("thisBudgets", this.props.Budgets)
         //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
         // </LinearGradient>
-        let { CurantSelected, BudgetList, IsLoding } = this.state
+        let { CurantSelected, BudgetList, IsLoding ,CurantTab} = this.state
         let text = ['food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food',]
         return (<View style={{
             width: '100%',
@@ -107,19 +108,37 @@ class BudgetList extends Component {
                     </View> */}
                     {/* // _________________________________________________________ */}
                     <View style={{ width: Width, alignItems: 'center', height: Height * .8 }}>
+                    <View style={{ height: Height * .08, justifyContent: 'space-between',alignItems:'center', flexDirection: FixViewsOrder(),width:'95%' }}>
+                               <TouchableOpacity onPress={()=>{
+                                   this.setState({CurantTab:3})
+                               }} style={{ width: '30%', height: Height * .06, backgroundColor:CurantTab==3?'#DCDCDC': '#FFFFFF',alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
+                                    <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{'Annual'}</Text>
+                                </TouchableOpacity>
+                            
+                                <TouchableOpacity onPress={()=>{
+                                   this.setState({CurantTab:2})
+                               }} style={{ width: '30%', height: Height * .06, backgroundColor:CurantTab==2? '#DCDCDC': '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
+                                    <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{'Monthly'}</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity onPress={()=>{
+                                   this.setState({CurantTab:1})
+                               }} style={{ width: '30%', height: Height * .06, backgroundColor:CurantTab==1? '#DCDCDC': '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
+                                    <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{'Weekly'}</Text>
+                                </TouchableOpacity>
+                            </View>
                         <ScrollView
                             contentContainerStyle={{
                                 width: Width,
                                 alignItems: 'center', paddingBottom: Height * .01
                             }} >
-                            {IsLoding && this.tabSections('Weekly')}
-                            {IsLoding && this.props.Budgets.length >=1 && this.props.Budgets.map((item, index) => {return (this.sections(item,0) ) })}
-                            {IsLoding && this.tabSections('Monthly')}
-                            {IsLoding && this.props.Budgets.length >=1 && this.props.Budgets.map((item, index) => {return (this.sections(item,1) ) })}     
-                            {IsLoding && this.tabSections('Annual')}
-                            {IsLoding && this.props.Budgets.length >= 1 && this.props.Budgets.map((item, index) => {return (this.sections(item,2) ) })}
+                 
+                
+                            {IsLoding && this.props.Budgets.length >= 1&&CurantTab==1 && this.props.Budgets.map((item, index) => { return (this.sections(item, 0)) })}
+                            {IsLoding && this.props.Budgets.length >= 1&&CurantTab==2 && this.props.Budgets.map((item, index) => { return (this.sections(item, 1)) })}
+                            {IsLoding && this.props.Budgets.length >= 1 &&CurantTab==3&& this.props.Budgets.map((item, index) => { return (this.sections(item, 2)) })}
                             {IsLoding == false && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                             <ActivityIndicator size='large' />
+                                <ActivityIndicator size='large' />
                             </View>}
                             {IsLoding && BudgetList.length < 1 && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                                 <Text>{strings('noBudgets')}</Text>
@@ -145,10 +164,10 @@ class BudgetList extends Component {
         )
     }
 
-    tabSections=(text)=>{
-       return( <View style={{ width: '94%', height: Height * .06, backgroundColor: Colors.BlueColor, alignItems: 'flex-start', justifyContent: 'center', borderRadius: 5,marginTop:Height*.02 }}>
-        <Text style={{ color: Colors.WhiteColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{text}</Text>
-    </View>)
+    tabSections = (text) => {
+        return (<View style={{ width: '94%', height: Height * .06, backgroundColor: Colors.BlueColor, alignItems: 'flex-start', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
+            <Text style={{ color: Colors.WhiteColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{text}</Text>
+        </View>)
     }
     sections = (item, index) => {
         return (

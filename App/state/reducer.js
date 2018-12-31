@@ -130,21 +130,22 @@ export class AppReducer {
         }
     }
 
-    static createBudget = (budget) => {
-        return {
-            type: AppReducer.CREATE_BUDGET,
-            budget,
-        }
-    }
+
 static createGoal=(goal)=>{
     return {
         type: AppReducer.CREATE_GOAL,
         goal,
     } 
 }
+static createBudget = (budget) => {
+    return {
+        type: AppReducer.CREATE_BUDGET,
+        budget,
+    }
+}
     static editBudget = (newBudget,index) => {
-        return {type:AppReducer.EDIT_BUDGET,index,newBudget,
-        }
+        return {type:AppReducer.EDIT_BUDGET,index,newBudget}
+     
     }
 
     static deleteBudget = (index) => {

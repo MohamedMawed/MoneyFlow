@@ -19,6 +19,7 @@ class EditBudget extends Component {
         super(props)
         
         this.state = {
+            selectedIndex: props.navigation.state.params.index,
             CurantSelected: props.navigation.state.params.item.icon_index,
             sliderOneValue: [10000],
             valueSlider:props.navigation.state.params.item.money,
@@ -263,8 +264,7 @@ class EditBudget extends Component {
             return alert('Please selected icon')
             
         let newBudget = { icon_index: icon, start_date: startDate, category: category, money: valueSlider,payment_period:payment_period }
-
-        this.props.createBudget(newBudget)
+        this.props.editBudget(newBudget,this.state.selectedIndex)
         // if (Budget) {
         //     let currantBudget = JSON.parse(Budget)
         //     currantBudget.push(newBudget)
