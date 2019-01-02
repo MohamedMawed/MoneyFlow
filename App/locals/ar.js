@@ -52,5 +52,11 @@ export default {
         changeLang : 'تغيير اللغة',
         changeCur : 'تغيير العملة',
         exportImport : 'استخراج البيانات وإدخالها',
+
+
+
+
+        addPlan_placeHolder_target : 'الهدف',
+        addPlan_placeHolder_startWith : 'مبلغ البداية',
    
 }

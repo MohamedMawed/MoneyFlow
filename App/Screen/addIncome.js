@@ -113,7 +113,6 @@ class AddIncome extends Component {
                                    if (IncomeOrExpence==1)
                                     this.props.editIncome(intVal);
                                    else  {this.props.editExpanse(intVal)
-                                    this.props.editIncome(-intVal);
                                 }
                                     // let data = { date: new Date(), IncomeValue: intVal, CategoryId: selectedData.id, CategoryName: selectedData.text }
                                     // let _data = []

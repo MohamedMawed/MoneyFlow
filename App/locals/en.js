@@ -60,4 +60,8 @@ Setting:'Setting'
         changeLang : 'Change Language',
         changeCur : 'Change Currency',
         exportImport : 'Export and Import Data',
+
+
+        addPlan_placeHolder_target : 'Target',
+        addPlan_placeHolder_startWith : 'Start with',
     }

@@ -183,6 +183,7 @@ class AddBudget extends Component {
                                 defaultValue={'weekly'}
                                 Data={[{ text: 'weekly', Icon: '' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }]}
                                 Width={Width * .38}
+                                borderRadius={Width * .05}
                                 DropdownWidth={Width * .38} />
                         </View>
                         <TouchableOpacity onPress={() => {

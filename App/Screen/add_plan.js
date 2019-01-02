@@ -12,7 +12,7 @@ import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { PlansGoalsList } from '../Global/ComponentTest';
 import { _key } from '../Global/API';
 import { connect } from 'react-redux';
-
+import DropDown from '../Components/DropDown';
 import { strings } from '../locals';
 import { AppReducer } from '../state/reducer';
 const createGole = AppReducer.createGoal;
@@ -20,6 +20,7 @@ const createGole = AppReducer.createGoal;
 class Add_plan extends Component {
     constructor(props) {
         super(props)
+        console.log('new Date().toISOString()',new Date().toISOString())
         this.state = {
             CurantSelected: -1,
             valueSlider: 0,
@@ -28,10 +29,11 @@ class Add_plan extends Component {
             addPlan: false,
             PlansGoalsList: PlansGoalsList,
             isDateTimePickerVisible: false,
-            startDate: strings('startDate'),
+            startDate: new Date().toISOString().split('T')[0],
             endDate: strings('endDate'),
             ButtonType: -1,
             target:500,
+            startWith : 0, // the money to start the plan
             icon:'',
             PlanList:[],
             IsLoding:true
@@ -45,7 +47,7 @@ class Add_plan extends Component {
 
     _handleDatePicked = (date) => {
 
-        let  _date=new Date(date).getDate()+'-'+new Date(date).getMonth()+'-'+new Date(date).getFullYear()
+        let  _date=new Date(date).toISOString().split('T')[0];
         if (this.state.ButtonType == 'start')
             this.setState({ startDate: _date })
         if (this.state.ButtonType == 'end')
@@ -136,7 +138,7 @@ class Add_plan extends Component {
                 {/* // form enter data */}
                 <View style={[Styles.Header, {
                     width: '90%',
-                    height: Height * .27,
+                    height: Height * .32,
                     backgroundColor: Colors.WhiteColor,
                     elevation: 4,
                     borderRadius: Width * .03,
@@ -180,7 +182,28 @@ class Add_plan extends Component {
                             onChangeText={(text) => {
                                 this.setState({ target: text })
                             }} keyboardType='numeric'
-                            placeholder='Target'
+                            placeholder={strings('addPlan_placeHolder_target')}
+                            style={{
+                                fontSize: Width * .03,
+                                fontFamily: FontFamilies.Etisalat_0,
+                                width: '90%',
+                                height: Height * .06,
+                                borderRadius: Width * .02,
+                                borderWidth: 1,
+                                borderColor: '#D9D9D9',
+                                backgroundColor: '#F9F9F9',
+                                paddingHorizontal: Width * .03,
+                                // fontSize: Width*.03
+                                // marginTop: Height * .022
+                            }} />
+
+
+                        <TextInput
+                            autoCorrect={false}
+                            onChangeText={(text) => {
+                                this.setState({ startWith: text })
+                            }} keyboardType='numeric'
+                            placeholder={strings('addPlan_placeHolder_startWith')}
                             style={{
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
@@ -251,7 +274,7 @@ class Add_plan extends Component {
                 </View>
 
 
-                <View style={[Styles.Header, { width: '90%', height: Height * .39, justifyContent: 'center', alignItems: 'center', marginVertical: 5 }]}>
+                <View style={[Styles.Header, { width: '90%', height: Height * .38, justifyContent: 'center', alignItems: 'center', marginVertical: 5 }]}>
                     <FlatList
                         numColumns={5}
                         showsVerticalScrollIndicator={false}
@@ -278,7 +301,7 @@ class Add_plan extends Component {
             <TouchableOpacity onPress={async () => {
                 this.onsubmitPlan()
                 // ios-save
-            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.BlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .03 }}>
+            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.BlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 }}>
                 <Text style={{ fontSize: 15, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>Save</Text>
             </TouchableOpacity>
             
