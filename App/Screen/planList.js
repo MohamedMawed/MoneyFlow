@@ -93,14 +93,14 @@ class PlanList extends Component {
 
                                 return (
                                     <HomeProgressBarItem
-                                    onClick={() => this.props.navigation.navigate('plan',{item: item,index:index})}
-                                    key={index}
+                                        onClick={() => this.props.navigation.navigate('plan', { item: item, index: index })}
+                                        key={index}
                                         cost={item.money}
                                         Percent={this.CalcPercent(item.start_date, item.end_date)}
                                         BackColor={this.CalcPercentColor(item.start_date, item.end_date)}
                                         Source={Requires.ICons[item.icon_index].icon}
                                         nameCategory={item.name}
-                                        />
+                                    />
                                 )
                             })
                             }
@@ -137,15 +137,20 @@ class PlanList extends Component {
         )
     }
     CalcPercent = (start, end) => {
-        let _staer = start.split('-')[2] + '-' + start.split('-')[1] + '-' + start.split('-')[0]
-        let _end = end.split('-')[2] + '-' + end.split('-')[1] + '-' + end.split('-')[0]
-        let totdays = Math.abs(new Date(_end) - new Date(_staer));
+
+        // let _staer = start.split('-')[2] + '-' + start.split('-')[1] + '-' + start.split('-')[0]
+        // console.log(_staer)
+        // let _end = end.split('-')[2] + '-' + end.split('-')[1] + '-' + end.split('-')[0]
+        // console.log(_end)
+        // console.log(new Date(end))
+        let totdays = Math.abs(new Date(end) - new Date(start));
+        console.log(totdays, "mellidayssss")
 
         // //console.log(melli)
         totdays = totdays / 1000 / 60 / 60 / 24
-        //console.log(totdays, "dddddddddddddddddsssss")
+        console.log(totdays, "dddddddddddddddddsssss")
 
-        let tillNow = Math.abs(new Date() - new Date(_staer));
+        let tillNow = Math.abs(new Date() - new Date(start));
         tillNow = tillNow / 1000 / 60 / 60 / 24
         return parseInt((tillNow / totdays) * 100)
     }

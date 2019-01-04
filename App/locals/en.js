@@ -64,4 +64,7 @@ Setting:'Setting'
 
         addPlan_placeHolder_target : 'Target',
         addPlan_placeHolder_startWith : 'Start with',
+    
+    
+        allPlans_remain : 'remaining days',
     }

@@ -59,4 +59,9 @@ export default {
         addPlan_placeHolder_target : 'الهدف',
         addPlan_placeHolder_startWith : 'مبلغ البداية',
    
-}
+
+
+
+        allPlans_remain : 'أيام متبقية',
+
+    }
