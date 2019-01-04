@@ -343,7 +343,7 @@ class Add_plan extends Component {
     }
    async onsubmitPlan(){
 
-        let { startDate, endDate, addPlan, icon, category,target,NamePlan } = this.state
+        let { startDate, endDate, startWith, icon, category,target,NamePlan } = this.state
             if (NamePlan == '')
             return alert('Please specify the name')
             if (target == 0)
@@ -355,7 +355,7 @@ class Add_plan extends Component {
             if (icon == '')
                 return alert('Please selected icon')
             // add store
-            let newPlan = { icon_index: icon, start_date: startDate, end_date: endDate, name: NamePlan,money:target,category:category }
+            let newPlan = { start_money : startWith , icon_index: icon, start_date: startDate, end_date: endDate, name: NamePlan,money:target,category:category }
             // {
             //     "category": "Foot",
             //     "name": "Foot",
