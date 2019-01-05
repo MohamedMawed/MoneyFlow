@@ -63,20 +63,17 @@ class Register extends Component {
         const { Name, Email, Password } = this.state
 
         if (Name === '') {
-            this.Massage = 'Name Required'
-            this.setState({ CloseAlert: true })
+            global.openToast('Name Required')
             return
         }
 
         if (Email === '') {
-            this.Massage = 'Email Required'
-            this.setState({ CloseAlert: true })
+            global.openToast('Email Required')
             return
         }
 
         if (Password === '') {
-            this.Massage = 'Password Required'
-            this.setState({ CloseAlert: true })
+            global.openToast('Password Required')
             return
         }
         this.setState({ Loading: true })
@@ -91,16 +88,16 @@ class Register extends Component {
         }).catch((error) => {
             switch (error.code) {
                 case 'auth/email-already-in-use':
-                    this.Massage = 'email aleady exist'
+                    global.openToast('email aleady exist')
                     break;
                 case 'auth/invalid-email':
-                    this.Massage = 'invalid email'
+                    global.openToast('invalid email')
                     break;
                 case 'auth/weak-password':
-                    this.Massage = 'weak password'
+                    global.openToast('weak password')
                     break;
                 default:
-                    this.Massage = 'Network Error'
+                    global.openToast('Network Error')
 
                 // handle other codes ...
             }
@@ -279,12 +276,6 @@ class Register extends Component {
                             </TouchableOpacity>
                         </View>
                         </View>
-                        {this.state.CloseAlert === true && <CustomToast
-                            Massage={this.Massage}
-                            CloseAlert={this
-                                .CloseAlert
-                                .bind(this)}
-                            PositionAlert="Left" />}
                     </View>
                 </ScrollView>
             </View>
