@@ -64,20 +64,16 @@ class Login extends Component {
     Login = () => {
         const { Email, Password } = this.state
         if (Email === '') {
-            this.Massage = 'Email Required'
-            this.setState({ CloseAlert: true })
+            global.openToast('Email Required')
             return
         }
 
         if (Password === '') {
-            this.Massage = 'Password Required'
-            this.setState({ CloseAlert: true })
+            global.openToast('Password Required')
             return
         }
         this.setState({ Loading: true })
-
         firebase.auth().signInWithEmailAndPassword(Email, Password).then((User) => {
-            //console.log('yesssssss', User)
             this.setState({ User: User, Loading: false })
 
             const resetAction = StackActions.reset({
@@ -87,24 +83,26 @@ class Login extends Component {
             // AsyncStorage.setItem('User',JSON.stringify(User))
             //console.log('myUserrrrrrrr'+User.user.uid);
             let snapshot = firebase.database().ref('/'+User.user.uid);
+            
             snapshot.once('value',(snapshot)=>{
-                // //console.log('snapSHOTTTTTTT',snapshot);
+                console.log('snapSHOTTTTTTT',snapshot);
                 this.props.LoadUserData(snapshot._value);
             this.props.navigation.dispatch(resetAction);
             })
         }).catch((error) => {
+            
             switch (error.code) {
                 case 'auth/invalid-email':
-                    this.Massage = 'invalid email'
+                    global.openToast('invalid email')
                     break;
                 case 'auth/user-disabled':
-                    this.Massage = 'this account has been deactivited'
+                    global.openToast('this account has been deactivited')
                     break;
                 case 'auth/user-not-found':
-                    this.Massage = 'email not found please register'
+                    global.openToast('email not found please register')
                     break;
                 default:
-                    this.Massage = 'Wrong Password'
+                    global.openToast('Wrong Password')
 
                 // handle other codes ...
             }
@@ -321,12 +319,6 @@ class Login extends Component {
                                 }}>{strings('googleLogin')}</Text>
                             </TouchableOpacity>
                         </View>
-                        {this.state.CloseAlert === true && <CustomToast
-                            Massage={this.Massage}
-                            CloseAlert={this
-                                .CloseAlert
-                                .bind(this)}
-                            PositionAlert="Left" />}
                     </View>
                 </ScrollView>
             </View>

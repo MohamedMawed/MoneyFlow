@@ -80,15 +80,14 @@ export class AppReducer {
                 temp1[action.index].end_date = action['2'];
                 return {
                     ...state,
-                    goal: temp1
+                    goal: JSON.parse(JSON.stringify(temp1))
                 }
             case AppReducer.ADD_GOAL_MONEY:
                 let temp = state.goal;
                 temp[action.index].currently_paid += action.money;
-                console.log('tempAfterUpdate',temp);
                 return {
                     ...state,
-                    goal: temp
+                    goal: JSON.parse(JSON.stringify(temp))
                 }
             case AppReducer.CREATE_BUDGET:
                 return {
