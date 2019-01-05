@@ -67,4 +67,23 @@ Setting:'Setting'
     
     
         allPlans_remain : 'remaining days',
+
+        allPlans_add : 'Add',
+        allPlans_edit : 'Edit',
+        allPlans_remove : 'Delete',
+
+
+        addPlan_nameErr : 'Please specify the goal name',
+        addPlan_targetErr : 'Please specify the target cost',
+        addPlan_startDateErr : 'Please specify the start date',
+        addPlan_endDateErr : 'Please specify the snd date',
+        addPlan_iconErr : 'Please specify the plan icon',
+
+
+
+        addMoneyPopUp_placeHolder : 'money',
+
+
+        edit_goal_title : 'Edit Goal',
+        add_money_title : 'Add Money',
     }

@@ -1,5 +1,17 @@
 import React, { Component } from 'React'
-import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, FlatList, TouchableOpacity, TextInput, ScrollView,ActivityIndicator,Alert } from 'react-native'
+import {
+    TouchableHighlight,
+    TouchableWithoutFeedback,
+    Text,
+    Image,
+    View,
+    AsyncStorage,
+    StyleSheet,
+    FlatList,
+    TouchableOpacity,
+    TextInput,
+            } from 'react-native'
+
 import { Height, Width } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
 import { Requires } from '../Assets/Requires';
@@ -13,8 +25,9 @@ import { PlansGoalsList } from '../Global/ComponentTest';
 import { _key } from '../Global/API';
 import { connect } from 'react-redux';
 import DropDown from '../Components/DropDown';
-import { strings } from '../locals';
+import { strings, getAppLanguage } from '../locals';
 import { AppReducer } from '../state/reducer';
+
 const createGole = AppReducer.createGoal;
 
 class Add_plan extends Component {
@@ -81,22 +94,27 @@ class Add_plan extends Component {
                         justifyContent: 'flex-start',
                         flexDirection: 'row'
                     }}>
-                        <TouchableOpacity style={{marginHorizontal:Width*.01}} onPress={()=>{
-                            this.props.navigation.goBack()
-                        }}>
-                        <Image
-                            source={Requires.back}
-                            resizeMode='contain'
+                        <TouchableOpacity
                             style={{
-                                width: Width * .05,
-                                height: Width * .05
-                            }} />
-                    </TouchableOpacity >
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                width: Width * .1,
+                                height: '100%'
+                            }} onPress={() => {
+                                this.props.navigation.goBack()
+                            }}>
+                            <Ionicons
+                                name={getAppLanguage() == 'ar' ? 'ios-arrow-forward' : 'ios-arrow-back'}
+                                color={'black'}
+                                size={Width * .05} />
+                        </TouchableOpacity>
 
                         <Text style={[Styles.TextStyle, {
                             width: '90%',
                             textAlign: 'left',
-                            fontSize: FontSize.LargFontSize,marginHorizontal:Width*.03
+                            fontSize: FontSize.LargFontSize,
+                            marginHorizontal:Width*.03,
+                            fontFamily:FontFamilies.Etisalat_0
                             // marginHorizontal: Width * .04
                         }]}> {strings('newPlan')}</Text>
 
@@ -158,12 +176,11 @@ class Add_plan extends Component {
                             onChangeText={(text) => {
                                 this.setState({ NamePlan: text })
                             }}
-                            placeholder='Name'
+                            placeholder={strings('name')}
                             style={{
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
                                 width: '90%',
-                                textAlign: 'left',
                                 height: Height * .06,
                                 borderRadius: Width * .02,
                                 borderWidth: 1,
@@ -230,6 +247,7 @@ class Add_plan extends Component {
                             this.setState({ ButtonType: 'start' })
                             this._showDateTimePicker()
                         }} activeOpacity={.5} style={{ width: '46%', height: '100%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
+                            
                                 <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7',fontSize:Width*.03 }]}>{this.state.startDate}</Text>
                                 <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                                 <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
@@ -270,7 +288,7 @@ class Add_plan extends Component {
 
                 {/* // TITLE CHOOSE ICON */}
                 <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                    <Text style={Styles.TextStyle}>{strings('chooseIcon')}</Text>
+                    <Text style={[Styles.TextStyle,{fontFamily:FontFamilies.Etisalat_0}]}>{strings('chooseIcon')}</Text>
                 </View>
 
 
@@ -302,7 +320,7 @@ class Add_plan extends Component {
                 this.onsubmitPlan()
                 // ios-save
             }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.BlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 }}>
-                <Text style={{ fontSize: 15, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>Save</Text>
+                <Text style={{ fontSize: 15, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('save')}</Text>
             </TouchableOpacity>
             
            
@@ -345,17 +363,15 @@ class Add_plan extends Component {
 
         let { startDate, endDate, startWith, icon, category,target,NamePlan } = this.state
             if (NamePlan == '')
-            return alert('Please specify the name')
+            return global.openToast(strings('addPlan_nameErr'))
             if (target == 0)
-                return alert('Please specify the value')
-            if (startDate == 'Start date')
-                return alert('Please specify the Start date')
-            if (endDate == 'End date')
-                return alert('Please specify the End date')
+                return global.openToast(strings('addPlan_targetErr'))
+           if (endDate == 'End date')
+                return global.openToast(strings('addPlan_endDateErr'))
             if (icon == '')
-                return alert('Please selected icon')
+                return global.openToast(strings('addPlan_iconErr'))
             // add store
-            let newPlan = { start_money : startWith , icon_index: icon, start_date: startDate, end_date: endDate, name: NamePlan,money:target,category:category }
+            let newPlan = { start_money : parseInt(startWith),currently_paid : parseInt(startWith), icon_index: icon, start_date: startDate, end_date: endDate, name: NamePlan,money:parseInt(target),category:category }
             // {
             //     "category": "Foot",
             //     "name": "Foot",

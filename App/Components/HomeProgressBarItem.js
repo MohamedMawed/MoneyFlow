@@ -13,6 +13,11 @@ import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
 import { FixViewsOrder } from '../Global';
 import { strings } from '../locals';
+import DropDown from './DropDownWithoutButtonText';
+import {connect } from 'react-redux';
+
+import { AppReducer } from '../state/reducer';
+const deleteGoal = AppReducer.deleteGoal;
 
 export const BudgetItem = ({ onClick, Source, cost, Category, date, payment_period }) => {
     return (
@@ -91,9 +96,9 @@ class HomeProgressBarItem extends Component {
         let { nameCategory, Percent } = this.props
         return (
             <View style={styles.container}>
-                <View activeOpacity={0.75} 
-                // onPress={this.props.onClick} 
-                style={styles.ItemRow}>
+                <View activeOpacity={0.75}
+                    // onPress={this.props.onClick} 
+                    style={styles.ItemRow}>
 
                     {/* for item Icon */}
                     <View style={[styles.ItemIconContainer, { backgroundColor: this.props.BackColor, }]}>
@@ -103,15 +108,28 @@ class HomeProgressBarItem extends Component {
 
                     {/* for item Header and remaingin time */}
                     <View style={styles.HeaderContainer}>
-                        <Text style={styles.HeaderTitle}>{nameCategory}</Text>
-                        <Text style={styles.HeaderRemainingDays}>{Percent + ' ' + strings('allPlans_remain')} </Text>
+                        <Text style={[styles.HeaderTitle,{fontFamily: FontFamilies.Etisalat_0}]}>{nameCategory}</Text>
+            
+                        <Text style={[styles.HeaderRemainingDays,{fontFamily: FontFamilies.Etisalat_0}]}>{this.props.remains + ' ' + strings('allPlans_remain')} </Text>
                     </View>
-
-                    {/* for item Cost */}
-                    <TouchableOpacity activeOpacity={0.75} style={styles.ItemCostContainer}>
-                        <Image source={Requires.dots} style={{ width: Width * .08, height: Height * .02, margin: 10 }} />
-                    </TouchableOpacity>
-
+                    <DropDown
+                        onSelect={(index) => {
+                            if(index.text == strings('allPlans_remove')){
+                                this.props.deleteGoal(this.props.index)
+                            }else if(index.text == strings('allPlans_add')){
+                                this.props.openAddAlert()
+                            }else {
+                                this.props.openEditAlert()
+                            }
+                        }}
+                        defaultValue={''}
+                        Data={[
+                            { text: strings('allPlans_add'), Icon: Requires.PlusAdd },
+                            { text: strings('allPlans_edit'), Icon: Requires.edit },
+                            { text: strings('allPlans_remove'), Icon: Requires.remove }
+                             ]}
+                        Width={Width * .1}
+                        DropdownWidth={Width * .3} />
                 </View>
 
                 <View style={styles.ProgressBarContainer}>
@@ -124,9 +142,9 @@ class HomeProgressBarItem extends Component {
                     alignItems: 'center',
                     height: Height * .03,
                 }}>
-                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.DarkGrayColor, fontSize: 14 }}>2000</Text>
-                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.AppBlueColor, fontSize: 16 }}>1000</Text>
-                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.DarkGrayColor, fontSize: 14 }}>1000</Text>
+                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.DarkGrayColor, fontSize: 14 }}>{this.props.startWith}</Text>
+                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.AppBlueColor, fontSize: 16 }}>{this.props.currentlyPaid}</Text>
+                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.DarkGrayColor, fontSize: 14 }}>{this.props.cost}</Text>
                 </View>
 
             </View>
@@ -168,7 +186,6 @@ const styles = StyleSheet.create(
 
         },
         HeaderRemainingDays: {
-            fontFamily: FontFamilies.Etisalat_0,
             fontSize: FontSize.MediumFontSize,
             color: 'gray',
             textAlign: 'left',
@@ -182,7 +199,7 @@ const styles = StyleSheet.create(
             textAlign: 'left',
         },
         HeaderContainer: {
-            width: Width * .45,
+            width: Width * .55,
             height: '100%',
             justifyContent: 'flex-start',
             alignItems: 'center'
@@ -221,4 +238,29 @@ const styles = StyleSheet.create(
         }
     }
 )
-export { HomeProgressBarItem }
+
+
+
+
+function mapStateToProps(state) {
+    console.log("TAG", "previous profile", state)
+
+    return {
+        appData: state.appReducer,
+        income: state.appReducer.income,
+        expense: state.appReducer.expense,
+        goal: state.appReducer.goal,
+        budget: state.appReducer.budget,
+    }
+}
+
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        deleteGoal: (value) => dispatch(deleteGoal(value)),
+    }
+}
+export default connect(
+    mapStateToProps,mapDispatchToProps
+)(HomeProgressBarItem)

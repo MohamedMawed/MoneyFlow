@@ -1,83 +1,86 @@
-import React, { Component } from 'React'
-import { StyleSheet, Text, View, Animated, Easing, TouchableOpacity, TouchableWithoutFeedback, Linking } from 'react-native'
-import { Width, Height, Colors, FontFamilies } from './../Global'
 
-class CustomToast extends Component {
+
+import React, { Component } from 'react';
+import { Text, View, TextInput, ActivityIndicator, Image, TouchableOpacity, Animated } from 'react-native';
+import { Width, Height, FontFamilies } from '../Global';
+
+export class CustomToast extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            animaitionAlert: new Animated.Value(-Height*.1),
-            opacity: new Animated.Value(-Height * .2),
-            disable: 'auto',
-            PositionAlert: 'Bottom', ToValue: 0
-        }
+            fadeAnim: new Animated.Value(0),
+            transAnim: new Animated.Value(0),
+            transAnim2: new Animated.Value(Height),
+            errorMessage:""
+        };
+    }
+    componentDidMount() {
+       global.openToast=this.open
+    }
+    open=(message)=>{
+        this.setState({errorMessage:message},()=>{
+            delayTime = 0
+            Animated.parallel([
+                Animated.timing(
+                    this.state.fadeAnim,
+                    { toValue: 1, duration: 300, delay: delayTime,useNativeDriver: true },
+                ),
+                Animated.timing(
+                    this.state.transAnim2,
+                    { toValue: Height*.8, duration: 300, delay: delayTime,useNativeDriver: true },
+                )
+            ]).start(()=>{
+                setTimeout(this.close,2100)
+            })
+        })
+    
+    }
+    close = () => {
+        Animated.parallel([
+            Animated.timing(
+                this.state.fadeAnim,
+                { toValue: 0, duration: 400,useNativeDriver: true },
+            ),
+            Animated.timing(
+                this.state.transAnim2,
+                { toValue: Height, duration: 500,useNativeDriver: true },
+            )
+        ]).start()
     }
     render() {
         return (
-            <Animated.View style={[Styles.Container, { paddingHorizontal: Width*.03,height: Height * .055, bottom: this.state.animaitionAlert }]} >
-                <Text style={{fontSize: Width * .03,fontFamily:FontFamilies.Etisalat_0, color: Colors.ofWhiteColr, textAlign: 'center' }}>{this.props.Massage}</Text>
+            <Animated.View
+                style={{
+                    transform: [{ translateY: this.state.transAnim2 }],
+                    // bottom:this.state.transAnim,
+                    position: "absolute",
+                    opacity: this.state.fadeAnim,
+                    width: Width,
+                    height: Height * .1,
+                    backgroundColor: "transparent",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+
+                <View style={{
+                    fontFamily: FontFamilies.Etisalat_0,
+                    backgroundColor: "grey",
+                    justifyContent:"center",
+                    alignItems:"center",
+                    borderRadius: 4,
+                }}>
+                    <Text style={{
+                        paddingHorizontal: Width * 0.02,
+                        paddingVertical: Width * 0.01,
+                        fontFamily: FontFamilies.Etisalat_0,                       
+                        color: "#fff",
+                        textAlign: "center",
+                    }}>{this.state.errorMessage}</Text>
+                </View>
+
+
             </Animated.View>
+
         )
     }
-    componentWillMount() {
-    }
-    PositionAlert() {
-        if (this.props.PositionAlert == 'Left') {
-            this.setState({ animaitionAlert: new Animated.Value(-Width) }, () => {
-                this.setState({ PositionAlert: 'Left', ToValue: +Width })
-            })
-        }
-        if (this.props.PositionAlert == 'Right') {
-            this.setState({ animaitionAlert: new Animated.Value(+Width) }, () => {
-                this.setState({ PositionAlert: 'Right', ToValue: +Width })
-            })
-
-        }
-        if (this.props.PositionAlert == 'Top') {
-            this.setState({ animaitionAlert: new Animated.Value(-Height) }, () => {
-                this.setState({ PositionAlert: 'Top', ToValue: -Height })
-            })
-        }
-        if (this.props.PositionAlert == 'Bottom') {
-            this.setState({ animaitionAlert: new Animated.Value(-Height) }, () => {
-                this.setState({ PositionAlert: 'Bottom', ToValue: -Height })
-            })
-        }
-    }
-    Open() {
-        Animated.timing(this.state.animaitionAlert, {
-            toValue: +Height * .07, easing: Easing.elastic(), duration: 400
-        }).start(()=>{
-            Animated.timing(this.state.animaitionAlert, {
-                toValue: -Height * .1, easing: Easing.elastic(), duration: 1000,delay:1000
-            }).start(()=>{
-                this.props.CloseAlert()
-            })
-        })
-    }
-
-    componentDidMount() {
-        this.Open()
-    }
 }
-const Styles = StyleSheet.create(
-
-    {
-        Container: {
-
-            position: 'absolute', backgroundColor:'rgba(0,0,0,.66)', borderRadius: Width * .03, alignItems: 'center', justifyContent: 'center'
-        },
-        button: {
-            overflow: 'hidden', width: Width * .7, height: Height * .07, backgroundColor: Colors.MoveColor, alignItems: 'center', justifyContent: 'center', marginTop: Height * .03, borderRadius: Width * .03
-        },
-        textButton: {
-            color: Colors.WhiteColor
-        },
-        text: {
-            marginTop: Height * .04
-        }
-
-
-    }
-)
-export default CustomToast

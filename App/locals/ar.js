@@ -63,5 +63,22 @@ export default {
 
 
         allPlans_remain : 'أيام متبقية',
+        allPlans_add : 'إضافة',
+        allPlans_edit : 'تعديل',
+        allPlans_remove : 'حذف',
 
+
+
+        addPlan_nameErr : 'إسم الهدف إلزامي',
+        addPlan_targetErr : 'تكلفة الهدف إلزامي',
+        addPlan_endDateErr : 'تاريخ إنتهاء الهدف إلزامي',
+        addPlan_iconErr : 'شعار الهدف إلزامي',
+  
+  
+        addMoneyPopUp_placeHolder : 'المبلغ',
+
+
+        edit_goal_title : 'تعديل الهدف',
+        add_money_title : 'إضافة مبلغ',
+  
     }

@@ -15,6 +15,7 @@ import configureStore from './App/state/store';
 import { combineReducers } from 'redux';
 import { AddBudget } from './App/Screen/AddBudget';
 import { BudgetList } from './App/Screen/BudgetList';
+import { CustomToast } from './App/Components/CustomToast';
 
 let userPersistConfig = {
     key: 'user',
@@ -53,6 +54,7 @@ class MainApp extends Component {
                     </PersistGate>
 
                 </Provider>
+                <CustomToast/>
             </View>
         )
     }

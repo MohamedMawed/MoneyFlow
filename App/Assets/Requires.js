@@ -42,6 +42,7 @@ export const incomeCategory=
 {id:5, icon: require('./img/Icon/cake5.png'),text:'School'},
 ]
 export const Requires = {
+    PlusAdd : require('./img/plusAdd.png'),
     Logo_main: require('./img/logo-main.png'),
     toturil: [require('./img/toturil1.png'), require('./img/toturil2.png'), require('./img/toturil3.png')],
     Email: require('./img/at_email.png'),
