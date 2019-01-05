@@ -81,4 +81,8 @@ export default {
         edit_goal_title : 'تعديل الهدف',
         add_money_title : 'إضافة مبلغ',
   
+        edit_profile_title : 'تعديل الملف الشخصي',
+        edit_profile_new_password : 'كلمة السر الجديدة',
+    
+        edit_profile_requiredText : 'لتغيير البريد الإلكتروني أو كلمة السر يجب إدخال كلمة السر الحاليى',
     }

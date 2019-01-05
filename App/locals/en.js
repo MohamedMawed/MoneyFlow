@@ -28,6 +28,7 @@ Setting:'Setting'
         googleRegister : 'Register with google',
         email : 'Email Address',
         password : 'Password',
+        current_password : 'Current Password',
         name : 'Name',
 
 
@@ -86,4 +87,9 @@ Setting:'Setting'
 
         edit_goal_title : 'Edit Goal',
         add_money_title : 'Add Money',
+
+
+        edit_profile_title : 'Edit Profile',
+        edit_profile_new_password : 'New Password',
+        edit_profile_requiredText : 'To change email or password you will need to type the current password',
     }

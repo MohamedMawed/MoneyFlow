@@ -66,8 +66,8 @@ const Tabs = createBottomTabNavigator(
 
 export default App = createStackNavigator(
     {
-        Add_plan:{screen:Add_plan},
         Splash: { screen: Splash },
+        Add_plan:{screen:Add_plan},
         Main: { screen: Tabs },
         Login: { screen: Login },
         Intro: { screen: Intro },
