@@ -4,13 +4,12 @@ import {
     View,
     Text,
     TouchableOpacity,
-    ActivityIndicator, ScrollView, AsyncStorage, FlatList,Alert
-
+    ScrollView,
+    FlatList
 } from 'react-native';
 import { Requires, incomeCategory } from '../Assets/Requires';
 import { CustomTextInput } from './../Components/TextInput'
 import { Colors, FontFamilies, Width, Height, FixViewsOrder } from '../Global';
-import monthlyIncome, { setSavedMonthlyIncome, getSavedMonthlyIncome, getHomeScreen } from './../Global/API';
 import { strings } from '../locals';
 import { connect } from 'react-redux';
 import { AppReducer } from './../state/reducer';
@@ -33,7 +32,7 @@ class AddIncome extends Component {
             <View style={{
                 flex: 1,
                 alignItems: 'center',
-                backgroundColor: Colors.WhiteColor,
+                backgroundColor: '#fff',
             }}>
                 <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center' }} >
                     <Image
@@ -147,10 +146,10 @@ class AddIncome extends Component {
                                     // this.setState({ income: '', selectedCatogry: -1, selectedData: null })
                                 }
                                 else
-                                    alert(strings('alertChooseType'));
+                                    global.openToast(strings('alertChooseType'));
                             } catch (error) {
                                 //console.log(error, "selectedData11")
-                                alert(strings('validNumber'));
+                                global.openToast(strings('validNumber'));
                             }
                         }}
                         style={{

@@ -151,14 +151,18 @@ dependencies {
     compile project(':react-native-restart')
     compile project(':react-native-i18n')
     compile project(':react-native-firebase')
-    compile project(':react-native-google-signin')
+        implementation(project(":react-native-google-signin")){
+        exclude group: "com.google.android.gms" // very important
+    }
     compile project(':react-native-facebook-login')
     compile project(':react-native-vector-icons')
     compile project(':react-native-svg')
-    implementation "com.google.firebase:firebase-database:16.0.4"
-  implementation "com.google.android.gms:play-services-base:16.0.1"
-  implementation "com.google.firebase:firebase-core:16.0.3"
-  implementation "com.google.firebase:firebase-auth:16.0.3"
+        // Firebase dependencies
+    implementation "com.google.android.gms:play-services-base:15.0.1"
+    implementation "com.google.firebase:firebase-core:16.0.1"
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation "com.google.firebase:firebase-database:16.0.1"
+    implementation "com.google.firebase:firebase-auth:16.0.3"
     compile project(':react-native-linear-gradient')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

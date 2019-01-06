@@ -45,8 +45,8 @@ class Add_plan extends Component {
             startDate: new Date().toISOString().split('T')[0],
             endDate: strings('endDate'),
             ButtonType: -1,
-            target:500,
-            startWith : 0, // the money to start the plan
+            target:'',
+            startWith : '', // the money to start the plan
             icon:'',
             PlanList:[],
             IsLoding:true
@@ -64,7 +64,14 @@ class Add_plan extends Component {
         if (this.state.ButtonType == 'start')
             this.setState({ startDate: _date })
         if (this.state.ButtonType == 'end')
-            this.setState({ endDate: _date })
+            {
+                if( new Date(date) - new Date(this.state.startDate) > 0)
+                {
+                this.setState({ endDate: _date });
+                }else {
+                    global.openToast('please choose the end date to be greater than or equal the start date')
+                }
+            }
         //console.log(date, "datedatedatedatedatedate")
         this._hideDateTimePicker();
     };
@@ -176,6 +183,7 @@ class Add_plan extends Component {
                             onChangeText={(text) => {
                                 this.setState({ NamePlan: text })
                             }}
+                            maxLength={25}
                             placeholder={strings('name')}
                             style={{
                                 fontSize: Width * .03,
@@ -197,9 +205,15 @@ class Add_plan extends Component {
                         <TextInput
                             autoCorrect={false}
                             onChangeText={(text) => {
-                                this.setState({ target: text })
-                            }} keyboardType='numeric'
+                                if (+text != NaN) {
+                                    this.setState({ target: text });
+                                    console.log('target')
+                                }
+                            }}
+                            keyboardType='numeric'
+                            value={this.state.target}
                             placeholder={strings('addPlan_placeHolder_target')}
+                            maxLength={10}
                             style={{
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
@@ -218,8 +232,10 @@ class Add_plan extends Component {
                         <TextInput
                             autoCorrect={false}
                             onChangeText={(text) => {
+                                if(+text != NaN && +text <= +this.state.target)
                                 this.setState({ startWith: text })
                             }} keyboardType='numeric'
+                            value={this.state.startWith}
                             placeholder={strings('addPlan_placeHolder_startWith')}
                             style={{
                                 fontSize: Width * .03,

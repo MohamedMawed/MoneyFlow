@@ -92,4 +92,5 @@ Setting:'Setting'
         edit_profile_title : 'Edit Profile',
         edit_profile_new_password : 'New Password',
         edit_profile_requiredText : 'To change email or password you will need to type the current password',
+        home_no_stat : 'No Statistics Available'
     }

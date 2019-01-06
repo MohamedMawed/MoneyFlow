@@ -25,6 +25,7 @@ class HomeMonthsSwiperComponent extends Component {
                 paddingVertical:Height*.02,
                 marginTop:Height*.04,
                 elevation: 2,
+                backgroundColor: '#fff',
                 // shadowColor:'red',
                 justifyContent:'space-around',
                 alignItems:'center'

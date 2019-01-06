@@ -87,8 +87,7 @@ const styles = StyleSheet.create(
         container: {
             width: '100%',
             height: '100%',
-            backgroundColor: Colors.WhiteColor,
-
+            backgroundColor: '#f6f6f6', 
             alignItems: 'center',
             overflow: 'hidden',
         },

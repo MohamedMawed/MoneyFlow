@@ -17,6 +17,7 @@ class HomeMoneyItem extends Component {
                 height: Height * .12,
                 borderRadius: Width * .02,
                 paddingVertical: Height * .02,
+                backgroundColor: '#fff',
                 elevation: 2,
                 justifyContent: 'space-around',
                 alignItems: 'center'

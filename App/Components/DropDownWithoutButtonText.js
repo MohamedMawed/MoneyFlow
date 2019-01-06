@@ -67,7 +67,7 @@ class DropDown extends Component {
                 <TouchableOpacity activeOpacity={.9} onPress={() => {
                 this.refs.dropdown1.show()
              }} style={{ width: Width * .12, height: Height * .05, backgroundColor: '#fff', right: 0,top:0, position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
-                            <Image resizeMode={'cover'} source={Requires.dots} style={{ width: Width * .09, height: '100%', }} />
+                            <Image resizeMode={'contain'} source={Requires.dots} style={{ width: Width * .09, height: '100%', }} />
                 </TouchableOpacity>
             </TouchableOpacity>
         )

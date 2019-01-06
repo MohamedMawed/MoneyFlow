@@ -69,9 +69,11 @@ export class AppReducer {
             case AppReducer.USER_DATA:
                 return action.value
             case AppReducer.DELETE_GOAL:
+                let newData = state.goal;
+                newData.splice(action.index , 1);
                 return {
                     ...state,
-                    goal: state.goal.length > 1 ? state.goal.splice(action.index, 1) : [],
+                    goal: JSON.parse(JSON.stringify(newData))
                 }
             case AppReducer.EDIT_GOAL:
                 let temp1 = state.goal;

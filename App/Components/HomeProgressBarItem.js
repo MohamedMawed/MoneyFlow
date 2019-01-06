@@ -110,7 +110,7 @@ class HomeProgressBarItem extends Component {
                     <View style={styles.HeaderContainer}>
                         <Text style={[styles.HeaderTitle,{fontFamily: FontFamilies.Etisalat_0}]}>{nameCategory}</Text>
             
-                        <Text style={[styles.HeaderRemainingDays,{fontFamily: FontFamilies.Etisalat_0}]}>{this.props.remains + ' ' + strings('allPlans_remain')} </Text>
+                        <Text style={[styles.HeaderRemainingDays,{fontFamily: FontFamilies.Etisalat_0}]}>{this.props.remains ? this.props.remains + ' ' + strings('allPlans_remain'):'Finished'} </Text>
                     </View>
                     <DropDown
                         onSelect={(index) => {
@@ -142,9 +142,9 @@ class HomeProgressBarItem extends Component {
                     alignItems: 'center',
                     height: Height * .03,
                 }}>
-                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.DarkGrayColor, fontSize: 14 }}>{this.props.startWith}</Text>
-                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.AppBlueColor, fontSize: 16 }}>{this.props.currentlyPaid}</Text>
-                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.DarkGrayColor, fontSize: 14 }}>{this.props.cost}</Text>
+                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.BigMediumColor, fontSize: 14 }}>{this.props.startWith}</Text>
+                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: this.props.BackColor, fontSize: 16 }}>{this.props.currentlyPaid}</Text>
+                    <Text style={{ fontFamily: FontFamilies.Etisalat_0, color: Colors.BigMediumColor, fontSize: 14 }}>{this.props.cost}</Text>
                 </View>
 
             </View>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create(
             borderRadius: Width * .02,
             marginTop: Height * .02,
             elevation: 1.5,
-            // backgroundColor: 'red',
+            backgroundColor: '#fff',
             // justifyContent: 'center',
             alignItems: 'center',
             overflow: 'hidden',

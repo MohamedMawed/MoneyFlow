@@ -64,7 +64,7 @@ class PlanList extends Component {
             this.setState((prev) => ({
                 selectedGoal: {
                     ...prev.selectedGoal,
-                    end_date: +_date
+                    end_date: _date
                 }
             })
             )
@@ -72,11 +72,11 @@ class PlanList extends Component {
     };
     render() {
         //console.log(this.props.goals,"this.props.goals")
-        let { CurantSelected, PlanList, IsLoding,addPlan } = this.state
+        let {IsLoding} = this.state
         return (<View style={{
             width: '100%',
             height: '100%',
-            backgroundColor: '#fff',
+            backgroundColor: '#f6f6f6',
             alignItems: 'center'
         }}>
 
@@ -278,6 +278,12 @@ class PlanList extends Component {
                             return global.openToast(strings('addPlan_nameErr'))
                         if (target == 0)
                             return global.openToast(strings('addPlan_targetErr'))
+                        if(target < this.props.goals[this.state.selectedGoalIndex].currently_paid)
+                        return global.openToast('please choose the target to be more than or equal the currently paid money');
+
+                        if (new Date(end_date) - new Date(this.props.goals[this.state.selectedGoalIndex].start_date) < 0) 
+                            return global.openToast('please choose the end date to be greater than or equal the start date');
+                        
                         this.props.editGoal(this.state.selectedGoalIndex , name , target , end_date);
                         this.setState({showEditAlert:false})
                         // ios-save 
@@ -327,7 +333,11 @@ class PlanList extends Component {
                     <TextInput
                         autoCorrect={false}
                         onChangeText={(text) => {
-                            this.setState({ newMoneyAdded: +text })
+                            // alert(this.props.goals[this.state.selectedGoalIndex].money - this.props.goals[this.state.selectedGoalIndex].currently_paid)
+                            if (+text <= this.props.goals[this.state.selectedGoalIndex].money - this.props.goals[this.state.selectedGoalIndex].currently_paid)
+                                {
+                                    this.setState({ newMoneyAdded: text })
+                                }
                         }}
                         keyboardType={'numeric'}
                         value={this.state.newMoneyAdded}
@@ -345,8 +355,8 @@ class PlanList extends Component {
                         }} />
                     <TouchableOpacity onPress={() => {
                         console.log('newMoneyAdded',this.state.newMoneyAdded)
-                        if(this.state.newMoneyAdded !== NaN)
-                        this.props.addGoalMoney(this.state.selectedGoalIndex,this.state.newMoneyAdded);
+                        if(+this.state.newMoneyAdded !== NaN)
+                        this.props.addGoalMoney(this.state.selectedGoalIndex,+this.state.newMoneyAdded);
                         this.setState({newMoneyAdded:'',showAddAlert:false})
                         // ios-save
                     }} style={{ elevation: 5, width: Width * .5, backgroundColor: Colors.BlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 }}>

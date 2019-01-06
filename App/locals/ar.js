@@ -85,4 +85,7 @@ export default {
         edit_profile_new_password : 'كلمة السر الجديدة',
     
         edit_profile_requiredText : 'لتغيير البريد الإلكتروني أو كلمة السر يجب إدخال كلمة السر الحاليى',
+    
+    
+            home_no_stat : 'لا يوجد تقارير'
     }

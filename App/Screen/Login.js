@@ -14,7 +14,6 @@ import { FontFamilies, FontSize } from '../Global/Font';
 import {setGlobalUser} from './../Global/API';
 import { Colors } from '../Global/Colors';
 import firebase from 'react-native-firebase';
-firebase.initializeApp();
 import { NavigationActions, StackActions } from 'react-navigation'
 import CustomToast from '../Components/CustomToast';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
@@ -86,6 +85,8 @@ class Login extends Component {
             
             snapshot.once('value',(snapshot)=>{
                 console.log('snapSHOTTTTTTT',snapshot);
+                snapshot._value.goal ? null : snapshot._value.goal = [];
+                snapshot._value.budget ? null : snapshot._value.budget=[];
                 this.props.LoadUserData(snapshot._value);
             this.props.navigation.dispatch(resetAction);
             })

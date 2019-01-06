@@ -1,7 +1,7 @@
 /** @format */
 import React, { Component } from 'react'
 import { AppRegistry, View, StatusBar, ScrollView } from 'react-native';
-import App from './App';
+
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
