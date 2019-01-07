@@ -39,8 +39,7 @@ class AddBudget extends Component {
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
     _handleDatePicked = (date) => {
-
-        let _date = new Date(date).getDate() + '-' + (new Date(date).getMonth() + 1) + '-' + new Date(date).getFullYear()
+        let _date =new Date(date).getFullYear() + '-' + (new Date(date).getMonth() + 1) + '-' +  new Date(date).getDate() 
         this.setState({ startDate: _date })
         this._hideDateTimePicker();
     };

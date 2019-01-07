@@ -15,6 +15,8 @@ import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyEx
 import { strings } from '../locals';
 import DropDown from '../Components/DropDown';
 import { connect } from 'react-redux'
+import { AppReducer } from '../state/reducer';
+const editBudget = AppReducer.editBudget;
 
 class BudgetList extends Component {
     constructor(props) {
@@ -66,7 +68,7 @@ class BudgetList extends Component {
             backgroundColor: '#fff',
         }}>
             {/* //header */}
-            <View style={{ width: '100%', height: '100%' }}>
+            <View style={{ width: '100%', height: '100%',backgroundColor:'#FBFBFB' }}>
                 <View style={{ height: '95%', alignItems: 'center' }}>
 
                     <View style={{ width: '90%', height: Height * .08, justifyContent: 'center' }}>
@@ -134,9 +136,9 @@ class BudgetList extends Component {
                             }} >
                  
                 
-                            {IsLoding && this.props.Budgets.length >= 1&&CurantTab==1 && this.props.Budgets.map((item, index) => { return (this.sections(item, 0)) })}
-                            {IsLoding && this.props.Budgets.length >= 1&&CurantTab==2 && this.props.Budgets.map((item, index) => { return (this.sections(item, 1)) })}
-                            {IsLoding && this.props.Budgets.length >= 1 &&CurantTab==3&& this.props.Budgets.map((item, index) => { return (this.sections(item, 2)) })}
+                            {IsLoding && this.props.Budgets.length >= 1&&CurantTab==1 && this.props.Budgets.map((item, index) => { return (this.sections(item, 0,index)) })}
+                            {IsLoding && this.props.Budgets.length >= 1&&CurantTab==2 && this.props.Budgets.map((item, index) => { return (this.sections(item, 1,index)) })}
+                            {IsLoding && this.props.Budgets.length >= 1 &&CurantTab==3&& this.props.Budgets.map((item, index) => { return (this.sections(item, 2,index)) })}
                             {IsLoding == false && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                                 <ActivityIndicator size='large' />
                             </View>}
@@ -169,10 +171,13 @@ class BudgetList extends Component {
             <Text style={{ color: Colors.WhiteColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{text}</Text>
         </View>)
     }
-    sections = (item, index) => {
+    sections = (item, index,ItemIndex) => {
         return (
-            <View>
+            <View >
                 {item.payment_period == index ? <BudgetItem
+                onRemove={()=>{
+                    this.OnRemoveBudget(ItemIndex)
+                }}
                     onClick={() => this.props.navigation.navigate('EditBudget', { item: item, index: index })}
                     Source={Requires.ICons[item.icon_index].icon}
                     cost={item.money}
@@ -183,6 +188,12 @@ class BudgetList extends Component {
             </View>
 
         )
+    }
+    OnRemoveBudget(index){
+alert(index)
+        // let Budgets=this.props.Budgets
+        // Budgets.split(index)
+        // this.props.editBudget(Budgets)
     }
     CalcPercent = (start, end) => {
 
@@ -245,7 +256,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        createBudget: (value) => dispatch(createBudget(value)),
+        editBudget: (value) => dispatch(editBudget(value))
     }
 }
 

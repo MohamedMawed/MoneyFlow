@@ -17,23 +17,23 @@ const editBudget = AppReducer.editBudget;
 class EditBudget extends Component {
     constructor(props) {
         super(props)
-        
+
         this.state = {
             selectedIndex: props.navigation.state.params.index,
             CurantSelected: props.navigation.state.params.item.icon_index,
             sliderOneValue: [10000],
-            valueSlider:props.navigation.state.params.item.money,
+            valueSlider: props.navigation.state.params.item.money,
             AddBudget: false,
             PlansGoalsList: PlansGoalsList2,
             isDateTimePickerVisible: false,
-            startDate:props.navigation.state.params.item.start_date,
+            startDate: props.navigation.state.params.item.start_date,
             ButtonType: -1,
             icon: props.navigation.state.params.item.icon_index,
-            category:props.navigation.state.params.item.category,
+            category: props.navigation.state.params.item.category,
             BudgetList: [],
             IsLoding: true,
-            payment_period:props.navigation.state.params.item.payment_period,
-            Defaultpayment_period:[{ text: 'weekly', Icon: '' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }]
+            payment_period: props.navigation.state.params.item.payment_period,
+            Defaultpayment_period: [{ text: 'weekly', Icon: '' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }]
         }
     }
 
@@ -43,8 +43,8 @@ class EditBudget extends Component {
     _handleDatePicked = (date) => {
 
         let _date = new Date(date).getDate() + '-' + (new Date(date).getMonth() + 1) + '-' + new Date(date).getFullYear()
-            this.setState({ startDate: _date })
-            this._hideDateTimePicker();
+        this.setState({ startDate: _date })
+        this._hideDateTimePicker();
     };
     render() {
         let { CurantSelected } = this.state
@@ -93,7 +93,7 @@ class EditBudget extends Component {
                     </View>
                 </View>
                 {/* // form enter data */}
-                <View style={[Styles.Header, { width: '90%', height: Height * .2, backgroundColor: Colors.WhiteColor, elevation: 7, borderRadius: Width * .03, alignItems: 'center',justifyContent:'center' }]}>
+                <View style={[Styles.Header, { width: '90%', height: Height * .2, backgroundColor: Colors.WhiteColor, elevation: 7, borderRadius: Width * .03, alignItems: 'center', justifyContent: 'center' }]}>
 
                     <View style={{ width: '100%', height: '30%', alignItems: 'center' }}>
                         {/* //inputs */}
@@ -104,8 +104,8 @@ class EditBudget extends Component {
                             justifyContent: 'space-evenly'
                         }}>
                             <TextInput
-                            value={this.state.valueSlider}
-                            keyboardType='numeric'
+                                value={this.state.valueSlider}
+                                keyboardType='numeric'
                                 autoCorrect={false}
                                 onChangeText={(text) => {
                                     this.setState({ valueSlider: text })
@@ -165,46 +165,46 @@ class EditBudget extends Component {
 
 
                     </View>
-                    <View style={{width:'90%',height:Height*.08,alignItems:'center',justifyContent:'space-between',flexDirection:FixViewsOrder(),marginTop:Height*.01}}>
-                    <View style={{ width: '43%', height: '30%', justifyContent: 'center', alignItems: 'center' }}>
-                        <DropDown
-                        returnIndex
-                            defaultIndex={this.state.payment_period}
-                            onSelect={(index) => {
-                                this.setState({payment_period:index})
-                            }}
-                            defaultValue={this.state.Defaultpayment_period[this.state.payment_period].text}
-                            Data={this.state.Defaultpayment_period}
-                            Width={Width * .38}
-                            DropdownWidth={Width * .38} />
-                    </View>
-                    <TouchableOpacity onPress={() => {
+                    <View style={{ width: '90%', height: Height * .08, alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder(), marginTop: Height * .01 }}>
+                        <View style={{ width: '43%', height: '30%', justifyContent: 'center', alignItems: 'center' }}>
+                            <DropDown
+                                returnIndex
+                                defaultIndex={this.state.payment_period}
+                                onSelect={(index) => {
+                                    this.setState({ payment_period: index })
+                                }}
+                                defaultValue={this.state.Defaultpayment_period[this.state.payment_period].text}
+                                Data={this.state.Defaultpayment_period}
+                                Width={Width * .38}
+                                DropdownWidth={Width * .38} />
+                        </View>
+                        <TouchableOpacity onPress={() => {
                             this.setState({ ButtonType: 'end' })
                             this._showDateTimePicker()
                         }}
-                                activeOpacity={.5}
-                                style={{
-                                    width: '43%',
-                                    height: Height * .06,
-                                    borderRadius: Width * .02,
-                                    borderColor: '#D7D7D7',
-                                    borderWidth: 1,
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    backgroundColor: '#F9F9F9',
-                                    paddingHorizontal: Width * .03
-                                }}>
-                                <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
-                                <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
-                                <Text
-                                    style={[Styles.TextStyle, {
-                                        width: '60%',fontSize:Width*.03 ,
-                                        color: '#D7D7D7'
-                                    }]}>{this.state.startDate}</Text>
+                            activeOpacity={.5}
+                            style={{
+                                width: '43%',
+                                height: Height * .06,
+                                borderRadius: Width * .02,
+                                borderColor: '#D7D7D7',
+                                borderWidth: 1,
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                backgroundColor: '#F9F9F9',
+                                paddingHorizontal: Width * .03
+                            }}>
+                            <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
+                            <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
+                            <Text
+                                style={[Styles.TextStyle, {
+                                    width: '60%', fontSize: Width * .03,
+                                    color: '#D7D7D7'
+                                }]}>{this.state.startDate}</Text>
 
-                            </TouchableOpacity>
-                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 {/* // TITLE CHOOSE ICON */}
@@ -215,6 +215,7 @@ class EditBudget extends Component {
 
                 <View style={[Styles.Header, { width: '100%', height: Height * .45, marginVertical: 5 }]}>
                     <FlatList
+
                         showsVerticalScrollIndicator={false}
                         numColumns={4}
                         contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }} data={Requires.ICons} renderItem={({ item, index }) => {
@@ -254,36 +255,18 @@ class EditBudget extends Component {
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
     OnSubmit = async () => {
-        // 
-        let { startDate, endDate, valueSlider, AddBudget, icon, category,payment_period } = this.state
+        let { startDate, endDate, valueSlider, AddBudget, icon, category, payment_period } = this.state
         if (valueSlider == 0)
             return alert('Please specify the value')
         if (startDate == 'Start date')
             return alert('Please specify the date')
         if (icon == -1)
             return alert('Please selected icon')
-            
-        let newBudget = { icon_index: icon, start_date: startDate, category: category, money: valueSlider,payment_period:payment_period }
-        this.props.editBudget(newBudget,this.state.selectedIndex)
-        // if (Budget) {
-        //     let currantBudget = JSON.parse(Budget)
-        //     currantBudget.push(newBudget)
-        //     AsyncStorage.setItem('Budget' + _key, JSON.stringify(currantBudget))
-        //     this.setState({ BudgetList: currantBudget })
-        //     //console.log('currantBudget', currantBudget)
-        // }
-        // else {
-        //     AsyncStorage.setItem('Budget' + _key, JSON.stringify([newBudget]))
-        //     this.setState({ BudgetList: [newBudget] })
-        // }
-
-        Alert.alert('successfully', 'Budget Added successfully', [{
-            text: 'ok', onPress: () => {
-                this.props.navigation.goBack()
-            }
-        }])
-
-
+        let newBudget = { icon_index: icon, start_date: startDate, category: category, money: valueSlider, payment_period: payment_period }
+        let Budget = this.props.Budgets
+        Budget[this.state.selectedIndex] = newBudget
+        this.props.editBudget(Budget)
+        this.props.navigation.goBack()
 
     }
     CalcPercent = (start, end) => {
@@ -335,17 +318,18 @@ const Styles = StyleSheet.create({
 })
 
 
-function mapStateToProps(state) {   
+function mapStateToProps(state) {
     return {
-      income: state.appReducer.income,
+        income: state.appReducer.income,
+        Budgets: state.appReducer.budget,
     }
-  }
+}
 
-  function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
-     editBudget : (value,index) => dispatch(editBudget(value,index)),
+        editBudget: (value) => dispatch(editBudget(value)),
     }
-  }
-  
+}
 
-export default connect(mapStateToProps,mapDispatchToProps)(EditBudget)
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditBudget)

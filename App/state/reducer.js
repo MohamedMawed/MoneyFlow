@@ -90,9 +90,10 @@ export class AppReducer {
                 };
 
             case AppReducer.EDIT_BUDGET:
-                return {
-                    ...action.newBudget,
-                };
+            return {
+                ...state,
+                budget : action.newBudget
+            };
             case AppReducer.DELETE_BUDGET:
                 return initialOrderState;
             default:
@@ -143,8 +144,9 @@ static createBudget = (budget) => {
         budget,
     }
 }
-    static editBudget = (newBudget,index) => {
-        return {type:AppReducer.EDIT_BUDGET,index,newBudget}
+    static editBudget = (newBudget) => {
+        console.log()
+        return {type:AppReducer.EDIT_BUDGET,newBudget}
      
     }
 

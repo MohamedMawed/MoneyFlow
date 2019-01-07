@@ -13,64 +13,77 @@ import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
 import { FixViewsOrder } from '../Global';
 
-export const BudgetItem = ({ onClick, Source, cost,Category,date,payment_period }) => {
+export const BudgetItem = ({ onClick, Source, cost, Category, date, payment_period,onRemove }) => {
+           var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+           let today=new Date()
+            let time=today.toString().split(' ')[4]
+           let selectedDate=new Date(date.split('-')[0],date.split('-')[1]-1,date.split('-')[2],time.split(':')[0],time.split(':')[1],time.split(':')[2])
+           console.log('ToDATAAAToDATAAA',today.getTime(),"dddddd",selectedDate.getTime())
+           if (today.getTime()==selectedDate.getTime()){
+               console.log('ToDATAAAToDATAAAdddffdfdfdf')
+           }
+         var firstDate = new Date(date);
+
+        var secondDate = new Date("2008/1/22");
+var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+console.log("diffDaysdiffDays",date)
     return (
-        <View style={[styles.container, { paddingTop: 0 ,height:Height*.13}]}>
+        <View style={[styles.container, { paddingTop: 0, height: Height * .15 ,backgroundColor:'#fff'}]}>
 
-            <TouchableOpacity activeOpacity={0.75}  style={[{ height: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: FixViewsOrder() }]}>
-                
-                <View style={{width:Width*.27,height:'100%',alignItems:'center'}} >
-                <View style={{width:'70%',height:'50%',flexDirection:FixViewsOrder(),justifyContent:'flex-end',alignItems:'center'}}>
-        
-                       
-                <TouchableOpacity >
-                <View style={{width:Width*.08,height:Width*.08,borderRadius:Width*.05,marginHorizontal:5,alignItems:'center',justifyContent:'center',borderColor:Colors.DarkGrayColor,backgroundColor:Colors.GrayColor}}>
-                <Image source={Requires.remove} resizeMode='contain' style={{width:'50%',height:'50%',tintColor:Colors.DarkGrayColor}} />
+            <TouchableOpacity activeOpacity={0.75} style={[{ height: '100%', alignItems: 'center',width:'100%' }]}>
+
+
+                <View style={{ width: '100%', height: '60%', alignItems: 'center', justifyContent: 'center', flexDirection: FixViewsOrder() }}>
+                    <View style={{ width: Width * .27, height: '100%', alignItems: 'center' }} >
+
+                        <View style={{ width: '70%', height: '100%', flexDirection: FixViewsOrder(), alignItems: 'center',justifyContent:'flex-end' }}>
+
+                            <TouchableOpacity onPress={onRemove} >
+                                <View style={{ width: Width * .08, height: Width * .08, borderRadius: Width * .05, marginHorizontal: 5, alignItems: 'center', justifyContent: 'center', borderColor: Colors.DarkGrayColor, backgroundColor: Colors.GrayColor }}>
+                                    <Image source={Requires.remove} resizeMode='contain' style={{ width: '50%', height: '50%', tintColor: Colors.DarkGrayColor }} />
+                                </View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={onClick}>
+                                <View style={{ width: Width * .08, height: Width * .08, borderRadius: Width * .05, marginHorizontal: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.GrayColor }}>
+                                    <Image source={Requires.edit} resizeMode='contain' style={{ width: '50%', height: '50%', tintColor: Colors.DarkGrayColor }} />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+
+                    </View>
+
+
+                    <View style={{ width: Width * .5, height: '100%',justifyContent:'center' }}>
+                        <Text style={[{ color: Colors.BlackColor, fontSize: 17 }]}>{Category}</Text>
+                        <View style={{ flexDirection: FixViewsOrder(), justifyContent: 'flex-end' }}>
+                            {/* <Text style={[styles.ItemCostText, { color: Colors.DarkGrayColor, fontSize: 14 }]}>{payment_period}</Text> */}
+                            <Text style={[{ color: Colors.DarkGrayColor, fontSize: 12 }]}>Remaining 4 days</Text>
+                        </View>
+                    </View>
+
+                    <View style={{ width: Width * .17, alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                        <View style={[{ backgroundColor: "#7276CF", width: Width * .09, height: Width * .09, alignItems: 'center', justifyContent: 'center', borderRadius: Width * .1 }]}>
+                            <Image source={Source} resizeMode='contain' style={{ width: '60%', height: '60%', tintColor: '#fff' }} />
+                        </View>
+                    </View>
                 </View>
 
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onClick}>
-                <View style={{width:Width*.08,height:Width*.08,borderRadius:Width*.05,marginHorizontal:5,alignItems:'center',justifyContent:'center',backgroundColor:Colors.GrayColor}}>
-                <Image source={Requires.edit} resizeMode='contain' style={{width:'50%',height:'50%',tintColor:Colors.DarkGrayColor}} />
-                </View>
-                </TouchableOpacity>
-     
-                
-          
 
-                </View>
+                <View style={{ width: '100%', height: '40%',alignItems:'center' }}>
 
-                <View style={[styles.ItemCostContainer, { borderColor: Colors.GreenColor, marginTop: Height * .012 }]}>
+                <View style={{width:'92%',height:Height*.012,backgroundColor:'#7276CF',borderRadius:Width*.08}} />
+              <View style={{width:'92%',alignItems:'flex-start',marginTop:Height*.005}}>
+              <Text style={{fontFamily:FontFamilies.Etisalat_0,color:'#7276CF',fontSize:15}}>{cost}</Text>
+              </View>
+              
+                 {/* <View style={[styles.ItemCostContainer, { borderColor: Colors.GreenColor, marginTop: Height * .012 }]}>
                     <Text style={[styles.ItemCostText, { color: Colors.GreenColor }]}
                     >{cost}</Text>
+                </View> */}
+                
                 </View>
-
-                </View>
-          
-
-                <View style={{width:Width*.5,height:'70%'}}>
-                    <Text style={[{ color: Colors.BlackColor,fontSize:17 }]}>{Category}</Text>
-                    <View style={{flexDirection:FixViewsOrder(),justifyContent:'flex-end'}}>
-                    <Text style={[styles.ItemCostText, { color: Colors.DarkGrayColor,fontSize:14 }]}>{date}</Text>
-                    <Text style={[{ color: Colors.DarkGrayColor,fontSize:12 }]}>Next Date : </Text>
-                    </View>
-                    <View style={{flexDirection:FixViewsOrder(),justifyContent:'flex-end'}}>
-                    <Text style={[styles.ItemCostText, { color: Colors.DarkGrayColor,fontSize:14 }]}>{payment_period}</Text>
-                    <Text style={[{ color: Colors.DarkGrayColor,fontSize:12 }]}>Payment Period :</Text>
-                    </View>
-                </View>
-
-
-
-                <View style={{ width: Width * .17, alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-                    <View style={[{ backgroundColor: Colors.GreenColor,width:Width*.13,height:Width*.13,alignItems:'center',justifyContent:'center',borderRadius:Width*.1 }]}>
-                        <Image source={Source} style={styles.ItemIcon} />
-                    </View>
-                </View>
-
-
-
-
+               
             </TouchableOpacity>
 
 
@@ -135,7 +148,7 @@ const styles = StyleSheet.create(
             height: Height * .15,
             borderRadius: Width * .02,
             marginTop: Height * .02,
-            elevation: 1.5,
+            elevation: 4,
             // backgroundColor: 'red',
             // justifyContent: 'center',
             alignItems: 'center',
