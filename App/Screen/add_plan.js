@@ -1,5 +1,17 @@
 import React, { Component } from 'React'
-import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, FlatList, TouchableOpacity, TextInput, ScrollView,ActivityIndicator,Alert } from 'react-native'
+import {
+    TouchableHighlight,
+    TouchableWithoutFeedback,
+    Text,
+    Image,
+    View,
+    AsyncStorage,
+    StyleSheet,
+    FlatList,
+    TouchableOpacity,
+    TextInput,
+            } from 'react-native'
+
 import { Height, Width } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
 import { Requires } from '../Assets/Requires';
@@ -12,14 +24,16 @@ import { HomeProgressBarItem } from '../Components/HomeProgressBarItem';
 import { PlansGoalsList } from '../Global/ComponentTest';
 import { _key } from '../Global/API';
 import { connect } from 'react-redux';
-
-import { strings } from '../locals';
+import DropDown from '../Components/DropDown';
+import { strings, getAppLanguage, isArabic } from '../locals';
 import { AppReducer } from '../state/reducer';
+
 const createGole = AppReducer.createGoal;
 
 class Add_plan extends Component {
     constructor(props) {
         super(props)
+        console.log('new Date().toISOString()',new Date().toISOString())
         this.state = {
             CurantSelected: -1,
             valueSlider: 0,
@@ -28,10 +42,11 @@ class Add_plan extends Component {
             addPlan: false,
             PlansGoalsList: PlansGoalsList,
             isDateTimePickerVisible: false,
-            startDate: strings('startDate'),
+            startDate: new Date().toISOString().split('T')[0],
             endDate: strings('endDate'),
             ButtonType: -1,
-            target:500,
+            target:'',
+            startWith : 0, // the money to start the plan
             icon:'',
             PlanList:[],
             IsLoding:true
@@ -45,11 +60,18 @@ class Add_plan extends Component {
 
     _handleDatePicked = (date) => {
 
-        let  _date=new Date(date).getDate()+'-'+new Date(date).getMonth()+'-'+new Date(date).getFullYear()
+        let  _date=new Date(date).toISOString().split('T')[0];
         if (this.state.ButtonType == 'start')
             this.setState({ startDate: _date })
         if (this.state.ButtonType == 'end')
-            this.setState({ endDate: _date })
+            {
+                if( new Date(date) - new Date(this.state.startDate) > 0)
+                {
+                this.setState({ endDate: _date });
+                }else {
+                    global.openToast('please choose the end date to be greater than or equal the start date')
+                }
+            }
         //console.log(date, "datedatedatedatedatedate")
         this._hideDateTimePicker();
     };
@@ -79,22 +101,33 @@ class Add_plan extends Component {
                         justifyContent: 'flex-start',
                         flexDirection: 'row'
                     }}>
-                        <TouchableOpacity style={{marginHorizontal:Width*.01}} onPress={()=>{
-                            this.props.navigation.goBack()
-                        }}>
-                        <Image
-                            source={Requires.back}
-                            resizeMode='contain'
+                        <TouchableOpacity
                             style={{
-                                width: Width * .05,
-                                height: Width * .05
-                            }} />
-                    </TouchableOpacity >
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                width: Width * .1,
+                                height: '100%'
+                            }} onPress={() => {
+                                this.props.navigation.goBack()
+                            }}>
+                                                    <View style={{transform:[{rotate:isArabic()? '180deg':'0deg'}]}}>
+
+                           <Image
+                                source={Requires.back}
+                                resizeMode='contain'
+                                style={{
+                                    width: Width * .05,
+                                    height: Width * .05
+                                }} />
+                                </View>
+                        </TouchableOpacity>
 
                         <Text style={[Styles.TextStyle, {
                             width: '90%',
                             textAlign: 'left',
-                            fontSize: FontSize.LargFontSize,marginHorizontal:Width*.03
+                            fontSize: FontSize.LargFontSize,
+                            marginHorizontal:0,
+                            fontFamily:FontFamilies.Etisalat_0
                             // marginHorizontal: Width * .04
                         }]}> {strings('newPlan')}</Text>
 
@@ -136,7 +169,7 @@ class Add_plan extends Component {
                 {/* // form enter data */}
                 <View style={[Styles.Header, {
                     width: '90%',
-                    height: Height * .27,
+                    height: Height * .32,
                     backgroundColor: Colors.WhiteColor,
                     elevation: 4,
                     borderRadius: Width * .03,
@@ -156,12 +189,12 @@ class Add_plan extends Component {
                             onChangeText={(text) => {
                                 this.setState({ NamePlan: text })
                             }}
-                            placeholder='Name'
+                            maxLength={25}
+                            placeholder={strings('name')}
                             style={{
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
                                 width: '90%',
-                                textAlign: 'left',
                                 height: Height * .06,
                                 borderRadius: Width * .02,
                                 borderWidth: 1,
@@ -178,9 +211,38 @@ class Add_plan extends Component {
                         <TextInput
                             autoCorrect={false}
                             onChangeText={(text) => {
-                                this.setState({ target: text })
+                                if (+text != NaN) {
+                                    this.setState({ target: text });
+                                    console.log('target')
+                                }
+                            }}
+                            keyboardType='numeric'
+                            value={this.state.target}
+                            placeholder={strings('addPlan_placeHolder_target')}
+                            maxLength={10}
+                            style={{
+                                fontSize: Width * .03,
+                                fontFamily: FontFamilies.Etisalat_0,
+                                width: '90%',
+                                height: Height * .06,
+                                borderRadius: Width * .02,
+                                borderWidth: 1,
+                                borderColor: '#D9D9D9',
+                                backgroundColor: '#F9F9F9',
+                                paddingHorizontal: Width * .03,
+                                // fontSize: Width*.03
+                                // marginTop: Height * .022
+                            }} />
+
+
+                        <TextInput
+                            autoCorrect={false}
+                            onChangeText={(text) => {
+                                if(+text != NaN && +text <= +this.state.target)
+                                this.setState({ startWith: text })
                             }} keyboardType='numeric'
-                            placeholder='Target'
+                            value={this.state.startWith}
+                            placeholder={strings('addPlan_placeHolder_startWith')}
                             style={{
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
@@ -207,6 +269,7 @@ class Add_plan extends Component {
                             this.setState({ ButtonType: 'start' })
                             this._showDateTimePicker()
                         }} activeOpacity={.5} style={{ width: '46%', height: '100%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
+                            
                                 <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7',fontSize:Width*.03 }]}>{this.state.startDate}</Text>
                                 <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                                 <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
@@ -247,11 +310,11 @@ class Add_plan extends Component {
 
                 {/* // TITLE CHOOSE ICON */}
                 <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                    <Text style={Styles.TextStyle}>{strings('chooseIcon')}</Text>
+                    <Text style={[Styles.TextStyle,{fontFamily:FontFamilies.Etisalat_0,fontSize:17}]}>{strings('chooseIcon')}</Text>
                 </View>
 
 
-                <View style={[Styles.Header, { width: '90%', height: Height * .39, justifyContent: 'center', alignItems: 'center', marginVertical: 5 }]}>
+                <View style={[Styles.Header, { width: '90%', height: Height * .38, justifyContent: 'center', alignItems: 'center', marginVertical: 5 }]}>
                     <FlatList
                         numColumns={5}
                         showsVerticalScrollIndicator={false}
@@ -278,8 +341,8 @@ class Add_plan extends Component {
             <TouchableOpacity onPress={async () => {
                 this.onsubmitPlan()
                 // ios-save
-            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.BlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .03 }}>
-                <Text style={{ fontSize: 15, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>Save</Text>
+            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 }}>
+                <Text style={{ fontSize: 17, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('save')}</Text>
             </TouchableOpacity>
             
            
@@ -320,19 +383,17 @@ class Add_plan extends Component {
     }
    async onsubmitPlan(){
 
-        let { startDate, endDate, addPlan, icon, category,target,NamePlan } = this.state
+        let { startDate, endDate, startWith, icon, category,target,NamePlan } = this.state
             if (NamePlan == '')
-            return alert('Please specify the name')
+            return global.openToast(strings('addPlan_nameErr'))
             if (target == 0)
-                return alert('Please specify the value')
-            if (startDate == 'Start date')
-                return alert('Please specify the Start date')
-            if (endDate == 'End date')
-                return alert('Please specify the End date')
+                return global.openToast(strings('addPlan_targetErr'))
+           if (endDate == 'End date')
+                return global.openToast(strings('addPlan_endDateErr'))
             if (icon == '')
-                return alert('Please selected icon')
+                return global.openToast(strings('addPlan_iconErr'))
             // add store
-            let newPlan = { icon_index: icon, start_date: startDate, end_date: endDate, name: NamePlan,money:target,category:category }
+            let newPlan = { start_money : parseInt(startWith),currently_paid : parseInt(startWith), icon_index: icon, start_date: startDate, end_date: endDate, name: NamePlan,money:parseInt(target),category:category }
             // {
             //     "category": "Foot",
             //     "name": "Foot",

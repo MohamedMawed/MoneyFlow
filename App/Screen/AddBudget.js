@@ -7,12 +7,13 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { FontFamilies, FontSize } from '../Global/Font';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyExpenses } from '../Global/API';
-import { strings } from '../locals';
+import { strings, isArabic } from '../locals';
 import DropDown from '../Components/DropDown';
 import { PlansGoalsList2 } from '../Global/ComponentTest';
 import { FixViewsOrder } from '../Global';
 import { connect } from 'react-redux';
 import { AppReducer } from '../state/reducer';
+import Dropdown2 from '../Components/Dropdown2';
 const createBudget = AppReducer.createBudget;
 class AddBudget extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class AddBudget extends Component {
             AddBudget: false,
             PlansGoalsList: PlansGoalsList2,
             isDateTimePickerVisible: false,
-            startDate: strings('startDate'),
+            startDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
             endDate: strings('endDate'),
             ButtonType: -1,
             icon: -1,
@@ -39,7 +40,7 @@ class AddBudget extends Component {
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
     _handleDatePicked = (date) => {
-        let _date =new Date(date).getFullYear() + '-' + (new Date(date).getMonth() + 1) + '-' +  new Date(date).getDate() 
+        let _date = new Date(date).getFullYear() + '-' + (new Date(date).getMonth() + 1) + '-' + new Date(date).getDate()
         this.setState({ startDate: _date })
         this._hideDateTimePicker();
     };
@@ -74,13 +75,16 @@ class AddBudget extends Component {
                         <TouchableOpacity style={{ marginHorizontal: Width * .01 }} onPress={() => {
                             this.props.navigation.goBack()
                         }}>
-                            <Image
-                                source={Requires.back}
-                                resizeMode='contain'
-                                style={{
-                                    width: Width * .05,
-                                    height: Width * .05
-                                }} />
+                            <View style={{ transform: [{ rotate: isArabic() ? '180deg' : '0deg' }] }}>
+
+                                <Image
+                                    source={Requires.back}
+                                    resizeMode='contain'
+                                    style={{
+                                        width: Width * .05,
+                                        height: Width * .05
+                                    }} />
+                            </View>
                         </TouchableOpacity >
                         <Text style={[Styles.TextStyle, {
                             width: '90%',
@@ -94,15 +98,15 @@ class AddBudget extends Component {
                     </View>
                 </View>
                 {/* // form enter data */}
-                <View style={[Styles.Header, { width: '90%', height: Height * .2, backgroundColor: Colors.WhiteColor, elevation: 7, borderRadius: Width * .03, alignItems: 'center', justifyContent: 'center' }]}>
+                <View style={[Styles.Header, { width: '95%', height: Height * .22, backgroundColor: Colors.WhiteColor, elevation: 7, borderRadius: Width * .03, alignItems: 'center', justifyContent: 'center' }]}>
 
-                    {/* <View style={{ width: '90%', height: '33%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    {/* <View style={{ width: '90%', height: Height * .06, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Text style={[Styles.TextStyle, { fontSize: 18 }]}>{strings('budget')}</Text>
-                        <Text style={[Styles.TextStyle, { color: '#7274CD', fontSize: Width * .08 }]}>{this.state.valueSlider}</Text>
+                        <Text style={[Styles.TextStyle, { color: '#7274CD', fontSize: 15 }]}>{this.state.valueSlider}</Text>
                     </View> */}
 
                     {/* //slider */}
-                    <View style={{ width: '100%', height: '30%', alignItems: 'center' }}>
+                    <View style={{ width: '100%', height: Height * .06, alignItems: 'center' }}>
                         {/* //inputs */}
                         <View style={{
                             width: '100%',
@@ -131,58 +135,70 @@ class AddBudget extends Component {
                                     paddingHorizontal: Width * .03,
                                     // marginTop: Height * .022
                                 }} />
-                        </View>
 
-                        {/* <MultiSlider
-                            values={[this.state.valueSlider]}
-                            sliderLength={Width * .8}
-                            min={0}
-                            step={1}
-                            max={getSavedMonthlyIncome()-getSavedMonthlyExpenses()}
-                            snapped
-                            selectedStyle={{
-                                backgroundColor: '#7274CD', height: Width * .02, borderRadius: 4
-                            }}
-                            trackStyle={{
-                                backgroundColor: Colors.GrayColor, height: Width * .02, borderRadius: 4
-                            }}
-                            customMarker={() => {
-                                return (
-                                    <View
-                                        style={{
-                                            backgroundColor: Colors.WhiteColor,
-                                            width: Width * .07,
-                                            height: Width * .07,
-                                            borderColor: '#DDDDDD',
-                                            borderWidth: 1,
-                                            borderRadius: Width * .01,
-                                            justifyContent: "center",
-                                            alignItems: "center"
-                                        }}
-                                    />
-                                );
-                            }}
-                            onValuesChange={(values) => {
-                                //console.log(values, "ssssssssssssssddd")
-                                this.setState({ valueSlider: values[0] })
-                            }}
-                        //    onValuesChangeFinish={this.sliderOneValuesChangeFinish}
-                        /> */}
+                            {/* <MultiSlider
+                                values={[this.state.valueSlider]}
+                                sliderLength={Width * .8}
+                                min={0}
+                                step={1}
+                                max={this.state.sliderOneValue}
+                                snapped
+                                selectedStyle={{
+                                    backgroundColor: '#7274CD', height: Width * .02, borderRadius: 4
+                                }}
+                                trackStyle={{
+                                    backgroundColor: Colors.GrayColor, height: Width * .02, borderRadius: 4
+                                }}
+                                customMarker={() => {
+                                    return (
+                                        <View
+                                            style={{
+                                                backgroundColor: Colors.WhiteColor,
+                                                width: Width * .07,
+                                                height: Width * .07,
+                                                borderColor: '#DDDDDD',
+                                                borderWidth: 1,
+                                                borderRadius: Width * .01,
+                                                justifyContent: "center",
+                                                alignItems: "center"
+                                            }}
+                                        />
+                                    );
+                                }}
+                                onValuesChange={(values) => {
+                                    //console.log(values, "ssssssssssssssddd")
+                                    this.setState({ valueSlider: values[0] })
+                                }}
+                            //    onValuesChangeFinish={this.sliderOneValuesChangeFinish}
+                            /> */}
+
+                        </View>
 
 
                     </View>
-                    <View style={{ width: '90%', height: Height * .08, alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder(), marginTop: Height * .01 }}>
+                    <View style={{ width: '95%', height: Height * .04, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <View style={{ alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder(), width: '50%' }}>
+                            {/* <Text style={[Styles.TextStyle, { color: '#7274CD', fontSize: 15 }]}>{Math.floor((this.state.valueSlider / this.state.sliderOneValue * 100) * 10) / 10}%</Text>
+                            <Text style={[Styles.TextStyle, { color: Colors.DarkGrayColor, fontSize: 15 }]}>{this.state.sliderOneValue}</Text> */}
+                        </View>
+
+                    </View>
+
+                    <View style={{ width: Width * .85, height: Height * .06, alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder() }}>
                         <View style={{ width: '43%', height: '30%', justifyContent: 'center', alignItems: 'center' }}>
-                            <DropDown
+
+                            <Dropdown2
                                 returnIndex
                                 defaultIndex={0}
                                 onSelect={(index) => {
                                     this.setState({ payment_period: index })
                                 }}
-                                defaultValue={'weekly'}
-                                Data={[{ text: 'weekly', Icon: '' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }]}
-                                Width={Width * .38}
-                                DropdownWidth={Width * .38} />
+                                defaultValue={strings('weekly')}
+                                Data={[{ text: strings('weekly'), Icon: '' }, { text: strings('Monthly'), Icon: '' }, { text: strings('annual'), Icon: '' }]}
+                                Width={Width * .41}
+                                borderRadius={Width * .05}
+                                dropdownHeight={Height * .06}
+                                DropdownWidth={Width * .41} />
                         </View>
                         <TouchableOpacity onPress={() => {
                             this.setState({ ButtonType: 'end' })
@@ -190,7 +206,7 @@ class AddBudget extends Component {
                         }}
                             activeOpacity={.5}
                             style={{
-                                width: '43%',
+                                width: Width * .41,
                                 height: Height * .06,
                                 borderRadius: Width * .02,
                                 borderColor: '#D7D7D7',
@@ -250,8 +266,8 @@ class AddBudget extends Component {
             <TouchableOpacity onPress={async () => {
                 this.OnSubmit()
                 // ios-save
-            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.BlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .03 }}>
-                <Text style={{ fontSize: 15, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>Save</Text>
+            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .03 }}>
+                <Text style={{ fontSize: 17, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>Save</Text>
             </TouchableOpacity>
         </View>
         )
@@ -284,11 +300,10 @@ class AddBudget extends Component {
         //     this.setState({ BudgetList: [newBudget] })
         // }
 
-        Alert.alert('successfully', 'Budget Added successfully', [{
-            text: 'ok', onPress: () => {
-                this.props.navigation.goBack()
-            }
-        }])
+
+        this.props.navigation.goBack()
+
+
 
 
 

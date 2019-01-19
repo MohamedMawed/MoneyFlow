@@ -25,8 +25,9 @@ class HomeMonthsSwiperComponent extends Component {
                 paddingVertical:Height*.02,
                 marginTop:Height*.04,
                 elevation: 2,
+                backgroundColor: '#fff',
                 // shadowColor:'red',
-                justifyContent:'space-around',
+                justifyContent:'center',
                 alignItems:'center'
             }}>
                 <Text style={{
@@ -39,21 +40,18 @@ class HomeMonthsSwiperComponent extends Component {
                     > {strings('inWallet')}</Text>
                 <View style={{
                     flexDirection: 'row',
-                    borderWidth: 1,
-                    borderRadius: Width * .1,
-                    backgroundColor: Colors.AppGreenColor,
                     width: Width * .4,
                     height: Height * .06,
                     alignItems:'center',
-                    justifyContent:'center'
+                    justifyContent:'center',marginTop:Height*.01
 
 
                 }}>
                 
                     <Text style={{
                         fontFamily:FontFamilies.Etisalat_0,
-                        fontSize:FontSize.VeryLargFontSize,
-                        color:'white',
+                        fontSize:45,
+                        color:'#7C7DC1',
                         textAlign:'center',
                         // width:Width*.2,
                     }}

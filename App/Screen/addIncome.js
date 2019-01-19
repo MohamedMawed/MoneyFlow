@@ -4,14 +4,13 @@ import {
     View,
     Text,
     TouchableOpacity,
-    ActivityIndicator, ScrollView, AsyncStorage, FlatList,Alert
-
+    ScrollView,
+    FlatList
 } from 'react-native';
 import { Requires, incomeCategory } from '../Assets/Requires';
 import { CustomTextInput } from './../Components/TextInput'
 import { Colors, FontFamilies, Width, Height, FixViewsOrder } from '../Global';
-import monthlyIncome, { setSavedMonthlyIncome, getSavedMonthlyIncome, getHomeScreen } from './../Global/API';
-import { strings } from '../locals';
+import { strings, isArabic } from '../locals';
 import { connect } from 'react-redux';
 import { AppReducer } from './../state/reducer';
 const editIncome = AppReducer.updateIncome;
@@ -23,7 +22,8 @@ class AddIncome extends Component {
             income: '',
             selectedCatogry: -1,
             selectedData: null,
-            IncomeOrExpence:1
+            IncomeOrExpence:1,
+            pleaseHolder:[strings('Income'),strings('Expenses')]
         }
     }
     render() {
@@ -33,7 +33,7 @@ class AddIncome extends Component {
             <View style={{
                 flex: 1,
                 alignItems: 'center',
-                backgroundColor: Colors.WhiteColor,
+                backgroundColor: '#fff',
             }}>
                 <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center' }} >
                     <Image
@@ -64,26 +64,26 @@ class AddIncome extends Component {
                         }}>{strings('description')}</Text>  
                     </View>
                     <View style={{width:Width*.94,height:Height*.09,alignItems:'center',justifyContent:'space-between',flexDirection:FixViewsOrder(),paddingHorizontal:Width*.02}}>
-                  
+                    <TouchableOpacity onPress={()=>{
+                        this.setState({IncomeOrExpence:2})
+                    }} style={{width:'48%',height: Height * .065,backgroundColor:IncomeOrExpence==2? Colors.AppBlueColor:Colors.WhiteColor,alignItems:'center',justifyContent:'center',borderRadius:Width*.05,elevation:3}}>
+                    <Text style={{fontSize:12,color:IncomeOrExpence==1? Colors.DarkGrayColor:Colors.WhiteColor}}>{strings('Expenses')}</Text>
+                    </TouchableOpacity>
                   
                     <TouchableOpacity onPress={()=>{
                         this.setState({IncomeOrExpence:1})
                     }} style={{ width:'48%',height: Height * .065,backgroundColor:IncomeOrExpence==1? Colors.AppBlueColor:Colors.WhiteColor,alignItems:'center',justifyContent:'center',borderRadius:Width*.05,elevation:3}}>
-                    <Text style={{fontSize:12,color:IncomeOrExpence==2? Colors.DarkGrayColor:Colors.WhiteColor}}>Income</Text>
+                    <Text style={{fontSize:12,color:IncomeOrExpence==2? Colors.DarkGrayColor:Colors.WhiteColor}}>{strings('Income')}</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={()=>{
-                        this.setState({IncomeOrExpence:2})
-                    }} style={{width:'48%',height: Height * .065,backgroundColor:IncomeOrExpence==2? Colors.AppBlueColor:Colors.WhiteColor,alignItems:'center',justifyContent:'center',borderRadius:Width*.05,elevation:3}}>
-                    <Text style={{fontSize:12,color:IncomeOrExpence==1? Colors.DarkGrayColor:Colors.WhiteColor}}>Expence</Text>
-                    </TouchableOpacity>
+                   
                     
                     </View>
                     <View style={{ width: '90%', height: Height * .2, alignItems: 'center', justifyContent: 'center' }}>
-                        <FlatList contentContainerStyle={{ height: '100%', justifyContent: 'center', alignItems: 'center' }} horizontal data={incomeCategory} renderItem={({ item, index }) => {
+                        <FlatList contentContainerStyle={{ height: '100%', justifyContent: 'center', alignItems: 'center' }} horizontal data={incomeCategory[parseInt(this.state.IncomeOrExpence)-1 ]} renderItem={({ item, index }) => {
                             return (<TouchableOpacity onPress={() => {
                                 this.setState({ selectedCatogry: item.id, selectedData: item })
-                            }} style={{ width: Width * .15, height: Width * .2, marginHorizontal: Width * .05, alignItems: 'center', justifyContent: 'center' }}>
+                            }} style={{height: Width * .2, marginHorizontal: Width * .03, alignItems: 'center', justifyContent: 'center' }}>
                                 <Image resizeMode='contain' style={{ width: '60%', height: '50%', tintColor: selectedCatogry == item.id ? Colors.greenlite : null }} source={item.icon} />
                                 <Text style={{ color: selectedCatogry == item.id ? Colors.greenlite : null }}>{item.text}</Text>
                             </TouchableOpacity>)
@@ -93,8 +93,8 @@ class AddIncome extends Component {
                     NotIcon
                         value={this.state.income}
                         keyboardType='numeric'
-                        Title={strings('Income')}
-
+                        Title={this.state.pleaseHolder[this.sta]}
+                        
                         onChangeText={(text) => {
 
                             this.setState({ income: text })
@@ -113,7 +113,6 @@ class AddIncome extends Component {
                                    if (IncomeOrExpence==1)
                                     this.props.editIncome(intVal);
                                    else  {this.props.editExpanse(intVal)
-                                    this.props.editIncome(-intVal);
                                 }
                                     // let data = { date: new Date(), IncomeValue: intVal, CategoryId: selectedData.id, CategoryName: selectedData.text }
                                     // let _data = []
@@ -148,15 +147,15 @@ class AddIncome extends Component {
                                     // this.setState({ income: '', selectedCatogry: -1, selectedData: null })
                                 }
                                 else
-                                    alert(strings('alertChooseType'));
+                                    global.openToast(strings('alertChooseType'));
                             } catch (error) {
                                 //console.log(error, "selectedData11")
-                                alert(strings('validNumber'));
+                                global.openToast(strings('validNumber'));
                             }
                         }}
                         style={{
                             marginTop: Height * .05,
-                            backgroundColor: Colors.BtnLoginBack,
+                            backgroundColor: Colors.AppBlueColor,
                             borderRadius: Width * .1,
                             justifyContent: 'center',
                             alignItems: 'center',
@@ -166,14 +165,15 @@ class AddIncome extends Component {
                         }}>
                         <Text style={{
                             fontFamily: FontFamilies.Etisalat_0,
-                            fontSize: 18,
+                            fontSize: 17,
                             color: Colors.WhiteColor,
                         }}>{strings('save')}</Text>
                     </TouchableOpacity>
                 </ScrollView>
                 <TouchableOpacity style={{left:Width*.05,position:'absolute',top:Height*.04}} onPress={()=>{
-                      this.props.navigation.navigate('Home')
+                      this.props.navigation.goBack()
                         }}>
+                        <View style={{transform:[{rotate:isArabic()? '180deg':'0deg'}]}}>
                         <Image
                             source={Requires.back}
                             resizeMode='contain'
@@ -181,6 +181,8 @@ class AddIncome extends Component {
                                 width: Width * .07,
                                 height: Width * .07
                             }} />
+                        </View>
+                       
                     </TouchableOpacity >
             </View>
         )

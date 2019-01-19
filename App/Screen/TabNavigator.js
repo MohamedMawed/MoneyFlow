@@ -21,7 +21,7 @@ import { plan } from './plan';
 import AddIncome from './addIncome';
 import add_plan from './add_plan';
 import { strings } from '../locals';
-import { FontFamilies } from '../Global';
+import { FontFamilies, Colors } from '../Global';
 import  BudgetList  from './BudgetList';
 import AddBudget from './AddBudget';
 import EditBudget from './editBudget';
@@ -41,23 +41,28 @@ const Tabs = createBottomTabNavigator(
                 const { routeName } = navigation.state;
                 let myTintColor = tintColor
                 if (routeName == 'Plus') myTintColor = null
-                let IconWidth = routeName == 'Plus' ? Width * .11 : Width * .06
+                let IconWidth = routeName == 'Plus' ? Width * .11 : Width * .04
                 return <View style={{flexDirection:'row',alignItems:'center',width:Width*.25,justifyContent:'center'}}>
-             <Image source={Requires[routeName]}
+                    
+                    <View style={{width:Width * .07,height:Width * .07,backgroundColor:focused ?Colors.AppBlueColor:Colors.WhiteColor,borderRadius:Width*.035,alignItems:'center',justifyContent:'center'}}>
+                    <Image source={Requires[routeName]}
                     style={{
                         width: IconWidth,
                         height: IconWidth,
                         resizeMode: 'contain',
                         tintColor: myTintColor
                     }}  />
-                     <Text style={{fontFamily:FontFamilies.Etisalat_0,padding:10,fontSize:12}}>{strings('tap.'+routeName+'')}</Text>       
+                    </View>
+             
+
+                     <Text style={{fontFamily:FontFamilies.Etisalat_0,padding:10,fontSize:12,color:focused?Colors.AppBlueColor:'grgay'}}>{strings('tap.'+routeName+'')}</Text>       
                     </View>
             },
             tabBarLabel: () => null
         }),
         tabBarOptions: {
             activeBackgroundColor: '#F0F0F0',
-            activeTintColor: 'red',
+            activeTintColor:Colors.WhiteColor,
             inactiveTintColor: null
         },
     }
@@ -67,9 +72,9 @@ const Tabs = createBottomTabNavigator(
 export default App = createStackNavigator(
     {
         Splash: { screen: Splash },
+        Add_plan:{screen:Add_plan},
         Main: { screen: Tabs },
         Login: { screen: Login },
-        Add_plan:{screen:Add_plan},
         Intro: { screen: Intro },
         Register: { screen: Register },
         EditProfile:{screen:EditProfile},

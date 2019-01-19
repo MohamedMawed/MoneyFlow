@@ -1,6 +1,19 @@
 export default {
+    titlePlan:'Start saving for some goals',
     editBudget:'edit Budget',
+    weekly : 'Weekly',
+    Monthly : 'Monthly',
+    annual : 'Annual',
+    Remaining:'Remaining',
+    Edit:'Edit',
+    noGols:'There are no goals yet',
+noMonthlyBudgets:'There are no monthly Budgets',
+noWeeklyBudgets:'There are no weekly Budgets',
+noWeeklyAnnual:'There are no annual Budgets',
 
+    logout:'Logout',
+    days:'days',
+    titleBudget:'Helps you calculate your expenses in a more efficient way',
     tap:{
 Plan:'Goals',
 Home:'Home',
@@ -28,16 +41,17 @@ Setting:'Setting'
         googleRegister : 'Register with google',
         email : 'Email Address',
         password : 'Password',
+        current_password : 'Current Password',
         name : 'Name',
 
 
-        monthlyReport : 'ٌReport',
+        monthlyReport : 'Monthly Report',
         Income : 'Income',
         Expenses : 'Expenses',
         inWallet : 'In your wallet',
         currencyLE : 'LE',
 
-        headingIcomeScreen : 'Heading title',
+        headingIcomeScreen : 'Add income or expenses',
         description : 'add an income from this month to monitor',
         save:'save',
         noPlans : 'No Goals',
@@ -60,4 +74,36 @@ Setting:'Setting'
         changeLang : 'Change Language',
         changeCur : 'Change Currency',
         exportImport : 'Export and Import Data',
+
+
+        addPlan_placeHolder_target : 'Target',
+        addPlan_placeHolder_startWith : 'Start with',
+    
+    
+        allPlans_remain : 'remaining day',
+
+        allPlans_add : 'Add',
+        allPlans_edit : 'Edit',
+        allPlans_remove : 'Delete',
+
+
+        addPlan_nameErr : 'Please specify the goal name',
+        addPlan_targetErr : 'Please specify the target cost',
+        addPlan_startDateErr : 'Please specify the start date',
+        addPlan_endDateErr : 'Please specify the snd date',
+        addPlan_iconErr : 'Please specify the plan icon',
+
+
+
+        addMoneyPopUp_placeHolder : 'money',
+
+
+        edit_goal_title : 'Edit Goal',
+        add_money_title : 'Add Money',
+
+
+        edit_profile_title : 'Edit Profile',
+        edit_profile_new_password : 'New Password',
+        edit_profile_requiredText : 'To change email or password you will need to type the current password',
+        home_no_stat : 'No Statistics Available'
     }

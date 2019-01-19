@@ -17,21 +17,22 @@ class HomeMoneyItem extends Component {
                 height: Height * .12,
                 borderRadius: Width * .02,
                 paddingVertical: Height * .02,
+                backgroundColor: '#fff',
                 elevation: 2,
                 justifyContent: 'space-around',
                 alignItems: 'center'
             }}>
-                <Image source={this.props.Source} style={{
+                {/* <Image source={this.props.Source} style={{
                     resizeMode: 'contain',
                     width: Width * .09,
                     position: 'absolute',
                     top: -Height * .03,
                     right: Width * .05
 
-                }} />
+                }} /> */}
                 <Text style={{
                     fontFamily: FontFamilies.Etisalat_0,
-                    fontSize: 16,
+                    fontSize: 14,
                     color: 'gray',
                     textAlign: 'center',
                     width: Width * .45,marginTop:Height*.01
@@ -46,7 +47,7 @@ class HomeMoneyItem extends Component {
                 }}>
                     <Text style={{
                         fontFamily: FontFamilies.Etisalat_0,
-                        fontSize: 20,
+                        fontSize: 25,
                         color: this.props.color,
                         textAlign: 'center',
                         // width:Width*.2

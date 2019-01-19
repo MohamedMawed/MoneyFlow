@@ -4,7 +4,7 @@ import {
     Image,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,AsyncStorage
 } from 'react-native'
 import { CustomTextInput } from '../Components/TextInput';
 import { Width, Height } from '../Global/Dimension';
@@ -13,10 +13,11 @@ import { FontFamilies, FontSize } from '../Global/Font';
 import { Colors } from '../Global/Colors';
 import ModalDropdown from 'react-native-modal-dropdown';
 import DropDown from '../Components/DropDown';
-
+import { NavigationActions, StackActions } from 'react-navigation'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import { FixViewsOrder } from '../Global/Localization';
-import { strings, setAppLanguage, getAppLanguage } from '../locals';
+import { strings, setAppLanguage, getAppLanguage, isArabic } from '../locals';
+import firebase from 'react-native-firebase';
 
 class Setting extends Component {
     render() {
@@ -25,14 +26,15 @@ class Setting extends Component {
                 <Image source={Requires.settings_large} style={styles.settingsLogo} />
                 <View style={{
                     width: Width,
-                    height: '50%',
+                    height: '40%',
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
 
                     <TouchableOpacity activeOpacity={0.7} onPress={()=>this.props.navigation.navigate('EditProfile')} style={styles.Button}>
-                        <Text style={styles.textButton}>{strings('accountset')}</Text>
-                        <EvilIcons name='chevron-right' size={Width * .1} />
+                        <Text style={[{fontFamily: FontFamilies.Etisalat_0,fontSize:13,color:Colors.DarkGrayColor}]}>{strings('accountset')}</Text>
+
+                        <EvilIcons name={'chevron-'+[isArabic()?'left':'right']} size={Width * .1} />
                     </TouchableOpacity>
                     {/* <TouchableOpacity activeOpacity={0.7} onPress={()=>this.props.navigation.navigate('ExportTab')} style={styles.Button}>
                         <Text style={styles.textButton}>{strings('exportImport')}</Text>
@@ -72,6 +74,18 @@ class Setting extends Component {
                         DropdownWidth={Width * .9} />
                 </View>
 
+                <TouchableOpacity onPress={async () => {
+                   firebase.auth().signOut();
+                 await AsyncStorage.clear();
+                 const resetAction = StackActions.reset({
+                    index: 0,
+                    actions: [NavigationActions.navigate({ routeName: 'Login' })],
+                });
+                this.props.navigation.dispatch(resetAction);
+            }} style={{ elevation:2, width: Width * .9, backgroundColor: Colors.red, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 15, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('logout')}</Text>
+            </TouchableOpacity>
+
             </View>
         )
     }
@@ -87,8 +101,7 @@ const styles = StyleSheet.create(
         container: {
             width: '100%',
             height: '100%',
-            backgroundColor: Colors.WhiteColor,
-
+            backgroundColor: '#f6f6f6', 
             alignItems: 'center',
             overflow: 'hidden',
         },

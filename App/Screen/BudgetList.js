@@ -35,8 +35,8 @@ class BudgetList extends Component {
             category: '',
             BudgetList: [],
             IsLoding: true,
-            Defaultpayment_period: [{ text: 'weekly', Icon: '' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }],
-            CurantTab:1
+            Defaultpayment_period: [{ text: strings('weekly'), Icon: '' }, { text: strings('Monthly'), Icon: '' }, { text: strings('annual'), Icon: '' }],
+            CurantTab: 1
 
         }
     }
@@ -59,7 +59,7 @@ class BudgetList extends Component {
         //console.log("thisBudgets", this.props.Budgets)
         //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
         // </LinearGradient>
-        let { CurantSelected, BudgetList, IsLoding ,CurantTab} = this.state
+        let { CurantSelected, BudgetList, IsLoding, CurantTab } = this.state
         let text = ['food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food',]
         return (<View style={{
             width: '100%',
@@ -68,18 +68,20 @@ class BudgetList extends Component {
             backgroundColor: '#fff',
         }}>
             {/* //header */}
-            <View style={{ width: '100%', height: '100%',backgroundColor:'#FBFBFB' }}>
+            <View style={{ width: '100%', height: '100%', backgroundColor: '#f5f5f5' }}>
                 <View style={{ height: '95%', alignItems: 'center' }}>
 
-                    <View style={{ width: '90%', height: Height * .08, justifyContent: 'center' }}>
-                        <Text style={Styles.FirstCategoryHeader}>{strings('budgets')}</Text>
+                    <View style={{ width: '95%', height: Height * .15, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={[Styles.FirstCategoryHeader, { fontFamily: FontFamilies.Etisalat_0, fontSize: 20, color: '#000' }]}>{strings('budgets')}</Text>
+                        <Text style={[Styles.FirstCategoryHeader, { marginTop: Height * .01, fontFamily: FontFamilies.Etisalat_0, fontSize: 15, width: '100%', textAlign: 'center' }]}>{strings('titleBudget')}</Text>
+
                     </View>
                     {/* // swiper */}
                     {/* <View style={{ width: '100%', height: Height * .1, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{
                             flexDirection: 'row',
                             borderWidth: 1,
-                            borderRadius: Width * .1,
+                            borderRadius: Width * .1,e
                             borderColor: 'red',
                             width: Width * .9,
                             height: Height * .06,
@@ -110,40 +112,52 @@ class BudgetList extends Component {
                     </View> */}
                     {/* // _________________________________________________________ */}
                     <View style={{ width: Width, alignItems: 'center', height: Height * .8 }}>
-                    <View style={{ height: Height * .08, justifyContent: 'space-between',alignItems:'center', flexDirection: FixViewsOrder(),width:'95%' }}>
-                               <TouchableOpacity onPress={()=>{
-                                   this.setState({CurantTab:3})
-                               }} style={{ width: '30%', height: Height * .06, backgroundColor:CurantTab==3?'#DCDCDC': '#FFFFFF',alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
-                                    <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{'Annual'}</Text>
-                                </TouchableOpacity>
-                            
-                                <TouchableOpacity onPress={()=>{
-                                   this.setState({CurantTab:2})
-                               }} style={{ width: '30%', height: Height * .06, backgroundColor:CurantTab==2? '#DCDCDC': '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
-                                    <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{'Monthly'}</Text>
-                                </TouchableOpacity>
+                        <View style={{ height: Height * .08, justifyContent: 'space-between', alignItems: 'center', flexDirection: FixViewsOrder(), width: '95%' }}>
+                            <TouchableOpacity onPress={() => {
+                                this.setState({ CurantTab: 3 })
+                            }} style={{ width: '30%', height: Height * .06, backgroundColor: CurantTab == 3 ? '#DCDCDC' : '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
+                                <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03, fontFamily: FontFamilies.Etisalat_0 }}>{strings('annual')}</Text>
+                            </TouchableOpacity>
 
-                                <TouchableOpacity onPress={()=>{
-                                   this.setState({CurantTab:1})
-                               }} style={{ width: '30%', height: Height * .06, backgroundColor:CurantTab==1? '#DCDCDC': '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
-                                    <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{'Weekly'}</Text>
-                                </TouchableOpacity>
-                            </View>
+                            <TouchableOpacity onPress={() => {
+                                this.setState({ CurantTab: 2 })
+                            }} style={{ width: '30%', height: Height * .06, backgroundColor: CurantTab == 2 ? '#DCDCDC' : '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
+                                <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03, fontFamily: FontFamilies.Etisalat_0 }}>{strings('Monthly')}</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => {
+                                this.setState({ CurantTab: 1 })
+                            }} style={{ width: '30%', height: Height * .06, backgroundColor: CurantTab == 1 ? '#DCDCDC' : '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
+                                <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03, fontFamily: FontFamilies.Etisalat_0 }}>{strings('weekly')}</Text>
+                            </TouchableOpacity>
+                        </View>
                         <ScrollView
                             contentContainerStyle={{
                                 width: Width,
-                                alignItems: 'center', paddingBottom: Height * .01
+                                alignItems: 'center', paddingBottom: Height * .1
                             }} >
-                 
-                
-                            {IsLoding && this.props.Budgets.length >= 1&&CurantTab==1 && this.props.Budgets.map((item, index) => { return (this.sections(item, 0,index)) })}
-                            {IsLoding && this.props.Budgets.length >= 1&&CurantTab==2 && this.props.Budgets.map((item, index) => { return (this.sections(item, 1,index)) })}
-                            {IsLoding && this.props.Budgets.length >= 1 &&CurantTab==3&& this.props.Budgets.map((item, index) => { return (this.sections(item, 2,index)) })}
+
+
+                            {IsLoding && this.props.Budgets.length >= 1 && CurantTab == 1 && this.props.Budgets.map((item, index) => { return (this.sections(item, 0, index)) })}
+
+                            {IsLoding && this.props.Budgets.length < 1 && CurantTab == 1 && this.noBudget(this.props.Budgets, 0)}
+
+
+
+                            {IsLoding && this.props.Budgets.length >= 1 && CurantTab == 2 && this.props.Budgets.map((item, index) => { return (this.sections(item, 1, index)) })}
+                            {IsLoding && this.props.Budgets.length < 1 && CurantTab == 2 && this.noBudget(this.props.Budgets, 1)}
+
+
+                            {IsLoding && this.props.Budgets.length >= 1 && CurantTab == 3 && this.props.Budgets.map((item, index) => { return (this.sections(item, 2, index)) })}
+                            {IsLoding && this.props.Budgets.length >= 1 && CurantTab == 3 && this.noBudget(this.props.Budgets, 2)}
+
+
                             {IsLoding == false && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                                 <ActivityIndicator size='large' />
                             </View>}
                             {IsLoding && BudgetList.length < 1 && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                                <Text>{strings('noBudgets')}</Text>
+                                {/* <Text>{strings('noBudgets')}</Text> */}
+
                             </View>}
 
 
@@ -165,35 +179,66 @@ class BudgetList extends Component {
         </View>
         )
     }
+    noBudget = (Budgets, index) => {
+        let DATA = []
+        Budgets.forEach(element => {
+            if (element.payment_period == index)
+                DATA.push(element)
+        });
+        let text = strings('noWeeklyBudgets')
+        if (index == 0)
+        text = strings('noWeeklyBudgets')
+        if (index == 1)
+        text = strings('noMonthlyBudgets')
+        if (index == 2)
+        text = strings('noWeeklyBudgets')
 
+
+
+        return (
+            <View>
+                {DATA.length < 1 && <View style={{ width: Width, height: Height * .65, alignItems: 'center', justifyContent: 'center' }}>
+                    <Image resizeMode='contain' style={{ width: Width * .3, height: Width * .3 }} source={Requires.budgetIcon} />
+                    <Text style={[{ fontFamily: FontFamilies.Etisalat_0, fontSize: 18, color: Colors.DarkGrayColor ,marginTop:Height*.03}]}>{text}</Text>
+
+                </View>}
+            </View>
+        )
+    }
     tabSections = (text) => {
         return (<View style={{ width: '94%', height: Height * .06, backgroundColor: Colors.BlueColor, alignItems: 'flex-start', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
-            <Text style={{ color: Colors.WhiteColor, fontSize: 15, paddingHorizontal: Width * .03 }}>{text}</Text>
+            <Text style={{ color: Colors.WhiteColor, fontSize: 15, paddingHorizontal: Width * .03, fontFamily: FontFamilies.Etisalat_0 }}>{text}</Text>
         </View>)
     }
-    sections = (item, index,ItemIndex) => {
+    sections = (item, index, ItemIndex) => {
         return (
             <View >
                 {item.payment_period == index ? <BudgetItem
-                onRemove={()=>{
-                    this.OnRemoveBudget(ItemIndex)
-                }}
-                    onClick={() => this.props.navigation.navigate('EditBudget', { item: item, index: index })}
+                    onEditBudget={() => {
+                        this.props.navigation.navigate('EditBudget', { item: item, index: ItemIndex })
+                    }}
+
+                    onRemove={() => {
+                        this.OnRemoveBudget(ItemIndex)
+
+                    }}
                     Source={Requires.ICons[item.icon_index].icon}
                     cost={item.money}
                     Category={item.category}
                     date={item.start_date}
-                    payment_period={this.state.Defaultpayment_period[item.payment_period].text}
+                    payment_period={item.payment_period}
                 /> : null}
             </View>
 
         )
     }
-    OnRemoveBudget(index){
-alert(index)
-        // let Budgets=this.props.Budgets
-        // Budgets.split(index)
-        // this.props.editBudget(Budgets)
+    OnRemoveBudget(index) {
+        let Budgets = this.props.Budgets
+        if (Budgets.length == 1)
+            Budgets = []
+        else
+            Budgets.splice(index, 1)
+        this.props.editBudget(Budgets)
     }
     CalcPercent = (start, end) => {
 
@@ -242,8 +287,7 @@ const Styles = StyleSheet.create({
         fontFamily: FontFamilies.Etisalat_0,
         fontSize: FontSize.LargFontSize,
         color: 'gray',
-        textAlign: 'left',
-        width: Width * .9,
+        textAlign: 'center',
     },
 })
 

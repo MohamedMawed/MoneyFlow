@@ -29,7 +29,7 @@ class DropDown extends Component {
                     renderButtonText={(item, index) => {
                         //console.log(item, "itemitemitemitem")
                         this.setState({ arrowSource: item.Icon })
-                        return (<Text>
+                        return (<Text style={{fontFamily: FontFamilies.Etisalat_0,fontSize:13}}>
                             {item.text}
                         </Text>)
                     }}
@@ -37,7 +37,7 @@ class DropDown extends Component {
                         //console.log(item, "itemitemitemitem")
 
                         return (<View style={{ width: '100%', height: Height * .06, backgroundColor: IsSelected ? '#DADADA' : '#FAFAFA', paddingHorizontal: Width * .04, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
-                            <Text>{item.text}</Text>
+                            <Text style={{ fontFamily: FontFamilies.Etisalat_0}}>{item.text}</Text>
                             <Image resizeMode='contain' style={{ width: Width * .05, height: Height * .05, tintColor: this.props.TintColor ? IsSelected ? '#FAFAFA' : Colors.DarkGrayColor : null }} source={item.Icon}  >
                             </Image>
                         </View>)
@@ -58,9 +58,9 @@ class DropDown extends Component {
                     }}
                     
                     renderSeparator={() => null}
-                    dropdownTextStyle={Styles.dropdownTextStyle}
+                    dropdownTextStyle={[Styles.dropdownTextStyle,{ fontFamily: FontFamilies.Etisalat_0,fontSize:12}]}
                     dropdownStyle={[Styles.dropdownStyle, { width: this.props.DropdownWidth, height: this.state.dropdownHeight }]}
-                    textStyle={Styles.textStyle}
+                    textStyle={[Styles.textStyle,{ fontFamily: FontFamilies.Etisalat_0,fontSize:13}]}
                     style={Styles.DropDown}
                     defaultValue={this.props.defaultValue} options={this.state.options}
                     defaultIndex={this.props.defaultIndex} />
@@ -109,7 +109,7 @@ const Styles = StyleSheet.create({
         backgroundColor: Colors.WhiteColor, color: '#000', height: Height * .06, textAlign: 'center', fontSize: Width * 0.038, fontFamily: FontFamilies.Etisalat_0
     },
     textStyle: {
-        color: Colors.borderColor, width: Width * .8, fontSize: Width * 0.038, textAlign: 'right', textAlign: 'left', paddingHorizontal: Width * .03, fontFamily: FontFamilies.Etisalat_0
+ width: Width * .8, fontSize: 13, textAlign: 'right', textAlign: 'left', paddingHorizontal: Width * .04, fontFamily: FontFamilies.Etisalat_0,color:Colors.DarkGrayColor
     },
     dropdownStyle: {
         width: "20%", backgroundColor: Colors.WhiteColor, borderRadius: Width * .035, height: Height * .06, overflow: 'hidden', marginTop: Width * .05, elevation: 10, justifyContent: 'center'

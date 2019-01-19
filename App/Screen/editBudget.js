@@ -7,12 +7,13 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { FontFamilies, FontSize } from '../Global/Font';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyExpenses } from '../Global/API';
-import { strings } from '../locals';
+import { strings, isArabic } from '../locals';
 import DropDown from '../Components/DropDown';
 import { PlansGoalsList2 } from '../Global/ComponentTest';
 import { FixViewsOrder } from '../Global';
 import { connect } from 'react-redux';
 import { AppReducer } from '../state/reducer';
+import Dropdown2 from '../Components/Dropdown2';
 const editBudget = AppReducer.editBudget;
 class EditBudget extends Component {
     constructor(props) {
@@ -73,6 +74,8 @@ class EditBudget extends Component {
                         <TouchableOpacity style={{ marginHorizontal: Width * .01 }} onPress={() => {
                             this.props.navigation.goBack()
                         }}>
+                        <View style={{transform:[{rotate:isArabic()? '180deg':'0deg'}]}}>
+
                             <Image
                                 source={Requires.back}
                                 resizeMode='contain'
@@ -80,6 +83,7 @@ class EditBudget extends Component {
                                     width: Width * .05,
                                     height: Width * .05
                                 }} />
+                                </View>
                         </TouchableOpacity >
                         <Text style={[Styles.TextStyle, {
                             width: '90%',
@@ -167,7 +171,7 @@ class EditBudget extends Component {
                     </View>
                     <View style={{ width: '90%', height: Height * .08, alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder(), marginTop: Height * .01 }}>
                         <View style={{ width: '43%', height: '30%', justifyContent: 'center', alignItems: 'center' }}>
-                            <DropDown
+                            <Dropdown2
                                 returnIndex
                                 defaultIndex={this.state.payment_period}
                                 onSelect={(index) => {
@@ -245,8 +249,8 @@ class EditBudget extends Component {
             <TouchableOpacity onPress={async () => {
                 this.OnSubmit()
                 // ios-save
-            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.BlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .03 }}>
-                <Text style={{ fontSize: 15, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>Edit</Text>
+            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .03 }}>
+                <Text style={{ fontSize: 17, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('Edit')}</Text>
             </TouchableOpacity>
         </View>
         )

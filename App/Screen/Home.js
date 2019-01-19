@@ -25,28 +25,21 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            PlansGoalsList: [
-                {
-                    Icon: Requires.Home,
-                    startDate: '2018/01/01',
-                    endDate: '2020/02/01',
-                    cost: 234
-                },
-                {
-                    Icon: Requires.Home,
-                    startDate: '2018/07/010',
-                    endDate: '2020/02/01',
-                    cost: 3700
-                },
-            ],
+            PlansGoalsList: [],
+            sumOfStat:0,
             stateChanger: 0
         }
     }
     componentDidMount() {
         // setHomeScreen(this);
-        firebase.database().ref('/' + firebase.auth().currentUser.uid).set(this.props.appData, (res) => {
-            //console.log('app backup result',res);
-        })
+        try{
+            firebase.database().ref('/' + firebase.auth().currentUser.uid).set(this.props.appData, (res) => {
+                //console.log('app backup result',res);
+            })
+        }catch(error){
+            console.log(error)
+        }
+        
     }
     CalcPercent = (start, end) => {
         // //console.log((new Date()).days-10)
@@ -121,12 +114,12 @@ class Home extends Component {
 
         console.log('current statistics',res);
         return res;
-        return [12, 12, 3, 2, 1, 22];
     }
     render() {
         const fill = 'rgb(134, 65, 244)'
         const contentInset = { top: 20, bottom: 20 }
-        const data = this.getChartData()
+        const data = this.getChartData();
+        const sumOfStat = data.reduce((a, b) => a + b, 0);
         const x = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
         return (
             <View style={styles.container}>
@@ -138,7 +131,7 @@ class Home extends Component {
                 <View style={styles.categoriesContainer}>
                     <HomeMoneyItem
                         Source={Requires.arrow_down}
-                        color={Colors.AppBlueColor}
+                        color={'#4EAB28'}
                         value={this.props.income}
                         Title={strings('Income')} />
                     <HomeMoneyItem
@@ -157,7 +150,7 @@ class Home extends Component {
                         {strings('monthlyReport')}
 
                     </Text>
-                    <View style={{ height: Height * .35, flexDirection: 'row' }}>
+                    {sumOfStat > 0 && <View style={{ height: Height * .35, flexDirection: 'row' }}>
                         <YAxis
                             data={data}
                             contentInset={contentInset}
@@ -178,9 +171,9 @@ class Home extends Component {
                         >
                             <Grid />
                         </AreaChart>
-                    </View>
-                    <XAxis
-                        data={x}
+                    </View>}
+                    {sumOfStat > 0 && <XAxis
+                        data={data}
                         svg={{
                             fill: 'black',
                             fontSize: 10,
@@ -194,8 +187,21 @@ class Home extends Component {
                         style={{ marginHorizontal: -15, height: 20,marginLeft:20 }}
                         contentInset={{ left: 10, right: 25 }}
                         formatLabel={(value,index) => x[index]}
-                    />
-
+                    />}
+                    {sumOfStat == 0 && <View 
+                    style={{
+                        width:'100%',
+                        height:'100%',
+                        justifyContent:'center',
+                        alignItems:'center'
+                    }}
+                     >
+                        <Text style={{
+                            fontFamily:FontFamilies.Etisalat_0,
+                            fontSize:18,
+                            color:'#000'
+                        }}>{strings('home_no_stat')}</Text>
+                        </View>}
                 </View>
                 <TouchableOpacity onPress={() => {
 
@@ -225,7 +231,7 @@ const styles = StyleSheet.create({
         width: Width,
         height: Height,
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#f6f6f6', 
         // justifyContent: 'space-around'
     },
     FirstCategoryHeader: {
@@ -248,7 +254,7 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(state) {
-    //console.log("TAG", "previous profile", state)
+    console.log("TAG", "previous profile", state)
 
     return {
         appData: state.appReducer,

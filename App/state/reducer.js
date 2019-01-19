@@ -63,10 +63,34 @@ export class AppReducer {
 
 
     reduce(state = AppReducer.initialOrderState, action) {
+        console.log(action)
         switch (action.type) {
 
             case AppReducer.USER_DATA:
                 return action.value
+            case AppReducer.DELETE_GOAL:
+                let newData = state.goal;
+                newData.splice(action.index , 1);
+                return {
+                    ...state,
+                    goal: JSON.parse(JSON.stringify(newData))
+                }
+            case AppReducer.EDIT_GOAL:
+                let temp1 = state.goal;
+                temp1[action.index].name = action['0'];
+                temp1[action.index].money = action['1'];
+                temp1[action.index].end_date = action['2'];
+                return {
+                    ...state,
+                    goal: JSON.parse(JSON.stringify(temp1))
+                }
+            case AppReducer.ADD_GOAL_MONEY:
+                let temp = state.goal;
+                temp[action.index].currently_paid += action.money;
+                return {
+                    ...state,
+                    goal: JSON.parse(JSON.stringify(temp))
+                }
             case AppReducer.CREATE_BUDGET:
                 return {
                     ...state,
@@ -92,7 +116,7 @@ export class AppReducer {
             case AppReducer.EDIT_BUDGET:
             return {
                 ...state,
-                budget : action.newBudget
+                budget :JSON.parse(JSON.stringify(action.newBudget)) 
             };
             case AppReducer.DELETE_BUDGET:
                 return initialOrderState;
@@ -107,14 +131,42 @@ export class AppReducer {
     static CREATE_BUDGET = 'BUDGET/NEW_BUDGET';
     static EDIT_BUDGET = 'BUDGET/EDIT_BUDGET';
     static DELETE_BUDGET = 'BUDGET/DELETE_BUDGET';
-     static CREATE_GOAL="PLAN/CREATE_GOAL"
+    static CREATE_GOAL="GOAL/CREATE_GOAL";
+    static DELETE_GOAL = "GOAL/DELETE_GOAL";
+    static ADD_GOAL_MONEY = "GOAL/ADD_GOAL_MONEY";
+    static EDIT_GOAL = "GOAL/EDIT_GOAL";
 
-
+    
     static setAppData = (value) => {
         //console.log('this.setAppData',value);
         return {
             type : AppReducer.USER_DATA,
             value
+        }
+    }
+
+
+
+    static editGoal = (index , ...data) => {
+        return {
+            type : AppReducer.EDIT_GOAL,
+            index,...data
+           
+        }
+    }
+    static addGoalMoney = (index,money) => {
+        console.log('this.deleteGoal',index);        
+        return {
+            type: AppReducer.ADD_GOAL_MONEY,
+            index,
+            money
+        }
+    }
+    static deleteGoal = (index) => {
+        console.log('this.deleteGoal',index);        
+        return {
+            type: AppReducer.DELETE_GOAL,
+            index
         }
     }
     static updateExpense = (value) => {

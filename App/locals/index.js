@@ -32,7 +32,12 @@ export const RenderForwardButton=({color="#fff"})=>{
         <Ionicons name={"md-arrow-back"} color={color} size={22}/>
     )
 }
-
+export const isArabic=()=>{
+if (getAppLanguage()=='ar')
+return true
+else
+return false
+}
 export const RenderRightButton=({color="#fff"})=>{
     if(getAppLanguage()!=="ar"){
         return (
