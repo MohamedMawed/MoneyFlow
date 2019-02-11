@@ -3,7 +3,7 @@ import {
     View,
     ScrollView,
     Text,
-    StyleSheet, TouchableOpacity, Image
+    StyleSheet, TouchableOpacity, Image,StatusBar
 } from 'react-native'
 import { BarChart, LineChart,AreaChart, XAxis, YAxis, Grid } from 'react-native-svg-charts'
 import * as scale from 'd3-scale'
@@ -123,6 +123,9 @@ class Home extends Component {
         const x = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
         return (
             <View style={styles.container}>
+                   <StatusBar
+                        backgroundColor={'#7C7DC1'}
+                    />
                 <HomeMonthsSwiperComponent
                     handleMonthChange={(NewKey) => {
                         //console.log(NewKey)
@@ -144,7 +147,7 @@ class Home extends Component {
 
                     <Text style={{
                         color: Colors.BlackColor,
-                        fontSize: 22,
+                        fontSize: 18,
                         fontFamily: FontFamilies.Etisalat_0
                     }}>
                         {strings('monthlyReport')}
@@ -198,8 +201,8 @@ class Home extends Component {
                      >
                         <Text style={{
                             fontFamily:FontFamilies.Etisalat_0,
-                            fontSize:18,
-                            color:'#000'
+                            fontSize:16,
+                            color:Colors.DarkGrayColor
                         }}>{strings('home_no_stat')}</Text>
                         </View>}
                 </View>

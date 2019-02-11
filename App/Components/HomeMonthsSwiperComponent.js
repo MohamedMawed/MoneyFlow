@@ -40,7 +40,6 @@ class HomeMonthsSwiperComponent extends Component {
                     > {strings('inWallet')}</Text>
                 <View style={{
                     flexDirection: 'row',
-                    width: Width * .4,
                     height: Height * .06,
                     alignItems:'center',
                     justifyContent:'center',marginTop:Height*.01

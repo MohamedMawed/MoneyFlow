@@ -28,11 +28,12 @@ import EditBudget from './editBudget';
 import PlanList from './planList';
 import Add_plan from './add_plan';
 import Editplan from './editplan';
+import ForgotPassword from './ForgotPassword';
 const Tabs = createBottomTabNavigator(
     {
         Home: Home,
-        Plan: PlanList,
         Report: BudgetList,
+        Plan: PlanList,
         Setting: Setting,
     },
     {
@@ -41,10 +42,10 @@ const Tabs = createBottomTabNavigator(
                 const { routeName } = navigation.state;
                 let myTintColor = tintColor
                 if (routeName == 'Plus') myTintColor = null
-                let IconWidth = routeName == 'Plus' ? Width * .11 : Width * .04
+                let IconWidth = routeName == 'Plus' ? Width * .15 : Width * .06
                 return <View style={{flexDirection:'row',alignItems:'center',width:Width*.25,justifyContent:'center'}}>
                     
-                    <View style={{width:Width * .07,height:Width * .07,backgroundColor:focused ?Colors.AppBlueColor:Colors.WhiteColor,borderRadius:Width*.035,alignItems:'center',justifyContent:'center'}}>
+                    <View style={{width:Width * .07,height:Width * .0,borderRadius:Width*.035,alignItems:'center',justifyContent:'center'}}>
                     <Image source={Requires[routeName]}
                     style={{
                         width: IconWidth,
@@ -55,14 +56,14 @@ const Tabs = createBottomTabNavigator(
                     </View>
              
 
-                     <Text style={{fontFamily:FontFamilies.Etisalat_0,padding:10,fontSize:12,color:focused?Colors.AppBlueColor:'grgay'}}>{strings('tap.'+routeName+'')}</Text>       
+                     {/* <Text style={{fontFamily:FontFamilies.Etisalat_0,padding:10,fontSize:12,color:focused?Colors.AppBlueColor:'grgay'}}>{strings('tap.'+routeName+'')}</Text>        */}
                     </View>
             },
             tabBarLabel: () => null
         }),
         tabBarOptions: {
             activeBackgroundColor: '#F0F0F0',
-            activeTintColor:Colors.WhiteColor,
+            activeTintColor:'#5D5FD5',
             inactiveTintColor: null
         },
     }
@@ -83,6 +84,7 @@ export default App = createStackNavigator(
         plan:{screen : plan},
         Editplan:{screen:Editplan},
         AddBudget:{screen : AddBudget},
+        ForgotPassword:{screen : ForgotPassword},
         AddIncome:{screen : AddIncome}
 
     }, {

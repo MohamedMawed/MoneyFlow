@@ -75,7 +75,7 @@ class EditProfile extends Component {
                         <Image source={Requires.Logo} style={{ width: Width * .37, resizeMode: 'contain' }} />
                         <Text style={{
                             fontFamily: FontFamilies.Etisalat_0,
-                            fontSize: Width * .07,
+                            fontSize: Width * .05,
                             color: '#000',
                         }}>{strings('edit_profile_title')}</Text>
                     </View>
@@ -197,7 +197,7 @@ class EditProfile extends Component {
                                                 })
                                 }}
                                 style={{
-                                    backgroundColor: Colors.BtnLoginBack,
+                                    backgroundColor: Colors.AppBlueColor,
                                     borderRadius: Width * .1,
                                     justifyContent: 'center',
                                     alignItems: 'center',

@@ -16,7 +16,7 @@ class CustomTextInput extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Color: 'transparent',
+            Color: Colors.gray,
             currentValue: '',
             TextColor: Colors.TextGrayColor,
             background: Colors.BackGrayColor
@@ -44,6 +44,7 @@ class CustomTextInput extends Component {
                 {/* <Text style={[Styles.Header, { color: this.state.TextColor }]}>{this.props.Title}</Text> */}
                 {/* <View style={[Styles.line, { backgroundColor: this.state.Color }]} /> */}
                 <TextInput
+                
                 value={value}
                 keyboardType={keyboardType?keyboardType:'default'}
                     onChangeText={(text) => {
@@ -58,8 +59,8 @@ class CustomTextInput extends Component {
                     onSubmitEditing={this.onUnFocus}
                     onFocus={this.OnFocus}
                     style={[Styles.Input,{
-                        textAlign : this.props.secure && getAppLanguage() == 'ar'?'right':null
-                    }]}
+                        textAlign : getAppLanguage() == 'ar'?'right':'left'
+                    },{fontFamily:FontFamilies.Etisalat_0}]}
                 />
                {!this.props.NotIcon&& <Image source={this.props.icon} style={[Styles.CustomIcon, { tintColor: this.state.TextColor }]} />}
             </View>

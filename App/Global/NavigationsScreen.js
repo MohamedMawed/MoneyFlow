@@ -4,6 +4,7 @@ import { Splash } from '../Screen/Splash';
 import { Intro } from '../Screen/Intro';
 import { Login } from '../Screen/Login';
 import { Register } from '../Screen/Register';
+import ForgotPassword from '../Screen/ForgotPassword';
 class NavigationsScreen extends Component {
     render() {
         return (
@@ -17,6 +18,7 @@ const NavigationScreen = StackNavigator({
     Intro: { screen: Intro },
     Login: { screen: Login },
     Register: { screen: Register },
+    ForgotPassword: { screen: ForgotPassword },
 },
     {
         headerMode: 'none'

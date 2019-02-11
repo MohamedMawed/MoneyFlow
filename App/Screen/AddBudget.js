@@ -2,12 +2,12 @@ import React, { Component } from 'React'
 import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, FlatList, TextInput, TouchableOpacity, ScrollView, Alert, ActivityIndicator } from 'react-native'
 import { Height, Width } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
-import { Requires } from '../Assets/Requires';
+import { Requires, iconsBudgetList } from '../Assets/Requires';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { FontFamilies, FontSize } from '../Global/Font';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyExpenses } from '../Global/API';
-import { strings, isArabic } from '../locals';
+import { strings, isArabic, getAppLanguage } from '../locals';
 import DropDown from '../Components/DropDown';
 import { PlansGoalsList2 } from '../Global/ComponentTest';
 import { FixViewsOrder } from '../Global';
@@ -30,12 +30,11 @@ class AddBudget extends Component {
             ButtonType: -1,
             icon: -1,
             category: '',
-            BudgetList: [],
+            BudgetList:iconsBudgetList(),
             IsLoding: true,
             payment_period: 0
         }
     }
-
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
@@ -89,7 +88,7 @@ class AddBudget extends Component {
                         <Text style={[Styles.TextStyle, {
                             width: '90%',
                             textAlign: 'left',
-                            fontSize: FontSize.LargFontSize, marginHorizontal: Width * .03
+                            fontSize: FontSize.LargFontSize, marginHorizontal: Width * .03,fontFamily:FontFamilies.Etisalat_0
                             // marginHorizontal: Width * .04
                         }]}> {strings('newBudget')}</Text>
 
@@ -120,13 +119,14 @@ class AddBudget extends Component {
                                 onChangeText={(text) => {
                                     this.setState({ valueSlider: text })
                                 }}
-                                placeholder='Budget'
+                                placeholder={strings('howMuch')}
                                 style={{
                                     fontSize: Width * .03,
                                     fontFamily: FontFamilies.Etisalat_0,
                                     width: '90%',
                                     textAlign: 'left',
                                     height: Height * .06,
+                                    textAlign : getAppLanguage() == 'ar'?'right':'left',
                                     borderRadius: Width * .02,
                                     borderWidth: 1,
                                     borderColor: '#D9D9D9',
@@ -221,8 +221,8 @@ class AddBudget extends Component {
                             <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                             <Text
                                 style={[Styles.TextStyle, {
-                                    width: '60%', fontSize: Width * .03,
-                                    color: '#D7D7D7'
+                                    width: '60%', fontSize: Width * .03,textAlign:'left',
+                                    color: '#D7D7D7',fontFamily:FontFamilies.Etisalat_0
                                 }]}>{this.state.startDate}</Text>
 
                         </TouchableOpacity>
@@ -231,7 +231,7 @@ class AddBudget extends Component {
 
                 {/* // TITLE CHOOSE ICON */}
                 <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                    <Text style={[Styles.TextStyle, { fontSize: Width * .03 }]}>{strings('chooseCat')}</Text>
+                    <Text style={[Styles.TextStyle, { fontSize: Width * .03 ,fontFamily:FontFamilies.Etisalat_0}]}>{strings('chooseCat')}</Text>
                 </View>
 
 
@@ -239,23 +239,20 @@ class AddBudget extends Component {
                     <FlatList
                         showsVerticalScrollIndicator={false}
                         numColumns={4}
-                        contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }} data={Requires.ICons} renderItem={({ item, index }) => {
+                        contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }} data={this.state.BudgetList} renderItem={({ item, index }) => {
                             return (
-                                <View style={{ width: '25%', alignItems: 'center', marginBottom: Height * .01, justifyContent: 'center' }}>
-                                    <TouchableOpacity onPress={() => { this.setState({ CurantSelected: index, icon: index, category: item.text }) }} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015, elevation: CurantSelected == index ? 0 : 5 }}>
+                                <View style={{ width: '25%', alignItems: 'center', justifyContent: 'center' }}>
+                                    <TouchableOpacity onPress={() => { this.setState({ CurantSelected: index, icon: index, category: item.text }) }} activeOpacity={.8} style={{  height: Width * .2, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015, elevation: CurantSelected == index ? 0 : 5 }}>
                                         <View style={{ width: Width * .14, height: Width * .14, backgroundColor: CurantSelected == index ? Colors.AppBlueColor : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center' }}>
-                                            <Image source={item.icon} resizeMode='contain' style={{ width: '60%', height: '60%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
+                                            <Image source={item.icon} resizeMode='contain' style={{ width:'60%', height:'60%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
                                         </View>
-                                        <Text style={[Styles.TextStyle, { fontSize: Width * .03, marginTop: Height * .001, color: CurantSelected == index ? Colors.AppBlueColor : Colors.DarkGrayColor }]}>{item.text}</Text>
+                                        <Text style={[Styles.TextStyle, { fontSize: Width * .03, marginTop: Height * .001,width:Width*.23,textAlign:'center',fontFamily:FontFamilies.Etisalat_0, color: CurantSelected == index ? Colors.AppBlueColor : Colors.DarkGrayColor }]}>{item.text}</Text>
                                     </TouchableOpacity>
                                 </View>
                             )
                         }} />
                 </View>
             </View>
-
-
-
 
 
             <DateTimePicker
@@ -266,8 +263,8 @@ class AddBudget extends Component {
             <TouchableOpacity onPress={async () => {
                 this.OnSubmit()
                 // ios-save
-            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .03 }}>
-                <Text style={{ fontSize: 17, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>Save</Text>
+            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .03,position:'absolute',bottom:Height*.05 }}>
+                <Text style={{ fontSize: 17, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('save')}</Text>
             </TouchableOpacity>
         </View>
         )
@@ -276,14 +273,14 @@ class AddBudget extends Component {
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
     OnSubmit = async () => {
-        // 
+
         let { startDate, endDate, valueSlider, AddBudget, icon, category, payment_period } = this.state
         if (valueSlider == 0)
-            return alert('Please specify the value')
+        return  Alert.alert('',strings('PleaseSpecifyTheValue'),[{text:strings('ok')}])
         if (startDate == 'Start date')
-            return alert('Please specify the date')
+        return  Alert.alert('',strings('PleaseSpecifyTheDate'),[{text:strings('ok')}])
         if (icon == -1)
-            return alert('Please selected icon')
+        return  Alert.alert('',strings('PleaseSelectedIcon'),[{text:strings('ok')}])
 
         let newBudget = { icon_index: icon, start_date: startDate, category: category, money: valueSlider, payment_period: payment_period }
         //console.log("newBudgetnewBudget", newBudget)

@@ -16,7 +16,8 @@ class DropDown extends Component {
             options: this.props.Data,
             dropdownHeight: 0,
             borderColor: Colors.BorderColor,
-            arrowSource: this.props.Data[1].Icon
+            arrowSource: this.props.Data[this.props.defaultIndex].Icon,
+            defaultValue:this.props.defaultValue
         }
     }
     render() {
@@ -62,7 +63,7 @@ class DropDown extends Component {
                     dropdownStyle={[Styles.dropdownStyle, { width: this.props.DropdownWidth, height: this.state.dropdownHeight }]}
                     textStyle={[Styles.textStyle,{ fontFamily: FontFamilies.Etisalat_0,fontSize:13}]}
                     style={Styles.DropDown}
-                    defaultValue={this.props.defaultValue} options={this.state.options}
+                    defaultValue={this.state.defaultValue} options={this.state.options}
                     defaultIndex={this.props.defaultIndex} />
                 <TouchableOpacity activeOpacity={.9} onPress={() => {
                 this.refs.dropdown1.show()
@@ -73,7 +74,7 @@ class DropDown extends Component {
         )
     }
     componentWillReceiveProps(props) {
-        this.setState({ options: props.Data }, () => {
+        this.setState({ options: props.Data,defaultValue:props.defaultValue }, () => {
             this.SetHeight()
         })
         if (props.Error)

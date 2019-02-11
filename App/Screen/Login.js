@@ -26,8 +26,7 @@ import { strings } from '../locals';
 import { AppReducer } from './../state/reducer';
 const setAppData = AppReducer.setAppData;
 if (Platform.OS === "android") {
-    FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Native); // defaults to Native
-
+    FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.NativeOnly); // defaults to Native
 } else {
     FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Web); // defaults to Native
 
@@ -139,7 +138,7 @@ class Login extends Component {
     render() {
         return (
             <View style={{ width: '100%', height: '100%', backgroundColor: '#fff', }}>
-                <ScrollView  >
+                <ScrollView keyboardShouldPersistTaps={'handled'} >
                     <View style={{ width: Width, height: Height * .35, justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={Requires.Logo} style={{ width: Width * .3, resizeMode: 'contain' }} />
                         <Text style={{
@@ -170,19 +169,26 @@ class Login extends Component {
                             }}
                             icon={Requires.Password}
                         />
-                        <View style={{
+                        <View  style={{
                             width: Width * .85,
                             justifyContent: 'space-between',
                             alignItems: 'center',
                             height: Height * .06,
                             flexDirection: 'row'
                         }}>
-                            <Text style={{
+                        <TouchableOpacity
+                        
+                        onPress={()=>{
+                            this.props.navigation.navigate('ForgotPassword')
+                        }}>
+                                  <Text style={{
                                 fontFamily: FontFamilies.Etisalat_0,
                                 fontSize: Width * .035,
                                 color: '#000',
                                 textDecorationLine: 'underline'
                             }}>{strings('forgetPassword')}</Text>
+                        </TouchableOpacity>
+                      
                         </View>
                         <View style={{
                             width: Width * .9,

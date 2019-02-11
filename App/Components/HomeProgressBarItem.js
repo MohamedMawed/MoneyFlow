@@ -101,7 +101,9 @@ console.log("diffDaysdiffDays",date)
 
 
                     <View style={{ width: Width * .5, height: '100%',justifyContent:'center' }}>
-                        <Text style={[{ color: Colors.BlackColor, fontSize: 17,width:'100%' ,textAlign:'left'}]}>{Category}</Text>
+                    <Text style={[styles.HeaderTitle,{fontFamily: FontFamilies.Etisalat_0}]}>{Category}</Text>
+
+                        {/* <Text style={[{ color: Colors.BlackColor, fontSize:FontSize.LargFontSize,width:'100%' ,textAlign:'left',fontFamily:FontFamilies.Etisalat_0}]}>{Category}</Text> */}
                         <View style={{ flexDirection: FixViewsOrder(), justifyContent: 'flex-end' }}>
                             {/* <Text style={[styles.ItemCostText, { color: Colors.DarkGrayColor, fontSize: 14 }]}>{payment_period}</Text> */}
                             <Text style={[{ color: Colors.DarkGrayColor, fontSize: 12,fontFamily:FontFamilies.Etisalat_0 }]}>{strings('Remaining')+" " +text +" " +strings('days') }</Text>
@@ -127,7 +129,7 @@ console.log("diffDaysdiffDays",date)
               <View style={{width:'92%',alignItems:'center',justifyContent:'space-between',marginTop:Height*.005,flexDirection:'row'}}>
               <Text style={{fontFamily:FontFamilies.Etisalat_0,color:'#EBEBEB',fontSize:15}}>0</Text>
 
-              <Text style={{fontFamily:FontFamilies.Etisalat_0,color:'#7276CF',fontSize:15}}>{cost}</Text>
+              <Text style={{fontFamily:FontFamilies.Etisalat_0,color:'#7276CF',fontSize:FontSize.MediumFontSize}}>{cost}</Text>
               </View>
               
                  {/* <View style={[styles.ItemCostContainer, { borderColor: Colors.GreenColor, marginTop: Height * .012 }]}>

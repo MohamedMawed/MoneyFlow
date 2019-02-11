@@ -1,8 +1,8 @@
 import React, { Component } from 'React'
-import { Text, Image, View, AsyncStorage, StyleSheet, StatusBar, FlatList, TouchableOpacity, ScrollView, Alert, ActivityIndicator } from 'react-native'
+import { Text, Image, View, AsyncStorage,TextInput, StyleSheet, StatusBar, FlatList, TouchableOpacity, ScrollView, Alert, ActivityIndicator } from 'react-native'
 import { Height, Width } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
-import { Requires } from '../Assets/Requires';
+import { Requires, iconsBudgetList } from '../Assets/Requires';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { Lang, FixViewsOrder } from '../Global/Localization';
 import { FontFamilies, FontSize } from '../Global/Font';
@@ -12,10 +12,12 @@ import { HomeProgressBarItem, BudgetItem } from '../Components/HomeProgressBarIt
 import { PlansGoalsList, PlansGoalsList2 } from '../Global/ComponentTest';
 import { HomeMonthsSwiperComponent } from '../Components/HomeMonthsSwiperComponent';
 import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyExpenses } from '../Global/API';
-import { strings } from '../locals';
+import { strings, getAppLanguage } from '../locals';
 import DropDown from '../Components/DropDown';
 import { connect } from 'react-redux'
 import { AppReducer } from '../state/reducer';
+import { CustomeAlert } from '../Components/customAlert';
+import Dropdown2 from '../Components/Dropdown2';
 const editBudget = AppReducer.editBudget;
 
 class BudgetList extends Component {
@@ -24,19 +26,23 @@ class BudgetList extends Component {
         this.state = {
             CurantSelected: -1,
             sliderOneValue: [10000],
-            valueSlider: 0,
+            valueSlider:"",
             AddBudget: false,
             PlansGoalsList: PlansGoalsList2,
             isDateTimePickerVisible: false,
             startDate: strings('startDate'),
             endDate: strings('endDate'),
             ButtonType: -1,
-            icon: '',
+            icon: -1,
             category: '',
-            BudgetList: [],
+            BudgetList: iconsBudgetList(),
             IsLoding: true,
             Defaultpayment_period: [{ text: strings('weekly'), Icon: '' }, { text: strings('Monthly'), Icon: '' }, { text: strings('annual'), Icon: '' }],
-            CurantTab: 1
+            CurantTab: 1,
+            showEditAlert: false,
+            selectedIndex:-1,
+            IsLoding: true,
+            payment_period: 0,
 
         }
     }
@@ -45,16 +51,15 @@ class BudgetList extends Component {
 
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
+
     _handleDatePicked = (date) => {
 
         let _date = new Date(date).getDate() + '-' + (new Date(date).getMonth() + 1) + '-' + new Date(date).getFullYear()
-        if (this.state.ButtonType == 'start')
-            this.setState({ startDate: _date })
-        if (this.state.ButtonType == 'end')
-            this.setState({ endDate: _date })
-        //console.log(date, "datedatedatedatedatedate")
+        this.setState({ startDate: _date })
         this._hideDateTimePicker();
     };
+
+
     render() {
         //console.log("thisBudgets", this.props.Budgets)
         //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
@@ -114,19 +119,20 @@ class BudgetList extends Component {
                     <View style={{ width: Width, alignItems: 'center', height: Height * .8 }}>
                         <View style={{ height: Height * .08, justifyContent: 'space-between', alignItems: 'center', flexDirection: FixViewsOrder(), width: '95%' }}>
                             <TouchableOpacity onPress={() => {
-                                this.setState({ CurantTab: 3 })
+
+                                this.setState({ CurantTab: 3,payment_period:2 })
                             }} style={{ width: '30%', height: Height * .06, backgroundColor: CurantTab == 3 ? '#DCDCDC' : '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
                                 <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03, fontFamily: FontFamilies.Etisalat_0 }}>{strings('annual')}</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {
-                                this.setState({ CurantTab: 2 })
+                                this.setState({ CurantTab: 2,payment_period:1 })
                             }} style={{ width: '30%', height: Height * .06, backgroundColor: CurantTab == 2 ? '#DCDCDC' : '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
                                 <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03, fontFamily: FontFamilies.Etisalat_0 }}>{strings('Monthly')}</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {
-                                this.setState({ CurantTab: 1 })
+                                this.setState({ CurantTab: 1,payment_period:0 })
                             }} style={{ width: '30%', height: Height * .06, backgroundColor: CurantTab == 1 ? '#DCDCDC' : '#FFFFFF', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: Height * .02 }}>
                                 <Text style={{ color: Colors.DarkGrayColor, fontSize: 15, paddingHorizontal: Width * .03, fontFamily: FontFamilies.Etisalat_0 }}>{strings('weekly')}</Text>
                             </TouchableOpacity>
@@ -139,17 +145,16 @@ class BudgetList extends Component {
 
 
                             {IsLoding && this.props.Budgets.length >= 1 && CurantTab == 1 && this.props.Budgets.map((item, index) => { return (this.sections(item, 0, index)) })}
-
-                            {IsLoding && this.props.Budgets.length < 1 && CurantTab == 1 && this.noBudget(this.props.Budgets, 0)}
+                            {IsLoding && CurantTab == 1 && this.noBudget(this.props.Budgets, 0)}
 
 
 
                             {IsLoding && this.props.Budgets.length >= 1 && CurantTab == 2 && this.props.Budgets.map((item, index) => { return (this.sections(item, 1, index)) })}
-                            {IsLoding && this.props.Budgets.length < 1 && CurantTab == 2 && this.noBudget(this.props.Budgets, 1)}
+                            {IsLoding && CurantTab == 2 && this.noBudget(this.props.Budgets, 1)}
 
 
                             {IsLoding && this.props.Budgets.length >= 1 && CurantTab == 3 && this.props.Budgets.map((item, index) => { return (this.sections(item, 2, index)) })}
-                            {IsLoding && this.props.Budgets.length >= 1 && CurantTab == 3 && this.noBudget(this.props.Budgets, 2)}
+                            {IsLoding && CurantTab == 3 && this.noBudget(this.props.Budgets, 2)}
 
 
                             {IsLoding == false && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
@@ -176,30 +181,158 @@ class BudgetList extends Component {
                 <Image resizeMode='contain' style={{ width: Width * .13, height: Width * .13 }} source={Requires.Plus} />
                 {/* <Ionicons name={this.state.addPlan ? 'md-checkmark-circle' : 'md-add-circle'} size={Width * .14} color={'#F9616F'} /> */}
             </TouchableOpacity>
-        </View>
+
+            {this.state.showEditAlert&&<CustomeAlert
+                CloseAlert={() => { this.setState({ showEditAlert: false }) }}
+                AlertWidth={.9}
+                AlertHeight={.36}
+                AlertPosition='center'
+                borderRadius={7}
+                AlertOpen={this.state.showEditAlert}>
+
+
+                <View style={{ height:Height*.06, width: '100%', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row' }}>
+                    <Ionicons
+                        onPress={() => this.setState({ showEditAlert: false })}
+                        name={'md-close-circle'}
+                        color={'gray'}
+                        size={Width * .06}
+                        style={{
+                            position: 'absolute',
+                            zIndex: 10,
+                            top: 0,
+                            right: 0,
+                            margin: 10
+                        }}
+                    />
+                    <Text style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontFamily: FontFamilies.Etisalat_0,
+                        fontSize: 16,
+                        color: '#000'
+                    }}>{strings('editBudget')}</Text>
+                </View>
+
+
+                {/* // form enter data */}
+                <View style={[Styles.Header, { width: '100%', height: Height * .2, backgroundColor: Colors.WhiteColor, borderRadius: Width * .03, alignItems: 'center', justifyContent: 'center' }]}>
+                    <View style={{ width: '100%', height: '30%', alignItems: 'center' }}>
+                        {/* //inputs */}
+                        <View style={{
+                            width: '100%',
+                            height: '100%',
+                            alignItems: 'center',
+                            justifyContent: 'space-evenly'
+                        }}>
+                            <TextInput
+                                value={this.state.valueSlider}
+                                keyboardType='numeric'
+                                autoCorrect={false}
+                                onChangeText={(text) => {
+                                    this.setState({ valueSlider: text })
+                                }}
+                                placeholder='Budget'
+                                style={{
+                                    fontSize: Width * .03,
+                                    fontFamily: FontFamilies.Etisalat_0,
+                                    width: '90%',
+                                    textAlign: 'left',
+                                    height: Height * .06,
+                                    textAlign: getAppLanguage() == 'ar' ? 'right' : 'left',
+                                    borderRadius: Width * .02,
+                                    borderWidth: 1,
+                                    borderColor: '#D9D9D9',
+                                    // fontSize: 12,
+                                    backgroundColor: '#F9F9F9',
+                                    paddingHorizontal: Width * .03,
+                                    // marginTop: Height * .022
+                                }} />
+                        </View>
+                    </View>
+                    <View style={{ width: '90%', height: Height * .08, alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder(), marginTop: Height * .01 }}>
+                        <View style={{ width: '50%', height: '30%', justifyContent: 'center', alignItems: 'flex-end' }}>
+                            <Dropdown2
+                                returnIndex
+                                defaultIndex={this.state.payment_period}
+                                onSelect={(index) => {
+                                    this.setState({ payment_period: index })
+                                }}
+                                defaultValue={this.state.Defaultpayment_period[this.state.payment_period].text}
+                                Data={this.state.Defaultpayment_period}
+                                Width={Width * .38}
+                                DropdownWidth={Width * .38} />
+                        </View>
+                        <TouchableOpacity onPress={() => {
+                            this.setState({ ButtonType: 'end' })
+                            this._showDateTimePicker()
+                        }}
+                            activeOpacity={.5}
+                            style={{
+                                width: '43%',
+                                height: Height * .06,
+                                borderRadius: Width * .02,
+                                borderColor: '#D7D7D7',
+                                borderWidth: 1,
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                backgroundColor: '#F9F9F9',
+                                paddingHorizontal: Width * .03
+                            }}>
+                            <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
+                            <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
+                            <Text
+                                style={[Styles.TextStyle, {
+                                    width: '60%', fontSize: Width * .03,
+                                    color: '#D7D7D7'
+                                }]}>{this.state.startDate}</Text>
+
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                <DateTimePicker
+                    isVisible={this.state.isDateTimePickerVisible}
+                    onConfirm={this._handleDatePicked}
+                    onCancel={this._hideDateTimePicker}
+                />
+                <TouchableOpacity onPress={async () => {
+                    this.OnSubmit()
+                    // ios-save
+                }} style={{ elevation: 5, width: Width * .5, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 17, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('save')}</Text>
+                </TouchableOpacity>
+
+
+
+            </CustomeAlert>}
+
+
+
+        </View >
         )
     }
     noBudget = (Budgets, index) => {
+
         let DATA = []
         Budgets.forEach(element => {
             if (element.payment_period == index)
                 DATA.push(element)
         });
         let text = strings('noWeeklyBudgets')
-        if (index == 0)
-        text = strings('noWeeklyBudgets')
-        if (index == 1)
-        text = strings('noMonthlyBudgets')
-        if (index == 2)
-        text = strings('noWeeklyBudgets')
-
-
+        if (index === 0)
+            text = strings('noWeeklyBudgets')
+        if (index === 1)
+            text = strings('noMonthlyBudgets')
+        if (index === 2)
+            text = strings('noWeeklyAnnual')
 
         return (
             <View>
                 {DATA.length < 1 && <View style={{ width: Width, height: Height * .65, alignItems: 'center', justifyContent: 'center' }}>
                     <Image resizeMode='contain' style={{ width: Width * .3, height: Width * .3 }} source={Requires.budgetIcon} />
-                    <Text style={[{ fontFamily: FontFamilies.Etisalat_0, fontSize: 18, color: Colors.DarkGrayColor ,marginTop:Height*.03}]}>{text}</Text>
+                    <Text style={[{ fontFamily: FontFamilies.Etisalat_0, fontSize: 18, color: Colors.DarkGrayColor, marginTop: Height * .03 }]}>{text}</Text>
 
                 </View>}
             </View>
@@ -211,20 +344,24 @@ class BudgetList extends Component {
         </View>)
     }
     sections = (item, index, ItemIndex) => {
+
+
         return (
             <View >
                 {item.payment_period == index ? <BudgetItem
                     onEditBudget={() => {
-                        this.props.navigation.navigate('EditBudget', { item: item, index: ItemIndex })
-                    }}
+             this.setState({showEditAlert:true,valueSlider:item.money,CurantSelected:item.icon_index,startDate:item.start_date,category:item.category,payment_period:item.payment_period,index: ItemIndex,icon:item.icon_index,selectedIndex:ItemIndex })
 
+                        // this.props.navigation.navigate('EditBudget', { item: item, index: ItemIndex })
+                    }}
+                    
                     onRemove={() => {
                         this.OnRemoveBudget(ItemIndex)
 
                     }}
-                    Source={Requires.ICons[item.icon_index].icon}
+                    Source={this.state.BudgetList[item.icon_index].icon}
                     cost={item.money}
-                    Category={item.category}
+                    Category={this.state.BudgetList[item.icon_index].text}
                     date={item.start_date}
                     payment_period={item.payment_period}
                 /> : null}
@@ -254,13 +391,8 @@ class BudgetList extends Component {
         return parseInt((tillNow / totdays) * 100)
     }
 
-    CalcPercentColor = (start, end) => {
-        let percent = this.CalcPercent(start, end)
-        if (percent <= 33) return Colors.AppGreenColor
-        if (percent <= 66) return Colors.AppBlueColor
-        if (percent <= 100) return Colors.AppRedColor
 
-    }
+
     async componentDidMount() {
         this.setState({ IsLoding: false })
         let Budget = await AsyncStorage.getItem('Budget' + _key)
@@ -269,7 +401,38 @@ class BudgetList extends Component {
         } else {
             this.setState({ IsLoding: true })
         }
+
+
+
     }
+
+
+    _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+    OnSubmit = async () => {
+        let { startDate, endDate, valueSlider, AddBudget, icon, category, payment_period } = this.state
+        if (valueSlider == 0)
+            return alert('Please specify the value')
+        if (startDate == strings('startDate'))
+            return alert('Please specify the date')
+        if (icon == -1)
+            return alert('Please selected icon')
+        let newBudget = { icon_index: icon, start_date: startDate, category: category, money: valueSlider, payment_period: payment_period }
+        let Budget = this.props.Budgets
+    console.log("newBudgetnewBudget",this.state.selectedIndex,newBudget)
+        Budget[this.state.selectedIndex] = newBudget
+        this.props.editBudget(Budget)
+        this.setState({showEditAlert:false,valueSlider:"",startDate: strings('startDate'),selectedIndex:-1})
+        // this.props.navigation.goBack()
+    }
+
+    CalcPercentColor = (start, end) => {
+        let percent = this.CalcPercent(start, end)
+        if (percent <= 33) return Colors.AppGreenColor
+        if (percent <= 66) return Colors.AppBlueColor
+        if (percent <= 100) return Colors.AppRedColor
+    }
+
 }
 const Styles = StyleSheet.create({
     Container: {
@@ -295,6 +458,8 @@ function mapStateToProps(state) {
     //console.log("stateappReducerbudget", state.appReducer.budget)
     return {
         Budgets: state.appReducer.budget,
+        income: state.appReducer.income,
+
     }
 }
 
@@ -303,6 +468,7 @@ function mapDispatchToProps(dispatch) {
         editBudget: (value) => dispatch(editBudget(value))
     }
 }
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(BudgetList)

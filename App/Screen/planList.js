@@ -13,7 +13,7 @@ import { PlansGoalsList } from '../Global/ComponentTest';
 import { _key } from '../Global/API';
 import { connect } from 'react-redux';
 
-import { strings } from '../locals';
+import { strings, getAppLanguage } from '../locals';
 import { CustomeAlert } from '../Components/customAlert';
 import { AppReducer } from '../state/reducer';
 
@@ -227,6 +227,7 @@ class PlanList extends Component {
                             fontSize: Width * .03,
                             fontFamily: FontFamilies.Etisalat_0,
                             width: '90%',
+                            textAlign : getAppLanguage() == 'ar'?'right':'left',
                             height: Height * .06,
                             borderRadius: Width * .02,
                             borderWidth: 1,
@@ -263,6 +264,7 @@ class PlanList extends Component {
                             width: '45%',
                             height: Height * .06,
                             borderRadius: Width * .02,
+                            textAlign : getAppLanguage() == 'ar'?'right':'left',
                             borderWidth: 1,
                             borderColor: '#D9D9D9',
                             // fontSize: 12,
@@ -271,7 +273,9 @@ class PlanList extends Component {
                         }} />
                     <TouchableOpacity onPress={() => {
                         this._showDateTimePicker()
-                    }} activeOpacity={.5} style={{ width: '50%', height:  Height * .06, borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
+                    }} activeOpacity={.5} style={{ width: '50%', height:  Height * .06,
+                    
+                    borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
 
                         <Text style={[Styles.TextStyle, { width: '70%', color: '#D7D7D7', fontSize: Width * .03 }]}>{this.state.selectedGoal.end_date}</Text>
                         <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
@@ -296,7 +300,7 @@ class PlanList extends Component {
                         this.props.editGoal(this.state.selectedGoalIndex , name , target , end_date);
                         this.setState({showEditAlert:false})
                         // ios-save 
-                    }} style={{ elevation: 5, width: Width * .5, backgroundColor: Colors.BlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 }}>
+                    }} style={{ elevation: 5, width: Width * .5, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 }}>
                         <Text style={{ fontSize: 15, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('save')}</Text>
                     </TouchableOpacity>
                 </View>
@@ -358,6 +362,7 @@ class PlanList extends Component {
                             height: Height * .06,
                             borderRadius: Width * .02,
                             borderWidth: 1,
+                            textAlign : getAppLanguage() == 'ar'?'right':'left',
                             borderColor: '#D9D9D9',
                             backgroundColor: '#F9F9F9',
                             paddingHorizontal: Width * .03,
@@ -368,7 +373,7 @@ class PlanList extends Component {
                         this.props.addGoalMoney(this.state.selectedGoalIndex,+this.state.newMoneyAdded);
                         this.setState({newMoneyAdded:'',showAddAlert:false})
                         // ios-save
-                    }} style={{ elevation: 5, width: Width * .5, backgroundColor: Colors.BlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 }}>
+                    }} style={{ elevation: 5, width: Width * .5, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 }}>
                         <Text style={{ fontSize: 15, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('save')}</Text>
                     </TouchableOpacity>
                 </View>

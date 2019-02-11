@@ -68,7 +68,7 @@ export const isRTL = function () {
 // Allow RTL alignment in RTL languages
 ReactNative.I18nManager.allowRTL(false);
 
-let AppLanguage = "en"
+let AppLanguage = "ar"
 export const getAppLanguage = () => {
     return AppLanguage
 }

@@ -30,10 +30,11 @@ class HomeMoneyItem extends Component {
                     right: Width * .05
 
                 }} /> */}
-                <Text style={{
+                <Text numberOfLines={1} style={{
                     fontFamily: FontFamilies.Etisalat_0,
                     fontSize: 14,
                     color: 'gray',
+
                     textAlign: 'center',
                     width: Width * .45,marginTop:Height*.01
                 }}
@@ -45,7 +46,7 @@ class HomeMoneyItem extends Component {
                     alignItems: 'center',
                     justifyContent: 'space-around', marginTop: Height * .01
                 }}>
-                    <Text style={{
+                    <Text numberOfLines={1} style={{
                         fontFamily: FontFamilies.Etisalat_0,
                         fontSize: 25,
                         color: this.props.color,

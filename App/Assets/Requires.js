@@ -1,57 +1,71 @@
+import { strings } from '../locals';
 
-let icons = () => {
+export const icons = () => {
     let ddd = [
-        { icon: require('./img/Icon/cake0.png'), text: 'Foot' },
-        { icon: require('./img/Icon/cake1.png'), text: 'Drink' },
-        { icon: require('./img/Icon/cake2.png'), text: 'Party' },
-        { icon: require('./img/Icon/cake3.png'), text: 'Sound' },
-        { icon: require('./img/Icon/cake4.png'), text: 'Mony' },
-        { icon: require('./img/Icon/cake5.png'), text: 'School' },
-        { icon: require('./img/Icon/cake0.png'), text: 'Foot' },
-        { icon: require('./img/Icon/cake1.png'), text: 'Drink' },
-        { icon: require('./img/Icon/cake2.png'), text: 'Party' },
-        { icon: require('./img/Icon/cake3.png'), text: 'Sound' },
-        { icon: require('./img/Icon/cake4.png'), text: 'Mony' },
-        { icon: require('./img/Icon/cake5.png'), text: 'School' },
-        { icon: require('./img/Icon/cake0.png'), text: 'Foot' },
-        { icon: require('./img/Icon/cake1.png'), text: 'Drink' },
-        { icon: require('./img/Icon/cake2.png'), text: 'Party' },
-        { icon: require('./img/Icon/cake3.png'), text: 'Sound' },
-        { icon: require('./img/Icon/cake4.png'), text: 'Mony' },
-        { icon: require('./img/Icon/cake5.png'), text: 'School' },
-        { icon: require('./img/Icon/cake0.png'), text: 'Foot' },
-        { icon: require('./img/Icon/cake1.png'), text: 'Drink' },
-        { icon: require('./img/Icon/cake2.png'), text: 'Party' },
-        { icon: require('./img/Icon/cake3.png'), text: 'Sound' },
-        { icon: require('./img/Icon/cake4.png'), text: 'Mony' },
-        { icon: require('./img/Icon/cake5.png'), text: 'School' },
-        { icon: require('./img/Icon/cake0.png'), text: 'Foot' },
-        { icon: require('./img/Icon/cake1.png'), text: 'Drink' },
-        { icon: require('./img/Icon/cake2.png'), text: 'Party' },
-        { icon: require('./img/Icon/cake3.png'), text: 'Sound' },
-        { icon: require('./img/Icon/cake4.png'), text: 'Mony' },
-        { icon: require('./img/Icon/cake5.png'), text: 'School' },
+        { icon: require('./img/Icon/bank.png'), text: 'bank' },
+        { icon: require('./img/Icon/bicycle.png'), text: 'bicycle' },
+        { icon: require('./img/Icon/car.png'), text: 'car' },
+        { icon: require('./img/Icon/credit-card.png'), text: 'credit card' },
+        { icon: require('./img/Icon/debt.png'), text: 'debt' },
+        { icon: require('./img/Icon/deposit.png'), text: 'deposit' },
+        { icon: require('./img/Icon/gamepad.png'), text: 'gamepad' },
+        { icon: require('./img/Icon/gold-ingots.png'), text: 'gold ingots' },
+        { icon: require('./img/Icon/insurance.png'), text: 'insurance' },
+        { icon: require('./img/Icon/laptop.png'), text: 'laptop' },
+        { icon: require('./img/Icon/library.png'), text: 'library' },
+        { icon: require('./img/Icon/online-course.png'), text: 'online course' },
+        { icon: require('./img/Icon/photo-camera.png'), text: 'photo camera' },
+        { icon: require('./img/Icon/piggy-bank.png'), text: 'piggy bank' },
+        { icon: require('./img/Icon/presentation.png'), text: 'presentation' },
+        { icon: require('./img/Icon/profit.png'), text: 'profit' },
+        { icon: require('./img/Icon/scholarship.png'), text: 'scholarship' },
+        { icon: require('./img/Icon/shirt.png'), text: 'shirt' },
+        { icon: require('./img/Icon/shopping-bag.png'), text: 'shopping bag' },
+        { icon: require('./img/Icon/sneakers.png'), text: 'sneakers' },
+        { icon: require('./img/Icon/sunglasses.png'), text: 'sunglasses' },
+        { icon: require('./img/Icon/vespa.png'), text: 'vespa' },
+        { icon: require('./img/Icon/wallet.png'), text: 'wallet' },
+        { icon: require('./img/Icon/world.png'), text: 'world' }
     ]
     return ddd
 }
-export const incomeCategory =
-    [
-        [{ id: 1, icon: require('./img/incomeAndExpences/Salary.png'), text: 'Salary' },
-        { id: 2, icon: require('./img/incomeAndExpences/Business.png'), text: 'Business' },
-        ]
-        ,
-        [{ id: 1, icon: require('./img/incomeAndExpences/Bills.png'), text: 'Bills' },
-        { id: 2, icon: require('./img/incomeAndExpences/Business.png'), text: 'Business' },
-        { id: 3, icon: require('./img/incomeAndExpences/Education.png'), text: 'Education' },
-        { id: 4, icon: require('./img/incomeAndExpences/Entertainment.png'), text: 'Entertainment' },
-        { id: 5, icon: require('./img/incomeAndExpences/Gifts.png'), text: 'Gifts & Donations' },
-        { id: 6, icon: require('./img/incomeAndExpences/Groceries.png'), text: 'Groceries' },
-        { id: 7, icon: require('./img/incomeAndExpences/Health.png'), text: 'Health' },
-        { id: 8, icon: require('./img/incomeAndExpences/Salary.png'), text: 'Salary' },
-        { id: 9, icon: require('./img/incomeAndExpences/shopping.png'), text: 'Shopping' },
-        { id: 10, icon: require('./img/incomeAndExpences/Transportation.png'), text: 'Transportation' },
-        ]
+
+
+
+export const iconsBudgetList = () => {
+    let ddd = [
+       { icon: require('./img/incomeAndExpences/Bills.png'), text:strings('Bills')  },
+        {  icon: require('./img/incomeAndExpences/Groceries.png'), text:strings('Groceries')  },
+        { icon: require('./img/incomeAndExpences/Transportation.png'), text:strings('Transportation')   },
+        {  icon: require('./img/incomeAndExpences/shopping.png'), text:strings('Shopping')   },
+        { icon: require('./img/incomeAndExpences/Education.png'), text:strings('Education')   },
+        {  icon: require('./img/incomeAndExpences/Health.png'), text:strings('HealthFitness')   },
+        {  icon: require('./img/incomeAndExpences/Entertainment.png'), text:strings('Entertainment')},
+        {  icon: require('./img/incomeAndExpences/Gifts.png'), text: strings('GiftsDonations') },
+        {  icon: require('./img/incomeAndExpences/Business.png'), text: strings('Business')  }
+
     ]
+    return ddd
+}
+
+
+
+
+
+export const incomeCategory= () =>
+    [
+        [{ id: 1, icon: require('./img/incomeAndExpences/Salary.png'), text:strings('Salary')  },
+        { id: 2, icon: require('./img/incomeAndExpences/Business.png'), text: strings('Business') }],
+        [{ id: 1, icon: require('./img/incomeAndExpences/Bills.png'), text: strings('Bills') },
+        { id: 2, icon: require('./img/incomeAndExpences/Groceries.png'), text: strings('Groceries')  },
+        { id: 3, icon: require('./img/incomeAndExpences/Transportation.png'), text: strings('Transportation') },
+        { id: 4, icon: require('./img/incomeAndExpences/shopping.png'), text: strings('Shopping') },
+        { id: 5, icon: require('./img/incomeAndExpences/Education.png'), text: strings('Education')  },
+        { id: 6, icon: require('./img/incomeAndExpences/Health.png'), text: strings('HealthFitness') },
+        { id: 7, icon: require('./img/incomeAndExpences/Entertainment.png'), text: strings('Entertainment')},
+        { id: 8, icon: require('./img/incomeAndExpences/Gifts.png'), text: strings('GiftsDonations') },
+        { id: 9, icon: require('./img/incomeAndExpences/Business.png'), text: strings('Business') }
+        ]]
 export const Requires = {
     PlusAdd: require('./img/plusAdd.png'),
     goalIcon: require('./img/goalIcon.png'),
@@ -79,6 +93,7 @@ export const Requires = {
     Home: require('./img/home.png'),
     Plan: require('./img/plane.png'),
     Plus: require('./img/plus.png'),
+    iconsBudgetList:iconsBudgetList(),
     Report: require('./img/mezaneya.png'),
     Setting: require('./img/settings.png'),
     car2: require('./img/car2.png'),

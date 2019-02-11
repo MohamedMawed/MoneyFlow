@@ -195,6 +195,7 @@ class Add_plan extends Component {
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
                                 width: '90%',
+                                textAlign : getAppLanguage() == 'ar'?'right':'left',
                                 height: Height * .06,
                                 borderRadius: Width * .02,
                                 borderWidth: 1,
@@ -224,6 +225,7 @@ class Add_plan extends Component {
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
                                 width: '90%',
+                                textAlign : getAppLanguage() == 'ar'?'right':'left',
                                 height: Height * .06,
                                 borderRadius: Width * .02,
                                 borderWidth: 1,
@@ -247,6 +249,7 @@ class Add_plan extends Component {
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
                                 width: '90%',
+                                textAlign : getAppLanguage() == 'ar'?'right':'left',
                                 height: Height * .06,
                                 borderRadius: Width * .02,
                                 borderWidth: 1,
@@ -270,7 +273,7 @@ class Add_plan extends Component {
                             this._showDateTimePicker()
                         }} activeOpacity={.5} style={{ width: '46%', height: '100%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
                             
-                                <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7',fontSize:Width*.03 }]}>{this.state.startDate}</Text>
+                                <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7',fontSize:Width*.03,fontFamily:FontFamilies.Etisalat_0 }]}>{this.state.startDate}</Text>
                                 <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                                 <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
 
@@ -298,6 +301,7 @@ class Add_plan extends Component {
                                     style={[Styles.TextStyle, {
                                         width: '60%',fontSize:Width*.03 ,
                                         color: '#D7D7D7'
+                                    ,fontFamily:FontFamilies.Etisalat_0
                                     }]}>{this.state.endDate}</Text>
 
                             </TouchableOpacity>
@@ -310,7 +314,7 @@ class Add_plan extends Component {
 
                 {/* // TITLE CHOOSE ICON */}
                 <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                    <Text style={[Styles.TextStyle,{fontFamily:FontFamilies.Etisalat_0,fontSize:17}]}>{strings('chooseIcon')}</Text>
+                    <Text style={[Styles.TextStyle,{fontFamily:FontFamilies.Etisalat_0,fontSize: Width * .03}]}>{strings('chooseIcon')}</Text>
                 </View>
 
 
@@ -341,7 +345,7 @@ class Add_plan extends Component {
             <TouchableOpacity onPress={async () => {
                 this.onsubmitPlan()
                 // ios-save
-            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 }}>
+            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 ,position:'absolute',bottom:Height*.05}}>
                 <Text style={{ fontSize: 17, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('save')}</Text>
             </TouchableOpacity>
             
@@ -384,13 +388,13 @@ class Add_plan extends Component {
    async onsubmitPlan(){
 
         let { startDate, endDate, startWith, icon, category,target,NamePlan } = this.state
-            if (NamePlan == '')
+            if (NamePlan === '')
             return global.openToast(strings('addPlan_nameErr'))
-            if (target == 0)
+            if (target === 0)
                 return global.openToast(strings('addPlan_targetErr'))
-           if (endDate == 'End date')
+           if (endDate === 'End date')
                 return global.openToast(strings('addPlan_endDateErr'))
-            if (icon == '')
+            if (icon === '')
                 return global.openToast(strings('addPlan_iconErr'))
             // add store
             let newPlan = { start_money : parseInt(startWith),currently_paid : parseInt(startWith), icon_index: icon, start_date: startDate, end_date: endDate, name: NamePlan,money:parseInt(target),category:category }

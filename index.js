@@ -1,6 +1,6 @@
 /** @format */
 import React, { Component } from 'react'
-import { AppRegistry, View, StatusBar, ScrollView } from 'react-native';
+import ReactNative,{ AppRegistry, View, StatusBar, ScrollView } from 'react-native';
 
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -32,16 +32,17 @@ const mainReducer = combineReducers({
     appReducer: persistReducer(authPersistConfig, appReducer.reduce),
 });
 appReducer = persistReducer(userPersistConfig, mainReducer);
-
 const { store, persistor } = configureStore(appReducer)
 
 store.subscribe(() => {
     //console.log("TAG","storeState",store.getState())
 })
 class MainApp extends Component {
+    componentWillMount(){
+        ReactNative.I18nManager.forceRTL(true)
+    }
     render() {
         return (
-
             <ScrollView style={{
                 width: Width,
                 height: '100%',
@@ -54,7 +55,7 @@ class MainApp extends Component {
             >
                 <View style={{
                     width: '100%',
-                    height: Height*.96
+                    height: Height*.965
                 }}>
                     <StatusBar
                         backgroundColor={Colors.greenlite}

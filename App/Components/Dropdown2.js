@@ -33,13 +33,13 @@ class Dropdown2 extends Component {
                     renderButtonText={(item, index) => {
                         //console.log(item, "itemitemitemitem")
                         this.setState({ arrowSource: item.Icon })
-                        return (<Text style={{width:Width*.41,textAlign:'center'}}>
+                        return (<Text style={{width:Width*.41,textAlign:'center', fontFamily: FontFamilies.Etisalat_0}}>
                             {item.text}
                         </Text>)
                     }}
                     renderRow={(item, index, IsSelected) => {
                         return (<View style={{ width: '100%', height: Height * .06, backgroundColor: IsSelected ? '#DADADA' : '#FAFAFA', paddingHorizontal: Width * .04, justifyContent: 'center', flexDirection: 'row', alignItems: 'center'}}>
-                            <Text>{item.text}</Text>
+                            <Text style={{fontFamily: FontFamilies.Etisalat_0,fontSize:12}}>{item.text}</Text>
                         </View>)
                     }}
                     disabled={this.state.options.length < 1 ? true : false}
@@ -57,9 +57,9 @@ class Dropdown2 extends Component {
                     }}
                     
                     renderSeparator={() => null}
-                    dropdownTextStyle={Styles.dropdownTextStyle}
+                    dropdownTextStyle={[{ fontFamily: FontFamilies.Etisalat_0},Styles.dropdownTextStyle]}
                     dropdownStyle={[Styles.dropdownStyle, { width: this.props.DropdownWidth, height: this.state.dropdownHeight,transform:[{translateX:getAppLanguage()=='ar'? -Width*.49:0}] }]}
-                    textStyle={[Styles.textStyle]}
+                    textStyle={[Styles.textStyle,{fontFamily: FontFamilies.Etisalat_0,fontSize:13,includeFontPadding:true,marginTop:5}]}
                     style={Styles.DropDown}
                     defaultValue={this.props.defaultValue} options={this.state.options}
                     defaultIndex={this.props.defaultIndex} />

@@ -40,8 +40,8 @@ class Intro extends Component {
                         <Image resizeMode="contain" source={Requires.toturil[index]} style={{ width: '30%', height: '30%', position: 'absolute', bottom: Height * .1 }} />
                     </LinearGradient>
                     <View style={{ width: '85%', alignItems: 'center', marginTop: Height * .47 }}>
-                        <Text style={[Styles.TextStyle, { fontSize: Width*.045 }]}>{strings('TitleIntroScreen')[index]}</Text>
-                        <Text style={[Styles.TextStyle, { textAlign: 'center', fontSize: Width*.035, color: Colors.DarkGrayColor, marginTop: Height * .02, lineHeight: Height * .032 }]}>{strings('ContentIntroScreen')[index]}</Text>
+                        <Text style={[Styles.TextStyle, { fontSize: Width*.045, fontFamily: FontFamilies.Etisalat_0 }]}>{strings('TitleIntroScreen')[index]}</Text>
+                        <Text style={[Styles.TextStyle, { textAlign: 'center', fontSize: Width*.035, color: Colors.DarkGrayColor, marginTop: Height * .02, lineHeight: Height * .032 , fontFamily: FontFamilies.Etisalat_0}]}>{strings('ContentIntroScreen')[index]}</Text>
                     </View>
                 </View>
             </View>
@@ -73,6 +73,8 @@ class Intro extends Component {
                 <View style={{ width: '90%', flexDirection: 'row', justifyContent: 'space-between', height: '100%' }}>
 
                     <TouchableOpacity onPress={() => {
+                     AsyncStorage.setItem('FirstTime','true');
+
                         const resetAction = StackActions.reset({
                             index: 0,
                             actions: [NavigationActions.navigate({ routeName: 'Login' })],
@@ -82,19 +84,22 @@ class Intro extends Component {
 
                         style={[Styles.Button, { overflow: 'hidden', width: '48%', backgroundColor: StepColor[this.state.index] }]} >
 
-                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{strings('Login')}</Text>
+                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }]}>{strings('Login')}</Text>
 
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
+                      AsyncStorage.setItem('FirstTime','true');
+
                         const resetAction = StackActions.reset({
                             index: 0,
                             actions: [NavigationActions.navigate({ routeName: 'Register' })],
                         });
                         this.props.navigation.dispatch(resetAction);
+
                     }}
 
                         style={[Styles.Button, { overflow: 'hidden', width: '48%', backgroundColor: StepColor[this.state.index] }]} >
-                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{strings('Register')}</Text>
+                        <Text style={[Styles.TextStyle, { color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }]}>{strings('Register')}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -103,7 +108,7 @@ class Intro extends Component {
                     this.setState({ index: this.state.index + 1 })
                     this._carousel.snapToNext();
                 }} style={[Styles.Button, { overflow: 'hidden', backgroundColor: StepColor[this.state.index] }]} >
-                    <Text style={[Styles.TextStyle, { color: Colors.WhiteColor }]}>{strings('Next')}</Text>
+                    <Text style={[Styles.TextStyle, { color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }]}>{strings('Next')}</Text>
                 </TouchableOpacity>}
 
 
@@ -120,7 +125,6 @@ class Intro extends Component {
         )
     }
     async componentDidMount() {
-        await AsyncStorage.setItem('FirstTime','true');
         await AsyncStorage.setItem('Income','0');
         await AsyncStorage.setItem('Expenses','0');
         if(getAppLanguage() == 'ar'){

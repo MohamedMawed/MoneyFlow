@@ -7,7 +7,7 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { FontFamilies, FontSize } from '../Global/Font';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { getSavedMonthlyIncome, _key, getSavedMonthlyExpenses, setSavedMonthlyExpenses } from '../Global/API';
-import { strings, isArabic } from '../locals';
+import { strings, isArabic, getAppLanguage } from '../locals';
 import DropDown from '../Components/DropDown';
 import { PlansGoalsList2 } from '../Global/ComponentTest';
 import { FixViewsOrder } from '../Global';
@@ -34,7 +34,7 @@ class EditBudget extends Component {
             BudgetList: [],
             IsLoding: true,
             payment_period: props.navigation.state.params.item.payment_period,
-            Defaultpayment_period: [{ text: 'weekly', Icon: '' }, { text: 'Monthly', Icon: '' }, { text: 'annual', Icon: '' }]
+            Defaultpayment_period: [{ text: strings('weekly'), Icon: '' }, { text: strings('Monthly'), Icon: '' }, { text: strings('annual'), Icon: '' }]
         }
     }
 
@@ -74,16 +74,16 @@ class EditBudget extends Component {
                         <TouchableOpacity style={{ marginHorizontal: Width * .01 }} onPress={() => {
                             this.props.navigation.goBack()
                         }}>
-                        <View style={{transform:[{rotate:isArabic()? '180deg':'0deg'}]}}>
+                            <View style={{ transform: [{ rotate: isArabic() ? '180deg' : '0deg' }] }}>
 
-                            <Image
-                                source={Requires.back}
-                                resizeMode='contain'
-                                style={{
-                                    width: Width * .05,
-                                    height: Width * .05
-                                }} />
-                                </View>
+                                <Image
+                                    source={Requires.back}
+                                    resizeMode='contain'
+                                    style={{
+                                        width: Width * .05,
+                                        height: Width * .05
+                                    }} />
+                            </View>
                         </TouchableOpacity >
                         <Text style={[Styles.TextStyle, {
                             width: '90%',
@@ -121,6 +121,7 @@ class EditBudget extends Component {
                                     width: '90%',
                                     textAlign: 'left',
                                     height: Height * .06,
+                                    textAlign: getAppLanguage() == 'ar' ? 'right' : 'left',
                                     borderRadius: Width * .02,
                                     borderWidth: 1,
                                     borderColor: '#D9D9D9',
@@ -130,44 +131,6 @@ class EditBudget extends Component {
                                     // marginTop: Height * .022
                                 }} />
                         </View>
-
-                        {/* <MultiSlider
-                            values={[this.state.valueSlider]}
-                            sliderLength={Width * .8}
-                            min={0}
-                            step={1}
-                            max={getSavedMonthlyIncome()-getSavedMonthlyExpenses()}
-                            snapped
-                            selectedStyle={{
-                                backgroundColor: '#7274CD', height: Width * .02, borderRadius: 4
-                            }}
-                            trackStyle={{
-                                backgroundColor: Colors.GrayColor, height: Width * .02, borderRadius: 4
-                            }}
-                            customMarker={() => {
-                                return (
-                                    <View
-                                        style={{
-                                            backgroundColor: Colors.WhiteColor,
-                                            width: Width * .07,
-                                            height: Width * .07,
-                                            borderColor: '#DDDDDD',
-                                            borderWidth: 1,
-                                            borderRadius: Width * .01,
-                                            justifyContent: "center",
-                                            alignItems: "center"
-                                        }}
-                                    />
-                                );
-                            }}
-                            onValuesChange={(values) => {
-                                //console.log(values, "ssssssssssssssddd")
-                                this.setState({ valueSlider: values[0] })
-                            }}
-                        //    onValuesChangeFinish={this.sliderOneValuesChangeFinish}
-                        /> */}
-
-
                     </View>
                     <View style={{ width: '90%', height: Height * .08, alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder(), marginTop: Height * .01 }}>
                         <View style={{ width: '43%', height: '30%', justifyContent: 'center', alignItems: 'center' }}>
@@ -210,37 +173,7 @@ class EditBudget extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-
-                {/* // TITLE CHOOSE ICON */}
-                <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                    <Text style={[Styles.TextStyle, { fontSize: Width * .03 }]}>{strings('chooseCat')}</Text>
-                </View>
-
-
-                <View style={[Styles.Header, { width: '100%', height: Height * .45, marginVertical: 5 }]}>
-                    <FlatList
-
-                        showsVerticalScrollIndicator={false}
-                        numColumns={4}
-                        contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }} data={Requires.ICons} renderItem={({ item, index }) => {
-                            return (
-                                <View style={{ width: '25%', alignItems: 'center', marginBottom: Height * .01, justifyContent: 'center' }}>
-                                    <TouchableOpacity onPress={() => { this.setState({ CurantSelected: index, icon: index, category: item.text }) }} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015, elevation: CurantSelected == index ? 0 : 5 }}>
-                                        <View style={{ width: Width * .14, height: Width * .14, backgroundColor: CurantSelected == index ? Colors.AppBlueColor : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center' }}>
-                                            <Image source={item.icon} resizeMode='contain' style={{ width: '60%', height: '60%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
-                                        </View>
-                                        <Text style={[Styles.TextStyle, { fontSize: Width * .03, marginTop: Height * .001, color: CurantSelected == index ? Colors.AppBlueColor : Colors.DarkGrayColor }]}>{item.text}</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            )
-                        }} />
-                </View>
             </View>
-
-
-
-
-
             <DateTimePicker
                 isVisible={this.state.isDateTimePickerVisible}
                 onConfirm={this._handleDatePicked}

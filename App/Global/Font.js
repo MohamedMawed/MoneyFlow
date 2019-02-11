@@ -9,16 +9,14 @@ export const FontSize = {
 }
 export var FontFamilies = {
     // Etisalat_0: 'GE SS Two Etisalat_0',
-    Etisalat_0: 'OpenSans-Regular',
+    Etisalat_0: 'GE SS Two Etisalat_0',
 }
 
 // export var FontFamilies 
 
-export const setFont = (x)=>{
-FontFamilies = {
-    Etisalat_0: x,
+export const setFont =async (x)=>{
+FontFamilies = {Etisalat_0: x}
 
-}
 }
 
 
