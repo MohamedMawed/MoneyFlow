@@ -306,7 +306,7 @@ const styles = StyleSheet.create(
 
 
 function mapStateToProps(state) {
-    console.log("TAG", "previous profile", state)
+    // console.log("TAG", "previous profile", state)
 
     return {
         appData: state.appReducer,

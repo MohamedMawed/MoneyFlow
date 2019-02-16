@@ -1,3 +1,4 @@
+import { strings } from '../locals';
 
 export class AppReducer {
     constructor() {
@@ -9,8 +10,22 @@ export class AppReducer {
         "budget": [
         ],
         "goal": [
+        ],
+        "IncomeCategoryData": [
+            [
+                { id: 1, icon: require('../Assets/img/incomeAndExpences/Salary.png'), text: strings('Salary') },
+                { id: 2, icon: require('../Assets/img/incomeAndExpences/Business.png'), text: strings('Business') }],
+            [{ id: 1, icon: require('../Assets/img/incomeAndExpences/Bills.png'), text: strings('Bills') },
+            { id: 2, icon: require('../Assets/img/incomeAndExpences/Groceries.png'), text: strings('Groceries') },
+            { id: 3, icon: require('../Assets/img/incomeAndExpences/Transportation.png'), text: strings('Transportation') },
+            { id: 4, icon: require('../Assets/img/incomeAndExpences/shopping.png'), text: strings('Shopping') },
+            { id: 5, icon: require('../Assets/img/incomeAndExpences/Education.png'), text: strings('Education') },
+            { id: 6, icon: require('../Assets/img/incomeAndExpences/Health.png'), text: strings('HealthFitness') },
+            { id: 7, icon: require('../Assets/img/incomeAndExpences/Entertainment.png'), text: strings('Entertainment') },
+            { id: 8, icon: require('../Assets/img/incomeAndExpences/Gifts.png'), text: strings('GiftsDonations') },
+            { id: 9, icon: require('../Assets/img/incomeAndExpences/Business.png'), text: strings('Business') }
+            ]
         ]
-
         // "income": 1000,
         // "expense": 300,
         // "budget": [
@@ -120,6 +135,17 @@ export class AppReducer {
             };
             case AppReducer.DELETE_BUDGET:
                 return initialOrderState;
+                case AppReducer.ADDNEWTYPE:
+                let temp2 = JSON.parse(JSON.stringify(state.IncomeCategoryData));
+                temp2[action.index].push({
+                    id: temp2[action.index].length + 1,
+                    icon: action.icon,
+                    text: action.text
+                })
+                return {
+                    ...state,
+                    IncomeCategoryData: JSON.parse(JSON.stringify(temp2))
+                }    
             default:
                 return state;
         }
@@ -136,7 +162,19 @@ export class AppReducer {
     static ADD_GOAL_MONEY = "GOAL/ADD_GOAL_MONEY";
     static EDIT_GOAL = "GOAL/EDIT_GOAL";
 
-    
+    static ADDNEWTYPE = "FLOOSY/ADDNEWTYPE";
+
+
+    static addNewTypeAction = (index, icon, text) => {
+        //console.log('this.setAppData',value);
+        return {
+            type: AppReducer.ADDNEWTYPE,
+            index,
+            icon,
+            text
+        }
+    }
+
     static setAppData = (value) => {
         //console.log('this.setAppData',value);
         return {

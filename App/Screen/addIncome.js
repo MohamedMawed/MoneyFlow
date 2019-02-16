@@ -22,12 +22,14 @@ class AddIncome extends Component {
             income: '',
             selectedCatogry: -1,
             selectedData: null,
-            IncomeOrExpence:2,
-            pleaseHolder:[strings('Income'),strings('Expenses')]
+            IncomeOrExpence: 2,
+            pleaseHolder: [strings('Income'), strings('Expenses')]
         }
+
     }
+
     render() {
-        let {IncomeOrExpence}=this.state
+        let { IncomeOrExpence } = this.state
         let { selectedCatogry } = this.state
         return (
             <View style={{
@@ -52,53 +54,67 @@ class AddIncome extends Component {
                         <Text style={{
                             color: Colors.BlackColor,
                             fontSize: 22,
-                            fontFamily:FontFamilies.Etisalat_0,
+                            fontFamily: FontFamilies.Etisalat_0,
                             textAlign: 'center'
                         }}>
                             {strings('headingIcomeScreen')}
-                    </Text>
+                        </Text>
                         <Text style={{
                             fontSize: 18,
-                            fontFamily:FontFamilies.Etisalat_0,
+                            fontFamily: FontFamilies.Etisalat_0,
                             textAlign: 'center'
-                        }}>{strings('description')}</Text>  
+                        }}>{strings('description')}</Text>
                     </View>
-                    <View style={{width:Width*.94,height:Height*.09,alignItems:'center',justifyContent:'space-between',flexDirection:FixViewsOrder(),paddingHorizontal:Width*.02}}>
-                    
-                             
-                    <TouchableOpacity onPress={()=>{
-                        this.setState({IncomeOrExpence:1})
-                    }} style={{ width:'48%',height: Height * .065,backgroundColor:IncomeOrExpence==1? Colors.AppBlueColor:Colors.WhiteColor,alignItems:'center',justifyContent:'center',borderRadius:Width*.05,elevation:3}}>
-                    <Text style={{fontSize:12,color:IncomeOrExpence==2? Colors.DarkGrayColor:Colors.WhiteColor,fontFamily:FontFamilies.Etisalat_0}}>{strings('Income')}</Text>
-                    </TouchableOpacity>
+                    <View style={{ width: Width * .94, height: Height * .09, alignItems: 'center', justifyContent: 'space-between', flexDirection: FixViewsOrder(), paddingHorizontal: Width * .02 }}>
 
 
-                    <TouchableOpacity onPress={()=>{
-                        this.setState({IncomeOrExpence:2})
-                    }} style={{width:'48%',height: Height * .065,backgroundColor:IncomeOrExpence==2? Colors.AppBlueColor:Colors.WhiteColor,alignItems:'center',justifyContent:'center',borderRadius:Width*.05,elevation:3}}>
-                    <Text style={{fontSize:12,color:IncomeOrExpence==1? Colors.DarkGrayColor:Colors.WhiteColor,fontFamily:FontFamilies.Etisalat_0}}>{strings('Expenses')}</Text>
-                    </TouchableOpacity>
-         
+                        <TouchableOpacity onPress={() => {
+                            this.setState({ IncomeOrExpence: 1 })
+                        }} style={{ width: '48%', height: Height * .065, backgroundColor: IncomeOrExpence == 1 ? Colors.AppBlueColor : Colors.WhiteColor, alignItems: 'center', justifyContent: 'center', borderRadius: Width * .05, elevation: 3 }}>
+                            <Text style={{ fontSize: 12, color: IncomeOrExpence == 2 ? Colors.DarkGrayColor : Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('Income')}</Text>
+                        </TouchableOpacity>
 
-                   
-                    
+
+                        <TouchableOpacity onPress={() => {
+                            this.setState({ IncomeOrExpence: 2 })
+                        }} style={{ width: '48%', height: Height * .065, backgroundColor: IncomeOrExpence == 2 ? Colors.AppBlueColor : Colors.WhiteColor, alignItems: 'center', justifyContent: 'center', borderRadius: Width * .05, elevation: 3 }}>
+                            <Text style={{ fontSize: 12, color: IncomeOrExpence == 1 ? Colors.DarkGrayColor : Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('Expenses')}</Text>
+                        </TouchableOpacity>
+
+
+
+
                     </View>
                     <View style={{ width: '90%', height: Height * .2, alignItems: 'center', justifyContent: 'center' }}>
-                        <FlatList contentContainerStyle={{ height: '100%', justifyContent: 'center', alignItems: 'center' }} horizontal data={incomeCategory()[parseInt(this.state.IncomeOrExpence)-1 ]} renderItem={({ item, index }) => {
-                            return (<TouchableOpacity onPress={() => {
-                                this.setState({ selectedCatogry: item.id, selectedData: item })
-                            }} style={{height: Width * .2, marginHorizontal: Width * .03, alignItems: 'center', justifyContent: 'center' }}>
-                                <Image resizeMode='contain' style={{ width: Width*.1, height: '50%', tintColor: selectedCatogry == item.id ? Colors.greenlite : null }} source={item.icon} />
-                                <Text style={{ color: selectedCatogry == item.id ? Colors.greenlite : null ,fontFamily:FontFamilies.Etisalat_0,marginTop:Height*.007}}>{item.text}</Text>
-                            </TouchableOpacity>)
-                        }} />
+                        <FlatList
+                            contentContainerStyle={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}
+                            horizontal
+                         data={this.props.IncomeCategoryData[parseInt(this.state.IncomeOrExpence)-1 ].concat({})}
+                            renderItem={({ item, index }) => {
+                                if(index==this.props.IncomeCategoryData[parseInt(this.state.IncomeOrExpence)-1 ].length){
+                                  return (<TouchableOpacity onPress={() => {
+                                      this.props.navigation.navigate("AddNewType",{index:parseInt(this.state.IncomeOrExpence)-1})
+                                  }} style={{height: Width * .2, marginHorizontal: Width * .03, alignItems: 'center', justifyContent: 'center' }}>
+                                      <Image resizeMode='contain'
+                                       style={{ width: Width*.1, height: '50%', 
+                                       tintColor: "#000" }} source={Requires.PlusAdd} />
+                                      <Text style={{ color: null ,fontFamily:FontFamilies.Etisalat_0,marginTop:Height*.007}}>{strings("allPlans_add")}</Text>
+                                  </TouchableOpacity>)
+                                }
+                              return (<TouchableOpacity onPress={() => {
+                                  this.setState({ selectedCatogry: item.id, selectedData: item })
+                              }} style={{height: Width * .2, marginHorizontal: Width * .03, alignItems: 'center', justifyContent: 'center'}}>
+                                  <Image resizeMode='contain' style={{ width: Width*.1, height: '50%', tintColor: selectedCatogry == item.id ? Colors.greenlite : null }} source={item.icon} />
+                                  <Text style={{ color: selectedCatogry == item.id ? Colors.greenlite : null ,fontFamily:FontFamilies.Etisalat_0,marginTop:Height*.007}}>{item.text}</Text>
+                              </TouchableOpacity>)
+                            }} />
                     </View>
                     <CustomTextInput
-                    NotIcon
+                        NotIcon
                         value={this.state.income}
                         keyboardType='numeric'
                         Title={strings('howMuch')}
-                        
+
                         onChangeText={(text) => {
 
                             this.setState({ income: text })
@@ -113,11 +129,12 @@ class AddIncome extends Component {
                             try {
                                 let { selectedData, selectedCatogry } = this.state
                                 if (selectedData) {
-                                   let intVal = parseFloat(this.state.income);
-                                   if (IncomeOrExpence==1)
-                                    this.props.editIncome(intVal);
-                                   else  {this.props.editExpanse(intVal)
-                                }
+                                    let intVal = parseFloat(this.state.income);
+                                    if (IncomeOrExpence == 1)
+                                        this.props.editIncome(intVal);
+                                    else {
+                                        this.props.editExpanse(intVal)
+                                    }
                                     // let data = { date: new Date(), IncomeValue: intVal, CategoryId: selectedData.id, CategoryName: selectedData.text }
                                     // let _data = []
                                     // let currantIncome = []
@@ -147,7 +164,7 @@ class AddIncome extends Component {
                                     // let HomeScreenRef = getHomeScreen();
                                     // HomeScreenRef.setState((prev) => ({ stateChanger: prev.stateChanger }))
                                     // //console.log(_data, "successfully")
-                                     this.props.navigation.navigate('Home')
+                                    this.props.navigation.navigate('Home')
                                     // this.setState({ income: '', selectedCatogry: -1, selectedData: null })
                                 }
                                 else
@@ -174,10 +191,10 @@ class AddIncome extends Component {
                         }}>{strings('save')}</Text>
                     </TouchableOpacity>
                 </ScrollView>
-                <TouchableOpacity style={{left:Width*.05,position:'absolute',top:Height*.04}} onPress={()=>{
-                      this.props.navigation.goBack()
-                        }}>
-                        <View style={{transform:[{rotate:isArabic()? '180deg':'0deg'}]}}>
+                <TouchableOpacity style={{ left: Width * .05, position: 'absolute', top: Height * .04 }} onPress={() => {
+                    this.props.navigation.goBack()
+                }}>
+                    <View style={{ transform: [{ rotate: isArabic() ? '180deg' : '0deg' }] }}>
                         <Image
                             source={Requires.back}
                             resizeMode='contain'
@@ -185,9 +202,9 @@ class AddIncome extends Component {
                                 width: Width * .07,
                                 height: Width * .07
                             }} />
-                        </View>
-                       
-                    </TouchableOpacity >
+                    </View>
+
+                </TouchableOpacity >
             </View>
         )
     }
@@ -197,23 +214,24 @@ class AddIncome extends Component {
 
 function mapStateToProps(state) {
     // //console.log("TAG", "previous profile", state)
-   
-    return {
-      income: state.appReducer.income,
-    // onBoardingDataLoaded: state.userReducer.onBoardingDataLoaded,
-    }
-  }
 
-  function mapDispatchToProps(dispatch) {
     return {
-      editIncome : (value) => dispatch(editIncome(value)),
-      editExpanse: (value)=> dispatch(editExpense(value))
+        income: state.appReducer.income,
+        IncomeCategoryData: state.appReducer.IncomeCategoryData,
+        // onBoardingDataLoaded: state.userReducer.onBoardingDataLoaded,
     }
-  }
-  
-  
-  
-  export default connect(
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        editIncome: (value) => dispatch(editIncome(value)),
+        editExpanse: (value) => dispatch(editExpense(value))
+    }
+}
+
+
+
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AddIncome)
+)(AddIncome)

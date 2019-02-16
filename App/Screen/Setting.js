@@ -99,6 +99,7 @@ class Setting extends Component {
                 <TouchableOpacity onPress={async () => {
                     firebase.auth().signOut();
                     await AsyncStorage.clear();
+                    await AsyncStorage.setItem('FirstTime','true');
                     const resetAction = StackActions.reset({
                         index: 0,
                         actions: [NavigationActions.navigate({ routeName: 'Login' })],

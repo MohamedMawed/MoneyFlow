@@ -16,11 +16,7 @@ class Splash extends Component {
         this.state = {
         }
 
-        try {
-            firebase.initializeApp();            
-        } catch (error) {
-            alert(error)
-        }
+     
     }
     render() {  
 
@@ -62,6 +58,7 @@ class Splash extends Component {
         setFont(lang == 'ar' ? 'GE SS Two Etisalat_0' : 'OpenSans-Regular')
         let firstTime = await AsyncStorage.getItem('FirstTime');
         if (firstTime == null) {
+            AsyncStorage.setItem('FirstTime','true');
             setTimeout(() => {
 
                 const resetAction = StackActions.reset({

@@ -70,8 +70,9 @@ class Login extends Component {
             global.openToast('Password Required')
             return
         }
+        console.log("TAG","EMAIL",Email,Password)
         this.setState({ Loading: true })
-        firebase.auth().signInWithEmailAndPassword(Email, Password).then((User) => {
+        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(Email, Password).then((User) => {
             this.setState({ User: User, Loading: false })
 
             const resetAction = StackActions.reset({
@@ -79,7 +80,7 @@ class Login extends Component {
                 actions: [NavigationActions.navigate({ routeName: 'Main' })],
             });
             // AsyncStorage.setItem('User',JSON.stringify(User))
-            //console.log('myUserrrrrrrr'+User.user.uid);
+            console.log("TAG",'myUserrrrrrrr'+JSON.stringify(User));
             let snapshot = firebase.database().ref('/'+User.user.uid);
             
             snapshot.once('value',(snapshot)=>{
@@ -90,7 +91,7 @@ class Login extends Component {
             this.props.navigation.dispatch(resetAction);
             })
         }).catch((error) => {
-            
+                console.log("TAG","error",error)
             switch (error.code) {
                 case 'auth/invalid-email':
                     global.openToast('invalid email')
@@ -252,12 +253,21 @@ class Login extends Component {
                                 activeOpacity={0.7}
                                 onPress={async() => {
                                     try {
-                                       await Auth.Facebook.logout();
+                                        // FBLoginManager.loginWithPermissions(["email","user_friends"], function(error, data){
+                                        //     if (!error) {
+                                        //       console.log("TAG","Login data: ", data);
+                                        //     } else {
+                                        //       console.log("TAG","Error: ", error);
+                                        //     }
+                                        //   })
+                                        await Auth.Facebook.logout();
                                         Auth.Facebook.login(["email", "public_profile"])
                                         .then(async(token) => {
-                                            //console.log(token)
+                                            console.log("TAG","token",token)
                                             const credential = firebase.auth.FacebookAuthProvider.credential(token);
-                                            const currentUser = await firebase.auth().signInWithCredential({ providerId:credential.providerId,token: credential.token,secret: credential.secret})
+                                            console.log("TAG","credential",credential)
+                                            // const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken)
+                                            const currentUser = await firebase.auth().signInAndRetrieveDataWithCredential(credential)
                                             // setGlobalUser(currentUser._user);
                                             const resetAction = StackActions.reset({
                                                 index: 0,
@@ -270,9 +280,9 @@ class Login extends Component {
                                             this.props.navigation.dispatch(resetAction);
 
                                         })
-                                        .catch((err) => console.log(err))
+                                        .catch((err) => console.log("TAG","error",err))
                                     } catch (error) {
-                                        //console.log('MAWWWEEEDD', error)
+                                        console.log("TAG",'MAWWWEEEDD', error)
                                     }
                                 }}
                                 style={{

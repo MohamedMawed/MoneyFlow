@@ -5,6 +5,7 @@ const Facebook = {
     return new Promise((resolve, reject) => {
       FBLoginManager.loginWithPermissions(permissions || ['email'], (error, data) => {
         if (!error) {
+          // console.log("TAG","data",data)
           resolve(data.credentials.token);
         } else {
           reject(error);

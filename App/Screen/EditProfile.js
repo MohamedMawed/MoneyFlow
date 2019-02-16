@@ -154,7 +154,7 @@ class EditProfile extends Component {
                                     )
                                         firebase.
                                             auth().
-                                            signInWithEmailAndPassword(this.state.user.providerData[0].email,
+                                            signInAndRetrieveDataWithEmailAndPassword(this.state.user.providerData[0].email,
                                                 this.state.currentPassword).then((User) => {
 
                                                     this.state.user.updateEmail(this.state.newEmail).then(() => {
@@ -179,7 +179,7 @@ class EditProfile extends Component {
                                     )
                                         firebase.
                                             auth().
-                                            signInWithEmailAndPassword(this.state.user.providerData[0].email,
+                                            signInAndRetrieveDataWithEmailAndPassword(this.state.user.providerData[0].email,
                                                 this.state.currentPassword).then((User) => {
                                                     this.state.user.updatePassword(this.state.newPassword).then(()=>{
                                                         this.setState({ saveIsLoading: false })

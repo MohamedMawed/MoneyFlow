@@ -124,5 +124,8 @@ export default {
     edit_profile_requiredText: 'لتغيير البريد الإلكتروني أو كلمة السر يجب إدخال كلمة السر الحاليى',
 
 
-    home_no_stat: 'لا يوجد تقارير'
+    home_no_stat: 'لا يوجد تقارير',
+    addTypeName:"الاسم",
+    addTypeHeader:"اضافة تصنيف",
+    addTypeChooseIcon:"اختر أيقونة"
 }

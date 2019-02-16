@@ -29,6 +29,8 @@ import PlanList from './planList';
 import Add_plan from './add_plan';
 import Editplan from './editplan';
 import ForgotPassword from './ForgotPassword';
+import AddNewType from './AddNewType';
+
 const Tabs = createBottomTabNavigator(
     {
         Home: Home,
@@ -85,8 +87,8 @@ export default App = createStackNavigator(
         Editplan:{screen:Editplan},
         AddBudget:{screen : AddBudget},
         ForgotPassword:{screen : ForgotPassword},
-        AddIncome:{screen : AddIncome}
-
+        AddIncome:{screen : AddIncome},
+        AddNewType:{screen : AddNewType},
     }, {
         headerMode: 'none'
     }

@@ -33,6 +33,7 @@ class Home extends Component {
     componentDidMount() {
         // setHomeScreen(this);
         try{
+            console.log("TAG","appData",this.props.appData)
             firebase.database().ref('/' + firebase.auth().currentUser.uid).set(this.props.appData, (res) => {
                 //console.log('app backup result',res);
             })
@@ -257,7 +258,7 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(state) {
-    console.log("TAG", "previous profile", state)
+    // console.log("TAG", "previous profile", state)
 
     return {
         appData: state.appReducer,

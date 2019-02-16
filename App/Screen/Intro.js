@@ -73,7 +73,7 @@ class Intro extends Component {
                 <View style={{ width: '90%', flexDirection: 'row', justifyContent: 'space-between', height: '100%' }}>
 
                     <TouchableOpacity onPress={() => {
-                     AsyncStorage.setItem('FirstTime','true');
+                    
 
                         const resetAction = StackActions.reset({
                             index: 0,
@@ -88,7 +88,6 @@ class Intro extends Component {
 
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
-                      AsyncStorage.setItem('FirstTime','true');
 
                         const resetAction = StackActions.reset({
                             index: 0,
