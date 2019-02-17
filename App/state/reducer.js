@@ -5,6 +5,7 @@ export class AppReducer {
 
     }
     static initialOrderState = {
+       
         "income": 0,
         "expense": 0,
         "budget": [
@@ -13,17 +14,18 @@ export class AppReducer {
         ],
         "IncomeCategoryData": [
             [
-                { id: 1, icon: require('../Assets/img/incomeAndExpences/Salary.png'), text: strings('Salary') },
-                { id: 2, icon: require('../Assets/img/incomeAndExpences/Business.png'), text: strings('Business') }],
-            [{ id: 1, icon: require('../Assets/img/incomeAndExpences/Bills.png'), text: strings('Bills') },
-            { id: 2, icon: require('../Assets/img/incomeAndExpences/Groceries.png'), text: strings('Groceries') },
-            { id: 3, icon: require('../Assets/img/incomeAndExpences/Transportation.png'), text: strings('Transportation') },
-            { id: 4, icon: require('../Assets/img/incomeAndExpences/shopping.png'), text: strings('Shopping') },
-            { id: 5, icon: require('../Assets/img/incomeAndExpences/Education.png'), text: strings('Education') },
-            { id: 6, icon: require('../Assets/img/incomeAndExpences/Health.png'), text: strings('HealthFitness') },
-            { id: 7, icon: require('../Assets/img/incomeAndExpences/Entertainment.png'), text: strings('Entertainment') },
-            { id: 8, icon: require('../Assets/img/incomeAndExpences/Gifts.png'), text: strings('GiftsDonations') },
-            { id: 9, icon: require('../Assets/img/incomeAndExpences/Business.png'), text: strings('Business') }
+                { id: 1, icon: require('../Assets/img/incomeAndExpences/Salary.png'), text: 'Salary'},
+                { id: 2, icon: require('../Assets/img/incomeAndExpences/Business.png'), text: 'Business' }
+            ],
+            [{ id: 1, icon: require('../Assets/img/incomeAndExpences/Bills.png'), text: 'Bills' },
+            { id: 2, icon: require('../Assets/img/incomeAndExpences/Groceries.png'), text: 'Groceries'},
+            { id: 3, icon: require('../Assets/img/incomeAndExpences/Transportation.png'), text: 'Transportation' },
+            { id: 4, icon: require('../Assets/img/incomeAndExpences/shopping.png'), text: 'Shopping' },
+            { id: 5, icon: require('../Assets/img/incomeAndExpences/Education.png'), text: 'Education' },
+            { id: 6, icon: require('../Assets/img/incomeAndExpences/Health.png'), text: 'HealthFitness' },
+            { id: 7, icon: require('../Assets/img/incomeAndExpences/Entertainment.png'), text: 'Entertainment' },
+            { id: 8, icon: require('../Assets/img/incomeAndExpences/Gifts.png'), text: 'GiftsDonations' },
+            { id: 9, icon: require('../Assets/img/incomeAndExpences/Business.png'), text: 'Business'}
             ]
         ]
         // "income": 1000,
@@ -140,7 +142,8 @@ export class AppReducer {
                 temp2[action.index].push({
                     id: temp2[action.index].length + 1,
                     icon: action.icon,
-                    text: action.text
+                    text: action.text,
+                    notranslate:true
                 })
                 return {
                     ...state,

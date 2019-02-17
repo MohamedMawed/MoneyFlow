@@ -10,7 +10,7 @@ import {
     FlatList,
     TouchableOpacity,
     TextInput,
-            } from 'react-native'
+} from 'react-native'
 
 import { Height, Width } from '../Global/Dimension';
 import { Colors } from '../Global/Colors';
@@ -33,7 +33,7 @@ const createGole = AppReducer.createGoal;
 class Add_plan extends Component {
     constructor(props) {
         super(props)
-        console.log('new Date().toISOString()',new Date().toISOString())
+        console.log('new Date().toISOString()', new Date().toISOString())
         this.state = {
             CurantSelected: -1,
             valueSlider: 0,
@@ -45,11 +45,11 @@ class Add_plan extends Component {
             startDate: new Date().toISOString().split('T')[0],
             endDate: strings('endDate'),
             ButtonType: -1,
-            target:'',
-            startWith : 0, // the money to start the plan
-            icon:'',
-            PlanList:[],
-            IsLoding:true
+            target: '',
+            startWith: 0, // the money to start the plan
+            icon: '',
+            PlanList: [],
+            IsLoding: true
 
         }
     }
@@ -60,23 +60,21 @@ class Add_plan extends Component {
 
     _handleDatePicked = (date) => {
 
-        let  _date=new Date(date).toISOString().split('T')[0];
+        let _date = new Date(date).toISOString().split('T')[0];
         if (this.state.ButtonType == 'start')
             this.setState({ startDate: _date })
-        if (this.state.ButtonType == 'end')
-            {
-                if( new Date(date) - new Date(this.state.startDate) > 0)
-                {
+        if (this.state.ButtonType == 'end') {
+            if (new Date(date) - new Date(this.state.startDate) > 0) {
                 this.setState({ endDate: _date });
-                }else {
-                    global.openToast('please choose the end date to be greater than or equal the start date')
-                }
+            } else {
+                global.openToast('please choose the end date to be greater than or equal the start date')
             }
+        }
         //console.log(date, "datedatedatedatedatedate")
         this._hideDateTimePicker();
     };
     render() {
-        let { CurantSelected, PlanList, IsLoding,addPlan } = this.state
+        let { CurantSelected, PlanList, IsLoding, addPlan } = this.state
         return (<View style={{
             width: '100%',
             height: '100%',
@@ -86,7 +84,7 @@ class Add_plan extends Component {
 
 
             {/* //header */}
-             <View style={{ width: '100%', alignItems: 'center' }}>
+            <View style={{ width: '100%', alignItems: 'center' }}>
                 <View style={[Styles.Header, {
                     width: '90%',
                     height: Height * .08,
@@ -110,24 +108,24 @@ class Add_plan extends Component {
                             }} onPress={() => {
                                 this.props.navigation.goBack()
                             }}>
-                                                    <View style={{transform:[{rotate:isArabic()? '180deg':'0deg'}]}}>
+                            <View style={{ transform: [{ rotate: isArabic() ? '180deg' : '0deg' }] }}>
 
-                           <Image
-                                source={Requires.back}
-                                resizeMode='contain'
-                                style={{
-                                    width: Width * .05,
-                                    height: Width * .05
-                                }} />
-                                </View>
+                                <Image
+                                    source={Requires.back}
+                                    resizeMode='contain'
+                                    style={{
+                                        width: Width * .05,
+                                        height: Width * .05
+                                    }} />
+                            </View>
                         </TouchableOpacity>
 
                         <Text style={[Styles.TextStyle, {
                             width: '90%',
                             textAlign: 'left',
                             fontSize: FontSize.LargFontSize,
-                            marginHorizontal:0,
-                            fontFamily:FontFamilies.Etisalat_0
+                            marginHorizontal: 0,
+                            fontFamily: FontFamilies.Etisalat_0
                             // marginHorizontal: Width * .04
                         }]}> {strings('newPlan')}</Text>
 
@@ -195,7 +193,7 @@ class Add_plan extends Component {
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
                                 width: '90%',
-                                textAlign : getAppLanguage() == 'ar'?'right':'left',
+                                textAlign: getAppLanguage() == 'ar' ? 'right' : 'left',
                                 height: Height * .06,
                                 borderRadius: Width * .02,
                                 borderWidth: 1,
@@ -225,7 +223,7 @@ class Add_plan extends Component {
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
                                 width: '90%',
-                                textAlign : getAppLanguage() == 'ar'?'right':'left',
+                                textAlign: getAppLanguage() == 'ar' ? 'right' : 'left',
                                 height: Height * .06,
                                 borderRadius: Width * .02,
                                 borderWidth: 1,
@@ -240,8 +238,8 @@ class Add_plan extends Component {
                         <TextInput
                             autoCorrect={false}
                             onChangeText={(text) => {
-                                if(+text != NaN && +text <= +this.state.target)
-                                this.setState({ startWith: text })
+                                if (+text != NaN && +text <= +this.state.target)
+                                    this.setState({ startWith: text })
                             }} keyboardType='numeric'
                             value={this.state.startWith}
                             placeholder={strings('addPlan_placeHolder_startWith')}
@@ -249,7 +247,7 @@ class Add_plan extends Component {
                                 fontSize: Width * .03,
                                 fontFamily: FontFamilies.Etisalat_0,
                                 width: '90%',
-                                textAlign : getAppLanguage() == 'ar'?'right':'left',
+                                textAlign: getAppLanguage() == 'ar' ? 'right' : 'left',
                                 height: Height * .06,
                                 borderRadius: Width * .02,
                                 borderWidth: 1,
@@ -269,19 +267,19 @@ class Add_plan extends Component {
                             }}>
 
                             <TouchableOpacity onPress={() => {
-                            this.setState({ ButtonType: 'start' })
-                            this._showDateTimePicker()
-                        }} activeOpacity={.5} style={{ width: '46%', height: '100%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
-                            
-                                <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7',fontSize:Width*.03,fontFamily:FontFamilies.Etisalat_0 }]}>{this.state.startDate}</Text>
+                                this.setState({ ButtonType: 'start' })
+                                this._showDateTimePicker()
+                            }} activeOpacity={.5} style={{ width: '46%', height: '100%', borderRadius: Width * .02, borderColor: '#D7D7D7', borderWidth: 1, flexDirection: FixViewsOrder(), justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9F9F9', paddingHorizontal: Width * .03 }}>
+
+                                <Text style={[Styles.TextStyle, { width: '60%', color: '#D7D7D7', fontSize: Width * .03, fontFamily: FontFamilies.Etisalat_0 }]}>{this.state.startDate}</Text>
                                 <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                                 <Image source={Requires.claender} resizeMode='contain' style={{ width: Width * .05, height: Width * .05 }} />
 
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {
-                            this.setState({ ButtonType: 'end' })
-                            this._showDateTimePicker()
-                        }}
+                                this.setState({ ButtonType: 'end' })
+                                this._showDateTimePicker()
+                            }}
                                 activeOpacity={.5}
                                 style={{
                                     width: '46%',
@@ -299,9 +297,9 @@ class Add_plan extends Component {
                                 <View style={{ width: 1, height: '100%', backgroundColor: '#D7D7D7' }} />
                                 <Text
                                     style={[Styles.TextStyle, {
-                                        width: '60%',fontSize:Width*.03 ,
+                                        width: '60%', fontSize: Width * .03,
                                         color: '#D7D7D7'
-                                    ,fontFamily:FontFamilies.Etisalat_0
+                                        , fontFamily: FontFamilies.Etisalat_0
                                     }]}>{this.state.endDate}</Text>
 
                             </TouchableOpacity>
@@ -314,7 +312,7 @@ class Add_plan extends Component {
 
                 {/* // TITLE CHOOSE ICON */}
                 <View style={[Styles.Header, { width: '90%', height: Height * .05, marginTop: Height * .03 }]}>
-                    <Text style={[Styles.TextStyle,{fontFamily:FontFamilies.Etisalat_0,fontSize: Width * .03}]}>{strings('chooseIcon')}</Text>
+                    <Text style={[Styles.TextStyle, { fontFamily: FontFamilies.Etisalat_0, fontSize: Width * .03 }]}>{strings('chooseIcon')}</Text>
                 </View>
 
 
@@ -322,10 +320,12 @@ class Add_plan extends Component {
                     <FlatList
                         numColumns={5}
                         showsVerticalScrollIndicator={false}
-                        contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }} data={Requires.ICons} renderItem={({ item, index }) => {
+                        contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }}
+                         data={Requires.ICons} 
+                         renderItem={({ item, index }) => {
                             return (
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
-                                    <TouchableOpacity onPress={() => this.setState({ CurantSelected: index,icon:index,category: item.text })} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015 }}>
+                                    <TouchableOpacity onPress={() => this.setState({ CurantSelected: index, icon: index, category: item.text })} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015 }}>
                                         <View style={{ width: Width * .14, height: Width * .14, backgroundColor: CurantSelected == index ? Colors.AppBlueColor : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center' }}>
                                             <Image source={item.icon} resizeMode='contain' style={{ width: '60%', height: '60%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
                                         </View>
@@ -341,15 +341,15 @@ class Add_plan extends Component {
                 onConfirm={this._handleDatePicked}
                 onCancel={this._hideDateTimePicker}
             />
-            
+
             <TouchableOpacity onPress={async () => {
                 this.onsubmitPlan()
                 // ios-save
-            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01 ,position:'absolute',bottom:Height*.05}}>
+            }} style={{ elevation: 5, width: Width * .9, backgroundColor: Colors.AppBlueColor, height: Height * .07, borderRadius: Width * .09, alignItems: 'center', justifyContent: 'center', marginTop: Height * .01, position: 'absolute', bottom: Height * .05 }}>
                 <Text style={{ fontSize: 17, color: Colors.WhiteColor, fontFamily: FontFamilies.Etisalat_0 }}>{strings('save')}</Text>
             </TouchableOpacity>
-            
-           
+
+
 
         </View>
         )
@@ -385,35 +385,35 @@ class Add_plan extends Component {
             this.setState({ IsLoding: true })
         }
     }
-   async onsubmitPlan(){
+    async onsubmitPlan() {
 
-        let { startDate, endDate, startWith, icon, category,target,NamePlan } = this.state
-            if (NamePlan === '')
+        let { startDate, endDate, startWith, icon, category, target, NamePlan } = this.state
+        if (NamePlan === '')
             return global.openToast(strings('addPlan_nameErr'))
-            if (target === 0)
-                return global.openToast(strings('addPlan_targetErr'))
-           if (endDate === 'End date')
-                return global.openToast(strings('addPlan_endDateErr'))
-            if (icon === '')
-                return global.openToast(strings('addPlan_iconErr'))
-            // add store
-            let newPlan = { start_money : parseInt(startWith),currently_paid : parseInt(startWith), icon_index: icon, start_date: startDate, end_date: endDate, name: NamePlan,money:parseInt(target),category:category }
-            // {
-            //     "category": "Foot",
-            //     "name": "Foot",
-            //     "icon_index": 2,
-            //     "money": 254,
-            //     "start_date": "MM/DD/YYYY",
-            //     "end_date": "MM/DD/YYYY"
-            // }
-            //console.log("newPlannewPlan",newPlan)
-            this.props.createGole(newPlan)
-            this.props.navigation.goBack()
+        if (target === 0)
+            return global.openToast(strings('addPlan_targetErr'))
+        if (endDate === 'End date')
+            return global.openToast(strings('addPlan_endDateErr'))
+        if (icon === '')
+            return global.openToast(strings('addPlan_iconErr'))
+        // add store
+        let newPlan = { start_money: parseInt(startWith), currently_paid: parseInt(startWith), icon_index: icon, start_date: startDate, end_date: endDate, name: NamePlan, money: parseInt(target), category: category }
+        // {
+        //     "category": "Foot",
+        //     "name": "Foot",
+        //     "icon_index": 2,
+        //     "money": 254,
+        //     "start_date": "MM/DD/YYYY",
+        //     "end_date": "MM/DD/YYYY"
+        // }
+        //console.log("newPlannewPlan",newPlan)
+        this.props.createGole(newPlan)
+        this.props.navigation.goBack()
 
     }
 }
 
-  function mapStateToProps(state) {
+function mapStateToProps(state) {
     return {
         income: state.appReducer.income,
     }
@@ -439,7 +439,7 @@ const Styles = StyleSheet.create({
     TextStyle: {
         fontFamily: FontFamilies.Etisalat_0,
         color: Colors.BlackColor,
-        fontSize: Width*.03,
+        fontSize: Width * .03,
         // width:'100%',
         textAlign: 'left'
     },
@@ -453,5 +453,5 @@ const Styles = StyleSheet.create({
 })
 
 export default connect(
-    mapStateToProps,mapDispatchToProps
-  )(Add_plan)
+    mapStateToProps, mapDispatchToProps
+)(Add_plan)

@@ -91,6 +91,7 @@ class AddIncome extends Component {
                             horizontal
                          data={this.props.IncomeCategoryData[parseInt(this.state.IncomeOrExpence)-1 ].concat({})}
                             renderItem={({ item, index }) => {
+                                console.log("TAG","item",index,item)
                                 if(index==this.props.IncomeCategoryData[parseInt(this.state.IncomeOrExpence)-1 ].length){
                                   return (<TouchableOpacity onPress={() => {
                                       this.props.navigation.navigate("AddNewType",{index:parseInt(this.state.IncomeOrExpence)-1})
@@ -105,7 +106,7 @@ class AddIncome extends Component {
                                   this.setState({ selectedCatogry: item.id, selectedData: item })
                               }} style={{height: Width * .2, marginHorizontal: Width * .03, alignItems: 'center', justifyContent: 'center'}}>
                                   <Image resizeMode='contain' style={{ width: Width*.1, height: '50%', tintColor: selectedCatogry == item.id ? Colors.greenlite : null }} source={item.icon} />
-                                  <Text style={{ color: selectedCatogry == item.id ? Colors.greenlite : null ,fontFamily:FontFamilies.Etisalat_0,marginTop:Height*.007}}>{item.text}</Text>
+                                  <Text style={{ color: selectedCatogry == item.id ? Colors.greenlite : null ,fontFamily:FontFamilies.Etisalat_0,marginTop:Height*.007}}>{item.notranslate?item.text:strings(item.text)}</Text>
                               </TouchableOpacity>)
                             }} />
                     </View>

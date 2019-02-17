@@ -47,6 +47,7 @@ class AddBudget extends Component {
 
         //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
         // </LinearGradient>
+        console.log("TAG","IncomeCategoryData",this.props.IncomeCategoryData)
         let { CurantSelected, BudgetList, IsLoding } = this.state
         let text = ['food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food',]
         return (<View style={{
@@ -235,18 +236,21 @@ class AddBudget extends Component {
                 </View>
 
 
-                <View style={[Styles.Header, { width: '100%', height: Height * .39, marginVertical: 5 }]}>
+                <View style={[Styles.Header, { width: '100%', height: Height * .44, marginVertical: 5 }]}>
                     <FlatList
                         showsVerticalScrollIndicator={false}
                         numColumns={4}
-                        contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }} data={this.state.BudgetList} renderItem={({ item, index }) => {
+                        contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }}
+                         data={this.props.IncomeCategoryData[1]}
+                         renderItem={({ item, index }) => {
+                             
                             return (
                                 <View style={{ width: '25%', alignItems: 'center', justifyContent: 'center' }}>
                                     <TouchableOpacity onPress={() => { this.setState({ CurantSelected: index, icon: index, category: item.text }) }} activeOpacity={.8} style={{  height: Width * .2, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015, elevation: CurantSelected == index ? 0 : 5 }}>
                                         <View style={{ width: Width * .14, height: Width * .14, backgroundColor: CurantSelected == index ? Colors.AppBlueColor : Colors.WhiteColor, borderRadius: Width * .02, alignItems: 'center', justifyContent: 'center' }}>
                                             <Image source={item.icon} resizeMode='contain' style={{ width:'60%', height:'60%', tintColor: CurantSelected == index ? Colors.WhiteColor : Colors.DarkGrayColor }} />
                                         </View>
-                                        <Text style={[Styles.TextStyle, { fontSize: Width * .03, marginTop: Height * .001,width:Width*.23,textAlign:'center',fontFamily:FontFamilies.Etisalat_0, color: CurantSelected == index ? Colors.AppBlueColor : Colors.DarkGrayColor }]}>{item.text}</Text>
+                                        <Text style={[Styles.TextStyle, { fontSize: Width * .03, marginTop: Height * .001,width:Width*.23,textAlign:'center',fontFamily:FontFamilies.Etisalat_0, color: CurantSelected == index ? Colors.AppBlueColor : Colors.DarkGrayColor }]}>{item.notranslate?item.text:strings(item.text)}</Text>
                                     </TouchableOpacity>
                                 </View>
                             )
@@ -357,6 +361,7 @@ const Styles = StyleSheet.create({
 function mapStateToProps(state) {
     return {
         income: state.appReducer.income,
+        IncomeCategoryData: state.appReducer.IncomeCategoryData,  
     }
 }
 

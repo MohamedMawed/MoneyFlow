@@ -111,8 +111,7 @@ class ForgotPassword extends Component {
 
                     }
                     style={{
-                        borderColor: Colors.BtnLoginBack,
-                        borderWidth: 1,
+                        backgroundColor: Colors.BtnLoginBack,
                         width: Width * .8,
                         borderRadius: Width * .1,
                         justifyContent: 'center',
@@ -124,7 +123,7 @@ class ForgotPassword extends Component {
                     <Text style={{
                         fontFamily: FontFamilies.Etisalat_0,
                         fontSize: Width * .035,
-                        color: Colors.BtnLoginBack,
+                        color: Colors.WhiteColor,
                     }}>{strings('send')}</Text>
                 </TouchableOpacity>
             </View>
