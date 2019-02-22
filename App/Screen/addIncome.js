@@ -91,7 +91,6 @@ class AddIncome extends Component {
                             horizontal
                          data={this.props.IncomeCategoryData[parseInt(this.state.IncomeOrExpence)-1 ].concat({})}
                             renderItem={({ item, index }) => {
-                                console.log("TAG","item",index,item)
                                 if(index==this.props.IncomeCategoryData[parseInt(this.state.IncomeOrExpence)-1 ].length){
                                   return (<TouchableOpacity onPress={() => {
                                       this.props.navigation.navigate("AddNewType",{index:parseInt(this.state.IncomeOrExpence)-1})
@@ -129,8 +128,10 @@ class AddIncome extends Component {
                         onPress={async () => {
                             try {
                                 let { selectedData, selectedCatogry } = this.state
-                                if (selectedData) {
+                                console.log("TAG","selecteddata",this.state.income,selectedData)
+                                if (selectedData&&this.state.income!='') {
                                     let intVal = parseFloat(this.state.income);
+                                    console.log("intval",intVal)
                                     if (IncomeOrExpence == 1)
                                         this.props.editIncome(intVal);
                                     else {

@@ -83,7 +83,7 @@ class AddNewType extends Component {
             width: '100%',
             height: '100%',
             backgroundColor: '#fff',
-            alignItems: 'center'
+            alignItems: 'center',
         }}>
 
 
@@ -220,12 +220,12 @@ class AddNewType extends Component {
                 </View>
 
 
-                <View style={[Styles.Header, { width: '90%', height: Height * .38, justifyContent: 'center', alignItems: 'center', marginVertical: 5 }]}>
+                <View style={[Styles.Header, { width: '90%', height: Height * .45, justifyContent: 'center', alignItems: 'center', marginVertical: 5 }]}>
                     <FlatList
                         numColumns={5}
-                        showsVerticalScrollIndicator={false}
-                        contentContainerStyle={{ width: '100%', justifyContent: 'space-between' }}
-                         data={Requires.ICons} renderItem={({ item, index }) => {
+                        showsVerticalScrollIndicator={true}
+                        contentContainerStyle={{ width: '100%', justifyContent: 'space-between'}}
+                         data={Requires.extraIcons} renderItem={({ item, index }) => {
                             return (
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
                                     <TouchableOpacity onPress={() => this.setState({ CurantSelected: index,icon:index,category: item.text })} activeOpacity={.8} style={{ width: Width * .1, height: Width * .15, alignItems: 'center', justifyContent: 'space-between', marginVertical: Height * .015 }}>

@@ -41,21 +41,21 @@ class Splash extends Component {
     componentWillMount = async () => {
         //firebase.auth().signOut();
         // await AsyncStorage.clear();
+       
         const lang = await AsyncStorage.getItem('language')
         //console.log("TAG", lang)
+        // alert(I18nManager.isRTL+" "+lang)
         if (lang != null) {
             setAppLanguage(lang, false)
         } else {
             if (I18nManager.isRTL) {
                 setAppLanguage("ar", false);
-            } else {
-                setAppLanguage('ar')
-
+            }else{
+                setAppLanguage("en", false);
             }
         }
         if (lang)
             setFont(lang == 'ar' ? 'GE SS Two Etisalat_0' : 'OpenSans-Regular')
-        console.log("TAG",strings("sdfsdf"))    
         let firstTime = await AsyncStorage.getItem('FirstTime');
         if (firstTime == null) {
             AsyncStorage.setItem('FirstTime', 'true');

@@ -1,5 +1,42 @@
 import { strings } from '../locals';
 
+
+export const extraIcons = () => {
+    let ddd = [
+        { icon: require('./img/Icon/extra/001-smartphone.png'), text: 'smartphone' },
+        { icon: require('./img/Icon/extra/002-book.png'), text: 'book' },
+        { icon: require('./img/Icon/extra/003-bulb.png'), text: 'bulb' },
+        { icon: require('./img/Icon/extra/004-supermarket.png'), text: 'supermarket' },
+        { icon: require('./img/Icon/extra/005-shield.png'), text: 'shield' },
+        { icon: require('./img/Icon/extra/006-team.png'), text: 'team' },
+        { icon: require('./img/Icon/extra/007-shout.png'), text: 'shout' },
+        { icon: require('./img/Icon/extra/008-heart.png'), text: 'heart' },
+        { icon: require('./img/Icon/extra/009-food.png'), text: 'food' },
+        { icon: require('./img/Icon/extra/010-avatar.png'), text: 'avatar' },
+        { icon: require('./img/Icon/extra/011-house.png'), text: 'house' },
+        { icon: require('./img/Icon/extra/012-teacher.png'), text: 'teacher' },
+        { icon: require('./img/Icon/extra/013-phone.png'), text: 'phone' },
+        { icon: require('./img/Icon/extra/014-list.png'), text: 'list' },
+        { icon: require('./img/Icon/extra/015-joystick.png'), text: 'joystick' },
+        { icon: require('./img/Icon/extra/016-money.png'), text: 'money' },
+        { icon: require('./img/Icon/extra/017-camera.png'), text: 'camera' },
+        { icon: require('./img/Icon/extra/018-contract.png'), text: 'contract' },
+        { icon: require('./img/Icon/extra/019-cinema.png'), text: 'cinema' },
+        { icon: require('./img/Icon/extra/020-game-controller.png'), text: 'game-controller' },
+        { icon: require('./img/Icon/extra/021-departures.png'), text: 'departures' },
+        { icon: require('./img/Icon/extra/022-credit-card.png'), text: 'credit-card' },
+        { icon: require('./img/Icon/extra/023-cake.png'), text: 'cake' },
+        { icon: require('./img/Icon/extra/024-gift.png'), text: 'gift' },
+
+
+
+    ]
+    return ddd
+}
+
+
+
+
 export const icons = () => {
     let ddd = [
         { icon: require('./img/Icon/bank.png'), text: 'bank' },
@@ -79,6 +116,7 @@ export const Requires = {
     Google: require('./img/google.png'),
     User: require('./img/user.png'),
     ICons: icons(),
+    extraIcons:extraIcons(),
     refresh: require('./img/refresh.png'),
     User: require('./img/user.png'),
     claender: require('./img/claender.png'),

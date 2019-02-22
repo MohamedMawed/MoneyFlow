@@ -1,6 +1,6 @@
 /** @format */
 import React, { Component } from 'react'
-import ReactNative,{ AppRegistry, View, StatusBar, ScrollView } from 'react-native';
+import ReactNative,{ AppRegistry, View, StatusBar, ScrollView,I18nManager } from 'react-native';
 
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -39,11 +39,10 @@ store.subscribe(() => {
 })
 class MainApp extends Component {
     componentWillMount(){
-        ReactNative.I18nManager.forceRTL(true)
     }
     render() {
         return (
-            <ScrollView style={{
+            <View style={{
                 width: Width,
                 height: '100%',
             }}
@@ -68,7 +67,7 @@ class MainApp extends Component {
                     </Provider>
                     <CustomToast />
                 </View>
-            </ScrollView>
+            </View>
         )
     }
 }
