@@ -65,6 +65,7 @@ class BudgetList extends Component {
         //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={Styles.Container}>
         // </LinearGradient>
         let { CurantSelected, BudgetList, IsLoding, CurantTab } = this.state
+        let {IncomeCategoryData}=this.props
         let text = ['food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food', 'food',]
         return (<View style={{
             width: '100%',
@@ -160,7 +161,7 @@ class BudgetList extends Component {
                             {IsLoding == false && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                                 <ActivityIndicator size='large' />
                             </View>}
-                            {IsLoding && BudgetList.length < 1 && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                            {IsLoding && IncomeCategoryData[1].length < 1 && <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                                 {/* <Text>{strings('noBudgets')}</Text> */}
 
                             </View>}
@@ -359,9 +360,9 @@ class BudgetList extends Component {
                         this.OnRemoveBudget(ItemIndex)
 
                     }}
-                    Source={this.state.BudgetList[item.icon_index].icon}
+                    Source={this.props.IncomeCategoryData[1][item.icon_index].icon}
                     cost={item.money}
-                    Category={this.state.BudgetList[item.icon_index].text}
+                    Category={this.props.IncomeCategoryData[1][item.icon_index].text}
                     date={item.start_date}
                     payment_period={item.payment_period}
                 /> : null}
@@ -459,7 +460,8 @@ function mapStateToProps(state) {
     return {
         Budgets: state.appReducer.budget,
         income: state.appReducer.income,
-
+        IncomeCategoryData:state.appReducer.IncomeCategoryData
+        
     }
 }
 
