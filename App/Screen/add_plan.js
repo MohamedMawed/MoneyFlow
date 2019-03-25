@@ -392,7 +392,7 @@ class Add_plan extends Component {
             return global.openToast(strings('addPlan_nameErr'))
         if (target === 0)
             return global.openToast(strings('addPlan_targetErr'))
-        if (endDate === 'End date')
+        if (endDate === strings('endDate'))
             return global.openToast(strings('addPlan_endDateErr'))
         if (icon === '')
             return global.openToast(strings('addPlan_iconErr'))

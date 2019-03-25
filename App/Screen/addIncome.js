@@ -129,7 +129,12 @@ class AddIncome extends Component {
                             try {
                                 let { selectedData, selectedCatogry } = this.state
                                 console.log("TAG","selecteddata",this.state.income,selectedData)
-                                if (selectedData&&this.state.income!='') {
+                                if(this.state.income==''){
+                                    global.openToast(strings('validNumber'));
+                                }else if(!selectedData){
+                                    global.openToast(strings('alertChooseType'));
+                                }
+                                else {
                                     let intVal = parseFloat(this.state.income);
                                     console.log("intval",intVal)
                                     if (IncomeOrExpence == 1)
@@ -169,8 +174,7 @@ class AddIncome extends Component {
                                     this.props.navigation.navigate('Home')
                                     // this.setState({ income: '', selectedCatogry: -1, selectedData: null })
                                 }
-                                else
-                                    global.openToast(strings('alertChooseType'));
+                                    
                             } catch (error) {
                                 //console.log(error, "selectedData11")
                                 global.openToast(strings('validNumber'));
