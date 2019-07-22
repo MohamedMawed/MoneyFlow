@@ -114,6 +114,7 @@ class Login extends Component {
         try {
             await GoogleSignin.hasPlayServices();
             const data = await GoogleSignin.signIn();
+            console.log("TAG","data",JSON.stringify(data))
             const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken)
             const currentUser = await firebase.auth().signInAndRetrieveDataWithCredential(credential);
             console.info(JSON.stringify(currentUser.user.toJSON()));
@@ -125,6 +126,7 @@ class Login extends Component {
             this.props.navigation.dispatch(resetAction);
 
         } catch (error) {
+            console.log("TAG","error",error)
             // alert(error)
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // user cancelled the login flow
@@ -260,6 +262,7 @@ class Login extends Component {
                                         //       console.log("TAG","Error: ", error);
                                         //     }
                                         //   })
+                                        console.log("TAG","facebooklogin")
                                         await Auth.Facebook.logout();
                                         Auth.Facebook.login(["email", "public_profile"])
                                         .then(async(token) => {

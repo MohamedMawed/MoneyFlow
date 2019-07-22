@@ -14,9 +14,34 @@ class Splash extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            appname:"",
         }
 
-
+        this.getAppName()
+    }
+   
+    getAppName=async()=>{
+        let appname=""
+        const lang = await AsyncStorage.getItem('language')
+        console.log("TAG", lang,I18nManager.isRTL)
+        // alert(I18nManager.isRTL+" "+lang)
+        if (lang != null) {
+            if(lang=="en"){
+                appname="FlOOSY";
+            }else{
+                appname="فلوسي";
+            }
+            
+           
+        } else {
+            if (I18nManager.isRTL) {
+                appname="فلوسي";
+            }else{
+                appname="FlOOSY";
+            }
+        }
+        console.log("TAG","getAppName",appname)
+        this.setState({appname})
     }
     render() {
 
@@ -33,7 +58,7 @@ class Splash extends Component {
                     fontFamily: FontFamilies.Etisalat_0,
                     fontSize: 22,
                     color: '#fff',
-                }}>{strings('appName')}</Text>
+                }}>{this.state.appname}</Text>
             </LinearGradient>
 
         )
@@ -43,19 +68,23 @@ class Splash extends Component {
         // await AsyncStorage.clear();
        
         const lang = await AsyncStorage.getItem('language')
-        //console.log("TAG", lang)
+        console.log("TAG", lang,I18nManager.isRTL)
         // alert(I18nManager.isRTL+" "+lang)
         if (lang != null) {
             setAppLanguage(lang, false)
         } else {
             if (I18nManager.isRTL) {
                 setAppLanguage("ar", false);
+                // setFont('GE SS Two Etisalat_0')
             }else{
                 setAppLanguage("en", false);
+                // setFont('OpenSans-Regular')
             }
         }
-        if (lang)
-            setFont(lang == 'ar' ? 'GE SS Two Etisalat_0' : 'OpenSans-Regular')
+        // if (lang)
+        //     setFont(lang == 'ar' ? 'GE SS Two Etisalat_0' : 'OpenSans-Regular')
+
+        setFont('OpenSans-Regular')
         let firstTime = await AsyncStorage.getItem('FirstTime');
         if (firstTime == null) {
             AsyncStorage.setItem('FirstTime', 'true');
