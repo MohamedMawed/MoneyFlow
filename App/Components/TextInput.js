@@ -60,7 +60,7 @@ class CustomTextInput extends Component {
                     onFocus={this.OnFocus}
                     style={[Styles.Input,{
                         textAlign : getAppLanguage() == 'ar'?'right':'left'
-                    },{fontFamily:FontFamilies.Etisalat_0}]}
+                    },{}]}
                 />
                {!this.props.NotIcon&& <Image source={this.props.icon} style={[Styles.CustomIcon, { tintColor: this.state.TextColor }]} />}
             </View>
@@ -88,11 +88,9 @@ const Styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     Header: {
-        fontFamily: FontFamilies.Etisalat_0,
         fontSize: FontSize.smallFontSize
     },
     Input: {
-        fontFamily: FontFamilies.Etisalat_0,
         fontSize: Width*.03,
         color: '#000',
         width: Width * .7,

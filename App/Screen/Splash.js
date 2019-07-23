@@ -75,16 +75,14 @@ class Splash extends Component {
         } else {
             if (I18nManager.isRTL) {
                 setAppLanguage("ar", false);
-                // setFont('GE SS Two Etisalat_0')
+                setFont('GE SS Two Etisalat_0')
             }else{
                 setAppLanguage("en", false);
-                // setFont('OpenSans-Regular')
+                setFont('OpenSans-Regular')
             }
         }
-        // if (lang)
-        //     setFont(lang == 'ar' ? 'GE SS Two Etisalat_0' : 'OpenSans-Regular')
-
-        setFont('OpenSans-Regular')
+        if (lang)
+            setFont(lang == 'ar' ? 'GE SS Two Etisalat_0' : 'OpenSans-Regular')
         let firstTime = await AsyncStorage.getItem('FirstTime');
         if (firstTime == null) {
             AsyncStorage.setItem('FirstTime', 'true');
